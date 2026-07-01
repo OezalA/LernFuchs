@@ -7,7 +7,7 @@ import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
 import { ConfigService } from '../../core/config.service';
 import { ReadStateService } from '../../core/read-state.service';
-import { topicIcon } from '../../core/topic-icon';
+import { categoryFor } from '../../core/category';
 import { VocabularyWord, Difficulty } from '../../core/models';
 
 @Component({
@@ -73,13 +73,13 @@ export class Wortschatz implements OnInit {
   // Nach Thema gruppiert (aufklappbar).
   collapsedGroups = signal<Set<string>>(new Set());
   groupedWords = computed(() => {
-    const groups = new Map<string, VocabularyWord[]>();
+    const groups = new Map<string, { icon: string; words: VocabularyWord[] }>();
     for (const w of this.availableWords()) {
-      const key = w.topic || 'Sonstiges';
-      const list = groups.get(key);
-      if (list) list.push(w); else groups.set(key, [w]);
+      const cat = categoryFor(w.topic);
+      const g = groups.get(cat.name);
+      if (g) g.words.push(w); else groups.set(cat.name, { icon: cat.icon, words: [w] });
     }
-    return Array.from(groups, ([topic, words]) => ({ topic, icon: topicIcon(topic), words }))
+    return Array.from(groups, ([topic, g]) => ({ topic, icon: g.icon, words: g.words }))
       .sort((a, b) => a.topic.localeCompare(b.topic));
   });
 

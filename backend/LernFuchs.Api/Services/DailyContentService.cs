@@ -15,14 +15,22 @@ public class DailyContentService : BackgroundService
     private readonly FeatureOptions _features;
     private readonly ILogger<DailyContentService> _logger;
 
-    // Über die Tage rotierender Themenpool (altersgerecht, 5. Klasse).
+    // Über die Tage rotierender Themenpool, nach Kategorien verschränkt, damit
+    // die 5 Themen eines Tages möglichst unterschiedliche Kategorien abdecken.
     private static readonly string[] TopicPool =
     {
-        "Der Ozean", "Dinosaurier", "Pflanzen und Bäume", "Das Wetter", "Berühmte Erfinder",
-        "Der menschliche Körper", "Vulkane", "Die Wüste", "Musikinstrumente", "Gesunde Ernährung",
-        "Fahrzeuge", "Das Mittelalter", "Die Planeten", "Insekten", "Wälder der Welt",
-        "Feste und Bräuche", "Roboter und Technik", "Berühmte Bauwerke", "Der Bauernhof", "Recycling",
-        "Sterne und Galaxien", "Piraten", "Wüstentiere", "Das Wasser", "Brücken und Tunnel",
+        // Runde 1 – je ein Thema pro Kategorie
+        "Haustiere", "Der Wald", "Fußball", "Deutschland", "Berühmte Märchen",
+        "Die Ritter", "Berühmte Erfinder", "Die Planeten", "Der menschliche Körper",
+        "Freundschaft", "Gesunde Ernährung", "Berufe: Feuerwehr", "Piraten",
+        // Runde 2
+        "Wilde Tiere Afrikas", "Das Wetter", "Musikinstrumente", "Frankreich", "Fabeln von Äsop",
+        "Das alte Rom", "Roboter und Technik", "Sterne und Galaxien", "Unsere fünf Sinne",
+        "Meine Familie", "Obst und Gemüse", "Verschiedene Berufe", "Drachen und Abenteuer",
+        // Runde 3
+        "Insekten", "Vulkane und die Erde", "Schwimmen lernen", "Feste in aller Welt",
+        "Sagen und Legenden", "Die Wikinger", "Brücken und Tunnel", "Astronauten im Weltall",
+        "Gesund bleiben", "Eine spannende Schatzsuche", "Der Ozean und seine Tiere",
     };
 
     private static readonly string[] Models =
