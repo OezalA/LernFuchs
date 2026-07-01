@@ -35,11 +35,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Datenbank bei Start automatisch anlegen/migrieren.
+// Datenbank bei Start automatisch anlegen/migrieren und ggf. mit Startinhalten füllen.
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
+
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    await DatabaseSeeder.SeedAsync(db, app.Environment.ContentRootPath, logger);
 }
 
 if (app.Environment.IsDevelopment())

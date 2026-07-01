@@ -14,10 +14,12 @@ public interface IContentGenerationService
 
     /// <summary>
     /// Erzeugt einen Lesetext samt Verständnisfragen und den schwierigen Wörtern
-    /// aus dem Text (für den Wortschatz).
+    /// aus dem Text (für den Wortschatz). <paramref name="modelOverride"/> erlaubt es,
+    /// ausnahmsweise ein anderes Modell zu verwenden (z. B. beim Erzeugen der Startinhalte).
     /// </summary>
     Task<GeneratedReading> GenerateReadingPassageAsync(
-        string topic, Difficulty difficulty, int questionCount, CancellationToken ct = default);
+        string topic, Difficulty difficulty, int questionCount,
+        CancellationToken ct = default, string? modelOverride = null);
 }
 
 /// <summary>Ergebnis der Lesetext-Erzeugung: Text plus die schwierigen Wörter daraus.</summary>

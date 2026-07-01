@@ -18,4 +18,9 @@
     <PackageReference Include="Scalar.AspNetCore" Version="2.16.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Startinhalte mit in die Ausgabe kopieren, damit sie auch nach dem Publish (z. B. auf Azure) vorhanden sind. -->
+    <Content Update="Data\seed-data.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

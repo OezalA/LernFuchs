@@ -83,7 +83,8 @@ public class GeminiContentGenerationService : IContentGenerationService
     }
 
     public async Task<GeneratedReading> GenerateReadingPassageAsync(
-        string topic, Difficulty difficulty, int questionCount, CancellationToken ct = default)
+        string topic, Difficulty difficulty, int questionCount,
+        CancellationToken ct = default, string? modelOverride = null)
     {
         var prompt = $$"""
             Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
@@ -94,6 +95,8 @@ public class GeminiContentGenerationService : IContentGenerationService
             Suche außerdem die 3-6 schwierigsten Wörter aus DEINEM Text heraus (Wörter, die ein Kind
             der 5. Klasse vielleicht noch nicht kennt) und erkläre sie einfach – alles auf Deutsch.
 
+            Alle Fragen sind Multiple-Choice mit genau 4 Antwortmöglichkeiten.
+
             Antworte ausschließlich als JSON in genau dieser Struktur:
             {
               "title": "kurzer Titel",
@@ -101,7 +104,7 @@ public class GeminiContentGenerationService : IContentGenerationService
               "questions": [
                 {
                   "questionText": "die Frage",
-                  "questionType": "MultipleChoice | OpenEnded",
+                  "questionType": "MultipleChoice",
                   "options": ["A", "B", "C", "D"],
                   "correctAnswer": "der Text der richtigen Antwort",
                   "explanation": "kurze Begründung"
@@ -120,13 +123,13 @@ public class GeminiContentGenerationService : IContentGenerationService
                 }
               ]
             }
-            Regeln: Mische MultipleChoice- und OpenEnded-Fragen. Bei OpenEnded ist "options" ein leeres Array
-            und "correctAnswer" eine Musterantwort. Bei MultipleChoice muss "correctAnswer" exakt einer Option entsprechen.
+            Regeln: Jede Frage hat genau 4 Optionen, und "correctAnswer" muss exakt einer der Optionen entsprechen.
+            Formuliere klare Fragen mit nur einer eindeutig richtigen Antwort.
             Die Wörter in "difficultWords" müssen wirklich im Text vorkommen.
             Gib keine Erklärungen außerhalb des JSON aus.
             """;
 
-        var json = await CallGeminiAsync(prompt, ct);
+        var json = await CallGeminiAsync(prompt, ct, modelOverride);
         var dto = JsonSerializer.Deserialize<ReadingResponse>(json, JsonOpts)
                   ?? throw new InvalidOperationException("Gemini-Antwort konnte nicht gelesen werden.");
 
@@ -169,13 +172,14 @@ public class GeminiContentGenerationService : IContentGenerationService
     }
 
     /// <summary>Ruft die Gemini-API auf und gibt den reinen JSON-Text der Antwort zurück.</summary>
-    private async Task<string> CallGeminiAsync(string prompt, CancellationToken ct)
+    private async Task<string> CallGeminiAsync(string prompt, CancellationToken ct, string? modelOverride = null)
     {
         if (string.IsNullOrWhiteSpace(_options.ApiKey))
             throw new InvalidOperationException(
                 "Kein Gemini-API-Schlüssel konfiguriert. Bitte 'Gemini:ApiKey' in den User Secrets oder appsettings setzen.");
 
-        var url = $"https://generativelanguage.googleapis.com/v1beta/models/{_options.Model}:generateContent";
+        var model = string.IsNullOrWhiteSpace(modelOverride) ? _options.Model : modelOverride;
+        var url = $"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent";
 
         var requestBody = new
         {
@@ -185,19 +189,37 @@ public class GeminiContentGenerationService : IContentGenerationService
             },
             generationConfig = new { responseMimeType = "application/json" }
         };
+        var bodyJson = JsonSerializer.Serialize(requestBody);
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, url);
-        request.Headers.Add("x-goog-api-key", _options.ApiKey);
-        request.Content = new StringContent(
-            JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
-
-        using var response = await _http.SendAsync(request, ct);
-        var responseText = await response.Content.ReadAsStringAsync(ct);
-
-        if (!response.IsSuccessStatusCode)
+        // Bei vorübergehender Überlastung (503) mehrmals mit wachsender Wartezeit erneut versuchen.
+        const int maxAttempts = 4;
+        string responseText = "";
+        System.Net.HttpStatusCode status = default;
+        for (var attempt = 1; attempt <= maxAttempts; attempt++)
         {
-            _logger.LogError("Gemini-Fehler {Status}: {Body}", response.StatusCode, responseText);
-            throw new HttpRequestException($"Gemini-API antwortete mit {(int)response.StatusCode}.");
+            using var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Add("x-goog-api-key", _options.ApiKey);
+            request.Content = new StringContent(bodyJson, Encoding.UTF8, "application/json");
+
+            using var response = await _http.SendAsync(request, ct);
+            status = response.StatusCode;
+            responseText = await response.Content.ReadAsStringAsync(ct);
+
+            if (response.IsSuccessStatusCode) break;
+
+            var transient = status is System.Net.HttpStatusCode.ServiceUnavailable
+                                   or System.Net.HttpStatusCode.InternalServerError;
+            if (transient && attempt < maxAttempts)
+            {
+                var delay = TimeSpan.FromSeconds(2 * attempt);
+                _logger.LogWarning("Gemini {Status}, Versuch {Attempt}/{Max} – neuer Versuch in {Delay}s.",
+                    (int)status, attempt, maxAttempts, delay.TotalSeconds);
+                await Task.Delay(delay, ct);
+                continue;
+            }
+
+            _logger.LogError("Gemini-Fehler {Status}: {Body}", status, responseText);
+            throw new HttpRequestException($"Gemini-API antwortete mit {(int)status}.");
         }
 
         using var doc = JsonDocument.Parse(responseText);

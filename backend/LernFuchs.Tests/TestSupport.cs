@@ -36,7 +36,8 @@ public sealed class FakeContentGenerationService : IContentGenerationService
         => Task.FromResult(VocabToReturn);
 
     public Task<GeneratedReading> GenerateReadingPassageAsync(
-        string topic, Difficulty difficulty, int questionCount, CancellationToken ct = default)
+        string topic, Difficulty difficulty, int questionCount,
+        CancellationToken ct = default, string? modelOverride = null)
         => Task.FromResult(ReadingToReturn
             ?? throw new InvalidOperationException("ReadingToReturn wurde im Test nicht gesetzt."));
 }
