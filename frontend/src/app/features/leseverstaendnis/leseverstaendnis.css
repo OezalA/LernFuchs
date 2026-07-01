@@ -30,21 +30,60 @@ h1 { color: var(--fox-orange-dark); }
 button.small { padding: 0.35rem 0.8rem; font-size: 0.9rem; }
 .empty { padding: 2rem 0; font-size: 1.05rem; }
 
-/* Textliste */
-.passage-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.read-progress {
+  font-weight: 800;
+  color: var(--leaf-green);
+  background: #eafaf0;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  white-space: nowrap;
+}
+
+/* Themengruppen */
+.topic-group { margin-bottom: 1.4rem; }
+.topic-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.7rem;
+  font-size: 1.15rem;
+}
+.topic-count {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: #f0e6d6;
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+}
+
+.passage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
 .passage-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  border: 2px solid transparent;
+}
+.passage-item:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0,0,0,0.12); }
+.passage-item.read { border-color: #cdeccf; background: linear-gradient(160deg, #fff 0%, #f4fbf5 100%); }
+.passage-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.read-badge { font-size: 0.75rem; font-weight: 800; color: var(--leaf-green); }
+.passage-title { margin: 0.1rem 0; font-size: 1.05rem; }
+.passage-meta { margin: 0; font-size: 0.82rem; }
+.passage-foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  margin-top: auto;
+  padding-top: 0.4rem;
 }
-.passage-item:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.1); }
-.passage-info h3 { margin: 0 0 0.3rem; }
-.passage-info p { margin: 0; }
-.passage-actions { display: flex; align-items: center; gap: 0.6rem; }
-.open-arrow { font-size: 1.4rem; color: var(--fox-orange); font-weight: 800; }
+.open-cta { font-weight: 800; color: var(--fox-orange-dark); font-size: 0.9rem; margin-left: auto; }
 button.tiny { padding: 0.25rem 0.5rem; font-size: 0.85rem; }
 
 .back { margin-bottom: 1rem; }

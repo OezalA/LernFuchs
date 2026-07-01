@@ -7,6 +7,7 @@ import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
 import { ConfigService } from '../../core/config.service';
 import { ReadStateService } from '../../core/read-state.service';
+import { topicIcon } from '../../core/topic-icon';
 import { VocabularyWord, Difficulty } from '../../core/models';
 
 @Component({
@@ -68,6 +69,28 @@ export class Wortschatz implements OnInit {
     const words = this.availableWords();
     return t ? words.filter(w => w.topic === t) : words;
   });
+
+  // Nach Thema gruppiert (aufklappbar).
+  collapsedGroups = signal<Set<string>>(new Set());
+  groupedWords = computed(() => {
+    const groups = new Map<string, VocabularyWord[]>();
+    for (const w of this.availableWords()) {
+      const key = w.topic || 'Sonstiges';
+      const list = groups.get(key);
+      if (list) list.push(w); else groups.set(key, [w]);
+    }
+    return Array.from(groups, ([topic, words]) => ({ topic, icon: topicIcon(topic), words }))
+      .sort((a, b) => a.topic.localeCompare(b.topic));
+  });
+
+  toggleGroup(topic: string): void {
+    const next = new Set(this.collapsedGroups());
+    if (next.has(topic)) next.delete(topic); else next.add(topic);
+    this.collapsedGroups.set(next);
+  }
+  isCollapsed(topic: string): boolean {
+    return this.collapsedGroups().has(topic);
+  }
 
   get topicModel2() { return this.selectedTopic(); }
   set topicModel2(v: string) { this.selectedTopic.set(v); }

@@ -89,16 +89,10 @@
     </section>
   }
 
-  <!-- Wortliste -->
+  <!-- Wortliste nach Thema gruppiert -->
   <section class="list-head">
-    <h2>Wörter ({{ filteredWords().length }})</h2>
+    <h2>Wörter ({{ availableWords().length }})</h2>
     <div class="list-actions">
-      @if (topics().length) {
-        <select [(ngModel)]="topicModel2" title="Nach Thema filtern">
-          <option value="">Alle Themen</option>
-          @for (t of topics(); track t) { <option [value]="t">{{ t }}</option> }
-        </select>
-      }
       @if (availableWords().length && !practicing()) {
         <button class="secondary" (click)="startDuePractice()">⏰ Heute üben</button>
         <button (click)="startPractice()">🎴 Üben</button>
@@ -117,18 +111,26 @@
       <a routerLink="/lesen"><button>📖 Zum Leseverständnis</button></a>
     </div>
   } @else {
-    <div class="wordgrid">
-      @for (w of filteredWords(); track w.id) {
-        <div class="card word-card">
-          <div class="word-line">
-            @if (articleLabel(w)) { <span class="article-sm">{{ articleLabel(w) }}</span> }
-            <span class="w">{{ w.word }}</span>
-            @if (w.plural) { <span class="plural muted">, die {{ w.plural }}</span> }
-            @if (canSpeak) {
-              <button class="icon-btn" (click)="speak(w, $event)" title="Vorlesen">🔊</button>
-            }
-          </div>
-          <p class="def muted">{{ w.definitionGerman }}</p>
+    @for (group of groupedWords(); track group.topic) {
+      <section class="topic-group">
+        <button class="topic-heading" (click)="toggleGroup(group.topic)">
+          <span class="chevron">{{ isCollapsed(group.topic) ? '▶' : '▼' }}</span>
+          {{ group.icon }} {{ group.topic }}
+          <span class="topic-count">{{ group.words.length }}</span>
+        </button>
+        @if (!isCollapsed(group.topic)) {
+        <div class="wordgrid">
+          @for (w of group.words; track w.id) {
+            <div class="card word-card">
+              <div class="word-line">
+                @if (articleLabel(w)) { <span class="article-sm">{{ articleLabel(w) }}</span> }
+                <span class="w">{{ w.word }}</span>
+                @if (w.plural) { <span class="plural muted">, die {{ w.plural }}</span> }
+                @if (canSpeak) {
+                  <button class="icon-btn" (click)="speak(w, $event)" title="Vorlesen">🔊</button>
+                }
+              </div>
+              <p class="def muted">{{ w.definitionGerman }}</p>
           <div class="word-foot">
             <span class="badge" [class.leicht]="w.difficulty==='Leicht'"
                   [class.mittel]="w.difficulty==='Mittel'"
@@ -138,6 +140,9 @@
           </div>
         </div>
       }
-    </div>
+        </div>
+        }
+      </section>
+    }
   }
 </div>

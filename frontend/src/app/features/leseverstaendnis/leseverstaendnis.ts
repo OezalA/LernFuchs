@@ -6,6 +6,7 @@ import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
 import { ConfigService } from '../../core/config.service';
 import { ReadStateService } from '../../core/read-state.service';
+import { topicIcon } from '../../core/topic-icon';
 import {
   ReadingPassage, ReadingPassageSummary, CheckResult, Difficulty
 } from '../../core/models';
@@ -42,6 +43,25 @@ export class Leseverstaendnis implements OnInit {
     const t = this.selectedTopic();
     return t ? this.passages().filter(p => p.topic === t) : this.passages();
   });
+
+  // Nach Thema gruppiert (für die Übersicht).
+  groupedPassages = computed(() => {
+    const groups = new Map<string, ReadingPassageSummary[]>();
+    for (const p of this.filteredPassages()) {
+      const key = p.topic || 'Sonstiges';
+      const list = groups.get(key);
+      if (list) list.push(p); else groups.set(key, [p]);
+    }
+    return Array.from(groups, ([topic, items]) => ({ topic, icon: topicIcon(topic), items }))
+      .sort((a, b) => a.topic.localeCompare(b.topic));
+  });
+
+  // Lesefortschritt insgesamt.
+  readCount = computed(() => this.passages().filter(p => this.readState.isRead(p.id)).length);
+
+  isRead(id: number): boolean {
+    return this.readState.isRead(id);
+  }
 
   get topicModel2() { return this.selectedTopic(); }
   set topicModel2(v: string) { this.selectedTopic.set(v); }
