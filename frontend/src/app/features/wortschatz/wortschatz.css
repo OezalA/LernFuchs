@@ -1,0 +1,110 @@
+h1 { color: var(--fox-orange-dark); }
+
+.gen { margin-bottom: 1.4rem; }
+.gen h2 { margin-top: 0; }
+.gen-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+.gen-form input[type="text"] { flex: 1 1 240px; }
+
+.error {
+  color: var(--berry-red);
+  font-weight: 700;
+  margin: 0.6rem 0 0;
+}
+
+.list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.6rem 0 0.8rem;
+}
+.list-head h2 { margin: 0; }
+
+.empty { padding: 2rem 0; font-size: 1.05rem; }
+
+/* Wortliste */
+.wordgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.word-card { display: flex; flex-direction: column; gap: 0.4rem; }
+.word-line { font-size: 1.15rem; font-weight: 800; }
+.article-sm { color: var(--sky-blue); font-weight: 800; }
+.word-line .plural { font-weight: 500; font-size: 0.95rem; }
+.def { margin: 0; font-size: 0.92rem; }
+.word-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+.mastered { font-size: 0.8rem; font-weight: 700; color: #b8860b; }
+button.tiny { padding: 0.25rem 0.5rem; font-size: 0.85rem; margin-left: auto; }
+button.small { padding: 0.35rem 0.8rem; font-size: 0.9rem; }
+
+/* Karteikarten-Übung */
+.practice { margin-bottom: 1.4rem; }
+.practice-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+.row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.row.center { justify-content: center; }
+.answer-row { margin-top: 1rem; }
+
+.flashcard {
+  position: relative;
+  margin: 0 auto;
+  max-width: 480px;
+  min-height: 220px;
+  cursor: pointer;
+  perspective: 1200px;
+}
+.flashcard .face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.5s;
+  box-shadow: var(--shadow);
+}
+.flashcard .front {
+  background: linear-gradient(160deg, #fff 0%, #fff3e2 100%);
+  border: 3px solid var(--fox-orange);
+}
+.flashcard .back {
+  background: linear-gradient(160deg, #fff 0%, #eaf6ff 100%);
+  border: 3px solid var(--sky-blue);
+  transform: rotateY(180deg);
+  gap: 0.5rem;
+}
+.flashcard.is-flipped .front { transform: rotateY(180deg); }
+.flashcard.is-flipped .back { transform: rotateY(360deg); }
+
+/* Höhe über ein unsichtbares Element sichern */
+.flashcard::after { content: ''; display: block; padding-bottom: 46%; }
+
+.article { color: var(--sky-blue); font-weight: 800; font-size: 1.2rem; }
+.word { font-size: 2rem; font-weight: 900; }
+.hint { font-size: 0.85rem; margin-top: 0.6rem; }
+.definition { font-size: 1.05rem; margin: 0; }
+.example { font-style: italic; color: var(--muted); margin: 0; }
+.syn, .ant { font-size: 0.9rem; margin: 0; }
+
+.finished { padding: 1.5rem 0; }
+.big-fox { font-size: 3rem; }

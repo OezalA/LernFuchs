@@ -21,7 +21,7 @@ afterwards without repeated API calls.
 | Backend   | ASP.NET Core Web API (.NET 10, C#)            |
 | Database  | SQLite via Entity Framework Core              |
 | AI        | Google Gemini REST API (`gemini-2.5-flash`)   |
-| Frontend  | Angular (TypeScript) — *coming next*          |
+| Frontend  | Angular 22 (TypeScript, standalone + signals) |
 
 ---
 
@@ -39,7 +39,11 @@ LernFuchs/
 │       ├── Models/           # Domain entities + enums
 │       ├── Services/         # Gemini content-generation service
 │       └── Program.cs        # App startup (DB, CORS, Scalar, DI)
-└── frontend/                 # Angular app (coming next)
+└── frontend/                 # Angular app
+    ├── proxy.conf.json       # Dev proxy: /api -> backend :5219
+    └── src/app/
+        ├── core/             # Models + HTTP services
+        └── features/         # home, wortschatz, leseverstaendnis
 ```
 
 ### Domain model
@@ -97,6 +101,28 @@ In development, the API documentation UI (Scalar) is available at:
 ```
 https://localhost:<port>/scalar/v1
 ```
+
+---
+
+## Running the frontend
+
+In a second terminal (keep the backend running):
+
+```bash
+cd frontend
+npm install     # first time only
+npm start
+```
+
+Then open **http://localhost:4200**. The dev server proxies all `/api` calls to the
+backend on port 5219 (see `proxy.conf.json`), so no CORS setup is needed.
+
+The UI (in German) has two modules:
+
+- **Wortschatz** — generate themed words, then practise them with flip-cards
+  (marking "Gewusst" / "Nochmal" feeds the Leitner spaced-repetition progress).
+- **Leseverständnis** — generate a short text with questions, read it, answer the
+  questions and get instant per-question feedback and a score.
 
 ---
 

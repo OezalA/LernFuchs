@@ -1,0 +1,35 @@
+.hero {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(180deg, #fff 0%, #fff8ee 100%);
+}
+.hero-fox { font-size: 3.5rem; }
+.hero h1 { margin: 0.3rem 0 0.6rem; color: var(--fox-orange-dark); }
+.hero p { max-width: 520px; margin: 0 auto; }
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  text-align: left;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+.tile-icon { font-size: 2.6rem; }
+.tile h2 { margin: 0; }
+.tile .go {
+  margin-top: 0.6rem;
+  font-weight: 800;
+  color: var(--fox-orange-dark);
+}

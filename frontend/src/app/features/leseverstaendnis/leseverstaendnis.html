@@ -1,0 +1,128 @@
+<div class="container">
+  <h1>📖 Leseverständnis</h1>
+
+  @if (!current()) {
+    <!-- Übersicht + Erstellen -->
+    <section class="card gen">
+      <h2>Neuen Text erstellen</h2>
+      <p class="muted">Wähle ein Thema – der LernFuchs schreibt dir eine kurze Geschichte mit Fragen.</p>
+      <div class="gen-form">
+        <input type="text" placeholder="Thema, z. B. Tiere, Weltraum, Freundschaft…"
+               [(ngModel)]="topicModel" (keyup.enter)="generate()" />
+        <select [(ngModel)]="difficultyModel">
+          <option value="Leicht">Leicht</option>
+          <option value="Mittel">Mittel</option>
+          <option value="Schwer">Schwer</option>
+        </select>
+        <select [(ngModel)]="countModel">
+          <option [ngValue]="3">3 Fragen</option>
+          <option [ngValue]="4">4 Fragen</option>
+          <option [ngValue]="5">5 Fragen</option>
+        </select>
+        <button (click)="generate()" [disabled]="generating()">
+          @if (generating()) { <span class="spinner"></span> Wird geschrieben… }
+          @else { ✨ Erstellen }
+        </button>
+      </div>
+      @if (error()) { <p class="error">{{ error() }}</p> }
+    </section>
+
+    <h2 class="section-title">Deine Texte ({{ passages().length }})</h2>
+    @if (loading()) {
+      <p class="center"><span class="spinner"></span> Lädt…</p>
+    } @else if (!passages().length) {
+      <p class="muted center empty">Noch keine Texte. Erstelle oben deinen ersten Text! 🦊</p>
+    } @else {
+      <div class="passage-list">
+        @for (p of passages(); track p.id) {
+          <div class="card passage-item" (click)="open(p.id)">
+            <div class="passage-info">
+              <h3>{{ p.title }}</h3>
+              <p class="muted">
+                <span class="badge" [class.leicht]="p.difficulty==='Leicht'"
+                      [class.mittel]="p.difficulty==='Mittel'"
+                      [class.schwer]="p.difficulty==='Schwer'">{{ p.difficulty }}</span>
+                · {{ p.wordCount }} Wörter · {{ p.questionCount }} Fragen
+              </p>
+            </div>
+            <div class="passage-actions">
+              <button class="ghost tiny" (click)="deletePassage(p.id, $event)" title="Löschen">🗑️</button>
+              <span class="open-arrow">→</span>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  } @else {
+    <!-- Lesetext + Fragen -->
+    @let passage = current()!;
+    <button class="ghost back" (click)="backToList()">← Zurück zur Übersicht</button>
+
+    @if (loadingText()) {
+      <p class="center"><span class="spinner"></span> Lädt…</p>
+    } @else {
+      <article class="card reading">
+        <h2>{{ passage.title }}</h2>
+        <p class="reading-text">{{ passage.text }}</p>
+      </article>
+
+      <section class="questions">
+        <h2>Fragen</h2>
+        @for (q of passage.questions; track q.id; let i = $index) {
+          @let fb = feedbackFor(q.id);
+          <div class="card question"
+               [class.correct]="fb?.isCorrect === true"
+               [class.wrong]="fb?.isCorrect === false">
+            <p class="q-text"><strong>{{ i + 1 }}.</strong> {{ q.questionText }}</p>
+
+            @if (q.questionType === 'MultipleChoice') {
+              <div class="options">
+                @for (opt of q.options; track opt) {
+                  <label class="option" [class.chosen]="answers()[q.id] === opt">
+                    <input type="radio" [name]="'q' + q.id" [value]="opt"
+                           [checked]="answers()[q.id] === opt"
+                           [disabled]="!!result()"
+                           (change)="setAnswer(q.id, opt)" />
+                    <span>{{ opt }}</span>
+                  </label>
+                }
+              </div>
+            } @else {
+              <input type="text" class="open-answer" placeholder="Deine Antwort…"
+                     [value]="answers()[q.id] ?? ''"
+                     [disabled]="!!result()"
+                     (input)="setAnswer(q.id, $any($event.target).value)" />
+            }
+
+            @if (fb) {
+              <div class="feedback">
+                @if (fb.isCorrect) {
+                  <p class="fb-line ok">✅ Richtig!</p>
+                } @else {
+                  <p class="fb-line no">❌ Nicht ganz. Richtige Antwort: <strong>{{ fb.correctAnswer }}</strong></p>
+                }
+                @if (fb.explanation) { <p class="fb-expl muted">{{ fb.explanation }}</p> }
+              </div>
+            }
+          </div>
+        }
+
+        @if (!result()) {
+          <button class="submit" (click)="submit()" [disabled]="checking()">
+            @if (checking()) { <span class="spinner"></span> Wird geprüft… }
+            @else { ✅ Antworten prüfen }
+          </button>
+        } @else {
+          <div class="card score center">
+            <div class="big-fox">{{ result()!.score === result()!.total ? '🏆' : '🦊' }}</div>
+            <h2>Du hast {{ result()!.score }} von {{ result()!.total }} richtig!</h2>
+            <div class="row center">
+              <button class="ghost" (click)="open(passage.id)">🔁 Nochmal versuchen</button>
+              <button (click)="backToList()">Fertig</button>
+            </div>
+          </div>
+        }
+      </section>
+    }
+  }
+</div>

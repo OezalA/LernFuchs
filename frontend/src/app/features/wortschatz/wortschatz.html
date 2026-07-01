@@ -1,0 +1,120 @@
+<div class="container">
+  <h1>📚 Wortschatz</h1>
+
+  <!-- Neue Wörter erstellen -->
+  <section class="card gen">
+    <h2>Neue Wörter erstellen</h2>
+    <p class="muted">Gib ein Thema ein – der LernFuchs denkt sich passende Wörter aus.</p>
+    <div class="gen-form">
+      <input
+        type="text"
+        placeholder="Thema, z. B. Tiere, Natur, Sport…"
+        [(ngModel)]="topicModel"
+        (keyup.enter)="generate()" />
+      <select [(ngModel)]="difficultyModel">
+        <option value="Leicht">Leicht</option>
+        <option value="Mittel">Mittel</option>
+        <option value="Schwer">Schwer</option>
+      </select>
+      <select [(ngModel)]="countModel">
+        <option [ngValue]="5">5 Wörter</option>
+        <option [ngValue]="8">8 Wörter</option>
+        <option [ngValue]="12">12 Wörter</option>
+      </select>
+      <button (click)="generate()" [disabled]="generating()">
+        @if (generating()) { <span class="spinner"></span> Wird erstellt… }
+        @else { ✨ Erstellen }
+      </button>
+    </div>
+    @if (error()) { <p class="error">{{ error() }}</p> }
+  </section>
+
+  <!-- Übung (Karteikarten) -->
+  @if (practicing()) {
+    <section class="card practice">
+      @if (sessionFinished()) {
+        <div class="finished center">
+          <div class="big-fox">🎉</div>
+          <h2>Super gemacht!</h2>
+          <p>Du hast <strong>{{ correctCount() }}</strong> von
+            <strong>{{ reviewedCount() }}</strong> Wörtern gewusst.</p>
+          <div class="row center">
+            <button (click)="startPractice()">🔁 Nochmal üben</button>
+            <button class="ghost" (click)="stopPractice()">Fertig</button>
+          </div>
+        </div>
+      } @else {
+        <div class="practice-head">
+          <span class="muted">Karte {{ cardIndex() + 1 }} / {{ deck().length }}</span>
+          <button class="ghost small" (click)="stopPractice()">Beenden</button>
+        </div>
+
+        @let card = currentCard();
+        @if (card) {
+          <div class="flashcard" [class.is-flipped]="flipped()" (click)="flip()">
+            <div class="face front">
+              @if (articleLabel(card)) { <span class="article">{{ articleLabel(card) }}</span> }
+              <span class="word">{{ card.word }}</span>
+              <span class="hint muted">(Zum Umdrehen tippen)</span>
+            </div>
+            <div class="face back">
+              <p class="definition">{{ card.definitionGerman }}</p>
+              @if (card.exampleSentence) {
+                <p class="example">„{{ card.exampleSentence }}"</p>
+              }
+              @if (card.synonyms.length) {
+                <p class="syn"><strong>Ähnlich:</strong> {{ card.synonyms.join(', ') }}</p>
+              }
+              @if (card.antonyms.length) {
+                <p class="ant"><strong>Gegenteil:</strong> {{ card.antonyms.join(', ') }}</p>
+              }
+            </div>
+          </div>
+
+          @if (flipped()) {
+            <div class="row center answer-row">
+              <button class="danger" (click)="answer(false)">🔁 Nochmal</button>
+              <button class="success" (click)="answer(true)">👍 Gewusst</button>
+            </div>
+          } @else {
+            <p class="center muted">Überlege erst, dann tippe auf die Karte.</p>
+          }
+        }
+      }
+    </section>
+  }
+
+  <!-- Wortliste -->
+  <section class="list-head">
+    <h2>Alle Wörter ({{ words().length }})</h2>
+    @if (words().length && !practicing()) {
+      <button (click)="startPractice()">🎴 Karteikarten üben</button>
+    }
+  </section>
+
+  @if (loading()) {
+    <p class="center"><span class="spinner"></span> Lädt…</p>
+  } @else if (!words().length) {
+    <p class="muted center empty">Noch keine Wörter. Erstelle oben deine ersten Wörter! 🦊</p>
+  } @else {
+    <div class="wordgrid">
+      @for (w of words(); track w.id) {
+        <div class="card word-card">
+          <div class="word-line">
+            @if (articleLabel(w)) { <span class="article-sm">{{ articleLabel(w) }}</span> }
+            <span class="w">{{ w.word }}</span>
+            @if (w.plural) { <span class="plural muted">, die {{ w.plural }}</span> }
+          </div>
+          <p class="def muted">{{ w.definitionGerman }}</p>
+          <div class="word-foot">
+            <span class="badge" [class.leicht]="w.difficulty==='Leicht'"
+                  [class.mittel]="w.difficulty==='Mittel'"
+                  [class.schwer]="w.difficulty==='Schwer'">{{ w.difficulty }}</span>
+            @if (w.progress?.mastered) { <span class="mastered">⭐ gelernt</span> }
+            <button class="ghost tiny" (click)="deleteWord(w.id)" title="Löschen">🗑️</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
