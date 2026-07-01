@@ -19,6 +19,9 @@ builder.Services.AddScoped<GameService>();
 // --- Feature-Flags ---
 builder.Services.Configure<FeatureOptions>(builder.Configuration.GetSection("Features"));
 
+// --- Täglicher Inhaltsdienst (erzeugt automatisch neue Texte) ---
+builder.Services.AddHostedService<DailyContentService>();
+
 // --- Web API ---
 builder.Services.AddControllers()
     .AddJsonOptions(o =>

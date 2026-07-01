@@ -14,6 +14,7 @@ public class AppDbContext : DbContext
     public DbSet<PlayerProfile> PlayerProfiles => Set<PlayerProfile>();
     public DbSet<Achievement> Achievements => Set<Achievement>();
     public DbSet<DailyActivity> DailyActivities => Set<DailyActivity>();
+    public DbSet<SystemState> SystemStates => Set<SystemState>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
