@@ -31,7 +31,7 @@ public class ReadingControllerTests
         await db.SaveChangesAsync();
 
         var q = passage.Questions.ToList();
-        var controller = new ReadingController(db, new FakeContentGenerationService());
+        var controller = new ReadingController(db, new FakeContentGenerationService(), new GameService(db));
 
         var submissions = new List<AnswerSubmission>
         {
@@ -66,7 +66,7 @@ public class ReadingControllerTests
         {
             ReadingToReturn = new GeneratedReading(passage, difficult)
         };
-        var controller = new ReadingController(db, fake);
+        var controller = new ReadingController(db, fake, new GameService(db));
 
         var result = await controller.Generate(new GenerateReadingRequest("Wald"), CancellationToken.None);
 
@@ -95,7 +95,7 @@ public class ReadingControllerTests
         db.ReadingPassages.Add(passage);
         await db.SaveChangesAsync();
 
-        var controller = new ReadingController(db, new FakeContentGenerationService());
+        var controller = new ReadingController(db, new FakeContentGenerationService(), new GameService(db));
         var result = await controller.GetById(passage.Id);
 
         var value = Assert.IsType<OkObjectResult>(result).Value!;

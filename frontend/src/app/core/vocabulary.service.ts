@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {
-  VocabularyWord, VocabularyProgress, GenerateVocabularyRequest, Difficulty
+  VocabularyWord, VocabularyProgress, GenerateVocabularyRequest, Difficulty, GameActivityResult
 } from './models';
 
 @Injectable({ providedIn: 'root' })
@@ -25,8 +25,9 @@ export class VocabularyService {
     return this.http.post<VocabularyWord[]>(`${this.base}/generate`, req);
   }
 
-  review(id: number, correct: boolean): Observable<VocabularyProgress> {
-    return this.http.post<VocabularyProgress>(`${this.base}/${id}/review`, { correct });
+  review(id: number, correct: boolean): Observable<{ progress: VocabularyProgress; game: GameActivityResult }> {
+    return this.http.post<{ progress: VocabularyProgress; game: GameActivityResult }>(
+      `${this.base}/${id}/review`, { correct });
   }
 
   delete(id: number): Observable<void> {

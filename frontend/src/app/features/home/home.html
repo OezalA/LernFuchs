@@ -8,6 +8,34 @@
     </p>
   </section>
 
+  @if (game.state(); as g) {
+    <section class="goal card">
+      <div class="goal-ring">
+        <svg viewBox="0 0 120 120" width="120" height="120">
+          <circle class="ring-bg" cx="60" cy="60" r="52" />
+          <circle class="ring-fill" cx="60" cy="60" r="52"
+                  [attr.stroke-dasharray]="goalCircumference"
+                  [attr.stroke-dashoffset]="goalDashOffset()" />
+        </svg>
+        <div class="goal-center">
+          <div class="goal-num">{{ g.reviewsToday }}/{{ g.dailyGoal }}</div>
+          <div class="goal-label">heute</div>
+        </div>
+      </div>
+      <div class="goal-text">
+        <h2>Tagesziel 🎯</h2>
+        @if (goalPercent() >= 100) {
+          <p class="muted">Geschafft! Du hast dein Tagesziel erreicht. Super! 🎉</p>
+        } @else {
+          <p class="muted">Übe noch <strong>{{ g.dailyGoal - g.reviewsToday }}</strong> Wörter,
+            um dein Tagesziel zu erreichen.</p>
+        }
+        <div class="streak-line">🔥 <strong>{{ g.currentStreakDays }}</strong> Tage in Folge
+          · längste Serie: {{ g.longestStreakDays }}</div>
+      </div>
+    </section>
+  }
+
   @if (stats(); as s) {
     <section class="stats">
       <div class="stat card">
@@ -48,4 +76,19 @@
       <span class="go">Los geht's →</span>
     </a>
   </div>
+
+  @if (game.state(); as g) {
+    <section class="achievements">
+      <h2>Abzeichen 🏅</h2>
+      <div class="badge-grid">
+        @for (a of g.achievements; track a.code) {
+          <div class="badge-card card" [class.locked]="!a.unlocked" [title]="a.description">
+            <div class="badge-icon">{{ a.unlocked ? a.icon : '🔒' }}</div>
+            <div class="badge-title">{{ a.title }}</div>
+            <div class="badge-desc muted">{{ a.description }}</div>
+          </div>
+        }
+      </div>
+    </section>
+  }
 </div>

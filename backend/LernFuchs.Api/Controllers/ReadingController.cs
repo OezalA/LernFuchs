@@ -13,11 +13,13 @@ public class ReadingController : ControllerBase
 {
     private readonly AppDbContext _db;
     private readonly IContentGenerationService _content;
+    private readonly GameService _game;
 
-    public ReadingController(AppDbContext db, IContentGenerationService content)
+    public ReadingController(AppDbContext db, IContentGenerationService content, GameService game)
     {
         _db = db;
         _content = content;
+        _game = game;
     }
 
     /// <summary>Alle Lesetexte (ohne Fragen, als Übersicht).</summary>
@@ -108,7 +110,10 @@ public class ReadingController : ControllerBase
         }
 
         var score = feedback.Count(f => f.IsCorrect);
-        return Ok(new { Total = feedback.Count, Score = score, Feedback = feedback });
+
+        // XP je richtiger Antwort; das Lesen zählt als eine Aktivität für die Serie.
+        var game = await _game.RegisterActivityAsync(score * 5, wordsReviewed: 0);
+        return Ok(new { Total = feedback.Count, Score = score, Feedback = feedback, Game = game });
     }
 
     [HttpDelete("{id:int}")]

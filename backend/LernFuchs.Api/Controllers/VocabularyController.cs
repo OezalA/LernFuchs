@@ -13,15 +13,17 @@ public class VocabularyController : ControllerBase
 {
     private readonly AppDbContext _db;
     private readonly IContentGenerationService _content;
+    private readonly GameService _game;
     private readonly ILogger<VocabularyController> _logger;
 
     /// <summary>Leitner-Intervalle in Tagen je Box (Index 0..5).</summary>
     private static readonly int[] BoxIntervalsDays = { 0, 1, 3, 7, 16, 35 };
 
-    public VocabularyController(AppDbContext db, IContentGenerationService content, ILogger<VocabularyController> logger)
+    public VocabularyController(AppDbContext db, IContentGenerationService content, GameService game, ILogger<VocabularyController> logger)
     {
         _db = db;
         _content = content;
+        _game = game;
         _logger = logger;
     }
 
@@ -101,7 +103,10 @@ public class VocabularyController : ControllerBase
         p.NextReviewAt = DateTime.UtcNow.AddDays(BoxIntervalsDays[p.Box]);
 
         await _db.SaveChangesAsync();
-        return Ok(p);
+
+        // XP vergeben: richtig gibt mehr, aber auch Üben zählt.
+        var game = await _game.RegisterActivityAsync(result.Correct ? 10 : 2, wordsReviewed: 1);
+        return Ok(new { progress = p, game });
     }
 
     [HttpDelete("{id:int}")]

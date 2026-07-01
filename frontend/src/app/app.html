@@ -3,6 +3,19 @@
     <span class="fox">🦊</span>
     <span class="brand-name">LernFuchs</span>
   </a>
+
+  @if (game.state(); as s) {
+    <div class="hud">
+      <div class="hud-level" title="Level {{ s.level }}">
+        <span class="lvl-badge">Lvl {{ s.level }}</span>
+        <div class="xp-bar"><div class="xp-fill" [style.width.%]="levelProgress()"></div></div>
+      </div>
+      <div class="hud-streak" title="{{ s.currentStreakDays }} Tage in Folge">
+        🔥 <strong>{{ s.currentStreakDays }}</strong>
+      </div>
+    </div>
+  }
+
   <nav class="nav">
     <a routerLink="/wortschatz" routerLinkActive="active">📚 Wortschatz</a>
     <a routerLink="/lesen" routerLinkActive="active">📖 Leseverständnis</a>
@@ -12,6 +25,16 @@
     </button>
   </nav>
 </header>
+
+@if (game.latestAchievement(); as badge) {
+  <div class="achievement-toast">
+    <span class="at-icon">{{ badge.icon }}</span>
+    <div>
+      <div class="at-title">Neues Abzeichen!</div>
+      <div class="at-name">{{ badge.title }} – {{ badge.description }}</div>
+    </div>
+  </div>
+}
 
 <main>
   <router-outlet></router-outlet>

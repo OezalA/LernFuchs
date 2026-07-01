@@ -44,3 +44,67 @@
   border-radius: 999px;
 }
 .sound-toggle:hover { background: #f5efe4; }
+
+/* Spielstand-Anzeige (HUD) */
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+.hud-level { display: flex; align-items: center; gap: 0.5rem; }
+.lvl-badge {
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--fox-orange);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-family: 'Fredoka', sans-serif;
+}
+.xp-bar {
+  width: 90px;
+  height: 10px;
+  background: #eee4d4;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sun-yellow), var(--leaf-green));
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+.hud-streak { font-weight: 700; white-space: nowrap; }
+.hud-streak strong { color: var(--berry-red); }
+
+/* Abzeichen-Einblendung */
+.achievement-toast {
+  position: fixed;
+  top: 74px;
+  right: 16px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #fff;
+  border: 2px solid var(--sun-yellow);
+  border-radius: 14px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  animation: toast-in 0.4s ease both;
+  max-width: 320px;
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.at-icon { font-size: 1.8rem; }
+.at-title { font-weight: 800; color: var(--fox-orange-dark); font-size: 0.85rem; }
+.at-name { font-size: 0.9rem; }
+
+@media (max-width: 620px) {
+  .hud { order: 3; width: 100%; margin: 0.4rem 0 0; justify-content: center; }
+  .topbar { flex-wrap: wrap; }
+}

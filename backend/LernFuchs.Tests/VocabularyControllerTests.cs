@@ -2,6 +2,7 @@ using LernFuchs.Api.Controllers;
 using LernFuchs.Api.Data;
 using LernFuchs.Api.Dtos;
 using LernFuchs.Api.Models;
+using LernFuchs.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -11,7 +12,7 @@ namespace LernFuchs.Tests;
 public class VocabularyControllerTests
 {
     private static VocabularyController CreateController(AppDbContext db, FakeContentGenerationService? content = null)
-        => new(db, content ?? new FakeContentGenerationService(), NullLogger<VocabularyController>.Instance);
+        => new(db, content ?? new FakeContentGenerationService(), new GameService(db), NullLogger<VocabularyController>.Instance);
 
     [Fact]
     public async Task Review_CorrectAnswer_MovesWordToNextBoxAndSchedulesFutureReview()

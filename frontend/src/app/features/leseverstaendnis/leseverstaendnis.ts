@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ReadingService } from '../../core/reading.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
+import { GameService } from '../../core/game.service';
 import {
   ReadingPassage, ReadingPassageSummary, CheckResult, Difficulty
 } from '../../core/models';
@@ -17,6 +18,7 @@ export class Leseverstaendnis implements OnInit {
   private reading = inject(ReadingService);
   private speech = inject(SpeechService);
   private celebrate = inject(CelebrationService);
+  private game = inject(GameService);
 
   passages = signal<ReadingPassageSummary[]>([]);
   loading = signal(false);
@@ -123,6 +125,7 @@ export class Leseverstaendnis implements OnInit {
       next: r => {
         this.result.set(r);
         this.checking.set(false);
+        this.game.handleActivity(r.game);
         if (r.score === r.total) this.celebrate.fanfare();
         else if (r.score > 0) this.celebrate.confettiSmall();
       },

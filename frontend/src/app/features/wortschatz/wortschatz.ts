@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { VocabularyService } from '../../core/vocabulary.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
+import { GameService } from '../../core/game.service';
 import { VocabularyWord, Difficulty } from '../../core/models';
 
 @Component({
@@ -15,6 +16,7 @@ export class Wortschatz implements OnInit {
   private vocab = inject(VocabularyService);
   private speech = inject(SpeechService);
   private celebrate = inject(CelebrationService);
+  private game = inject(GameService);
 
   // Datenbestand
   words = signal<VocabularyWord[]>([]);
@@ -145,7 +147,7 @@ export class Wortschatz implements OnInit {
   answer(correct: boolean): void {
     const card = this.currentCard();
     if (!card) return;
-    this.vocab.review(card.id, correct).subscribe();
+    this.vocab.review(card.id, correct).subscribe(res => this.game.handleActivity(res.game));
     this.reviewedCount.update(n => n + 1);
     if (correct) {
       this.correctCount.update(n => n + 1);

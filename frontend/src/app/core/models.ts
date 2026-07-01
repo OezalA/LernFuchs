@@ -72,6 +72,7 @@ export interface CheckResult {
   total: number;
   score: number;
   feedback: AnswerFeedback[];
+  game?: GameActivityResult;
 }
 
 export interface LearningStats {
@@ -82,6 +83,34 @@ export interface LearningStats {
   wrongReviews: number;
   successRate: number;
   totalPassages: number;
+}
+
+export interface AchievementView {
+  code: string;
+  title: string;
+  description: string;
+  icon: string;
+  unlocked: boolean;
+}
+
+export interface GameState {
+  xp: number;
+  level: number;
+  xpIntoLevel: number;
+  xpForNextLevel: number;
+  currentStreakDays: number;
+  longestStreakDays: number;
+  reviewsToday: number;
+  dailyGoal: number;
+  achievements: AchievementView[];
+}
+
+export interface GameActivityResult {
+  xpGained: number;
+  xp: number;
+  level: number;
+  leveledUp: boolean;
+  newAchievements: AchievementView[];
 }
 
 // Request-Typen

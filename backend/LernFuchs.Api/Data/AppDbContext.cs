@@ -11,6 +11,8 @@ public class AppDbContext : DbContext
     public DbSet<VocabularyProgress> VocabularyProgress => Set<VocabularyProgress>();
     public DbSet<ReadingPassage> ReadingPassages => Set<ReadingPassage>();
     public DbSet<ComprehensionQuestion> ComprehensionQuestions => Set<ComprehensionQuestion>();
+    public DbSet<PlayerProfile> PlayerProfiles => Set<PlayerProfile>();
+    public DbSet<Achievement> Achievements => Set<Achievement>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,6 +48,9 @@ public class AppDbContext : DbContext
              .HasForeignKey<VocabularyProgress>(p => p.VocabularyWordId)
              .OnDelete(DeleteBehavior.Cascade);
         });
+
+        // Jeder Abzeichen-Code kommt höchstens einmal vor.
+        modelBuilder.Entity<Achievement>(e => e.HasIndex(a => a.Code).IsUnique());
 
         base.OnModelCreating(modelBuilder);
     }

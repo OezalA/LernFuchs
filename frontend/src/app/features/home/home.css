@@ -39,6 +39,50 @@
   gap: 1.2rem;
 }
 
+/* Tagesziel */
+.goal {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.goal-ring { position: relative; width: 120px; height: 120px; flex: 0 0 auto; }
+.goal-ring svg { transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: #eee4d4; stroke-width: 12; }
+.ring-fill {
+  fill: none;
+  stroke: url(#g) var(--leaf-green);
+  stroke: var(--leaf-green);
+  stroke-width: 12;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease;
+}
+.goal-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.goal-num { font-size: 1.4rem; font-weight: 900; color: var(--fox-orange-dark); font-family: 'Fredoka', sans-serif; }
+.goal-label { font-size: 0.8rem; color: var(--muted); }
+.goal-text { flex: 1 1 220px; }
+.goal-text h2 { margin: 0 0 0.4rem; }
+.streak-line { margin-top: 0.6rem; font-weight: 700; }
+
+/* Abzeichen */
+.achievements { margin-top: 1.8rem; }
+.achievements h2 { margin-bottom: 0.8rem; }
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.9rem;
+}
+.badge-card { text-align: center; padding: 1rem 0.7rem; }
+.badge-card.locked { opacity: 0.55; filter: grayscale(0.6); }
+.badge-icon { font-size: 2.2rem; }
+.badge-title { font-weight: 800; margin-top: 0.3rem; }
+.badge-desc { font-size: 0.8rem; margin-top: 0.2rem; }
+
 .tile {
   display: flex;
   flex-direction: column;

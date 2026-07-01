@@ -13,6 +13,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.Configure<GeminiOptions>(builder.Configuration.GetSection("Gemini"));
 builder.Services.AddHttpClient<IContentGenerationService, GeminiContentGenerationService>();
 
+// --- Spiel-/Fortschrittslogik ---
+builder.Services.AddScoped<GameService>();
+
 // --- Web API ---
 builder.Services.AddControllers()
     .AddJsonOptions(o =>
