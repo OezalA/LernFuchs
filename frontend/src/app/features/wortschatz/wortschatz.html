@@ -99,7 +99,7 @@
           @for (t of topics(); track t) { <option [value]="t">{{ t }}</option> }
         </select>
       }
-      @if (words().length && !practicing()) {
+      @if (availableWords().length && !practicing()) {
         <button class="secondary" (click)="startDuePractice()">⏰ Heute üben</button>
         <button (click)="startPractice()">🎴 Üben</button>
       }
@@ -108,8 +108,14 @@
 
   @if (loading()) {
     <p class="center"><span class="spinner"></span> Lädt…</p>
-  } @else if (!words().length) {
-    <p class="muted center empty">Noch keine Wörter. Erstelle oben deine ersten Wörter! 🦊</p>
+  } @else if (!availableWords().length) {
+    <div class="card empty-guide center">
+      <div class="big-fox">🦊📖</div>
+      <p>Dein Wortschatz füllt sich, sobald du Texte liest!</p>
+      <p class="muted">Lies im Bereich <strong>Leseverständnis</strong> einen Text und beantworte die Fragen –
+        die schwierigen Wörter daraus landen dann hier.</p>
+      <a routerLink="/lesen"><button>📖 Zum Leseverständnis</button></a>
+    </div>
   } @else {
     <div class="wordgrid">
       @for (w of filteredWords(); track w.id) {

@@ -80,6 +80,7 @@ public class ReadingController : ControllerBase
         var generated = await _content.GenerateReadingPassageAsync(req.Topic, req.Difficulty, questionCount, ct);
 
         _db.ReadingPassages.Add(generated.Passage);
+        await _db.SaveChangesAsync(ct); // Passage-Id festlegen, um die Wörter zu verknüpfen
 
         // Schwierige Wörter aus dem Text zum Wortschatz hinzufügen –
         // aber keine Dubletten (Wörter, die es schon gibt).
@@ -91,10 +92,15 @@ public class ReadingController : ControllerBase
             .Where(w => existing.Add(w.Word.ToLowerInvariant()))
             .ToList();
 
-        if (newWords.Count > 0)
-            _db.VocabularyWords.AddRange(newWords);
+        foreach (var w in newWords)
+            w.SourcePassageId = generated.Passage.Id; // Wort mit seinem Text verknüpfen
 
-        await _db.SaveChangesAsync(ct);
+        if (newWords.Count > 0)
+        {
+            _db.VocabularyWords.AddRange(newWords);
+            await _db.SaveChangesAsync(ct);
+        }
+
         return Ok(new { generated.Passage.Id, generated.Passage.Title, addedWords = newWords.Count });
     }
 

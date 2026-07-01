@@ -43,6 +43,12 @@ public class VocabularyWord
     [MaxLength(60)]
     public string? Topic { get; set; }
 
+    /// <summary>
+    /// Lesetext, aus dem dieses Wort stammt. Nur Wörter aus gelesenen Texten
+    /// erscheinen im Wortschatz und in den Spielen.
+    /// </summary>
+    public int? SourcePassageId { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public VocabularyProgress? Progress { get; set; }

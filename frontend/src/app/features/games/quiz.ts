@@ -3,8 +3,9 @@ import { RouterLink } from '@angular/router';
 import { VocabularyService } from '../../core/vocabulary.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
+import { ReadStateService } from '../../core/read-state.service';
 import { VocabularyWord } from '../../core/models';
-import { articleLabel, shuffle, wordWithArticle } from './game-utils';
+import { shuffle, wordWithArticle, readableWords } from './game-utils';
 
 interface QuizQuestion {
   word: VocabularyWord;
@@ -21,6 +22,7 @@ export class QuizGame implements OnInit {
   private vocab = inject(VocabularyService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
+  private readState = inject(ReadStateService);
 
   loading = signal(true);
   questions = signal<QuizQuestion[]>([]);
@@ -34,7 +36,7 @@ export class QuizGame implements OnInit {
 
   ngOnInit(): void {
     this.vocab.getAll().subscribe({
-      next: words => { this.build(words); this.loading.set(false); },
+      next: words => { this.build(readableWords(words, this.readState.ids())); this.loading.set(false); },
       error: () => this.loading.set(false)
     });
   }
@@ -91,6 +93,6 @@ export class QuizGame implements OnInit {
     this.score.set(0);
     this.answered.set(null);
     this.finished.set(false);
-    this.vocab.getAll().subscribe(words => this.build(words));
+    this.vocab.getAll().subscribe(words => this.build(readableWords(words, this.readState.ids())));
   }
 }

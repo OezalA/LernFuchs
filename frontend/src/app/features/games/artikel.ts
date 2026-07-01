@@ -3,8 +3,9 @@ import { RouterLink } from '@angular/router';
 import { VocabularyService } from '../../core/vocabulary.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
+import { ReadStateService } from '../../core/read-state.service';
 import { VocabularyWord } from '../../core/models';
-import { shuffle } from './game-utils';
+import { shuffle, readableWords } from './game-utils';
 
 @Component({
   selector: 'app-artikel-game',
@@ -16,6 +17,7 @@ export class ArtikelGame implements OnInit {
   private vocab = inject(VocabularyService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
+  private readState = inject(ReadStateService);
 
   readonly articles = ['der', 'die', 'das'];
 
@@ -31,7 +33,7 @@ export class ArtikelGame implements OnInit {
   ngOnInit(): void {
     this.vocab.getAll().subscribe({
       next: words => {
-        const nouns = words.filter(w => w.article && w.article !== 'None');
+        const nouns = readableWords(words, this.readState.ids()).filter(w => w.article && w.article !== 'None');
         this.deck.set(shuffle(nouns).slice(0, 12));
         this.loading.set(false);
       },

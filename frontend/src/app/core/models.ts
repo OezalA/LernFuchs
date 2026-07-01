@@ -29,6 +29,7 @@ export interface VocabularyWord {
   antonyms: string[];
   difficulty: Difficulty;
   topic: string | null;
+  sourcePassageId: number | null;
   createdAt: string;
   progress: VocabularyProgress | null;
 }

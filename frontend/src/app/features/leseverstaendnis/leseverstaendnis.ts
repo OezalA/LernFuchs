@@ -5,6 +5,7 @@ import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
 import { ConfigService } from '../../core/config.service';
+import { ReadStateService } from '../../core/read-state.service';
 import {
   ReadingPassage, ReadingPassageSummary, CheckResult, Difficulty
 } from '../../core/models';
@@ -21,6 +22,7 @@ export class Leseverstaendnis implements OnInit {
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
   protected config = inject(ConfigService);
+  protected readState = inject(ReadStateService);
 
   passages = signal<ReadingPassageSummary[]>([]);
   loading = signal(false);
@@ -127,6 +129,7 @@ export class Leseverstaendnis implements OnInit {
       next: r => {
         this.result.set(r);
         this.checking.set(false);
+        this.readState.markRead(passage.id); // Text gilt jetzt als gelesen
         this.game.handleActivity(r.game);
         if (r.score === r.total) this.celebrate.fanfare();
         else if (r.score > 0) this.celebrate.confettiSmall();

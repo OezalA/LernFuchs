@@ -20,3 +20,8 @@ export function wordWithArticle(w: VocabularyWord): string {
   const a = articleLabel(w);
   return a ? `${a} ${w.word}` : w.word;
 }
+
+/** Nur Wörter aus gelesenen Texten (oder eigenständige Wörter ohne Quelltext). */
+export function readableWords(words: VocabularyWord[], readIds: Set<number>): VocabularyWord[] {
+  return words.filter(w => w.sourcePassageId == null || readIds.has(w.sourcePassageId));
+}

@@ -5,8 +5,9 @@ import { VocabularyService } from '../../core/vocabulary.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
+import { ReadStateService } from '../../core/read-state.service';
 import { VocabularyWord } from '../../core/models';
-import { shuffle } from './game-utils';
+import { shuffle, readableWords } from './game-utils';
 
 @Component({
   selector: 'app-diktat-game',
@@ -19,6 +20,7 @@ export class DiktatGame implements OnInit {
   private speech = inject(SpeechService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
+  private readState = inject(ReadStateService);
 
   canSpeak = this.speech.supported;
   loading = signal(true);
@@ -38,7 +40,7 @@ export class DiktatGame implements OnInit {
   ngOnInit(): void {
     this.vocab.getAll().subscribe({
       next: words => {
-        this.deck.set(shuffle(words).slice(0, 10));
+        this.deck.set(shuffle(readableWords(words, this.readState.ids())).slice(0, 10));
         this.loading.set(false);
         setTimeout(() => this.sayCurrent(), 400);
       },

@@ -3,8 +3,9 @@ import { RouterLink } from '@angular/router';
 import { VocabularyService } from '../../core/vocabulary.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
+import { ReadStateService } from '../../core/read-state.service';
 import { VocabularyWord } from '../../core/models';
-import { shuffle, wordWithArticle } from './game-utils';
+import { shuffle, wordWithArticle, readableWords } from './game-utils';
 
 interface MemoryCard {
   key: number;
@@ -23,6 +24,7 @@ export class MemoryGame implements OnInit {
   private vocab = inject(VocabularyService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
+  private readState = inject(ReadStateService);
 
   loading = signal(true);
   cards = signal<MemoryCard[]>([]);
@@ -42,7 +44,7 @@ export class MemoryGame implements OnInit {
   }
 
   private build(words: VocabularyWord[]): void {
-    const picked = shuffle(words).slice(0, 6);
+    const picked = shuffle(readableWords(words, this.readState.ids())).slice(0, 6);
     let key = 0;
     const cards: MemoryCard[] = [];
     for (const w of picked) {

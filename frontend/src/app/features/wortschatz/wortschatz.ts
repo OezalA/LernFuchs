@@ -1,15 +1,17 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { VocabularyService } from '../../core/vocabulary.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
 import { ConfigService } from '../../core/config.service';
+import { ReadStateService } from '../../core/read-state.service';
 import { VocabularyWord, Difficulty } from '../../core/models';
 
 @Component({
   selector: 'app-wortschatz',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './wortschatz.html',
   styleUrl: './wortschatz.css'
 })
@@ -19,6 +21,7 @@ export class Wortschatz implements OnInit {
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
   protected config = inject(ConfigService);
+  private readState = inject(ReadStateService);
 
   // Datenbestand
   words = signal<VocabularyWord[]>([]);
@@ -46,17 +49,24 @@ export class Wortschatz implements OnInit {
   currentCard = computed(() => this.deck()[this.cardIndex()] ?? null);
   sessionFinished = computed(() => this.practicing() && this.cardIndex() >= this.deck().length);
 
-  // Verfügbare Themen (aus den vorhandenen Wörtern)
+  // Nur Wörter aus gelesenen Texten (oder eigenständig erstellte Wörter ohne Quelltext).
+  availableWords = computed(() => {
+    const read = this.readState.ids();
+    return this.words().filter(w => w.sourcePassageId == null || read.has(w.sourcePassageId));
+  });
+
+  // Verfügbare Themen (aus den freigeschalteten Wörtern)
   topics = computed(() => {
     const set = new Set<string>();
-    for (const w of this.words()) if (w.topic) set.add(w.topic);
+    for (const w of this.availableWords()) if (w.topic) set.add(w.topic);
     return Array.from(set).sort();
   });
 
   // Gefilterte Wortliste nach ausgewähltem Thema
   filteredWords = computed(() => {
     const t = this.selectedTopic();
-    return t ? this.words().filter(w => w.topic === t) : this.words();
+    const words = this.availableWords();
+    return t ? words.filter(w => w.topic === t) : words;
   });
 
   get topicModel2() { return this.selectedTopic(); }
@@ -114,12 +124,14 @@ export class Wortschatz implements OnInit {
     this.beginPractice([...this.filteredWords()]);
   }
 
-  /** Übt nur die heute fälligen Wörter (Leitner-System). */
+  /** Übt nur die heute fälligen Wörter (Leitner-System) aus gelesenen Texten. */
   startDuePractice(): void {
     this.vocab.getDue(50).subscribe({
       next: due => {
-        if (!due.length) { this.error.set('Heute ist nichts fällig – super, du bist auf dem neuesten Stand! 🎉'); return; }
-        this.beginPractice(due);
+        const read = this.readState.ids();
+        const scoped = due.filter(w => w.sourcePassageId == null || read.has(w.sourcePassageId));
+        if (!scoped.length) { this.error.set('Heute ist nichts fällig – super, du bist auf dem neuesten Stand! 🎉'); return; }
+        this.beginPractice(scoped);
       }
     });
   }

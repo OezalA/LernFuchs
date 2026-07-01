@@ -97,9 +97,14 @@ public class DailyContentService : BackgroundService
             {
                 var generated = await content.GenerateReadingPassageAsync(topic, difficulty, 4, ct, model);
                 db.ReadingPassages.Add(generated.Passage);
+                await db.SaveChangesAsync(ct); // Passage-Id für die Verknüpfung
+
                 foreach (var w in generated.DifficultWords)
                     if (existingWords.Add(w.Word.ToLowerInvariant()))
+                    {
+                        w.SourcePassageId = generated.Passage.Id;
                         db.VocabularyWords.Add(w);
+                    }
                 made++;
                 _logger.LogInformation("Tagesinhalt erzeugt: {Topic} ({Difficulty})", topic, difficulty);
             }

@@ -34,9 +34,11 @@ public static class DatabaseSeeder
         var seed = JsonSerializer.Deserialize<SeedRoot>(json, JsonOpts);
         if (seed is null) return;
 
+        // Texte anlegen und je Thema merken (jedes Seed-Thema ist eindeutig).
+        var passageByTopic = new Dictionary<string, ReadingPassage>(StringComparer.OrdinalIgnoreCase);
         foreach (var p in seed.Passages)
         {
-            db.ReadingPassages.Add(new ReadingPassage
+            var passage = new ReadingPassage
             {
                 Title = p.Title,
                 Text = p.Text,
@@ -51,13 +53,20 @@ public static class DatabaseSeeder
                     CorrectAnswer = q.CorrectAnswer,
                     Explanation = q.Explanation
                 }).ToList()
-            });
+            };
+            db.ReadingPassages.Add(passage);
+            if (!string.IsNullOrWhiteSpace(p.Topic))
+                passageByTopic[p.Topic] = passage;
         }
+        await db.SaveChangesAsync(ct); // Texte bekommen ihre Ids
 
         var seen = new HashSet<string>();
         foreach (var w in seed.Words)
         {
             if (!seen.Add(w.Word.Trim().ToLowerInvariant())) continue;
+            int? sourceId = w.Topic is not null && passageByTopic.TryGetValue(w.Topic, out var src)
+                ? src.Id
+                : null;
             db.VocabularyWords.Add(new VocabularyWord
             {
                 Word = w.Word,
@@ -69,7 +78,8 @@ public static class DatabaseSeeder
                 Synonyms = w.Synonyms,
                 Antonyms = w.Antonyms,
                 Difficulty = ParseEnum(w.Difficulty, Difficulty.Mittel),
-                Topic = w.Topic
+                Topic = w.Topic,
+                SourcePassageId = sourceId
             });
         }
 
