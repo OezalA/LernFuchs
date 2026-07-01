@@ -46,7 +46,7 @@ h1 { color: var(--fox-orange-dark); }
 }
 .word-card { display: flex; flex-direction: column; gap: 0.4rem; }
 .word-line { font-size: 1.15rem; font-weight: 800; }
-.article-sm { color: var(--sky-blue); font-weight: 800; }
+.article-sm { color: var(--sky-blue); font-weight: 800; margin-right: 0.35em; }
 .word-line .plural { font-weight: 500; font-size: 0.95rem; }
 .def { margin: 0; font-size: 0.92rem; }
 .word-foot {
