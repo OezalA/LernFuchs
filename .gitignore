@@ -1,0 +1,27 @@
+# ---- .NET / ASP.NET Core ----
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# EF Core SQLite database (generated at runtime)
+*.db
+*.db-shm
+*.db-wal
+
+# Local secrets / configuration overrides
+appsettings.*.local.json
+secrets.json
+
+# ---- Node / Angular (frontend) ----
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+# ---- Editor / OS ----
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
