@@ -47,7 +47,7 @@ public class ReadingController : ControllerBase
         return Ok(passages);
     }
 
-    /// <summary>Ein Lesetext samt Fragen (ohne die richtigen Antworten preiszugeben).</summary>
+    /// <summary>Ein Lesetext samt Fragen und den zugehörigen Wörtern (für das Frontend-Spielerlebnis).</summary>
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -55,15 +55,21 @@ public class ReadingController : ControllerBase
             .FirstOrDefaultAsync(p => p.Id == id);
         if (passage is null) return NotFound();
 
+        // Wörter, die aus diesem Text stammen (zum Hervorheben im Text und für die Ergebnisseite).
+        var words = await _db.VocabularyWords
+            .Where(w => w.SourcePassageId == id)
+            .Select(w => new { w.Id, w.Word, w.Article, w.Plural, w.WordType, w.DefinitionGerman, w.ExampleSentence })
+            .ToListAsync();
+
         return Ok(new
         {
             passage.Id, passage.Title, passage.Text, passage.Difficulty,
             passage.Topic, passage.WordCount, passage.CreatedAt,
             Questions = passage.Questions.Select(q => new
             {
-                q.Id, q.QuestionText, q.QuestionType, q.Options
-                // CorrectAnswer/Explanation werden bewusst nicht mitgeliefert.
-            })
+                q.Id, q.QuestionText, q.QuestionType, q.Options, q.CorrectAnswer, q.Explanation
+            }),
+            Words = words
         });
     }
 

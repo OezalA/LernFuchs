@@ -1,155 +1,145 @@
 <div class="container">
-  <h1>📖 Leseverständnis</h1>
-
-  @if (!current()) {
-    <!-- Übersicht + Erstellen -->
-    @if (config.userGenerationEnabled()) {
-    <section class="card gen">
-      <h2>Neuen Text erstellen</h2>
-      <p class="muted">Wähle ein Thema – der LernFuchs schreibt dir eine kurze Geschichte mit Fragen.</p>
-      <div class="gen-form">
-        <input type="text" placeholder="Thema, z. B. Tiere, Weltraum, Freundschaft…"
-               [(ngModel)]="topicModel" (keyup.enter)="generate()" />
-        <select [(ngModel)]="difficultyModel">
-          <option value="Leicht">Leicht</option>
-          <option value="Mittel">Mittel</option>
-          <option value="Schwer">Schwer</option>
-        </select>
-        <select [(ngModel)]="countModel">
-          <option [ngValue]="3">3 Fragen</option>
-          <option [ngValue]="4">4 Fragen</option>
-          <option [ngValue]="5">5 Fragen</option>
-        </select>
-        <button (click)="generate()" [disabled]="generating()">
-          @if (generating()) { <span class="spinner"></span> Wird geschrieben… }
-          @else { ✨ Erstellen }
-        </button>
-      </div>
-    </section>
-    }
-    @if (error()) { <p class="error">{{ error() }}</p> }
-
-    <div class="list-head">
-      <h2 class="section-title">Deine Texte</h2>
+  <!-- ============ 1) BIBLIOTHEK ============ -->
+  @if (view() === 'list') {
+    <div class="lese-head">
+      <h1>📖 Leseverständnis</h1>
       @if (passages().length) {
         <span class="read-progress">✓ {{ readCount() }} / {{ passages().length }} gelesen</span>
       }
     </div>
+    @if (error()) { <p class="error">{{ error() }}</p> }
 
     @if (loading()) {
       <p class="center"><span class="spinner"></span> Lädt…</p>
     } @else if (!passages().length) {
       <p class="muted center empty">Noch keine Texte vorhanden. 🦊</p>
     } @else {
-      @for (group of groupedPassages(); track group.topic) {
+      @for (group of groupedPassages(); track group.name) {
         <section class="topic-group">
-          <h3 class="topic-heading">{{ group.icon }} {{ group.topic }}
+          <h2 class="topic-heading">{{ group.icon }} {{ group.name }}
             <span class="topic-count">{{ group.items.length }}</span>
-          </h3>
-          <div class="passage-grid">
+          </h2>
+          <div class="book-grid">
             @for (p of group.items; track p.id) {
-              <div class="card passage-item" [class.read]="isRead(p.id)" (click)="open(p.id)">
-                <div class="passage-top">
-                  <span class="badge" [class.leicht]="p.difficulty==='Leicht'"
-                        [class.mittel]="p.difficulty==='Mittel'"
-                        [class.schwer]="p.difficulty==='Schwer'">{{ p.difficulty }}</span>
-                  @if (isRead(p.id)) { <span class="read-badge">✓ Gelesen</span> }
+              <button class="book" [class.read]="isRead(p.id)" (click)="open(p.id)">
+                <div class="book-cover">
+                  <span class="cover-emoji">{{ group.icon }}</span>
+                  @if (isRead(p.id)) { <span class="cover-check">✓</span> }
                 </div>
-                <h4 class="passage-title">{{ p.title }}</h4>
-                <p class="muted passage-meta">{{ p.wordCount }} Wörter · {{ p.questionCount }} Fragen</p>
-                <div class="passage-foot">
-                  @if (config.userGenerationEnabled()) {
-                    <button class="ghost tiny" (click)="deletePassage(p.id, $event)" title="Löschen">🗑️</button>
-                  }
-                  <span class="open-cta">{{ isRead(p.id) ? 'Nochmal lesen' : 'Lesen' }} →</span>
+                <div class="book-title">{{ p.title }}</div>
+                <div class="book-stars" [title]="p.difficulty">
+                  {{ '⭐'.repeat(difficultyStars(p.difficulty)) }}<span class="star-off">{{ '☆'.repeat(3 - difficultyStars(p.difficulty)) }}</span>
                 </div>
-              </div>
+              </button>
             }
           </div>
         </section>
       }
     }
-  } @else {
-    <!-- Lesetext + Fragen -->
-    @let passage = current()!;
-    <button class="ghost back" (click)="backToList()">← Zurück zur Übersicht</button>
+  }
 
+  <!-- ============ 2) LESEN ============ -->
+  @if (view() === 'reading') {
+    <button class="ghost back" (click)="backToList()">← Zurück zur Bibliothek</button>
     @if (loadingText()) {
       <p class="center"><span class="spinner"></span> Lädt…</p>
-    } @else {
-      @if (infoMessage()) {
-        <div class="info-banner">{{ infoMessage() }}</div>
-      }
-      <article class="card reading">
-        <div class="reading-head">
-          <h2>{{ passage.title }}</h2>
+    } @else if (current(); as p) {
+      <article class="card reader">
+        <div class="reader-head">
+          <h1 class="reader-title">{{ p.title }}</h1>
           @if (canSpeak) {
             <div class="read-controls">
-              <button class="secondary small" (click)="speak(passage.text)" title="Vorlesen">🔊 Vorlesen</button>
-              <button class="ghost small" (click)="stopSpeaking()" title="Stopp">⏹️</button>
+              <button class="secondary" (click)="speakText()">🔊 Vorlesen</button>
+              <button class="ghost" (click)="stopSpeaking()" title="Stopp">⏹️</button>
             </div>
           }
         </div>
-        <p class="reading-text">{{ passage.text }}</p>
+        <p class="reader-text">@for (t of textTokens(); track $index) {@if (t.word) {<button class="hard-word" (click)="tapWord(t.word)">{{ t.text }}</button>} @else {{{ t.text }}}}</p>
+
+        @if (activeWord(); as w) {
+          <div class="word-popover">
+            <strong>{{ w.article !== 'None' ? (w.article | lowercase) + ' ' : '' }}{{ w.word }}</strong>
+            <span class="muted"> – {{ w.definitionGerman }}</span>
+          </div>
+        } @else {
+          <p class="reader-hint muted">💡 Tippe auf ein <span class="hard-word-demo">unterstrichenes</span> Wort, um es zu hören und seine Bedeutung zu sehen.</p>
+        }
       </article>
 
-      <section class="questions">
-        <h2>Fragen</h2>
-        @for (q of passage.questions; track q.id; let i = $index) {
-          @let fb = feedbackFor(q.id);
-          <div class="card question"
-               [class.correct]="fb?.isCorrect === true"
-               [class.wrong]="fb?.isCorrect === false">
-            <p class="q-text"><strong>{{ i + 1 }}.</strong> {{ q.questionText }}</p>
+      <div class="reader-cta">
+        <button class="big-cta" (click)="startQuiz()">Fertig gelesen → Fragen starten ✏️</button>
+      </div>
+    }
+  }
 
-            @if (q.questionType === 'MultipleChoice') {
-              <div class="options">
-                @for (opt of q.options; track opt) {
-                  <label class="option" [class.chosen]="answers()[q.id] === opt">
-                    <input type="radio" [name]="'q' + q.id" [value]="opt"
-                           [checked]="answers()[q.id] === opt"
-                           [disabled]="!!result()"
-                           (change)="setAnswer(q.id, opt)" />
-                    <span>{{ opt }}</span>
-                  </label>
-                }
-              </div>
-            } @else {
-              <input type="text" class="open-answer" placeholder="Deine Antwort…"
-                     [value]="answers()[q.id] ?? ''"
-                     [disabled]="!!result()"
-                     (input)="setAnswer(q.id, $any($event.target).value)" />
-            }
+  <!-- ============ 3) QUIZ ============ -->
+  @if (view() === 'quiz') {
+    @if (current(); as p) {
+      <div class="quiz-head">
+        <button class="ghost back" (click)="backToList()">← Abbrechen</button>
+        <div class="progress-dots">
+          @for (q of p.questions; track q.id; let i = $index) {
+            <span class="dot" [class.done]="i < qIndex()" [class.active]="i === qIndex()"></span>
+          }
+        </div>
+      </div>
 
-            @if (fb) {
-              <div class="feedback">
-                @if (fb.isCorrect) {
-                  <p class="fb-line ok">✅ Richtig!</p>
-                } @else {
-                  <p class="fb-line no">❌ Nicht ganz. Richtige Antwort: <strong>{{ fb.correctAnswer }}</strong></p>
-                }
-                @if (fb.explanation) { <p class="fb-expl muted">{{ fb.explanation }}</p> }
-              </div>
+      @if (currentQuestion(); as q) {
+        <div class="card quiz-card">
+          <div class="q-count">Frage {{ qIndex() + 1 }} von {{ p.questions.length }}</div>
+          <h2 class="q-text">{{ q.questionText }}</h2>
+
+          <div class="q-options">
+            @for (opt of q.options; track opt) {
+              <button class="q-opt" [class]="optionState(opt)"
+                      [disabled]="!!chosen()" (click)="choose(opt)">
+                {{ opt }}
+              </button>
             }
           </div>
-        }
 
-        @if (!result()) {
-          <button class="submit" (click)="submit()" [disabled]="checking()">
-            @if (checking()) { <span class="spinner"></span> Wird geprüft… }
-            @else { ✅ Antworten prüfen }
-          </button>
-        } @else {
-          <div class="card score center">
-            <div class="big-fox">{{ result()!.score === result()!.total ? '🏆' : '🦊' }}</div>
-            <h2>Du hast {{ result()!.score }} von {{ result()!.total }} richtig!</h2>
-            <div class="row center">
-              <button class="ghost" (click)="open(passage.id)">🔁 Nochmal versuchen</button>
-              <button (click)="backToList()">Fertig</button>
+          @if (chosen()) {
+            <div class="q-feedback" [class.ok]="isCorrectChoice()" [class.no]="!isCorrectChoice()">
+              @if (isCorrectChoice()) { <span>✅ Richtig!</span> }
+              @else { <span>❌ Nicht ganz. Richtig ist: <strong>{{ q.correctAnswer }}</strong></span> }
+              @if (q.explanation) { <p class="q-expl">{{ q.explanation }}</p> }
             </div>
+            <button class="big-cta" (click)="next()">
+              {{ qIndex() + 1 < p.questions.length ? 'Weiter →' : 'Ergebnis ansehen 🎉' }}
+            </button>
+          }
+        </div>
+      }
+    }
+  }
+
+  <!-- ============ 4) ERGEBNIS ============ -->
+  @if (view() === 'result') {
+    @if (current(); as p) {
+      <div class="card result-card center">
+        <div class="result-stars">{{ '⭐'.repeat(resultStars()) }}<span class="star-off">{{ '☆'.repeat(3 - resultStars()) }}</span></div>
+        <h1>{{ checkResult()?.score }} von {{ checkResult()?.total }} richtig!</h1>
+        @if (checkResult()?.game?.xpGained) {
+          <p class="xp-line">+{{ checkResult()!.game!.xpGained }} XP ✨</p>
+        }
+
+        @if (p.words.length) {
+          <div class="unlocked">
+            <h3>🔓 Neue Wörter freigeschaltet</h3>
+            <div class="unlocked-words">
+              @for (w of p.words; track w.id) {
+                <span class="chip">{{ w.article !== 'None' ? (w.article | lowercase) + ' ' : '' }}{{ w.word }}</span>
+              }
+            </div>
+            <p class="muted">Übe sie jetzt im Wortschatz und in den Spielen!</p>
           </div>
         }
-      </section>
+
+        <div class="row center">
+          <button (click)="startQuiz()">🔁 Nochmal</button>
+          <button class="ghost" (click)="backToList()">Zur Bibliothek</button>
+        </div>
+      </div>
     }
   }
 </div>

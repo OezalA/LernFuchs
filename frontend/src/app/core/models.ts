@@ -40,6 +40,19 @@ export interface ComprehensionQuestion {
   questionText: string;
   questionType: QuestionType;
   options: string[];
+  correctAnswer: string;
+  explanation: string | null;
+}
+
+/** Ein Wort, das aus einem Lesetext stammt (für Hervorhebung + Ergebnisseite). */
+export interface PassageWord {
+  id: number;
+  word: string;
+  article: Article;
+  plural: string | null;
+  wordType: WordType;
+  definitionGerman: string;
+  exampleSentence: string | null;
 }
 
 export interface ReadingPassage {
@@ -51,6 +64,7 @@ export interface ReadingPassage {
   wordCount: number;
   createdAt: string;
   questions: ComprehensionQuestion[];
+  words: PassageWord[];
 }
 
 export interface ReadingPassageSummary {

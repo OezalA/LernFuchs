@@ -81,7 +81,7 @@ public class ReadingControllerTests
     }
 
     [Fact]
-    public async Task GetById_DoesNotLeakCorrectAnswers()
+    public async Task GetById_ReturnsQuestionsAndTheSourceWordsOfThePassage()
     {
         using var db = TestDb.Create();
         var passage = new ReadingPassage
@@ -90,19 +90,26 @@ public class ReadingControllerTests
             Text = "…",
             Questions = new List<ComprehensionQuestion>
             {
-                new() { QuestionText = "Frage?", CorrectAnswer = "Geheim", Options = new() { "A", "B" } }
+                new() { QuestionText = "Frage?", CorrectAnswer = "A", Options = new() { "A", "B" } }
             }
         };
         db.ReadingPassages.Add(passage);
+        await db.SaveChangesAsync();
+        db.VocabularyWords.Add(new VocabularyWord
+        {
+            Word = "Baum", DefinitionGerman = "Pflanze", SourcePassageId = passage.Id
+        });
         await db.SaveChangesAsync();
 
         var controller = new ReadingController(db, new FakeContentGenerationService(), new GameService(db), Options.Create(new FeatureOptions()));
         var result = await controller.GetById(passage.Id);
 
         var value = Assert.IsType<OkObjectResult>(result).Value!;
-        var questions = (System.Collections.IEnumerable)Prop(value, "Questions")!;
-        var first = questions.Cast<object>().Single();
-        // Die richtige Antwort darf im ausgelieferten Objekt nicht enthalten sein.
-        Assert.Null(first.GetType().GetProperty("CorrectAnswer"));
+        var questions = ((System.Collections.IEnumerable)Prop(value, "Questions")!).Cast<object>().ToList();
+        Assert.Single(questions);
+
+        var words = ((System.Collections.IEnumerable)Prop(value, "Words")!).Cast<object>().ToList();
+        Assert.Single(words);
+        Assert.Equal("Baum", Prop(words[0], "Word"));
     }
 }
