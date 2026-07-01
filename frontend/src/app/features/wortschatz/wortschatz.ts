@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VocabularyService } from '../../core/vocabulary.service';
+import { SpeechService } from '../../core/speech.service';
 import { VocabularyWord, Difficulty } from '../../core/models';
 
 @Component({
@@ -11,11 +12,16 @@ import { VocabularyWord, Difficulty } from '../../core/models';
 })
 export class Wortschatz implements OnInit {
   private vocab = inject(VocabularyService);
+  private speech = inject(SpeechService);
 
   // Datenbestand
   words = signal<VocabularyWord[]>([]);
   loading = signal(false);
   error = signal<string | null>(null);
+
+  // Themenfilter
+  selectedTopic = signal<string>('');
+  canSpeak = this.speech.supported;
 
   // Formular zum Erzeugen
   topic = signal('');
@@ -33,6 +39,22 @@ export class Wortschatz implements OnInit {
 
   currentCard = computed(() => this.deck()[this.cardIndex()] ?? null);
   sessionFinished = computed(() => this.practicing() && this.cardIndex() >= this.deck().length);
+
+  // Verfügbare Themen (aus den vorhandenen Wörtern)
+  topics = computed(() => {
+    const set = new Set<string>();
+    for (const w of this.words()) if (w.topic) set.add(w.topic);
+    return Array.from(set).sort();
+  });
+
+  // Gefilterte Wortliste nach ausgewähltem Thema
+  filteredWords = computed(() => {
+    const t = this.selectedTopic();
+    return t ? this.words().filter(w => w.topic === t) : this.words();
+  });
+
+  get topicModel2() { return this.selectedTopic(); }
+  set topicModel2(v: string) { this.selectedTopic.set(v); }
 
   // ngModel-Brücken zu den Signalen
   get topicModel() { return this.topic(); }
@@ -81,14 +103,37 @@ export class Wortschatz implements OnInit {
 
   // ----- Karteikarten -----
 
+  /** Übt alle (gefilterten) Wörter. */
   startPractice(): void {
-    const shuffled = [...this.words()].sort(() => Math.random() - 0.5);
+    this.beginPractice([...this.filteredWords()]);
+  }
+
+  /** Übt nur die heute fälligen Wörter (Leitner-System). */
+  startDuePractice(): void {
+    this.vocab.getDue(50).subscribe({
+      next: due => {
+        if (!due.length) { this.error.set('Heute ist nichts fällig – super, du bist auf dem neuesten Stand! 🎉'); return; }
+        this.beginPractice(due);
+      }
+    });
+  }
+
+  private beginPractice(cards: VocabularyWord[]): void {
+    const shuffled = cards.sort(() => Math.random() - 0.5);
     this.deck.set(shuffled);
     this.cardIndex.set(0);
     this.flipped.set(false);
     this.reviewedCount.set(0);
     this.correctCount.set(0);
     this.practicing.set(true);
+    this.error.set(null);
+  }
+
+  /** Liest ein Wort (mit Artikel) laut vor. */
+  speak(w: VocabularyWord, event?: Event): void {
+    event?.stopPropagation();
+    const article = this.articleLabel(w);
+    this.speech.speak(article ? `${article} ${w.word}` : w.word);
   }
 
   flip(): void {

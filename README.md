@@ -117,12 +117,18 @@ npm start
 Then open **http://localhost:4200**. The dev server proxies all `/api` calls to the
 backend on port 5219 (see `proxy.conf.json`), so no CORS setup is needed.
 
-The UI (in German) has two modules:
+The UI (in German) has a start page with a **progress dashboard** and two modules:
 
 - **Wortschatz** — generate themed words, then practise them with flip-cards
   (marking "Gewusst" / "Nochmal" feeds the Leitner spaced-repetition progress).
-- **Leseverständnis** — generate a short text with questions, read it, answer the
-  questions and get instant per-question feedback and a score.
+  Includes a **"Heute üben"** button (only words due today), a **topic filter**,
+  and **read-aloud** (🔊) via the browser's free Web Speech API.
+- **Leseverständnis** — generate a short text with questions, read it (with
+  optional **read-aloud**), filter by topic, answer the questions and get instant
+  per-question feedback and a score.
+
+The start page shows live stats: words collected, mastered, due today, success
+rate and number of reading texts (`GET /api/stats`).
 
 ---
 

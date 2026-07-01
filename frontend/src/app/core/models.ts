@@ -75,6 +75,16 @@ export interface CheckResult {
   feedback: AnswerFeedback[];
 }
 
+export interface LearningStats {
+  totalWords: number;
+  masteredWords: number;
+  dueWords: number;
+  correctReviews: number;
+  wrongReviews: number;
+  successRate: number;
+  totalPassages: number;
+}
+
 // Request-Typen
 export interface GenerateVocabularyRequest {
   topic: string;

@@ -52,10 +52,10 @@ public class VocabularyController : ControllerBase
     public async Task<IActionResult> GetDue([FromQuery] int limit = 20)
     {
         var now = DateTime.UtcNow;
+        // Neue Wörter (ohne Fortschritt) zuerst, dann die am längsten fälligen.
         var due = await _db.VocabularyWords.Include(w => w.Progress)
             .Where(w => w.Progress == null || w.Progress.NextReviewAt <= now)
-            .OrderBy(w => w.Progress == null ? 0 : 1)
-            .ThenBy(w => Guid.NewGuid())
+            .OrderBy(w => w.Progress == null ? DateTime.MinValue : w.Progress.NextReviewAt)
             .Take(limit)
             .ToListAsync();
         return Ok(due);

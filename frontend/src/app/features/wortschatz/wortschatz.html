@@ -55,6 +55,9 @@
             <div class="face front">
               @if (articleLabel(card)) { <span class="article">{{ articleLabel(card) }}</span> }
               <span class="word">{{ card.word }}</span>
+              @if (canSpeak) {
+                <button class="icon-btn big" (click)="speak(card, $event)" title="Vorlesen">🔊</button>
+              }
               <span class="hint muted">(Zum Umdrehen tippen)</span>
             </div>
             <div class="face back">
@@ -86,10 +89,19 @@
 
   <!-- Wortliste -->
   <section class="list-head">
-    <h2>Alle Wörter ({{ words().length }})</h2>
-    @if (words().length && !practicing()) {
-      <button (click)="startPractice()">🎴 Karteikarten üben</button>
-    }
+    <h2>Wörter ({{ filteredWords().length }})</h2>
+    <div class="list-actions">
+      @if (topics().length) {
+        <select [(ngModel)]="topicModel2" title="Nach Thema filtern">
+          <option value="">Alle Themen</option>
+          @for (t of topics(); track t) { <option [value]="t">{{ t }}</option> }
+        </select>
+      }
+      @if (words().length && !practicing()) {
+        <button class="secondary" (click)="startDuePractice()">⏰ Heute üben</button>
+        <button (click)="startPractice()">🎴 Üben</button>
+      }
+    </div>
   </section>
 
   @if (loading()) {
@@ -98,12 +110,15 @@
     <p class="muted center empty">Noch keine Wörter. Erstelle oben deine ersten Wörter! 🦊</p>
   } @else {
     <div class="wordgrid">
-      @for (w of words(); track w.id) {
+      @for (w of filteredWords(); track w.id) {
         <div class="card word-card">
           <div class="word-line">
             @if (articleLabel(w)) { <span class="article-sm">{{ articleLabel(w) }}</span> }
             <span class="w">{{ w.word }}</span>
             @if (w.plural) { <span class="plural muted">, die {{ w.plural }}</span> }
+            @if (canSpeak) {
+              <button class="icon-btn" (click)="speak(w, $event)" title="Vorlesen">🔊</button>
+            }
           </div>
           <p class="def muted">{{ w.definitionGerman }}</p>
           <div class="word-foot">

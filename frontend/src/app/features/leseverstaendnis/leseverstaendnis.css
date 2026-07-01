@@ -12,6 +12,22 @@ h1 { color: var(--fox-orange-dark); }
 
 .error { color: var(--berry-red); font-weight: 700; margin: 0.6rem 0 0; }
 .section-title { margin: 1.6rem 0 0.8rem; }
+.list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.reading-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.read-controls { display: flex; gap: 0.4rem; }
+button.small { padding: 0.35rem 0.8rem; font-size: 0.9rem; }
 .empty { padding: 2rem 0; font-size: 1.05rem; }
 
 /* Textliste */

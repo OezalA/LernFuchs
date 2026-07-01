@@ -1,6 +1,7 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReadingService } from '../../core/reading.service';
+import { SpeechService } from '../../core/speech.service';
 import {
   ReadingPassage, ReadingPassageSummary, CheckResult, Difficulty
 } from '../../core/models';
@@ -13,10 +14,28 @@ import {
 })
 export class Leseverstaendnis implements OnInit {
   private reading = inject(ReadingService);
+  private speech = inject(SpeechService);
 
   passages = signal<ReadingPassageSummary[]>([]);
   loading = signal(false);
   error = signal<string | null>(null);
+
+  selectedTopic = signal<string>('');
+  canSpeak = this.speech.supported;
+
+  topics = computed(() => {
+    const set = new Set<string>();
+    for (const p of this.passages()) if (p.topic) set.add(p.topic);
+    return Array.from(set).sort();
+  });
+
+  filteredPassages = computed(() => {
+    const t = this.selectedTopic();
+    return t ? this.passages().filter(p => p.topic === t) : this.passages();
+  });
+
+  get topicModel2() { return this.selectedTopic(); }
+  set topicModel2(v: string) { this.selectedTopic.set(v); }
 
   // Formular
   topic = signal('');
@@ -104,7 +123,16 @@ export class Leseverstaendnis implements OnInit {
     return this.result()?.feedback.find(f => f.questionId === questionId) ?? null;
   }
 
+  speak(text: string): void {
+    this.speech.speak(text);
+  }
+
+  stopSpeaking(): void {
+    this.speech.stop();
+  }
+
   backToList(): void {
+    this.speech.stop();
     this.current.set(null);
     this.result.set(null);
     this.load();

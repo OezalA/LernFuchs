@@ -27,14 +27,22 @@
       @if (error()) { <p class="error">{{ error() }}</p> }
     </section>
 
-    <h2 class="section-title">Deine Texte ({{ passages().length }})</h2>
+    <div class="list-head">
+      <h2 class="section-title">Deine Texte ({{ filteredPassages().length }})</h2>
+      @if (topics().length) {
+        <select [(ngModel)]="topicModel2" title="Nach Thema filtern">
+          <option value="">Alle Themen</option>
+          @for (t of topics(); track t) { <option [value]="t">{{ t }}</option> }
+        </select>
+      }
+    </div>
     @if (loading()) {
       <p class="center"><span class="spinner"></span> Lädt…</p>
     } @else if (!passages().length) {
       <p class="muted center empty">Noch keine Texte. Erstelle oben deinen ersten Text! 🦊</p>
     } @else {
       <div class="passage-list">
-        @for (p of passages(); track p.id) {
+        @for (p of filteredPassages(); track p.id) {
           <div class="card passage-item" (click)="open(p.id)">
             <div class="passage-info">
               <h3>{{ p.title }}</h3>
@@ -62,7 +70,15 @@
       <p class="center"><span class="spinner"></span> Lädt…</p>
     } @else {
       <article class="card reading">
-        <h2>{{ passage.title }}</h2>
+        <div class="reading-head">
+          <h2>{{ passage.title }}</h2>
+          @if (canSpeak) {
+            <div class="read-controls">
+              <button class="secondary small" (click)="speak(passage.text)" title="Vorlesen">🔊 Vorlesen</button>
+              <button class="ghost small" (click)="stopSpeaking()" title="Stopp">⏹️</button>
+            </div>
+          }
+        </div>
         <p class="reading-text">{{ passage.text }}</p>
       </article>
 

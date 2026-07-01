@@ -24,6 +24,17 @@ h1 { color: var(--fox-orange-dark); }
   margin: 1.6rem 0 0.8rem;
 }
 .list-head h2 { margin: 0; }
+.list-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+
+.icon-btn {
+  background: transparent;
+  box-shadow: none;
+  padding: 0.1rem 0.35rem;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+.icon-btn:hover { background: #f0e6d6; }
+.icon-btn.big { font-size: 1.5rem; margin-top: 0.4rem; }
 
 .empty { padding: 2rem 0; font-size: 1.05rem; }
 

@@ -8,6 +8,31 @@
     </p>
   </section>
 
+  @if (stats(); as s) {
+    <section class="stats">
+      <div class="stat card">
+        <div class="stat-num">{{ s.totalWords }}</div>
+        <div class="stat-label">Wörter gesammelt</div>
+      </div>
+      <div class="stat card">
+        <div class="stat-num">⭐ {{ s.masteredWords }}</div>
+        <div class="stat-label">gelernt</div>
+      </div>
+      <div class="stat card" [class.highlight]="s.dueWords > 0">
+        <div class="stat-num">{{ s.dueWords }}</div>
+        <div class="stat-label">heute zu üben</div>
+      </div>
+      <div class="stat card">
+        <div class="stat-num">{{ s.successRate }}%</div>
+        <div class="stat-label">richtig</div>
+      </div>
+      <div class="stat card">
+        <div class="stat-num">📖 {{ s.totalPassages }}</div>
+        <div class="stat-label">Lesetexte</div>
+      </div>
+    </section>
+  }
+
   <div class="tiles">
     <a class="tile card" routerLink="/wortschatz">
       <div class="tile-icon">📚</div>
