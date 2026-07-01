@@ -22,6 +22,7 @@ export class Leseverstaendnis implements OnInit {
 
   selectedTopic = signal<string>('');
   canSpeak = this.speech.supported;
+  infoMessage = signal<string | null>(null);
 
   topics = computed(() => {
     const set = new Set<string>();
@@ -81,6 +82,9 @@ export class Leseverstaendnis implements OnInit {
       next: created => {
         this.generating.set(false);
         this.topic.set('');
+        this.infoMessage.set(created.addedWords > 0
+          ? `✨ Text erstellt! ${created.addedWords} schwierige Wörter wurden zum Wortschatz hinzugefügt.`
+          : '✨ Text erstellt!');
         this.load();
         this.open(created.id);
       },
@@ -135,6 +139,7 @@ export class Leseverstaendnis implements OnInit {
     this.speech.stop();
     this.current.set(null);
     this.result.set(null);
+    this.infoMessage.set(null);
     this.load();
   }
 

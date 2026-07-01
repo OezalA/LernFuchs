@@ -22,8 +22,8 @@ export class ReadingService {
     return this.http.get<ReadingPassage>(`${this.base}/${id}`);
   }
 
-  generate(req: GenerateReadingRequest): Observable<{ id: number; title: string }> {
-    return this.http.post<{ id: number; title: string }>(`${this.base}/generate`, req);
+  generate(req: GenerateReadingRequest): Observable<{ id: number; title: string; addedWords: number }> {
+    return this.http.post<{ id: number; title: string; addedWords: number }>(`${this.base}/generate`, req);
   }
 
   check(id: number, answers: { questionId: number; answer: string }[]): Observable<CheckResult> {

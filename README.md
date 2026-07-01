@@ -9,8 +9,8 @@ afterwards without repeated API calls.
 
 > **Languages:** The learning content is **entirely in German** — words, sentences and
 > the meaning explanations. Definitions are written in simple, child-friendly German that
-> a 5th-grader understands (full-immersion). An optional Turkish hint per word is supported
-> but not required. The **user interface is in German**. This documentation is in English.
+> a 5th-grader understands (full-immersion). The **user interface is in German**.
+> This documentation is in English.
 
 ---
 
@@ -49,8 +49,8 @@ LernFuchs/
 ### Domain model
 
 - **VocabularyWord** — German word with article (der/die/das), plural, word type,
-  a child-friendly German definition (the core meaning), an optional Turkish hint,
-  example sentence, synonyms/antonyms, difficulty, topic.
+  a child-friendly German definition (the core meaning), example sentence,
+  synonyms/antonyms, difficulty, topic.
 - **VocabularyProgress** — spaced-repetition state per word using the **Leitner system**
   (boxes 0–5 with growing review intervals).
 - **ReadingPassage** — a reading text with a list of comprehension questions.
@@ -125,7 +125,9 @@ The UI (in German) has a start page with a **progress dashboard** and two module
   and **read-aloud** (🔊) via the browser's free Web Speech API.
 - **Leseverständnis** — generate a short text with questions, read it (with
   optional **read-aloud**), filter by topic, answer the questions and get instant
-  per-question feedback and a score.
+  per-question feedback and a score. When a text is generated, the **difficult
+  words from it are automatically extracted and added to the Wortschatz** (skipping
+  words that already exist), so reading feeds vocabulary practice.
 
 The start page shows live stats: words collected, mastered, due today, success
 rate and number of reading texts (`GET /api/stats`).

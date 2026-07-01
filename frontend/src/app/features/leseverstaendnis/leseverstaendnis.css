@@ -49,6 +49,16 @@ button.tiny { padding: 0.25rem 0.5rem; font-size: 0.85rem; }
 
 .back { margin-bottom: 1rem; }
 
+.info-banner {
+  background: linear-gradient(160deg, #eafaf0 0%, #d9f5e3 100%);
+  border: 2px solid var(--leaf-green);
+  color: #1f7a34;
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
 /* Lesetext */
 .reading { margin-bottom: 1.4rem; }
 .reading h2 { margin-top: 0; color: var(--fox-orange-dark); }

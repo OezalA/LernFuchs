@@ -69,11 +69,25 @@ public class ReadingController : ControllerBase
             return BadRequest("Bitte ein Thema angeben.");
 
         var questionCount = Math.Clamp(req.QuestionCount, 1, 10);
-        var passage = await _content.GenerateReadingPassageAsync(req.Topic, req.Difficulty, questionCount, ct);
+        var generated = await _content.GenerateReadingPassageAsync(req.Topic, req.Difficulty, questionCount, ct);
 
-        _db.ReadingPassages.Add(passage);
+        _db.ReadingPassages.Add(generated.Passage);
+
+        // Schwierige Wörter aus dem Text zum Wortschatz hinzufügen –
+        // aber keine Dubletten (Wörter, die es schon gibt).
+        var existing = (await _db.VocabularyWords.Select(w => w.Word).ToListAsync(ct))
+            .Select(w => w.ToLowerInvariant())
+            .ToHashSet();
+
+        var newWords = generated.DifficultWords
+            .Where(w => existing.Add(w.Word.ToLowerInvariant()))
+            .ToList();
+
+        if (newWords.Count > 0)
+            _db.VocabularyWords.AddRange(newWords);
+
         await _db.SaveChangesAsync(ct);
-        return Ok(new { passage.Id, passage.Title });
+        return Ok(new { generated.Passage.Id, generated.Passage.Title, addedWords = newWords.Count });
     }
 
     /// <summary>Prüft eingereichte Antworten und gibt Feedback je Frage.</summary>

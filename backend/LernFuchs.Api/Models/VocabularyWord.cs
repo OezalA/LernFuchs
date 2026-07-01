@@ -27,10 +27,6 @@ public class VocabularyWord
     [Required, MaxLength(500)]
     public string DefinitionGerman { get; set; } = string.Empty;
 
-    /// <summary>Optionale türkische Bedeutung als kleine Hilfe (kann leer bleiben).</summary>
-    [MaxLength(200)]
-    public string? MeaningTurkish { get; set; }
-
     /// <summary>Beispielsatz mit dem Wort.</summary>
     [MaxLength(300)]
     public string? ExampleSentence { get; set; }

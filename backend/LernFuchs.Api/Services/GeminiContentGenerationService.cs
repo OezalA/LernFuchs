@@ -74,7 +74,6 @@ public class GeminiContentGenerationService : IContentGenerationService
             Plural = string.IsNullOrWhiteSpace(w.Plural) ? null : w.Plural.Trim(),
             WordType = ParseEnum(w.WordType, WordType.Sonstiges),
             DefinitionGerman = w.DefinitionGerman?.Trim() ?? string.Empty,
-            MeaningTurkish = string.IsNullOrWhiteSpace(w.MeaningTurkish) ? null : w.MeaningTurkish.Trim(),
             ExampleSentence = w.ExampleSentence?.Trim(),
             Synonyms = w.Synonyms ?? new(),
             Antonyms = w.Antonyms ?? new(),
@@ -83,14 +82,17 @@ public class GeminiContentGenerationService : IContentGenerationService
         }).ToList();
     }
 
-    public async Task<ReadingPassage> GenerateReadingPassageAsync(
+    public async Task<GeneratedReading> GenerateReadingPassageAsync(
         string topic, Difficulty difficulty, int questionCount, CancellationToken ct = default)
     {
         var prompt = $$"""
-            Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium (Muttersprache Türkisch).
+            Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
             Schreibe einen altersgerechten deutschen Lesetext zum Thema "{{topic}}" mit Schwierigkeitsgrad "{{difficulty}}".
             Der Text soll etwa 120-200 Wörter haben und interessant sein.
             Formuliere danach genau {{questionCount}} Verständnisfragen zum Text.
+
+            Suche außerdem die 3-6 schwierigsten Wörter aus DEINEM Text heraus (Wörter, die ein Kind
+            der 5. Klasse vielleicht noch nicht kennt) und erkläre sie einfach – alles auf Deutsch.
 
             Antworte ausschließlich als JSON in genau dieser Struktur:
             {
@@ -104,10 +106,23 @@ public class GeminiContentGenerationService : IContentGenerationService
                   "correctAnswer": "der Text der richtigen Antwort",
                   "explanation": "kurze Begründung"
                 }
+              ],
+              "difficultWords": [
+                {
+                  "word": "schwieriges Wort aus dem Text in Grundform",
+                  "article": "der | die | das | none",
+                  "plural": "Pluralform oder null",
+                  "wordType": "Nomen | Verb | Adjektiv | Adverb | Praeposition | Pronomen | Konjunktion | Sonstiges",
+                  "definitionGerman": "einfache, kindgerechte deutsche Erklärung",
+                  "exampleSentence": "einfacher deutscher Beispielsatz",
+                  "synonyms": ["deutsches Synonym"],
+                  "antonyms": ["deutsches Gegenteil"]
+                }
               ]
             }
             Regeln: Mische MultipleChoice- und OpenEnded-Fragen. Bei OpenEnded ist "options" ein leeres Array
             und "correctAnswer" eine Musterantwort. Bei MultipleChoice muss "correctAnswer" exakt einer Option entsprechen.
+            Die Wörter in "difficultWords" müssen wirklich im Text vorkommen.
             Gib keine Erklärungen außerhalb des JSON aus.
             """;
 
@@ -116,7 +131,7 @@ public class GeminiContentGenerationService : IContentGenerationService
                   ?? throw new InvalidOperationException("Gemini-Antwort konnte nicht gelesen werden.");
 
         var text = dto.Text.Trim();
-        return new ReadingPassage
+        var passage = new ReadingPassage
         {
             Title = dto.Title.Trim(),
             Text = text,
@@ -132,6 +147,25 @@ public class GeminiContentGenerationService : IContentGenerationService
                 Explanation = q.Explanation?.Trim()
             }).ToList()
         };
+
+        var difficultWords = (dto.DifficultWords ?? new())
+            .Where(w => !string.IsNullOrWhiteSpace(w.Word))
+            .Select(w => new VocabularyWord
+            {
+                Word = w.Word.Trim(),
+                Article = ParseEnum(w.Article, Article.None),
+                Plural = string.IsNullOrWhiteSpace(w.Plural) ? null : w.Plural.Trim(),
+                WordType = ParseEnum(w.WordType, WordType.Sonstiges),
+                DefinitionGerman = w.DefinitionGerman?.Trim() ?? string.Empty,
+                ExampleSentence = w.ExampleSentence?.Trim(),
+                Synonyms = w.Synonyms ?? new(),
+                Antonyms = w.Antonyms ?? new(),
+                Difficulty = difficulty,
+                Topic = topic
+            })
+            .ToList();
+
+        return new GeneratedReading(passage, difficultWords);
     }
 
     /// <summary>Ruft die Gemini-API auf und gibt den reinen JSON-Text der Antwort zurück.</summary>
@@ -199,7 +233,6 @@ public class GeminiContentGenerationService : IContentGenerationService
         public string? Article { get; init; }
         public string? Plural { get; init; }
         public string? WordType { get; init; }
-        public string MeaningTurkish { get; init; } = "";
         public string? DefinitionGerman { get; init; }
         public string? ExampleSentence { get; init; }
         public List<string>? Synonyms { get; init; }
@@ -211,6 +244,7 @@ public class GeminiContentGenerationService : IContentGenerationService
         public string Title { get; init; } = "";
         public string Text { get; init; } = "";
         public List<QuestionDto> Questions { get; init; } = new();
+        public List<VocabularyDto>? DifficultWords { get; init; }
     }
 
     private sealed record QuestionDto

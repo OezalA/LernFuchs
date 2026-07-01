@@ -69,6 +69,9 @@
     @if (loadingText()) {
       <p class="center"><span class="spinner"></span> Lädt…</p>
     } @else {
+      @if (infoMessage()) {
+        <div class="info-banner">{{ infoMessage() }}</div>
+      }
       <article class="card reading">
         <div class="reading-head">
           <h2>{{ passage.title }}</h2>

@@ -24,7 +24,6 @@ export interface VocabularyWord {
   plural: string | null;
   wordType: WordType;
   definitionGerman: string;
-  meaningTurkish: string | null;
   exampleSentence: string | null;
   synonyms: string[];
   antonyms: string[];
