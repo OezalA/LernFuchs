@@ -83,6 +83,24 @@ public class VocabularyControllerTests
     }
 
     [Fact]
+    public async Task GetAll_ResultSerializesWithoutObjectCycle()
+    {
+        using var db = TestDb.Create();
+        var word = new VocabularyWord { Word = "Baum", DefinitionGerman = "eine Pflanze" };
+        word.Progress = new VocabularyProgress { Box = 2 }; // Fortschritt erzeugt die Rück-Navigation
+        db.VocabularyWords.Add(word);
+        await db.SaveChangesAsync();
+
+        var controller = CreateController(db);
+        var result = await controller.GetAll(null, null);
+        var value = Assert.IsType<OkObjectResult>(result).Value!;
+
+        // Ohne [JsonIgnore] auf der Rück-Navigation würde dies eine Zyklus-Ausnahme werfen.
+        var json = System.Text.Json.JsonSerializer.Serialize(value);
+        Assert.Contains("Baum", json);
+    }
+
+    [Fact]
     public async Task GetDue_ReturnsNewWordsAndSkipsWordsScheduledForTheFuture()
     {
         using var db = TestDb.Create();

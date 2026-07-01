@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace LernFuchs.Api.Models;
 
 /// <summary>
@@ -9,6 +11,10 @@ public class VocabularyProgress
     public int Id { get; set; }
 
     public int VocabularyWordId { get; set; }
+
+    // Rück-Navigation nicht serialisieren – sonst entsteht ein Objektzyklus
+    // (Word -> Progress -> Word -> ...).
+    [JsonIgnore]
     public VocabularyWord? VocabularyWord { get; set; }
 
     /// <summary>Leitner-Box (0–5).</summary>

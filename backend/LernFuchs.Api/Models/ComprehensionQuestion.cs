@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace LernFuchs.Api.Models;
 
@@ -8,6 +9,9 @@ public class ComprehensionQuestion
     public int Id { get; set; }
 
     public int ReadingPassageId { get; set; }
+
+    // Rück-Navigation nicht serialisieren (Zyklus Passage -> Questions -> Passage).
+    [JsonIgnore]
     public ReadingPassage? ReadingPassage { get; set; }
 
     [Required, MaxLength(400)]
