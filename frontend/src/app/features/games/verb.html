@@ -1,0 +1,47 @@
+<div class="container">
+  <a class="ghost back" routerLink="/spiele">← Zurück zu den Spielen</a>
+  <h1>🔤 Verben</h1>
+
+  @if (loading()) {
+    <p class="center"><span class="spinner"></span> Lädt…</p>
+  } @else if (!questions().length) {
+    <div class="card empty-hint">
+      <div class="big-fox">🦊📖</div>
+      <p>Für dieses Spiel brauchst du <strong>Verben aus gelesenen Texten</strong>.</p>
+      <p class="muted">Lies ein paar Texte im Leseverständnis – die Verben daraus kannst du dann hier üben.</p>
+      <a routerLink="/lesen"><button>📖 Zum Leseverständnis</button></a>
+    </div>
+  } @else if (finished()) {
+    <div class="card finished">
+      <div class="big-fox">{{ score() === questions().length ? '🏆' : '🦊' }}</div>
+      <h2>{{ score() }} von {{ questions().length }} richtig!</h2>
+      <div class="row">
+        <button (click)="restart()">🔁 Nochmal</button>
+        <a routerLink="/spiele"><button class="ghost">Andere Spiele</button></a>
+      </div>
+    </div>
+  } @else {
+    @let q = current();
+    <div class="game-head">
+      <span class="progress-pill">{{ index() + 1 }} / {{ questions().length }}</span>
+      <span class="progress-pill score-pill">⭐ {{ score() }}</span>
+    </div>
+
+    @if (q) {
+      <div class="card prompt-card">
+        <div class="prompt-label">Wie heißt das Verb in dieser Form?</div>
+        <div class="prompt-main">{{ q.verb.word }}</div>
+        <div class="conj-line"><span class="pronoun">{{ pronouns[q.pronounIndex] }}</span> <span class="blank">___</span></div>
+      </div>
+
+      <div class="options-grid">
+        @for (opt of q.options; track opt) {
+          <button class="opt-btn" [class]="optionState(opt)"
+                  [disabled]="!!answered()" (click)="choose(opt)">
+            {{ opt }}
+          </button>
+        }
+      </div>
+    }
+  }
+</div>

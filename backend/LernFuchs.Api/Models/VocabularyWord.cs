@@ -31,6 +31,12 @@ public class VocabularyWord
     [MaxLength(300)]
     public string? ExampleSentence { get; set; }
 
+    /// <summary>
+    /// Präsens-Konjugation bei Verben, in fester Reihenfolge:
+    /// [ich, du, er/sie/es, wir, ihr, sie/Sie]. Bei Nicht-Verben leer.
+    /// </summary>
+    public List<string> Conjugations { get; set; } = new();
+
     /// <summary>Synonyme (Liste, als JSON gespeichert).</summary>
     public List<string> Synonyms { get; set; } = new();
 

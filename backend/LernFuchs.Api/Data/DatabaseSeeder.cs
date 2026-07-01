@@ -77,6 +77,7 @@ public static class DatabaseSeeder
                 ExampleSentence = w.ExampleSentence,
                 Synonyms = w.Synonyms,
                 Antonyms = w.Antonyms,
+                Conjugations = w.Conjugations ?? new(),
                 Difficulty = ParseEnum(w.Difficulty, Difficulty.Mittel),
                 Topic = w.Topic,
                 SourcePassageId = sourceId
@@ -112,7 +113,7 @@ public static class DatabaseSeeder
                 words.Add(new SeedWord(
                     w.Word, w.Article.ToString(), w.Plural, w.WordType.ToString(),
                     w.DefinitionGerman, w.ExampleSentence, w.Synonyms, w.Antonyms,
-                    w.Difficulty.ToString(), w.Topic ?? ""));
+                    w.Difficulty.ToString(), w.Topic ?? "", w.Conjugations));
             }
         }
 

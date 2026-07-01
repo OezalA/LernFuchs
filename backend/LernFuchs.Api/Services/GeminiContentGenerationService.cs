@@ -77,6 +77,7 @@ public class GeminiContentGenerationService : IContentGenerationService
             ExampleSentence = w.ExampleSentence?.Trim(),
             Synonyms = w.Synonyms ?? new(),
             Antonyms = w.Antonyms ?? new(),
+            Conjugations = w.Conjugations ?? new(),
             Difficulty = difficulty,
             Topic = topic
         }).ToList();
@@ -119,13 +120,16 @@ public class GeminiContentGenerationService : IContentGenerationService
                   "definitionGerman": "einfache, kindgerechte deutsche Erklärung",
                   "exampleSentence": "einfacher deutscher Beispielsatz",
                   "synonyms": ["deutsches Synonym"],
-                  "antonyms": ["deutsches Gegenteil"]
+                  "antonyms": ["deutsches Gegenteil"],
+                  "conjugations": ["ich-Form", "du-Form", "er/sie/es-Form", "wir-Form", "ihr-Form", "sie/Sie-Form"]
                 }
               ]
             }
             Regeln: Jede Frage hat genau 4 Optionen, und "correctAnswer" muss exakt einer der Optionen entsprechen.
             Formuliere klare Fragen mit nur einer eindeutig richtigen Antwort.
             Die Wörter in "difficultWords" müssen wirklich im Text vorkommen.
+            "conjugations" NUR bei Verben ausfüllen (Präsens: ich, du, er/sie/es, wir, ihr, sie/Sie),
+            bei allen anderen Wortarten ein leeres Array [].
             Gib keine Erklärungen außerhalb des JSON aus.
             """;
 
@@ -259,6 +263,7 @@ public class GeminiContentGenerationService : IContentGenerationService
         public string? ExampleSentence { get; init; }
         public List<string>? Synonyms { get; init; }
         public List<string>? Antonyms { get; init; }
+        public List<string>? Conjugations { get; init; }
     }
 
     private sealed record ReadingResponse

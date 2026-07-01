@@ -27,6 +27,7 @@ export interface VocabularyWord {
   exampleSentence: string | null;
   synonyms: string[];
   antonyms: string[];
+  conjugations: string[];
   difficulty: Difficulty;
   topic: string | null;
   sourcePassageId: number | null;

@@ -27,4 +27,5 @@ public record SeedWord(
     List<string> Synonyms,
     List<string> Antonyms,
     string Difficulty,
-    string Topic);
+    string Topic,
+    List<string>? Conjugations = null);

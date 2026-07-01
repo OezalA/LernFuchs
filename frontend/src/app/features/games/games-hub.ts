@@ -13,5 +13,6 @@ export class GamesHub {
     { path: 'artikel', icon: '🏷️', title: 'der/die/das', desc: 'Wähle den richtigen Artikel.' },
     { path: 'diktat', icon: '✍️', title: 'Diktat', desc: 'Höre das Wort und schreibe es.' },
     { path: 'memory', icon: '🧠', title: 'Memory', desc: 'Finde Wort und Erklärung als Paar.' },
+    { path: 'verben', icon: '🔤', title: 'Verben', desc: 'Konjugiere die Verben richtig.' },
   ];
 }

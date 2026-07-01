@@ -41,5 +41,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/games/memory').then(m => m.MemoryGame),
     title: 'LernFuchs – Memory'
   },
+  {
+    path: 'spiele/verben',
+    loadComponent: () => import('./features/games/verb').then(m => m.VerbGame),
+    title: 'LernFuchs – Verben'
+  },
   { path: '**', redirectTo: '' }
 ];

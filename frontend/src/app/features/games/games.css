@@ -77,6 +77,11 @@ h1 { color: var(--fox-orange-dark); }
 .options-grid.three { grid-template-columns: repeat(3, 1fr); max-width: 460px; margin: 0 auto; }
 .artikel-btn { font-family: 'Fredoka', sans-serif; font-size: 1.3rem; text-transform: lowercase; }
 
+/* Verben (Konjugation) */
+.conj-line { margin-top: 0.6rem; font-size: 1.2rem; }
+.conj-line .pronoun { font-weight: 800; color: var(--sky-blue); }
+.conj-line .blank { color: var(--fox-orange); font-weight: 800; letter-spacing: 2px; }
+
 /* Diktat */
 .listen-btn { margin: 0.4rem 0 1rem; }
 .diktat-input {
