@@ -3,9 +3,6 @@
   @if (view() === 'list') {
     <div class="lese-head">
       <h1>📖 Leseverständnis</h1>
-      @if (passages().length) {
-        <span class="read-progress">✓ {{ readCount() }} / {{ passages().length }} gelesen</span>
-      }
     </div>
     @if (error()) { <p class="error">{{ error() }}</p> }
 
@@ -14,9 +11,24 @@
     } @else if (!passages().length) {
       <p class="muted center empty">Noch keine Texte vorhanden. 🦊</p>
     } @else {
+      <div class="lib-tabs">
+        <button class="lib-tab" [class.active]="libraryTab() === 'unread'" (click)="setTab('unread')">
+          📚 Zu lesen <span class="tab-num">{{ unreadCount() }}</span>
+        </button>
+        <button class="lib-tab" [class.active]="libraryTab() === 'read'" (click)="setTab('read')">
+          ✓ Gelesen <span class="tab-num">{{ readCount() }}</span>
+        </button>
+      </div>
+
+      @if (!tabPassages().length) {
+        <p class="muted center empty">
+          @if (libraryTab() === 'read') { Noch keine gelesenen Texte. Lies deinen ersten Text! 🦊 }
+          @else { 🎉 Super, du hast alle Texte gelesen! }
+        </p>
+      } @else {
       <div class="cat-chips">
         <button class="cat-chip" [class.active]="selectedCategory() === null" (click)="selectCategory(null)">
-          Alle <span class="cat-num">{{ passages().length }}</span>
+          Alle <span class="cat-num">{{ tabPassages().length }}</span>
         </button>
         @for (c of categories(); track c.name) {
           <button class="cat-chip" [class.active]="selectedCategory() === c.name" (click)="selectCategory(c.name)">
@@ -45,6 +57,7 @@
             }
           </div>
         </section>
+      }
       }
     }
   }

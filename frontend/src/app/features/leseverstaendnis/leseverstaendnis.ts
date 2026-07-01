@@ -50,13 +50,23 @@ export class Leseverstaendnis implements OnInit {
 
   readCount = computed(() => this.passages().filter(p => this.readState.isRead(p.id)).length);
 
+  // Bibliotheks-Reiter: noch zu lesen oder bereits gelesen.
+  libraryTab = signal<'unread' | 'read'>('unread');
   // Ausgewählte Kategorie (null = alle anzeigen).
   selectedCategory = signal<string | null>(null);
 
-  // Nach Kategorie gruppierte Kacheln
+  unreadCount = computed(() => this.passages().filter(p => !this.readState.isRead(p.id)).length);
+
+  // Texte des aktuellen Reiters.
+  tabPassages = computed(() => {
+    const wantRead = this.libraryTab() === 'read';
+    return this.passages().filter(p => this.readState.isRead(p.id) === wantRead);
+  });
+
+  // Nach Kategorie gruppierte Kacheln (des aktuellen Reiters)
   groupedPassages = computed(() => {
     const groups = new Map<string, { icon: string; items: ReadingPassageSummary[] }>();
-    for (const p of this.passages()) {
+    for (const p of this.tabPassages()) {
       const cat = categoryFor(p.topic);
       const g = groups.get(cat.name);
       if (g) g.items.push(p); else groups.set(cat.name, { icon: cat.icon, items: [p] });
@@ -64,6 +74,11 @@ export class Leseverstaendnis implements OnInit {
     return Array.from(groups, ([name, g]) => ({ name, icon: g.icon, items: g.items }))
       .sort((a, b) => a.name.localeCompare(b.name));
   });
+
+  setTab(tab: 'unread' | 'read'): void {
+    this.libraryTab.set(tab);
+    this.selectedCategory.set(null);
+  }
 
   // Kategorie-Buttons (Name, Icon, Anzahl).
   categories = computed(() =>
