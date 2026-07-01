@@ -99,7 +99,7 @@ public class DailyContentService : BackgroundService
         for (var i = 0; i < count; i++)
         {
             var topic = TopicPool[(start + i) % TopicPool.Length];
-            var difficulty = (Difficulty)(i % 3); // Leicht/Mittel/Schwer im Wechsel
+            var difficulty = TopicDifficulty.For(topic); // Schwierigkeit passend zum Thema
             var model = Models[i % Models.Length];
             try
             {

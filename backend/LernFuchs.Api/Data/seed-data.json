@@ -2,7 +2,7 @@
   "Passages": [
     {
       "Title": "Die beste Freundin",
-      "Text": "Lina und Mia sind seit dem Kindergarten unzertrennlich. Wenn sie zusammen sind, erleben sie die tollsten Abenteuer im Wald hinter dem Dorf. Manchmal streiten sie sich kurz, weil Lina lieber klettern möchte und Mia lieber Blumen sammelt. Doch nach einer Stunde haben sie sich immer wieder versöhnt. Ein echter Freund bedeutet für die beiden, dass man sich gegenseitig vertrauen kann. Wenn Lina mal eine schlechte Note schreibt, tröstet Mia sie sofort. Wenn Mia ihre Hausaufgaben vergisst, hilft ihr Lina bei der Lösung. Letzte Woche hat Lina ihren Lieblingsstift verloren. Sie war sehr traurig, aber Mia hat ihr sofort ihren eigenen Stift geliehen. Das ist das Wichtigste an einer Freundschaft: Man steht füreinander ein. Egal ob man lacht oder weint, mit einer besten Freundin an der Seite ist jeder Schultag viel schöner. Die beiden Mädchen freuen sich schon sehr auf die nächsten Ferien, denn dann wollen sie zusammen ein geheimes Baumhaus bauen. Wahre Freundschaft ist einfach ein tolles Geschenk.",
+      "Text": "Lina und Mia sind seit dem Kindergarten unzertrennlich. Wenn sie zusammen sind, erleben sie die tollsten Abenteuer im Wald hinter dem Dorf. Manchmal streiten sie sich kurz, weil Lina lieber klettern m\u00F6chte und Mia lieber Blumen sammelt. Doch nach einer Stunde haben sie sich immer wieder vers\u00F6hnt. Ein echter Freund bedeutet f\u00FCr die beiden, dass man sich gegenseitig vertrauen kann. Wenn Lina mal eine schlechte Note schreibt, tr\u00F6stet Mia sie sofort. Wenn Mia ihre Hausaufgaben vergisst, hilft ihr Lina bei der L\u00F6sung. Letzte Woche hat Lina ihren Lieblingsstift verloren. Sie war sehr traurig, aber Mia hat ihr sofort ihren eigenen Stift geliehen. Das ist das Wichtigste an einer Freundschaft: Man steht f\u00FCreinander ein. Egal ob man lacht oder weint, mit einer besten Freundin an der Seite ist jeder Schultag viel sch\u00F6ner. Die beiden M\u00E4dchen freuen sich schon sehr auf die n\u00E4chsten Ferien, denn dann wollen sie zusammen ein geheimes Baumhaus bauen. Wahre Freundschaft ist einfach ein tolles Geschenk.",
       "Difficulty": "Leicht",
       "Topic": "Freundschaft",
       "WordCount": 158,
@@ -27,18 +27,18 @@
             "Weil eine von beiden etwas verloren hat"
           ],
           "CorrectAnswer": "Weil sie unterschiedliche Dinge machen wollen",
-          "Explanation": "Lina möchte lieber klettern, während Mia Blumen sammeln möchte."
+          "Explanation": "Lina m\u00F6chte lieber klettern, w\u00E4hrend Mia Blumen sammeln m\u00F6chte."
         },
         {
           "QuestionText": "Was macht Mia, wenn Lina traurig ist?",
           "Options": [
-            "Sie lacht über Lina",
+            "Sie lacht \u00FCber Lina",
             "Sie geht nach Hause",
-            "Sie tröstet sie",
+            "Sie tr\u00F6stet sie",
             "Sie schimpft mit ihr"
           ],
-          "CorrectAnswer": "Sie tröstet sie",
-          "Explanation": "Der Text sagt: Wenn Lina mal eine schlechte Note schreibt, tröstet Mia sie sofort."
+          "CorrectAnswer": "Sie tr\u00F6stet sie",
+          "Explanation": "Der Text sagt: Wenn Lina mal eine schlechte Note schreibt, tr\u00F6stet Mia sie sofort."
         },
         {
           "QuestionText": "Was wollen die beiden in den Ferien machen?",
@@ -55,7 +55,7 @@
     },
     {
       "Title": "Faszinierende Reise durch den Weltraum",
-      "Text": "Stell dir vor, du sitzt in einer Rakete und fliegst hoch über die Wolken, bis der blaue Himmel tiefschwarz wird. Willkommen im Weltraum! Der Weltraum ist unendlich groß und ein Ort voller Geheimnisse. Er beginnt dort, wo die Lufthülle unserer Erde endet. Wenn du aus dem Fenster blickst, siehst du funkelnde Sterne, die in Wirklichkeit riesige, heiße Sonnen sind. Manche von ihnen sind noch viel größer als unsere eigene Sonne. Dazwischen ziehen Planeten ihre Bahnen, genau wie unsere Erde. In der Schwerelosigkeit ist alles anders: Dein Essen würde einfach vor deinem Gesicht herumschweben, wenn du nicht aufpasst. Astronauten müssen deshalb hart trainieren, um sich an das Leben ohne festen Boden unter den Füßen zu gewöhnen. Obwohl es im Weltraum bitterkalt und lebensfeindlich ist, träumen viele Menschen davon, fremde Galaxien zu erforschen. Vielleicht bist du ja der nächste Entdecker, der einen fernen Planeten besucht?",
+      "Text": "Stell dir vor, du sitzt in einer Rakete und fliegst hoch \u00FCber die Wolken, bis der blaue Himmel tiefschwarz wird. Willkommen im Weltraum! Der Weltraum ist unendlich gro\u00DF und ein Ort voller Geheimnisse. Er beginnt dort, wo die Lufth\u00FClle unserer Erde endet. Wenn du aus dem Fenster blickst, siehst du funkelnde Sterne, die in Wirklichkeit riesige, hei\u00DFe Sonnen sind. Manche von ihnen sind noch viel gr\u00F6\u00DFer als unsere eigene Sonne. Dazwischen ziehen Planeten ihre Bahnen, genau wie unsere Erde. In der Schwerelosigkeit ist alles anders: Dein Essen w\u00FCrde einfach vor deinem Gesicht herumschweben, wenn du nicht aufpasst. Astronauten m\u00FCssen deshalb hart trainieren, um sich an das Leben ohne festen Boden unter den F\u00FC\u00DFen zu gew\u00F6hnen. Obwohl es im Weltraum bitterkalt und lebensfeindlich ist, tr\u00E4umen viele Menschen davon, fremde Galaxien zu erforschen. Vielleicht bist du ja der n\u00E4chste Entdecker, der einen fernen Planeten besucht?",
       "Difficulty": "Mittel",
       "Topic": "Weltraum",
       "WordCount": 143,
@@ -64,23 +64,23 @@
           "QuestionText": "Ab wann beginnt der Weltraum laut dem Text?",
           "Options": [
             "Sobald man die Sonne sieht",
-            "Dort, wo die Lufthülle der Erde endet",
+            "Dort, wo die Lufth\u00FClle der Erde endet",
             "Wenn man den Mond erreicht",
             "Hinter den Wolken"
           ],
-          "CorrectAnswer": "Dort, wo die Lufthülle der Erde endet",
-          "Explanation": "Im Text steht explizit: Der Weltraum beginnt dort, wo die Lufthülle unserer Erde endet."
+          "CorrectAnswer": "Dort, wo die Lufth\u00FClle der Erde endet",
+          "Explanation": "Im Text steht explizit: Der Weltraum beginnt dort, wo die Lufth\u00FClle unserer Erde endet."
         },
         {
           "QuestionText": "Was sind die funkelnden Sterne im Weltraum eigentlich?",
           "Options": [
             "Kleine Steine",
             "Spiegelbilder der Erde",
-            "Riesige, heiße Sonnen",
-            "Eiswürfel im All"
+            "Riesige, hei\u00DFe Sonnen",
+            "Eisw\u00FCrfel im All"
           ],
-          "CorrectAnswer": "Riesige, heiße Sonnen",
-          "Explanation": "Der Text erklärt, dass die Sterne in Wirklichkeit riesige und sehr heiße Sonnen sind."
+          "CorrectAnswer": "Riesige, hei\u00DFe Sonnen",
+          "Explanation": "Der Text erkl\u00E4rt, dass die Sterne in Wirklichkeit riesige und sehr hei\u00DFe Sonnen sind."
         },
         {
           "QuestionText": "Was passiert mit dem Essen in der Schwerelosigkeit?",
@@ -94,21 +94,21 @@
           "Explanation": "Der Text beschreibt, dass das Essen in der Schwerelosigkeit vor dem Gesicht herumschwebt."
         },
         {
-          "QuestionText": "Warum müssen Astronauten hart trainieren?",
+          "QuestionText": "Warum m\u00FCssen Astronauten hart trainieren?",
           "Options": [
             "Um schneller zu laufen",
             "Um die Rakete zu bauen",
-            "Um sich an das Leben ohne festen Boden zu gewöhnen",
+            "Um sich an das Leben ohne festen Boden zu gew\u00F6hnen",
             "Um den Weltraum zu putzen"
           ],
-          "CorrectAnswer": "Um sich an das Leben ohne festen Boden zu gewöhnen",
-          "Explanation": "Astronauten trainieren, um mit der Schwerelosigkeit klarzukommen, da sie dort keinen festen Boden unter den Füßen haben."
+          "CorrectAnswer": "Um sich an das Leben ohne festen Boden zu gew\u00F6hnen",
+          "Explanation": "Astronauten trainieren, um mit der Schwerelosigkeit klarzukommen, da sie dort keinen festen Boden unter den F\u00FC\u00DFen haben."
         }
       ]
     },
     {
       "Title": "Die geniale Idee des Karl Drais",
-      "Text": "Stell dir vor, du müsstest jeden Weg zu Fuß gehen, weil es keine Fahrräder, Autos oder Busse gibt. Genau so sah das Leben vor über zweihundert Jahren aus! Doch im Jahr 1817 hatte ein deutscher Erfinder namens Karl Drais eine geniale Idee. Er erfand die sogenannte „Laufmaschine“, den Urvater unseres heutigen Fahrrads.\n\nDiese Erfindung bestand fast komplett aus Holz und hatte noch keine Pedale. Der Fahrer musste sich mit den Füßen schwungvoll vom Boden abstoßen, um vorwärtszukommen. Das sah ziemlich lustig aus, war aber viel schneller als normales Gehen. Karl Drais suchte nach einer Alternative zu Pferden, da eine Missernte damals das Haferfutter extrem teuer gemacht hatte. Seine Erfindung revolutionierte die Fortbewegung der Menschen.\n\nAnfangs erntete Drais oft Spott für sein kurioses Gefährt. Doch die Menschen erkannten bald, wie nützlich diese Maschine war. Aus der hölzernen Laufmaschine entwickelte sich über viele Jahrzehnte das moderne Fahrrad, das wir heute alle kennen. Jedes Mal, wenn du auf dein Rad steigst, nutzt du also eine geniale Idee aus der Vergangenheit!",
+      "Text": "Stell dir vor, du m\u00FCsstest jeden Weg zu Fu\u00DF gehen, weil es keine Fahrr\u00E4der, Autos oder Busse gibt. Genau so sah das Leben vor \u00FCber zweihundert Jahren aus! Doch im Jahr 1817 hatte ein deutscher Erfinder namens Karl Drais eine geniale Idee. Er erfand die sogenannte \u201ELaufmaschine\u201C, den Urvater unseres heutigen Fahrrads.\n\nDiese Erfindung bestand fast komplett aus Holz und hatte noch keine Pedale. Der Fahrer musste sich mit den F\u00FC\u00DFen schwungvoll vom Boden absto\u00DFen, um vorw\u00E4rtszukommen. Das sah ziemlich lustig aus, war aber viel schneller als normales Gehen. Karl Drais suchte nach einer Alternative zu Pferden, da eine Missernte damals das Haferfutter extrem teuer gemacht hatte. Seine Erfindung revolutionierte die Fortbewegung der Menschen.\n\nAnfangs erntete Drais oft Spott f\u00FCr sein kurioses Gef\u00E4hrt. Doch die Menschen erkannten bald, wie n\u00FCtzlich diese Maschine war. Aus der h\u00F6lzernen Laufmaschine entwickelte sich \u00FCber viele Jahrzehnte das moderne Fahrrad, das wir heute alle kennen. Jedes Mal, wenn du auf dein Rad steigst, nutzt du also eine geniale Idee aus der Vergangenheit!",
       "Difficulty": "Mittel",
       "Topic": "Erfindungen",
       "WordCount": 167,
@@ -119,138 +119,138 @@
             "Karl Benz",
             "Karl Drais",
             "Ein unbekannter Bauer",
-            "Die alten Römer"
+            "Die alten R\u00F6mer"
           ],
           "CorrectAnswer": "Karl Drais",
-          "Explanation": "Im Text wird ausdrücklich erwähnt, dass der deutsche Erfinder Karl Drais die Laufmaschine im Jahr 1817 erfunden hat."
+          "Explanation": "Im Text wird ausdr\u00FCcklich erw\u00E4hnt, dass der deutsche Erfinder Karl Drais die Laufmaschine im Jahr 1817 erfunden hat."
         },
         {
-          "QuestionText": "Wie bewegte man sich mit der ersten Laufmaschine vorwärts?",
+          "QuestionText": "Wie bewegte man sich mit der ersten Laufmaschine vorw\u00E4rts?",
           "Options": [
-            "Man trat kräftig in die Pedale.",
-            "Ein kleiner Elektromotor trieb die Räder an.",
-            "Man stieß sich mit den Füßen vom Boden ab.",
-            "Das Gefährt wurde von Hunden gezogen."
+            "Man trat kr\u00E4ftig in die Pedale.",
+            "Ein kleiner Elektromotor trieb die R\u00E4der an.",
+            "Man stie\u00DF sich mit den F\u00FC\u00DFen vom Boden ab.",
+            "Das Gef\u00E4hrt wurde von Hunden gezogen."
           ],
-          "CorrectAnswer": "Man stieß sich mit den Füßen vom Boden ab.",
-          "Explanation": "Da die Laufmaschine noch keine Pedale hatte, musste der Fahrer sich mit den Füßen schwungvoll vom Boden abstoßen."
+          "CorrectAnswer": "Man stie\u00DF sich mit den F\u00FC\u00DFen vom Boden ab.",
+          "Explanation": "Da die Laufmaschine noch keine Pedale hatte, musste der Fahrer sich mit den F\u00FC\u00DFen schwungvoll vom Boden absto\u00DFen."
         },
         {
           "QuestionText": "Warum suchte Karl Drais nach einer Alternative zu Pferden?",
           "Options": [
             "Weil eine Missernte das Pferdefutter extrem teuer gemacht hatte.",
-            "Weil Pferde in den Städten verboten wurden.",
+            "Weil Pferde in den St\u00E4dten verboten wurden.",
             "Weil er Angst vor Pferden hatte und sie nicht reiten wollte.",
-            "Weil Pferde zu langsam für lange Reisen waren."
+            "Weil Pferde zu langsam f\u00FCr lange Reisen waren."
           ],
           "CorrectAnswer": "Weil eine Missernte das Pferdefutter extrem teuer gemacht hatte.",
-          "Explanation": "Der Text erklärt, dass eine Missernte das Haferfutter für die Pferde sehr teuer machte und Drais deshalb ein neues Transportmittel suchte."
+          "Explanation": "Der Text erkl\u00E4rt, dass eine Missernte das Haferfutter f\u00FCr die Pferde sehr teuer machte und Drais deshalb ein neues Transportmittel suchte."
         },
         {
           "QuestionText": "Wie reagierten die Menschen anfangs auf die Erfindung von Drais?",
           "Options": [
             "Sie kauften die Laufmaschine sofort begeistert.",
-            "Sie ignorierten das neue Gefährt völlig.",
-            "Sie machten sich oft über das kuriose Gefährt lustig.",
+            "Sie ignorierten das neue Gef\u00E4hrt v\u00F6llig.",
+            "Sie machten sich oft \u00FCber das kuriose Gef\u00E4hrt lustig.",
             "Sie bekamen Angst und verboten die Maschine."
           ],
-          "CorrectAnswer": "Sie machten sich oft über das kuriose Gefährt lustig.",
-          "Explanation": "Im Text steht, dass Drais anfangs oft „Spott“ für sein Gefährt erntete. Spott bedeutet, dass sich andere Leute über etwas lustig machen."
+          "CorrectAnswer": "Sie machten sich oft \u00FCber das kuriose Gef\u00E4hrt lustig.",
+          "Explanation": "Im Text steht, dass Drais anfangs oft \u201ESpott\u201C f\u00FCr sein Gef\u00E4hrt erntete. Spott bedeutet, dass sich andere Leute \u00FCber etwas lustig machen."
         }
       ]
     },
     {
       "Title": "Warum Sport so wichtig ist",
-      "Text": "Sport ist weit mehr als nur anstrengende Bewegung. Für viele Schüler ist der Sportunterricht der Höhepunkt des Tages, weil sie sich nach dem langen Stillsitzen im Klassenzimmer endlich richtig auspowern können. Ob beim Fußball, Schwimmen oder Leichtathletik – Bewegung tut dem Körper gut. Studien belegen, dass regelmäßiges Training die Konzentration fördert. Wer sich nachmittags auf dem Sportplatz trifft, lernt zudem wichtige soziale Fähigkeiten. Man spielt in einem Team zusammen, muss sich absprechen und lernt auch, mit einer Niederlage umzugehen. Diese Erfahrungen sind sehr wertvoll für den Alltag. Außerdem hilft Sport dabei, Stress abzubauen. Wenn man sich intensiv bewegt, schüttet der Körper Glückshormone aus, die für gute Laune sorgen. Egal, welche Sportart man wählt, das Wichtigste ist der Spaß an der Sache. Wer regelmäßig Sport treibt, ist nicht nur körperlich fitter, sondern meist auch ausgeglichener. Also: Laufschuhe an und los geht’s!",
+      "Text": "Sport ist weit mehr als nur anstrengende Bewegung. F\u00FCr viele Sch\u00FCler ist der Sportunterricht der H\u00F6hepunkt des Tages, weil sie sich nach dem langen Stillsitzen im Klassenzimmer endlich richtig auspowern k\u00F6nnen. Ob beim Fu\u00DFball, Schwimmen oder Leichtathletik \u2013 Bewegung tut dem K\u00F6rper gut. Studien belegen, dass regelm\u00E4\u00DFiges Training die Konzentration f\u00F6rdert. Wer sich nachmittags auf dem Sportplatz trifft, lernt zudem wichtige soziale F\u00E4higkeiten. Man spielt in einem Team zusammen, muss sich absprechen und lernt auch, mit einer Niederlage umzugehen. Diese Erfahrungen sind sehr wertvoll f\u00FCr den Alltag. Au\u00DFerdem hilft Sport dabei, Stress abzubauen. Wenn man sich intensiv bewegt, sch\u00FCttet der K\u00F6rper Gl\u00FCckshormone aus, die f\u00FCr gute Laune sorgen. Egal, welche Sportart man w\u00E4hlt, das Wichtigste ist der Spa\u00DF an der Sache. Wer regelm\u00E4\u00DFig Sport treibt, ist nicht nur k\u00F6rperlich fitter, sondern meist auch ausgeglichener. Also: Laufschuhe an und los geht\u2019s!",
       "Difficulty": "Mittel",
       "Topic": "Sport",
       "WordCount": 140,
       "Questions": [
         {
-          "QuestionText": "Warum ist Sport laut Text gut für die Konzentration?",
+          "QuestionText": "Warum ist Sport laut Text gut f\u00FCr die Konzentration?",
           "Options": [
             "Weil man dabei lernt, zu gewinnen",
-            "Weil regelmäßiges Training sie fördert",
+            "Weil regelm\u00E4\u00DFiges Training sie f\u00F6rdert",
             "Weil man im Unterricht weniger schreiben muss",
             "Weil man dabei keine Hausaufgaben macht"
           ],
-          "CorrectAnswer": "Weil regelmäßiges Training sie fördert",
-          "Explanation": "Im Text steht direkt, dass Studien belegen, dass regelmäßiges Training die Konzentration fördert."
+          "CorrectAnswer": "Weil regelm\u00E4\u00DFiges Training sie f\u00F6rdert",
+          "Explanation": "Im Text steht direkt, dass Studien belegen, dass regelm\u00E4\u00DFiges Training die Konzentration f\u00F6rdert."
         },
         {
           "QuestionText": "Was lernt man beim Mannschaftssport laut Text besonders gut?",
           "Options": [
             "Wie man alleine am schnellsten ist",
-            "Wie man den Lehrer ärgert",
-            "Soziale Fähigkeiten",
+            "Wie man den Lehrer \u00E4rgert",
+            "Soziale F\u00E4higkeiten",
             "Wie man am besten Hausaufgaben vermeidet"
           ],
-          "CorrectAnswer": "Soziale Fähigkeiten",
-          "Explanation": "Der Text erwähnt, dass man in einem Team soziale Fähigkeiten und den Umgang mit Niederlagen lernt."
+          "CorrectAnswer": "Soziale F\u00E4higkeiten",
+          "Explanation": "Der Text erw\u00E4hnt, dass man in einem Team soziale F\u00E4higkeiten und den Umgang mit Niederlagen lernt."
         },
         {
-          "QuestionText": "Was passiert laut Text in unserem Körper, wenn wir uns intensiv bewegen?",
+          "QuestionText": "Was passiert laut Text in unserem K\u00F6rper, wenn wir uns intensiv bewegen?",
           "Options": [
-            "Der Körper braucht sehr viel Schlaf",
-            "Der Körper schüttet Glückshormone aus",
-            "Der Körper wird sofort sehr müde",
-            "Der Körper vergisst alles Gelernte"
+            "Der K\u00F6rper braucht sehr viel Schlaf",
+            "Der K\u00F6rper sch\u00FCttet Gl\u00FCckshormone aus",
+            "Der K\u00F6rper wird sofort sehr m\u00FCde",
+            "Der K\u00F6rper vergisst alles Gelernte"
           ],
-          "CorrectAnswer": "Der Körper schüttet Glückshormone aus",
-          "Explanation": "Der Text besagt, dass bei intensiver Bewegung Glückshormone ausgeschüttet werden, die für gute Laune sorgen."
+          "CorrectAnswer": "Der K\u00F6rper sch\u00FCttet Gl\u00FCckshormone aus",
+          "Explanation": "Der Text besagt, dass bei intensiver Bewegung Gl\u00FCckshormone ausgesch\u00FCttet werden, die f\u00FCr gute Laune sorgen."
         },
         {
           "QuestionText": "Was ist laut dem Text das Wichtigste beim Sport?",
           "Options": [
             "Immer zu gewinnen",
-            "Die teuerste Ausrüstung zu haben",
-            "Der Spaß an der Sache",
+            "Die teuerste Ausr\u00FCstung zu haben",
+            "Der Spa\u00DF an der Sache",
             "Dass man jeden Tag trainiert"
           ],
-          "CorrectAnswer": "Der Spaß an der Sache",
-          "Explanation": "Der Text betont zum Schluss, dass der Spaß an der Sache das Wichtigste bei jeder Sportart ist."
+          "CorrectAnswer": "Der Spa\u00DF an der Sache",
+          "Explanation": "Der Text betont zum Schluss, dass der Spa\u00DF an der Sache das Wichtigste bei jeder Sportart ist."
         }
       ]
     },
     {
       "Title": "Das wahre Leben auf der Ritterburg",
-      "Text": "Das mittelalterliche Leben auf einer trutzigen Ritterburg war keineswegs so romantisch, wie es in modernen Märchen oft dargestellt wird. Zwar boten die dicken Steinmauern Schutz vor feindlichen Heeren, doch im Inneren der Festung herrschte meist eine ungemütliche Kälte. Die hölzernen Fensterläden hielten den eisigen Wind kaum ab, und die weiten Säle ließen sich nur mühsam durch offene Kamine beheizen. Um den Alltag zu bewältigen, war eine strikte Hierarchie notwendig. Schon im zarten Alter von sieben Jahren verließen adlige Knaben ihr Elternhaus, um als Pagen an einem fremden Hof die ritterlichen Tugenden und den höfischen Anstand zu erlernen. Erst nach jahrelangem, entbehrungsreichem Training als Knappe konnten sie feierlich zum Ritter geschlagen werden. Im Belagerungsfall zog sich die gesamte Burgbesatzung in den wehrhaften Bergfried zurück. Dieser massiv gebaute Turm stellte die letzte Zufluchtsstätte dar. Von den Wehrgängen herab verteidigten die Bogenschützen verbissen die Festung, während die Vorräte im tiefen Keller das Überleben sichern mussten.",
+      "Text": "Das mittelalterliche Leben auf einer trutzigen Ritterburg war keineswegs so romantisch, wie es in modernen M\u00E4rchen oft dargestellt wird. Zwar boten die dicken Steinmauern Schutz vor feindlichen Heeren, doch im Inneren der Festung herrschte meist eine ungem\u00FCtliche K\u00E4lte. Die h\u00F6lzernen Fensterl\u00E4den hielten den eisigen Wind kaum ab, und die weiten S\u00E4le lie\u00DFen sich nur m\u00FChsam durch offene Kamine beheizen. Um den Alltag zu bew\u00E4ltigen, war eine strikte Hierarchie notwendig. Schon im zarten Alter von sieben Jahren verlie\u00DFen adlige Knaben ihr Elternhaus, um als Pagen an einem fremden Hof die ritterlichen Tugenden und den h\u00F6fischen Anstand zu erlernen. Erst nach jahrelangem, entbehrungsreichem Training als Knappe konnten sie feierlich zum Ritter geschlagen werden. Im Belagerungsfall zog sich die gesamte Burgbesatzung in den wehrhaften Bergfried zur\u00FCck. Dieser massiv gebaute Turm stellte die letzte Zufluchtsst\u00E4tte dar. Von den Wehrg\u00E4ngen herab verteidigten die Bogensch\u00FCtzen verbissen die Festung, w\u00E4hrend die Vorr\u00E4te im tiefen Keller das \u00DCberleben sichern mussten.",
       "Difficulty": "Schwer",
       "Topic": "Ritter und Burgen",
       "WordCount": 152,
       "Questions": [
         {
-          "QuestionText": "Warum war das Leben auf einer Burg laut Text oft ungemütlich?",
+          "QuestionText": "Warum war das Leben auf einer Burg laut Text oft ungem\u00FCtlich?",
           "Options": [
-            "Weil es keine Möbel gab und die Ritter auf dem Boden schlafen mussten.",
-            "Weil dicke Steinmauern und unzureichende Fensterläden Kälte hereinließen und die Säle schwer zu beheizen waren.",
-            "Weil die Burgbesatzung keine warmen Kleider besaß.",
-            "Weil die Kamine ständig rauchten und die Sicht versperrten."
+            "Weil es keine M\u00F6bel gab und die Ritter auf dem Boden schlafen mussten.",
+            "Weil dicke Steinmauern und unzureichende Fensterl\u00E4den K\u00E4lte hereinlie\u00DFen und die S\u00E4le schwer zu beheizen waren.",
+            "Weil die Burgbesatzung keine warmen Kleider besa\u00DF.",
+            "Weil die Kamine st\u00E4ndig rauchten und die Sicht versperrten."
           ],
-          "CorrectAnswer": "Weil dicke Steinmauern und unzureichende Fensterläden Kälte hereinließen und die Säle schwer zu beheizen waren.",
-          "Explanation": "Der Text beschreibt, dass im Inneren meist Kälte herrschte, die Fensterläden den Wind kaum abhielten und die Kamine die Säle nur mühsam erwärmten."
+          "CorrectAnswer": "Weil dicke Steinmauern und unzureichende Fensterl\u00E4den K\u00E4lte hereinlie\u00DFen und die S\u00E4le schwer zu beheizen waren.",
+          "Explanation": "Der Text beschreibt, dass im Inneren meist K\u00E4lte herrschte, die Fensterl\u00E4den den Wind kaum abhielten und die Kamine die S\u00E4le nur m\u00FChsam erw\u00E4rmten."
         },
         {
           "QuestionText": "Welche Ausbildungsschritte durchlief ein adliger Junge auf dem Weg zum Ritter?",
           "Options": [
             "Erst Knappe, dann Page, dann Ritter.",
-            "Erst Burgbesatzung, dann Bogenschütze, dann Ritter.",
+            "Erst Burgbesatzung, dann Bogensch\u00FCtze, dann Ritter.",
             "Erst Page, dann Knappe, dann Ritter.",
             "Erst Kaminfeger, dann Page, dann Ritter."
           ],
           "CorrectAnswer": "Erst Page, dann Knappe, dann Ritter.",
-          "Explanation": "Laut Text verließen die Knaben mit sieben Jahren das Haus, um erst als Page und nach jahrelangem Training als Knappe zum Ritter geschlagen zu werden."
+          "Explanation": "Laut Text verlie\u00DFen die Knaben mit sieben Jahren das Haus, um erst als Page und nach jahrelangem Training als Knappe zum Ritter geschlagen zu werden."
         },
         {
-          "QuestionText": "Was war der 'Bergfried' auf einer Burg?",
+          "QuestionText": "Was war der \u0027Bergfried\u0027 auf einer Burg?",
           "Options": [
-            "Ein tiefer Keller für die Vorräte.",
-            "Der Festsaal für große Hochzeiten.",
-            "Ein massiv gebauter Turm als letzte Zufluchtsstätte.",
-            "Ein geschützter Trainingsplatz für die Knappen."
+            "Ein tiefer Keller f\u00FCr die Vorr\u00E4te.",
+            "Der Festsaal f\u00FCr gro\u00DFe Hochzeiten.",
+            "Ein massiv gebauter Turm als letzte Zufluchtsst\u00E4tte.",
+            "Ein gesch\u00FCtzter Trainingsplatz f\u00FCr die Knappen."
           ],
-          "CorrectAnswer": "Ein massiv gebauter Turm als letzte Zufluchtsstätte.",
-          "Explanation": "Der Text definiert den Bergfried als massiv gebauten Turm, der der Burgbesatzung im Belagerungsfall als letzte Zufluchtsstätte diente."
+          "CorrectAnswer": "Ein massiv gebauter Turm als letzte Zufluchtsst\u00E4tte.",
+          "Explanation": "Der Text definiert den Bergfried als massiv gebauten Turm, der der Burgbesatzung im Belagerungsfall als letzte Zufluchtsst\u00E4tte diente."
         },
         {
           "QuestionText": "Mit welchem Adjektiv wird das Training des Knappen im Text beschrieben?",
@@ -261,66 +261,66 @@
             "herrschaftlich"
           ],
           "CorrectAnswer": "entbehrungsreich",
-          "Explanation": "Im Text wird ausdrücklich von einem 'jahrelangem, entbehrungsreichem Training als Knappe' gesprochen."
+          "Explanation": "Im Text wird ausdr\u00FCcklich von einem \u0027jahrelangem, entbehrungsreichem Training als Knappe\u0027 gesprochen."
         }
       ]
     },
     {
-      "Title": "Das geheimnisvolle alte Ägypten",
-      "Text": "Im geheimnisvollen Land Ägypten, vor vielen tausend Jahren, lebten mächtige Herrscher, die wir Pharaonen nennen. Sie waren nicht nur Könige, sondern wurden oft wie Götter verehrt. Der längste und wichtigste Fluss der Welt, der Nil, war das Herzstück ihres Reiches. Jedes Jahr überschwemmte er das Land und hinterließ fruchtbaren Schlamm, der das Wachstum von Getreide und anderen Pflanzen ermöglichte – die Lebensgrundlage für die alten Ägypter.\n\nUm ihre Pharaonen nach dem Tod zu ehren und ihnen ein ewiges Leben zu sichern, bauten die Ägypter gigantische Pyramiden. Diese riesigen Steinbauten waren Grabstätten voller Schätze und kunstvoller Wandmalereien. Die Toten wurden durch einen aufwendigen Prozess, die Mumifizierung, vor dem Verfall bewahrt. Auch die Schrift war etwas Besonderes: Hieroglyphen, kleine Bilder und Zeichen, erzählten Geschichten und hielten wichtige Ereignisse fest. Diese faszinierende Zivilisation hat uns viele Rätsel hinterlassen, die Archäologen bis heute entschlüsseln.",
+      "Title": "Das geheimnisvolle alte \u00C4gypten",
+      "Text": "Im geheimnisvollen Land \u00C4gypten, vor vielen tausend Jahren, lebten m\u00E4chtige Herrscher, die wir Pharaonen nennen. Sie waren nicht nur K\u00F6nige, sondern wurden oft wie G\u00F6tter verehrt. Der l\u00E4ngste und wichtigste Fluss der Welt, der Nil, war das Herzst\u00FCck ihres Reiches. Jedes Jahr \u00FCberschwemmte er das Land und hinterlie\u00DF fruchtbaren Schlamm, der das Wachstum von Getreide und anderen Pflanzen erm\u00F6glichte \u2013 die Lebensgrundlage f\u00FCr die alten \u00C4gypter.\n\nUm ihre Pharaonen nach dem Tod zu ehren und ihnen ein ewiges Leben zu sichern, bauten die \u00C4gypter gigantische Pyramiden. Diese riesigen Steinbauten waren Grabst\u00E4tten voller Sch\u00E4tze und kunstvoller Wandmalereien. Die Toten wurden durch einen aufwendigen Prozess, die Mumifizierung, vor dem Verfall bewahrt. Auch die Schrift war etwas Besonderes: Hieroglyphen, kleine Bilder und Zeichen, erz\u00E4hlten Geschichten und hielten wichtige Ereignisse fest. Diese faszinierende Zivilisation hat uns viele R\u00E4tsel hinterlassen, die Arch\u00E4ologen bis heute entschl\u00FCsseln.",
       "Difficulty": "Schwer",
-      "Topic": "Das alte Ägypten",
+      "Topic": "Das alte \u00C4gypten",
       "WordCount": 140,
       "Questions": [
         {
-          "QuestionText": "Wer waren die Pharaonen im alten Ägypten?",
+          "QuestionText": "Wer waren die Pharaonen im alten \u00C4gypten?",
           "Options": [
             "A) Einfache Bauern",
-            "B) Mächtige Herrscher, die wie Götter verehrt wurden",
-            "C) Archäologen, die Gräber fanden",
+            "B) M\u00E4chtige Herrscher, die wie G\u00F6tter verehrt wurden",
+            "C) Arch\u00E4ologen, die Gr\u00E4ber fanden",
             "D) Handwerker, die Pyramiden bauten"
           ],
-          "CorrectAnswer": "B) Mächtige Herrscher, die wie Götter verehrt wurden",
-          "Explanation": "Laut Text waren Pharaonen \"mächtige Herrscher, die wir Pharaonen nennen. Sie waren nicht nur Könige, sondern wurden oft wie Götter verehrt.\""
+          "CorrectAnswer": "B) M\u00E4chtige Herrscher, die wie G\u00F6tter verehrt wurden",
+          "Explanation": "Laut Text waren Pharaonen \u0022m\u00E4chtige Herrscher, die wir Pharaonen nennen. Sie waren nicht nur K\u00F6nige, sondern wurden oft wie G\u00F6tter verehrt.\u0022"
         },
         {
-          "QuestionText": "Warum war der Nil so wichtig für die alten Ägypter?",
+          "QuestionText": "Warum war der Nil so wichtig f\u00FCr die alten \u00C4gypter?",
           "Options": [
             "A) Er war ein guter Ort zum Schwimmen.",
-            "B) Er brachte fruchtbaren Schlamm für die Pflanzen.",
+            "B) Er brachte fruchtbaren Schlamm f\u00FCr die Pflanzen.",
             "C) Dort wohnten die Pharaonen.",
-            "D) Aus ihm wurde Sand für die Pyramiden gewonnen."
+            "D) Aus ihm wurde Sand f\u00FCr die Pyramiden gewonnen."
           ],
-          "CorrectAnswer": "B) Er brachte fruchtbaren Schlamm für die Pflanzen.",
-          "Explanation": "Der Text sagt: \"Jedes Jahr überschwemmte er das Land und hinterließ fruchtbaren Schlamm, der das Wachstum von Getreide und anderen Pflanzen ermöglichte.\""
+          "CorrectAnswer": "B) Er brachte fruchtbaren Schlamm f\u00FCr die Pflanzen.",
+          "Explanation": "Der Text sagt: \u0022Jedes Jahr \u00FCberschwemmte er das Land und hinterlie\u00DF fruchtbaren Schlamm, der das Wachstum von Getreide und anderen Pflanzen erm\u00F6glichte.\u0022"
         },
         {
-          "QuestionText": "Wozu dienten die riesigen Pyramiden hauptsächlich?",
+          "QuestionText": "Wozu dienten die riesigen Pyramiden haupts\u00E4chlich?",
           "Options": [
-            "A) Als Häuser für die Arbeiter",
-            "B) Als Schulen für die Kinder",
-            "C) Als Grabstätten für die Pharaonen",
-            "D) Als Tempel für die Götter"
+            "A) Als H\u00E4user f\u00FCr die Arbeiter",
+            "B) Als Schulen f\u00FCr die Kinder",
+            "C) Als Grabst\u00E4tten f\u00FCr die Pharaonen",
+            "D) Als Tempel f\u00FCr die G\u00F6tter"
           ],
-          "CorrectAnswer": "C) Als Grabstätten für die Pharaonen",
-          "Explanation": "Im Text steht: \"Diese riesigen Steinbauten waren Grabstätten voller Schätze und kunstvoller Wandmalereien.\""
+          "CorrectAnswer": "C) Als Grabst\u00E4tten f\u00FCr die Pharaonen",
+          "Explanation": "Im Text steht: \u0022Diese riesigen Steinbauten waren Grabst\u00E4tten voller Sch\u00E4tze und kunstvoller Wandmalereien.\u0022"
         },
         {
           "QuestionText": "Was sind Hieroglyphen?",
           "Options": [
-            "A) Große Steinblöcke",
+            "A) Gro\u00DFe Steinbl\u00F6cke",
             "B) Kleine Bilder und Zeichen als Schrift",
             "C) Namen der Pharaonen",
-            "D) Werkzeuge der Archäologen"
+            "D) Werkzeuge der Arch\u00E4ologen"
           ],
           "CorrectAnswer": "B) Kleine Bilder und Zeichen als Schrift",
-          "Explanation": "Der Text beschreibt Hieroglyphen als \"kleine Bilder und Zeichen, [die] Geschichten erzählten und wichtige Ereignisse festhielten.\""
+          "Explanation": "Der Text beschreibt Hieroglyphen als \u0022kleine Bilder und Zeichen, [die] Geschichten erz\u00E4hlten und wichtige Ereignisse festhielten.\u0022"
         }
       ]
     },
     {
       "Title": "Das erstaunliche Leben der Honigbienen",
-      "Text": "Wusstest du, dass Honigbienen echte Superhelden sind? Ein Bienenvolk besteht aus tausenden Tieren, die perfekt zusammenarbeiten. Es gibt die Bienenkönigin, die für den Nachwuchs sorgt, und die Arbeitsbienen, die unermüdlich Blüten besuchen. Damit sie den Weg zur Nahrung finden, führen sie einen speziellen Tanz auf. Dieser sogenannte Schwänzeltanz zeigt den anderen Bienen genau, in welche Richtung und wie weit sie fliegen müssen. Honigbienen sind zudem extrem nützlich. Während sie von Blume zu Blume fliegen, transportieren sie Blütenstaub. Ohne diese Bestäubung gäbe es viele Obstsorten wie Äpfel oder Kirschen gar nicht. Im Winter bilden die Bienen eine enge Kugel um die Königin, um sie warm zu halten. Sie zittern dabei mit ihren Muskeln, damit Wärme entsteht. Bienen sind also nicht nur für leckeren Honig wichtig, sondern sie erhalten auch unsere Natur. Deshalb sollten wir sie schützen und darauf achten, dass sie genug blühende Pflanzen in unserem Garten finden.",
+      "Text": "Wusstest du, dass Honigbienen echte Superhelden sind? Ein Bienenvolk besteht aus tausenden Tieren, die perfekt zusammenarbeiten. Es gibt die Bienenk\u00F6nigin, die f\u00FCr den Nachwuchs sorgt, und die Arbeitsbienen, die unerm\u00FCdlich Bl\u00FCten besuchen. Damit sie den Weg zur Nahrung finden, f\u00FChren sie einen speziellen Tanz auf. Dieser sogenannte Schw\u00E4nzeltanz zeigt den anderen Bienen genau, in welche Richtung und wie weit sie fliegen m\u00FCssen. Honigbienen sind zudem extrem n\u00FCtzlich. W\u00E4hrend sie von Blume zu Blume fliegen, transportieren sie Bl\u00FCtenstaub. Ohne diese Best\u00E4ubung g\u00E4be es viele Obstsorten wie \u00C4pfel oder Kirschen gar nicht. Im Winter bilden die Bienen eine enge Kugel um die K\u00F6nigin, um sie warm zu halten. Sie zittern dabei mit ihren Muskeln, damit W\u00E4rme entsteht. Bienen sind also nicht nur f\u00FCr leckeren Honig wichtig, sondern sie erhalten auch unsere Natur. Deshalb sollten wir sie sch\u00FCtzen und darauf achten, dass sie genug bl\u00FChende Pflanzen in unserem Garten finden.",
       "Difficulty": "Leicht",
       "Topic": "Tiere",
       "WordCount": 147,
@@ -328,40 +328,40 @@
         {
           "QuestionText": "Warum tanzen Bienen im Bienenstock?",
           "Options": [
-            "Um ihre Muskeln aufzuwärmen",
+            "Um ihre Muskeln aufzuw\u00E4rmen",
             "Um den Weg zur Nahrung zu zeigen",
-            "Um die Königin zu unterhalten",
-            "Weil sie den Frühling feiern"
+            "Um die K\u00F6nigin zu unterhalten",
+            "Weil sie den Fr\u00FChling feiern"
           ],
           "CorrectAnswer": "Um den Weg zur Nahrung zu zeigen",
-          "Explanation": "Im Text wird erklärt, dass der Schwänzeltanz den anderen Bienen zeigt, wo sie Nahrung finden."
+          "Explanation": "Im Text wird erkl\u00E4rt, dass der Schw\u00E4nzeltanz den anderen Bienen zeigt, wo sie Nahrung finden."
         },
         {
-          "QuestionText": "Welche Aufgabe hat die Bestäubung durch Bienen?",
+          "QuestionText": "Welche Aufgabe hat die Best\u00E4ubung durch Bienen?",
           "Options": [
-            "Sie macht den Honig süß",
-            "Sie schützt die Bienen vor Kälte",
+            "Sie macht den Honig s\u00FC\u00DF",
+            "Sie sch\u00FCtzt die Bienen vor K\u00E4lte",
             "Sie hilft beim Wachsen von Obst",
-            "Sie vertreibt Schädlinge aus dem Garten"
+            "Sie vertreibt Sch\u00E4dlinge aus dem Garten"
           ],
           "CorrectAnswer": "Sie hilft beim Wachsen von Obst",
-          "Explanation": "Der Text erwähnt, dass es ohne die Bestäubung Äpfel oder Kirschen nicht gäbe."
+          "Explanation": "Der Text erw\u00E4hnt, dass es ohne die Best\u00E4ubung \u00C4pfel oder Kirschen nicht g\u00E4be."
         },
         {
           "QuestionText": "Was machen Bienen im Winter, um nicht zu erfrieren?",
           "Options": [
-            "Sie fliegen in den Süden",
+            "Sie fliegen in den S\u00FCden",
             "Sie suchen sich ein neues Zuhause",
             "Sie verstecken sich im Boden",
             "Sie bilden eine Kugel und zittern"
           ],
           "CorrectAnswer": "Sie bilden eine Kugel und zittern",
-          "Explanation": "Im Text steht, dass sie eine Kugel um die Königin bilden und mit den Muskeln zittern, um Wärme zu erzeugen."
+          "Explanation": "Im Text steht, dass sie eine Kugel um die K\u00F6nigin bilden und mit den Muskeln zittern, um W\u00E4rme zu erzeugen."
         },
         {
-          "QuestionText": "Woraus besteht ein Bienenvolk hauptsächlich?",
+          "QuestionText": "Woraus besteht ein Bienenvolk haupts\u00E4chlich?",
           "Options": [
-            "Nur aus einer Königin",
+            "Nur aus einer K\u00F6nigin",
             "Aus tausenden zusammenarbeitenden Tieren",
             "Aus verschiedenen Insektenarten",
             "Nur aus den Arbeitsbienen"
@@ -373,7 +373,7 @@
     },
     {
       "Title": "Mein bester Freund auf vier Pfoten",
-      "Text": "Viele Kinder wünschen sich ein Haustier. Ein Hund oder eine Katze sind sehr beliebt. Aber ein Haustier zu haben, ist auch eine große Verantwortung. Man muss jeden Tag für das Tier sorgen, egal ob die Sonne scheint oder es regnet. Ein Hund braucht zum Beispiel viel Bewegung und muss mehrmals am Tag spazieren gehen. Er möchte auch spielen und kuscheln. Katzen sind oft etwas eigenwilliger, aber sie lieben es ebenfalls, gestreichelt zu werden. Man darf auch nicht vergessen, dass Tiere Futter, Wasser und einen sauberen Schlafplatz brauchen. Manchmal werden Tiere krank und müssen zum Tierarzt gebracht werden. Das kostet Geld und Zeit. Trotz der vielen Arbeit sind Haustiere wunderbare Begleiter. Sie trösten uns, wenn wir traurig sind, und freuen sich immer, wenn wir nach Hause kommen. Viele Kinder lernen durch ihr Haustier, wie wichtig es ist, Rücksicht auf andere Lebewesen zu nehmen. Ein Tier wird schnell zu einem echten Familienmitglied. Deshalb sollte man sich die Entscheidung gut überlegen, bevor man ein Tier bei sich aufnimmt.",
+      "Text": "Viele Kinder w\u00FCnschen sich ein Haustier. Ein Hund oder eine Katze sind sehr beliebt. Aber ein Haustier zu haben, ist auch eine gro\u00DFe Verantwortung. Man muss jeden Tag f\u00FCr das Tier sorgen, egal ob die Sonne scheint oder es regnet. Ein Hund braucht zum Beispiel viel Bewegung und muss mehrmals am Tag spazieren gehen. Er m\u00F6chte auch spielen und kuscheln. Katzen sind oft etwas eigenwilliger, aber sie lieben es ebenfalls, gestreichelt zu werden. Man darf auch nicht vergessen, dass Tiere Futter, Wasser und einen sauberen Schlafplatz brauchen. Manchmal werden Tiere krank und m\u00FCssen zum Tierarzt gebracht werden. Das kostet Geld und Zeit. Trotz der vielen Arbeit sind Haustiere wunderbare Begleiter. Sie tr\u00F6sten uns, wenn wir traurig sind, und freuen sich immer, wenn wir nach Hause kommen. Viele Kinder lernen durch ihr Haustier, wie wichtig es ist, R\u00FCcksicht auf andere Lebewesen zu nehmen. Ein Tier wird schnell zu einem echten Familienmitglied. Deshalb sollte man sich die Entscheidung gut \u00FCberlegen, bevor man ein Tier bei sich aufnimmt.",
       "Difficulty": "Leicht",
       "Topic": "Haustiere",
       "WordCount": 165,
@@ -381,13 +381,13 @@
         {
           "QuestionText": "Was ist laut Text besonders wichtig bei der Haltung eines Haustieres?",
           "Options": [
-            "Dass es möglichst billig ist",
+            "Dass es m\u00F6glichst billig ist",
             "Dass man viel Zeit und Verantwortung mitbringt",
             "Dass das Tier nur im Haus lebt",
             "Dass man keine anderen Hobbys hat"
           ],
           "CorrectAnswer": "Dass man viel Zeit und Verantwortung mitbringt",
-          "Explanation": "Der Text betont, dass man sich täglich um Futter, Bewegung und die Pflege kümmern muss."
+          "Explanation": "Der Text betont, dass man sich t\u00E4glich um Futter, Bewegung und die Pflege k\u00FCmmern muss."
         },
         {
           "QuestionText": "Warum muss man mit einem Hund spazieren gehen?",
@@ -398,7 +398,7 @@
             "Weil er die frische Luft nicht mag"
           ],
           "CorrectAnswer": "Weil er viel Bewegung braucht",
-          "Explanation": "Im Text wird explizit erwähnt, dass Hunde viel Bewegung benötigen."
+          "Explanation": "Im Text wird explizit erw\u00E4hnt, dass Hunde viel Bewegung ben\u00F6tigen."
         },
         {
           "QuestionText": "Was ist ein positiver Effekt eines Haustieres laut Text?",
@@ -406,33 +406,33 @@
             "Sie helfen uns, wenn wir traurig sind",
             "Sie machen niemals Dreck",
             "Sie bringen uns das Lesen bei",
-            "Sie müssen niemals zum Arzt"
+            "Sie m\u00FCssen niemals zum Arzt"
           ],
           "CorrectAnswer": "Sie helfen uns, wenn wir traurig sind",
-          "Explanation": "Der Text beschreibt, dass Haustiere uns trösten, wenn wir traurig sind."
+          "Explanation": "Der Text beschreibt, dass Haustiere uns tr\u00F6sten, wenn wir traurig sind."
         },
         {
           "QuestionText": "Was soll man tun, bevor man sich ein Tier anschafft?",
           "Options": [
             "Sofort in die Tierhandlung gehen",
-            "Die Entscheidung gut überlegen",
+            "Die Entscheidung gut \u00FCberlegen",
             "Erst einmal ein anderes Kind fragen",
-            "Das Tier nur nach dem Aussehen wählen"
+            "Das Tier nur nach dem Aussehen w\u00E4hlen"
           ],
-          "CorrectAnswer": "Die Entscheidung gut überlegen",
-          "Explanation": "Der letzte Satz im Text empfiehlt, die Entscheidung gut zu überlegen."
+          "CorrectAnswer": "Die Entscheidung gut \u00FCberlegen",
+          "Explanation": "Der letzte Satz im Text empfiehlt, die Entscheidung gut zu \u00FCberlegen."
         }
       ]
     },
     {
       "Title": "Der geheimnisvolle Wald",
-      "Text": "Der Wald ist viel mehr als nur eine Ansammlung von Bäumen. Er ist das Zuhause für unzählige Tiere und Pflanzen. Wenn wir durch den Wald spazieren, hören wir das Zwitschern der Vögel und das Rascheln der Blätter im Wind. Doch unsere Natur ist in Gefahr. Durch den achtlose Umgang mit Müll und den Klimawandel leidet das Ökosystem. Viele Tiere finden keinen Platz mehr zum Leben, weil ihr Lebensraum schrumpft. Aber jeder von uns kann helfen, unsere Umwelt zu schützen. Wenn wir weniger Plastik verbrauchen, den Müll richtig trennen oder öfter mit dem Fahrrad statt mit dem Auto fahren, leisten wir einen wichtigen Beitrag. Die Natur ist ein kostbares Geschenk, das wir bewahren müssen. Wenn wir aufmerksam durch die Welt gehen, lernen wir, die Schönheit unserer Umgebung zu schätzen. Denn nur wenn wir die Umwelt achten, können auch kommende Generationen den Wald in seiner vollen Pracht genießen. Lass uns gemeinsam dafür sorgen, dass der Wald auch in Zukunft ein grünes Paradies bleibt.",
+      "Text": "Der Wald ist viel mehr als nur eine Ansammlung von B\u00E4umen. Er ist das Zuhause f\u00FCr unz\u00E4hlige Tiere und Pflanzen. Wenn wir durch den Wald spazieren, h\u00F6ren wir das Zwitschern der V\u00F6gel und das Rascheln der Bl\u00E4tter im Wind. Doch unsere Natur ist in Gefahr. Durch den achtlose Umgang mit M\u00FCll und den Klimawandel leidet das \u00D6kosystem. Viele Tiere finden keinen Platz mehr zum Leben, weil ihr Lebensraum schrumpft. Aber jeder von uns kann helfen, unsere Umwelt zu sch\u00FCtzen. Wenn wir weniger Plastik verbrauchen, den M\u00FCll richtig trennen oder \u00F6fter mit dem Fahrrad statt mit dem Auto fahren, leisten wir einen wichtigen Beitrag. Die Natur ist ein kostbares Geschenk, das wir bewahren m\u00FCssen. Wenn wir aufmerksam durch die Welt gehen, lernen wir, die Sch\u00F6nheit unserer Umgebung zu sch\u00E4tzen. Denn nur wenn wir die Umwelt achten, k\u00F6nnen auch kommende Generationen den Wald in seiner vollen Pracht genie\u00DFen. Lass uns gemeinsam daf\u00FCr sorgen, dass der Wald auch in Zukunft ein gr\u00FCnes Paradies bleibt.",
       "Difficulty": "Mittel",
       "Topic": "Natur und Umwelt",
       "WordCount": 161,
       "Questions": [
         {
-          "QuestionText": "Was wird im Text als 'kostbares Geschenk' bezeichnet?",
+          "QuestionText": "Was wird im Text als \u0027kostbares Geschenk\u0027 bezeichnet?",
           "Options": [
             "Der Wald",
             "Das Fahrrad",
@@ -440,71 +440,71 @@
             "Das Plastik"
           ],
           "CorrectAnswer": "Die Natur",
-          "Explanation": "Im Text steht explizit: 'Die Natur ist ein kostbares Geschenk'."
+          "Explanation": "Im Text steht explizit: \u0027Die Natur ist ein kostbares Geschenk\u0027."
         },
         {
           "QuestionText": "Warum schrumpft der Lebensraum vieler Tiere?",
           "Options": [
-            "Weil die Bäume zu schnell wachsen",
-            "Wegen der Müllverschmutzung und des Klimawandels",
-            "Weil die Vögel wegfliegen",
+            "Weil die B\u00E4ume zu schnell wachsen",
+            "Wegen der M\u00FCllverschmutzung und des Klimawandels",
+            "Weil die V\u00F6gel wegfliegen",
             "Weil die Menschen zu viel Fahrrad fahren"
           ],
-          "CorrectAnswer": "Wegen der Müllverschmutzung und des Klimawandels",
-          "Explanation": "Der Text erwähnt, dass Müll und der Klimawandel dazu führen, dass Tiere keinen Platz mehr zum Leben finden."
+          "CorrectAnswer": "Wegen der M\u00FCllverschmutzung und des Klimawandels",
+          "Explanation": "Der Text erw\u00E4hnt, dass M\u00FCll und der Klimawandel dazu f\u00FChren, dass Tiere keinen Platz mehr zum Leben finden."
         },
         {
-          "QuestionText": "Welcher Tipp wird im Text gegeben, um die Umwelt zu schützen?",
+          "QuestionText": "Welcher Tipp wird im Text gegeben, um die Umwelt zu sch\u00FCtzen?",
           "Options": [
             "Mehr Plastik kaufen",
-            "Öfter mit dem Auto fahren",
-            "Den Müll richtig trennen",
+            "\u00D6fter mit dem Auto fahren",
+            "Den M\u00FCll richtig trennen",
             "Den Wald meiden"
           ],
-          "CorrectAnswer": "Den Müll richtig trennen",
-          "Explanation": "Das Trennen von Müll wird als eine der Möglichkeiten genannt, um die Umwelt zu schützen."
+          "CorrectAnswer": "Den M\u00FCll richtig trennen",
+          "Explanation": "Das Trennen von M\u00FCll wird als eine der M\u00F6glichkeiten genannt, um die Umwelt zu sch\u00FCtzen."
         },
         {
           "QuestionText": "Was ist das Hauptziel des Textes?",
           "Options": [
-            "Zu erklären, wie Vögel singen",
-            "Dazu aufzurufen, die Umwelt zu schützen",
+            "Zu erkl\u00E4ren, wie V\u00F6gel singen",
+            "Dazu aufzurufen, die Umwelt zu sch\u00FCtzen",
             "Den Wald als Wohnort zu empfehlen",
-            "Zu zeigen, wie man Bäume pflanzt"
+            "Zu zeigen, wie man B\u00E4ume pflanzt"
           ],
-          "CorrectAnswer": "Dazu aufzurufen, die Umwelt zu schützen",
+          "CorrectAnswer": "Dazu aufzurufen, die Umwelt zu sch\u00FCtzen",
           "Explanation": "Der gesamte Text appelliert daran, dass jeder einen Beitrag zum Schutz der Natur leisten sollte."
         }
       ]
     },
     {
       "Title": "Das Abenteuer der vier Jahreszeiten",
-      "Text": "Jedes Jahr erleben wir vier verschiedene Jahreszeiten. Zuerst kommt der Frühling. Wenn die Sonne wärmer wird, wachen die Blumen aus ihrem Winterschlaf auf und die Bäume bekommen zarte, grüne Blätter. Danach folgt der Sommer. Jetzt ist es richtig heiß, wir können im See schwimmen und lange Eis essen. Im Herbst wird es bunter. Die Blätter an den Bäumen verfärben sich goldgelb und rot, bevor sie zu Boden fallen. Es wird windig und wir brauchen öfter unsere Regenjacken. Zuletzt kommt der Winter. Wenn es draußen friert, fällt oft weißer Schnee. Alles wirkt dann wie verzaubert und ruhig. Wir können Schlittschuh laufen oder einen Schneemann bauen. Jede dieser Zeiten hat ihren ganz eigenen Zauber. Egal ob Sonne, Regen oder Schnee – das Jahr ist wie eine Reise mit vielen unterschiedlichen Abenteuern. Welches ist wohl deine liebste Jahreszeit?",
+      "Text": "Jedes Jahr erleben wir vier verschiedene Jahreszeiten. Zuerst kommt der Fr\u00FChling. Wenn die Sonne w\u00E4rmer wird, wachen die Blumen aus ihrem Winterschlaf auf und die B\u00E4ume bekommen zarte, gr\u00FCne Bl\u00E4tter. Danach folgt der Sommer. Jetzt ist es richtig hei\u00DF, wir k\u00F6nnen im See schwimmen und lange Eis essen. Im Herbst wird es bunter. Die Bl\u00E4tter an den B\u00E4umen verf\u00E4rben sich goldgelb und rot, bevor sie zu Boden fallen. Es wird windig und wir brauchen \u00F6fter unsere Regenjacken. Zuletzt kommt der Winter. Wenn es drau\u00DFen friert, f\u00E4llt oft wei\u00DFer Schnee. Alles wirkt dann wie verzaubert und ruhig. Wir k\u00F6nnen Schlittschuh laufen oder einen Schneemann bauen. Jede dieser Zeiten hat ihren ganz eigenen Zauber. Egal ob Sonne, Regen oder Schnee \u2013 das Jahr ist wie eine Reise mit vielen unterschiedlichen Abenteuern. Welches ist wohl deine liebste Jahreszeit?",
       "Difficulty": "Leicht",
       "Topic": "Jahreszeiten",
       "WordCount": 135,
       "Questions": [
         {
-          "QuestionText": "Was passiert im Frühling mit den Blumen?",
+          "QuestionText": "Was passiert im Fr\u00FChling mit den Blumen?",
           "Options": [
-            "Sie bekommen bunte Blätter",
+            "Sie bekommen bunte Bl\u00E4tter",
             "Sie wachen aus dem Winterschlaf auf",
             "Sie fallen auf den Boden",
             "Sie frieren im Schnee"
           ],
           "CorrectAnswer": "Sie wachen aus dem Winterschlaf auf",
-          "Explanation": "Im Text steht, dass die Blumen im Frühling aus ihrem Winterschlaf aufwachen."
+          "Explanation": "Im Text steht, dass die Blumen im Fr\u00FChling aus ihrem Winterschlaf aufwachen."
         },
         {
-          "QuestionText": "Welche Farbe haben die Blätter im Herbst laut Text?",
+          "QuestionText": "Welche Farbe haben die Bl\u00E4tter im Herbst laut Text?",
           "Options": [
-            "Nur grün",
-            "Schwarz und weiß",
+            "Nur gr\u00FCn",
+            "Schwarz und wei\u00DF",
             "Goldgelb und rot",
             "Sie haben keine Farbe"
           ],
           "CorrectAnswer": "Goldgelb und rot",
-          "Explanation": "Der Text beschreibt, dass sich die Blätter im Herbst goldgelb und rot verfärben."
+          "Explanation": "Der Text beschreibt, dass sich die Bl\u00E4tter im Herbst goldgelb und rot verf\u00E4rben."
         },
         {
           "QuestionText": "Was kann man im Winter laut Text machen?",
@@ -515,7 +515,7 @@
             "Blumen pflanzen"
           ],
           "CorrectAnswer": "Schlittschuh laufen oder einen Schneemann bauen",
-          "Explanation": "Der Text erwähnt ausdrücklich das Schlittschuhlaufen und den Bau eines Schneemannes als winterliche Aktivitäten."
+          "Explanation": "Der Text erw\u00E4hnt ausdr\u00FCcklich das Schlittschuhlaufen und den Bau eines Schneemannes als winterliche Aktivit\u00E4ten."
         },
         {
           "QuestionText": "Wie beschreibt der Autor das Jahr am Ende des Textes?",
@@ -527,6 +527,589 @@
           ],
           "CorrectAnswer": "Wie eine Reise voller Abenteuer",
           "Explanation": "Der Text endet mit dem Satz, dass das Jahr wie eine Reise mit vielen Abenteuern ist."
+        }
+      ]
+    },
+    {
+      "Title": "Auf Safari in der Savanne",
+      "Text": "Wenn die Sonne \u00FCber der afrikanischen Savanne aufgeht, erwacht das Leben. Die weite Graslandschaft bietet vielen beeindruckenden Tieren ein Zuhause. In der Ferne kann man eine Herde Elefanten beobachten, die langsam durch das hohe Gras ziehen. Sie sind die gr\u00F6\u00DFten Lands\u00E4ugetiere der Welt und suchen aufmerksam nach Wasserstellen. Nicht weit entfernt huscht ein Gepard vorbei. Er ist das schnellste Tier an Land und kann in wenigen Sekunden ein unglaubliches Tempo erreichen, um seine Beute zu jagen. In den Baumwipfeln der Akazien beobachtet ein Leopard die Umgebung, denn er ist ein geschickter Kletterer. Doch auch die kleinen Bewohner sind wichtig: Erdm\u00E4nnchen stehen oft Wache und warnen ihre Gruppe bei Gefahr durch schrille Rufe. Das \u00D6kosystem der Savanne ist ein faszinierendes Zusammenspiel, bei dem jedes Lebewesen seinen eigenen Platz hat. Wer einmal diese wilden Tiere in ihrer nat\u00FCrlichen Umgebung gesehen hat, wird diesen Anblick niemals vergessen. Es ist ein echtes Abenteuer, die Natur zu beobachten, w\u00E4hrend man den Regeln der Wildnis folgt.",
+      "Difficulty": "Mittel",
+      "Topic": "Wilde Tiere Afrikas",
+      "WordCount": 160,
+      "Questions": [
+        {
+          "QuestionText": "Welches Tier wird im Text als das schnellste Tier an Land bezeichnet?",
+          "Options": [
+            "Elefant",
+            "Gepard",
+            "Leopard",
+            "Erdm\u00E4nnchen"
+          ],
+          "CorrectAnswer": "Gepard",
+          "Explanation": "Im Text steht direkt, dass der Gepard das schnellste Tier an Land ist."
+        },
+        {
+          "QuestionText": "Warum sind Erdm\u00E4nnchen wichtig f\u00FCr ihre Gruppe?",
+          "Options": [
+            "Sie bauen die besten Nester.",
+            "Sie suchen nach Nahrung.",
+            "Sie passen auf und warnen bei Gefahr.",
+            "Sie sind die gr\u00F6\u00DFten Tiere dort."
+          ],
+          "CorrectAnswer": "Sie passen auf und warnen bei Gefahr.",
+          "Explanation": "Der Text erw\u00E4hnt, dass Erdm\u00E4nnchen Wache stehen und bei Gefahr warnen."
+        },
+        {
+          "QuestionText": "Wo versteckt sich der Leopard meistens?",
+          "Options": [
+            "In Wasserl\u00F6chern",
+            "Im hohen Gras",
+            "In Baumwipfeln",
+            "In unterirdischen H\u00F6hlen"
+          ],
+          "CorrectAnswer": "In Baumwipfeln",
+          "Explanation": "Der Text beschreibt den Leoparden als geschickten Kletterer, der in den Baumwipfeln der Akazien wartet."
+        },
+        {
+          "QuestionText": "Was ist laut Text eine Besonderheit der Elefanten?",
+          "Options": [
+            "Sie sind die gr\u00F6\u00DFten Lands\u00E4ugetiere.",
+            "Sie sind sehr schnell.",
+            "Sie sind gute Kletterer.",
+            "Sie jagen Geparden."
+          ],
+          "CorrectAnswer": "Sie sind die gr\u00F6\u00DFten Lands\u00E4ugetiere.",
+          "Explanation": "Der Text bezeichnet Elefanten direkt als die gr\u00F6\u00DFten Lands\u00E4ugetiere der Welt."
+        }
+      ]
+    },
+    {
+      "Title": "Der Ozean und seine Tiere",
+      "Text": "Die Ozeane unserer Erde sind riesig und geheimnisvoll. Sie bedecken mehr als siebzig Prozent unseres Planeten. In den verschiedenen Tiefen des Meeres leben faszinierende Kreaturen. Nahe der warmen Oberfl\u00E4che, wo das Sonnenlicht das Wasser durchflutet, tummeln sich bunte Fische und verspielte Delfine. Sie jagen gemeinsam und kommunizieren durch Klicklaute. Doch je tiefer man taucht, desto dunkler und k\u00E4lter wird es. In der Tiefsee, wo ewige Finsternis herrscht, leben ganz besondere Tiere. Ein Beispiel ist der Tiefsee-Anglerfisch. Er besitzt eine leuchtende Angel an seinem Kopf, um Beute anzulocken. Da es in dieser Tiefe kaum Nahrung gibt, muss er jede Gelegenheit nutzen. Auch die gigantischen Blauwale, die gr\u00F6\u00DFten Lebewesen der Erde, durchstreifen die Weltmeere. Sie ern\u00E4hren sich paradoxerweise von winzig kleinen Krebsen, dem Krill. Die Erforschung dieser marinen Lebensr\u00E4ume ist f\u00FCr Wissenschaftler eine gro\u00DFe Herausforderung, da der enorme Wasserdruck in der Tiefe extrem gef\u00E4hrlich ist. Dennoch lernen wir t\u00E4glich Neues \u00FCber diese verborgene Welt.",
+      "Difficulty": "Mittel",
+      "Topic": "Der Ozean und seine Tiere",
+      "WordCount": 152,
+      "Questions": [
+        {
+          "QuestionText": "Wie viel der Erdoberfl\u00E4che wird ungef\u00E4hr von Ozeanen bedeckt?",
+          "Options": [
+            "\u00DCber siebzig Prozent",
+            "Genau die H\u00E4lfte",
+            "Zirka drei\u00DFig Prozent",
+            "Fast der gesamte Planet"
+          ],
+          "CorrectAnswer": "\u00DCber siebzig Prozent",
+          "Explanation": "Im Text steht im zweiten Satz: \u0027Sie bedecken mehr als siebzig Prozent unseres Planeten.\u0027"
+        },
+        {
+          "QuestionText": "Wie lockt der Tiefsee-Anglerfisch in der Dunkelheit seine Nahrung an?",
+          "Options": [
+            "Durch lautes Singen",
+            "Mit einer leuchtenden Angel am Kopf",
+            "Indem er sich im Sand versteckt",
+            "Mit seinen gro\u00DFen Flossen"
+          ],
+          "CorrectAnswer": "Mit einer leuchtenden Angel am Kopf",
+          "Explanation": "Laut Text besitzt der Tiefsee-Anglerfisch eine leuchtende Angel an seinem Kopf, um Beute anzulocken."
+        },
+        {
+          "QuestionText": "Wovon ern\u00E4hren sich die riesigen Blauwale?",
+          "Options": [
+            "Von anderen Walen und gro\u00DFen Fischen",
+            "Von Algen und Meerespflanzen",
+            "Von winzigen Krebsen namens Krill",
+            "Ausschlie\u00DFlich von Seem\u00F6wen"
+          ],
+          "CorrectAnswer": "Von winzigen Krebsen namens Krill",
+          "Explanation": "Der Text erkl\u00E4rt, dass sich die Blauwale paradoxerweise von winzig kleinen Krebsen, dem Krill, ern\u00E4hren."
+        },
+        {
+          "QuestionText": "Warum ist die Erforschung der Tiefsee f\u00FCr Wissenschaftler so schwierig?",
+          "Options": [
+            "Weil es dort keine Tiere gibt",
+            "Weil das Wasser zu warm ist",
+            "Wegen des enormen Wasserdrucks",
+            "Weil man dort nicht atmen kann"
+          ],
+          "CorrectAnswer": "Wegen des enormen Wasserdrucks",
+          "Explanation": "Im Text wird erw\u00E4hnt, dass die Erforschung eine gro\u00DFe Herausforderung ist, weil der enorme Wasserdruck in der Tiefe extrem gef\u00E4hrlich ist."
+        }
+      ]
+    },
+    {
+      "Title": "Fu\u00DFballfieber: Ein Spiel, das begeistert",
+      "Text": "Jeder kennt es, viele lieben es: Fu\u00DFball! Es ist nicht nur ein Sport, sondern oft eine wahre Leidenschaft, die Menschen auf der ganzen Welt miteinander verbindet. Stell dir vor, du stehst auf einem gr\u00FCnen Rasen, die Sonne scheint, und der Schiedsrichter pfeift das Spiel an. Dein Herz klopft schnell, denn jeder Pass, jeder Trick und jeder Torschuss kann entscheidend sein.\n\nEin Fu\u00DFballteam besteht aus elf Spielern, die alle eine wichtige Aufgabe haben. Der Torwart ist der letzte Schutz vor einem Gegentor und muss besonders mutig sein. Die Verteidiger versuchen, den Ball vom eigenen Tor fernzuhalten. Im Mittelfeld wird das Spiel aufgebaut und die Angreifer, oft auch St\u00FCrmer genannt, sind daf\u00FCr zust\u00E4ndig, Tore zu schie\u00DFen. Wenn der Ball dann endlich im Netz zappelt, jubeln die Fans und die Spieler vor Freude.\n\nDoch Fu\u00DFball ist mehr als nur Tore schie\u00DFen. Es geht um Teamgeist, Fairplay und den gemeinsamen Willen, etwas zu erreichen. Manchmal gibt es dramatische Szenen, \u00FCberraschende Wendungen und unglaubliche Siege oder knappe Niederlagen. Egal, ob man selbst auf dem Platz steht oder mit Freunden vor dem Fernseher mitfiebert, Fu\u00DFball sorgt immer f\u00FCr Spannung und unvergessliche Momente. Es ist ein faszinierendes Spiel, das Jung und Alt begeistert.",
+      "Difficulty": "Schwer",
+      "Topic": "Fu\u00DFball",
+      "WordCount": 196,
+      "Questions": [
+        {
+          "QuestionText": "Was verbindet laut dem Text Menschen auf der ganzen Welt?",
+          "Options": [
+            "Die Sonne",
+            "Der Schiedsrichter",
+            "Die Leidenschaft f\u00FCr Fu\u00DFball",
+            "Der gr\u00FCne Rasen"
+          ],
+          "CorrectAnswer": "Die Leidenschaft f\u00FCr Fu\u00DFball",
+          "Explanation": "Der Text sagt: \u0027Es ist nicht nur ein Sport, sondern oft eine wahre Leidenschaft, die Menschen auf der ganzen Welt miteinander verbindet.\u0027"
+        },
+        {
+          "QuestionText": "Wie viele Spieler hat ein Fu\u00DFballteam?",
+          "Options": [
+            "Zehn Spieler",
+            "Elf Spieler",
+            "Zw\u00F6lf Spieler",
+            "Neun Spieler"
+          ],
+          "CorrectAnswer": "Elf Spieler",
+          "Explanation": "Im Text steht: \u0027Ein Fu\u00DFballteam besteht aus elf Spielern\u0027."
+        },
+        {
+          "QuestionText": "Welche Aufgabe haben die St\u00FCrmer haupts\u00E4chlich?",
+          "Options": [
+            "Den Ball vom eigenen Tor fernhalten",
+            "Das Spiel im Mittelfeld aufbauen",
+            "Tore schie\u00DFen",
+            "Der letzte Schutz vor einem Gegentor sein"
+          ],
+          "CorrectAnswer": "Tore schie\u00DFen",
+          "Explanation": "Der Text erkl\u00E4rt: \u0027die Angreifer, oft auch St\u00FCrmer genannt, sind daf\u00FCr zust\u00E4ndig, Tore zu schie\u00DFen\u0027."
+        },
+        {
+          "QuestionText": "Was ist laut dem Text neben dem Tore schie\u00DFen im Fu\u00DFball wichtig?",
+          "Options": [
+            "Die Geschwindigkeit des Balls",
+            "Die Farbe der Trikots",
+            "Teamgeist, Fairplay und gemeinsamer Wille",
+            "Nur die Anzahl der Fans"
+          ],
+          "CorrectAnswer": "Teamgeist, Fairplay und gemeinsamer Wille",
+          "Explanation": "Im Text steht: \u0027Es geht um Teamgeist, Fairplay und den gemeinsamen Willen, etwas zu erreichen\u0027."
+        }
+      ]
+    },
+    {
+      "Title": "Deutschland: Ein Land mit vielen Facetten",
+      "Text": "Deutschland liegt mitten in Europa und ist ein faszinierendes Land. Es besteht aus 16 Bundesl\u00E4ndern, die alle ihre eigenen Besonderheiten haben. Von den hohen Gipfeln der Alpen im S\u00FCden bis zu den sandigen Str\u00E4nden an Nord- und Ostsee bietet das Land eine abwechslungsreiche Natur. Die Hauptstadt Berlin ist eine pulsierende Metropole mit einer langen Geschichte und vielen ber\u00FChmten Sehensw\u00FCrdigkeiten wie dem Brandenburger Tor. Viele Menschen besuchen Deutschland auch wegen der traditionellen Feste, wie dem Oktoberfest, oder der Schl\u00F6sser, die wie aus einem M\u00E4rchen aussehen. Die deutsche Wirtschaft ist sehr stark und bekannt f\u00FCr ihre Autos und Technik. Doch Deutschland ist nicht nur Arbeit: In den vielen W\u00E4ldern und Nationalparks kann man wunderbar wandern und die Natur genie\u00DFen. Mit seiner zentralen Lage ist das Land zudem ein wichtiger Knotenpunkt f\u00FCr den Handel und das Reisen in Europa. Egal ob man St\u00E4dte erkundet, in den Bergen klettert oder an der K\u00FCste entspannt \u2013 Deutschland hat f\u00FCr jeden etwas zu bieten.",
+      "Difficulty": "Mittel",
+      "Topic": "Deutschland",
+      "WordCount": 158,
+      "Questions": [
+        {
+          "QuestionText": "Aus wie vielen Bundesl\u00E4ndern besteht Deutschland?",
+          "Options": [
+            "10",
+            "16",
+            "20",
+            "25"
+          ],
+          "CorrectAnswer": "16",
+          "Explanation": "Im Text wird explizit erw\u00E4hnt, dass Deutschland aus 16 Bundesl\u00E4ndern besteht."
+        },
+        {
+          "QuestionText": "Welche Stadt wird im Text als pulsierende Metropole beschrieben?",
+          "Options": [
+            "M\u00FCnchen",
+            "Hamburg",
+            "Berlin",
+            "Frankfurt"
+          ],
+          "CorrectAnswer": "Berlin",
+          "Explanation": "Der Text benennt Berlin als die Hauptstadt und beschreibt sie als pulsierende Metropole."
+        },
+        {
+          "QuestionText": "Wof\u00FCr ist die deutsche Wirtschaft laut Text besonders bekannt?",
+          "Options": [
+            "F\u00FCr Tourismus",
+            "F\u00FCr Autos und Technik",
+            "F\u00FCr den Schiffsbau",
+            "F\u00FCr Mode"
+          ],
+          "CorrectAnswer": "F\u00FCr Autos und Technik",
+          "Explanation": "Der Text sagt direkt, dass die deutsche Wirtschaft f\u00FCr ihre Autos und Technik bekannt ist."
+        },
+        {
+          "QuestionText": "Was bietet Deutschland laut dem Text geografisch an?",
+          "Options": [
+            "Nur flaches Land",
+            "Nur Berge",
+            "Eine abwechslungsreiche Natur von Bergen bis zum Meer",
+            "Nur Inseln"
+          ],
+          "CorrectAnswer": "Eine abwechslungsreiche Natur von Bergen bis zum Meer",
+          "Explanation": "Der Text beschreibt die Vielfalt von den Alpen im S\u00FCden bis zu den Str\u00E4nden im Norden."
+        }
+      ]
+    },
+    {
+      "Title": "Die Welt der ber\u00FChmten M\u00E4rchen",
+      "Text": "M\u00E4rchen sind uralte Geschichten, die seit Generationen erz\u00E4hlt werden. Besonders ber\u00FChmt sind die Sammlungen der Gebr\u00FCder Grimm, die vor \u00FCber zweihundert Jahren im ganzen Land Volksm\u00E4rchen sammelten. In ihren Erz\u00E4hlungen wimmelt es von magischen Wesen: g\u00FCtige Feen, listige Zwerge und sprechende Tiere. Doch M\u00E4rchen waren nicht immer nur zur Unterhaltung gedacht. Oft verbirgt sich hinter den fantastischen Abenteuern eine wichtige Botschaft oder Moral. So lernen wir beispielsweise von H\u00E4nsel und Gretel, dass man auch in schwierigen Situationen mutig und klug handeln muss. Rotk\u00E4ppchen warnt uns vor der Leichtgl\u00E4ubigkeit gegen\u00FCber Fremden. Obwohl viele M\u00E4rchen d\u00FCstere Momente haben, siegt am Ende fast immer das Gute \u00FCber das B\u00F6se. Die Gerechtigkeit triumphiert, und die Helden finden ihr wohlverdientes Gl\u00FCck. Bis heute faszinieren uns diese zeitlosen Erz\u00E4hlungen und regen unsere Fantasie an. Sie entf\u00FChren uns in eine Welt, in der alles m\u00F6glich scheint.",
+      "Difficulty": "Mittel",
+      "Topic": "Ber\u00FChmte M\u00E4rchen",
+      "WordCount": 139,
+      "Questions": [
+        {
+          "QuestionText": "Wer sammelte vor \u00FCber zweihundert Jahren die ber\u00FChmten Volksm\u00E4rchen?",
+          "Options": [
+            "Die Gebr\u00FCder Grimm",
+            "H\u00E4nsel und Gretel",
+            "Rotk\u00E4ppchen und der Wolf",
+            "G\u00FCtige Feen und Zwerge"
+          ],
+          "CorrectAnswer": "Die Gebr\u00FCder Grimm",
+          "Explanation": "Im Text wird direkt am Anfang erw\u00E4hnt, dass die Gebr\u00FCder Grimm vor \u00FCber zweihundert Jahren Volksm\u00E4rchen gesammelt haben."
+        },
+        {
+          "QuestionText": "Was verbirgt sich meistens hinter den fantastischen Abenteuern in M\u00E4rchen?",
+          "Options": [
+            "Eine Wegbeschreibung zu einem echten Schatz",
+            "Eine wichtige Botschaft oder Moral",
+            "Ein geheimes Rezept f\u00FCr Zaubertr\u00E4nke",
+            "Eine Anleitung zum Holzhacken im Wald"
+          ],
+          "CorrectAnswer": "Eine wichtige Botschaft oder Moral",
+          "Explanation": "Der Text erkl\u00E4rt, dass M\u00E4rchen nicht nur zur Unterhaltung da waren, sondern sich oft eine wichtige Botschaft oder Moral dahinter verbirgt."
+        },
+        {
+          "QuestionText": "Wovor warnt uns das M\u00E4rchen \u0027Rotk\u00E4ppchen\u0027 laut dem Text?",
+          "Options": [
+            "Vor dem Alleingang im tiefen, dunklen Wald",
+            "Vor dem Pfl\u00FCcken von giftigen Blumen",
+            "Vor der Leichtgl\u00E4ubigkeit gegen\u00FCber Fremden",
+            "Vor dem Backen von zu schweren Kuchen f\u00FCr die Gro\u00DFmutter"
+          ],
+          "CorrectAnswer": "Vor der Leichtgl\u00E4ubigkeit gegen\u00FCber Fremden",
+          "Explanation": "Der Text sagt ausdr\u00FCcklich: \u0027Rotk\u00E4ppchen warnt uns vor der Leichtgl\u00E4ubigkeit gegen\u00FCber Fremden.\u0027"
+        },
+        {
+          "QuestionText": "Wie enden die meisten M\u00E4rchen laut der Beschreibung?",
+          "Options": [
+            "Das B\u00F6se gewinnt und die Helden m\u00FCssen fliehen",
+            "Die Geschichten bleiben offen und ohne klares Ende",
+            "Das Gute siegt \u00FCber das B\u00F6se und Gerechtigkeit triumphiert",
+            "Alle Figuren schlafen f\u00FCr hundert Jahre ein"
+          ],
+          "CorrectAnswer": "Das Gute siegt \u00FCber das B\u00F6se und Gerechtigkeit triumphiert",
+          "Explanation": "Der Text schildert, dass am Ende fast immer das Gute \u00FCber das B\u00F6se siegt, die Gerechtigkeit triumphiert und die Helden ihr Gl\u00FCck finden."
+        }
+      ]
+    },
+    {
+      "Title": "Mein Freund der Roboter",
+      "Text": "Stell dir vor, du kommst nach Hause und ein kleiner Roboter begr\u00FC\u00DFt dich schon an der T\u00FCr. Er nimmt dir deinen schweren Schulrucksack ab und bringt ihn in dein Zimmer. Das klingt wie aus einem Science-Fiction-Film, aber in der Zukunft k\u00F6nnte das ganz normal sein. Roboter sind Maschinen, die so programmiert sind, dass sie Aufgaben f\u00FCr uns \u00FCbernehmen. Manche Roboter sehen aus wie Menschen, andere wie kleine K\u00E4sten auf R\u00E4dern. Sie k\u00F6nnen uns beim Aufr\u00E4umen helfen, den Rasen m\u00E4hen oder sogar komplexe Berechnungen in Sekunden durchf\u00FChren. Damit ein Roboter wei\u00DF, was er tun soll, muss ein Mensch ihm genaue Anweisungen geben. Das nennt man Programmierung. Ohne diese klugen Befehle w\u00FCrde der Roboter einfach stillstehen. Technik ist wirklich faszinierend, denn sie macht unser Leben einfacher und spannender. Vielleicht baust du ja sp\u00E4ter selbst einmal einen Roboter, der dir bei deinen Hausaufgaben hilft!",
+      "Difficulty": "Leicht",
+      "Topic": "Roboter und Technik",
+      "WordCount": 141,
+      "Questions": [
+        {
+          "QuestionText": "Was macht der Roboter im Text, wenn du nach Hause kommst?",
+          "Options": [
+            "Er kocht das Abendessen",
+            "Er macht die Hausaufgaben",
+            "Er nimmt den Rucksack ab",
+            "Er spielt ein Videospiel"
+          ],
+          "CorrectAnswer": "Er nimmt den Rucksack ab",
+          "Explanation": "Der Text beschreibt, dass der Roboter an der T\u00FCr wartet und den Schulrucksack in das Zimmer bringt."
+        },
+        {
+          "QuestionText": "Was ist eine notwendige Voraussetzung, damit ein Roboter funktioniert?",
+          "Options": [
+            "Er muss aussehen wie ein Mensch",
+            "Er braucht genaue Anweisungen (Programmierung)",
+            "Er muss fliegen k\u00F6nnen",
+            "Er braucht keine Hilfe vom Menschen"
+          ],
+          "CorrectAnswer": "Er braucht genaue Anweisungen (Programmierung)",
+          "Explanation": "Im Text steht, dass ein Mensch dem Roboter Befehle geben muss, damit er wei\u00DF, was er tun soll."
+        },
+        {
+          "QuestionText": "Welches Beispiel f\u00FCr die Hilfe durch Roboter wird im Text genannt?",
+          "Options": [
+            "Den Rasen m\u00E4hen",
+            "Flugzeuge steuern",
+            "B\u00FCcher schreiben",
+            "Musik komponieren"
+          ],
+          "CorrectAnswer": "Den Rasen m\u00E4hen",
+          "Explanation": "Der Text erw\u00E4hnt ausdr\u00FCcklich das M\u00E4hen des Rasens als eine der Aufgaben, bei denen Roboter helfen k\u00F6nnen."
+        },
+        {
+          "QuestionText": "Was passiert laut Text, wenn ein Roboter keine Befehle erh\u00E4lt?",
+          "Options": [
+            "Er beginnt zu rennen",
+            "Er wird sehr laut",
+            "Er geht aus dem Haus",
+            "Er steht einfach still"
+          ],
+          "CorrectAnswer": "Er steht einfach still",
+          "Explanation": "Der Text besagt, dass der Roboter ohne kluge Befehle einfach stillstehen w\u00FCrde."
+        }
+      ]
+    },
+    {
+      "Title": "Eine Reise durch unser Sonnensystem",
+      "Text": "Unser Sonnensystem ist ein faszinierender Ort. In der Mitte steht die Sonne, ein riesiger, hei\u00DFer Stern. Um sie herum kreisen acht Planeten auf ihren Bahnen. Der kleinste Planet ist der Merkur, der ganz nah an der Sonne liegt. Dort ist es unglaublich hei\u00DF. Ganz anders ist es auf dem Neptun. Er ist der am weitesten entfernte Planet und eisig kalt.\n\nUnser Heimatplanet ist die Erde. Sie ist der einzige bekannte Ort im Weltall, auf dem es Leben gibt. Das liegt am fl\u00FCssigen Wasser und der Luft zum Atmen. Neben uns zieht der rote Planet Mars seine Runden. Wissenschaftler erforschen ihn mit Robotern, weil sie wissen wollen, ob es dort fr\u00FCher einmal Wasser gab.\n\nDer gr\u00F6\u00DFte Riese in unserer Nachbarschaft ist der Jupiter. Er ist so gro\u00DF, dass alle anderen Planeten zusammen in ihn hineinpassen w\u00FCrden. Er hat sogar einen riesigen Wirbelsturm, der wie ein gro\u00DFes rotes Auge aussieht. Die Planeten sind alle einzigartig und machen unsere kosmische Heimat zu einem spannenden Abenteuerland.",
+      "Difficulty": "Leicht",
+      "Topic": "Die Planeten",
+      "WordCount": 162,
+      "Questions": [
+        {
+          "QuestionText": "Warum gibt es auf der Erde Leben?",
+          "Options": [
+            "Weil sie am n\u00E4chsten an der Sonne liegt.",
+            "Weil es dort fl\u00FCssiges Wasser und Luft zum Atmen gibt.",
+            "Weil sie der gr\u00F6\u00DFte Riese im Weltall ist.",
+            "Weil Roboter sie gr\u00FCndlich erforschen."
+          ],
+          "CorrectAnswer": "Weil es dort fl\u00FCssiges Wasser und Luft zum Atmen gibt.",
+          "Explanation": "Der Text erkl\u00E4rt, dass das Leben auf der Erde durch das fl\u00FCssige Wasser und die Luft zum Atmen m\u00F6glich gemacht wird."
+        },
+        {
+          "QuestionText": "Welcher Planet ist der gr\u00F6\u00DFte in unserem Sonnensystem?",
+          "Options": [
+            "Der Merkur",
+            "Der Mars",
+            "Der Jupiter",
+            "Der Neptun"
+          ],
+          "CorrectAnswer": "Der Jupiter",
+          "Explanation": "Im Text wird der Jupiter als der gr\u00F6\u00DFte Riese beschrieben, in den alle anderen Planeten hineinpassen w\u00FCrden."
+        },
+        {
+          "QuestionText": "Warum erforschen Wissenschaftler den Mars mit Robotern?",
+          "Options": [
+            "Sie suchen nach dem riesigen Wirbelsturm.",
+            "Sie wollen wissen, ob es dort fr\u00FCher einmal Wasser gab.",
+            "Sie m\u00F6chten dort ein neues Abenteuerland bauen.",
+            "Sie wollen den Planeten n\u00E4her an die Sonne schieben."
+          ],
+          "CorrectAnswer": "Sie wollen wissen, ob es dort fr\u00FCher einmal Wasser gab.",
+          "Explanation": "Laut Text nutzen Wissenschaftler Roboter auf dem Mars, weil sie herausfinden wollen, ob es dort fr\u00FCher einmal Wasser gab."
+        },
+        {
+          "QuestionText": "Welche Eigenschaft hat der Planet Neptun?",
+          "Options": [
+            "Er ist der Sonne am n\u00E4chsten und unglaublich hei\u00DF.",
+            "Er hat einen roten Wirbelsturm, der wie ein Auge aussieht.",
+            "Er ist der am weitesten entfernte Planet und eisig kalt.",
+            "Er ist der einzige Planet, auf dem es Luft zum Atmen gibt."
+          ],
+          "CorrectAnswer": "Er ist der am weitesten entfernte Planet und eisig kalt.",
+          "Explanation": "Der Text besagt, dass Neptun am weitesten entfernt und eisig kalt ist."
+        }
+      ]
+    },
+    {
+      "Title": "Das facettenreiche Familienleben",
+      "Text": "Meine Familie gleicht einem bunten Mosaik. Wir leben in einem Haus, in dem es selten still ist, denn mein Vater ist ein leidenschaftlicher Hobby-Astronom und meine Mutter arbeitet als Arch\u00E4ologin. Wenn sie von ihren Ausgrabungen berichtet, lauschen wir alle gebannt ihren Erz\u00E4hlungen \u00FCber l\u00E4ngst vergangene Epochen. Mein \u00E4lterer Bruder Lukas und ich sind zwar grundverschieden, doch bei einem sind wir uns einig: Unsere Sonntage verbringen wir am liebsten mit einem ausgiebigen Familienfr\u00FChst\u00FCck. Dabei diskutieren wir oft \u00FCber existenzielle Fragen, wie zum Beispiel, ob Au\u00DFerirdische existieren k\u00F6nnten. Meine Gro\u00DFeltern wohnen in der Einliegerwohnung direkt nebenan. Opa liest mir oft aus seinen philosophischen B\u00FCchern vor, auch wenn ich manche Passagen noch nicht ganz verstehe. Unsere Familie ist vielleicht ein wenig exzentrisch, da wir uns f\u00FCr sehr unterschiedliche Dinge begeistern, doch genau diese Vielfalt macht unseren Zusammenhalt aus. Jeder darf bei uns so sein, wie er ist, und genau das sch\u00E4tze ich an meinem Zuhause am meisten.",
+      "Difficulty": "Schwer",
+      "Topic": "Meine Familie",
+      "WordCount": 154,
+      "Questions": [
+        {
+          "QuestionText": "Welchen Beruf \u00FCbt die Mutter der Erz\u00E4hlerin oder des Erz\u00E4hlers aus?",
+          "Options": [
+            "Astronomie",
+            "Arch\u00E4ologie",
+            "Philosophie",
+            "Lehrerin"
+          ],
+          "CorrectAnswer": "Arch\u00E4ologie",
+          "Explanation": "Im Text steht, dass die Mutter als Arch\u00E4ologin arbeitet."
+        },
+        {
+          "QuestionText": "Was machen die Familienmitglieder am liebsten gemeinsam am Sonntag?",
+          "Options": [
+            "In den Urlaub fahren",
+            "Einen Film schauen",
+            "Ein ausgiebiges Fr\u00FChst\u00FCck genie\u00DFen",
+            "Im Garten arbeiten"
+          ],
+          "CorrectAnswer": "Ein ausgiebiges Fr\u00FChst\u00FCck genie\u00DFen",
+          "Explanation": "Der Text erw\u00E4hnt, dass sie am liebsten den Sonntag mit einem ausgiebigen Familienfr\u00FChst\u00FCck verbringen."
+        },
+        {
+          "QuestionText": "Wie wird die Familie im Text beschrieben?",
+          "Options": [
+            "Als sehr ruhig und ordentlich",
+            "Als ein buntes Mosaik und exzentrisch",
+            "Als eine sehr kleine Familie",
+            "Als eine Familie, die sich nie streitet"
+          ],
+          "CorrectAnswer": "Als ein buntes Mosaik und exzentrisch",
+          "Explanation": "Der Autor vergleicht die Familie mit einem bunten Mosaik und bezeichnet sie als ein wenig exzentrisch."
+        },
+        {
+          "QuestionText": "Wo wohnen die Gro\u00DFeltern?",
+          "Options": [
+            "In einer anderen Stadt",
+            "Im Dachgeschoss",
+            "In der Einliegerwohnung nebenan",
+            "Sie wohnen nicht bei der Familie"
+          ],
+          "CorrectAnswer": "In der Einliegerwohnung nebenan",
+          "Explanation": "Im Text hei\u00DFt es explizit, dass die Gro\u00DFeltern in der Einliegerwohnung direkt nebenan wohnen."
+        }
+      ]
+    },
+    {
+      "Title": "Gurken im Obstsalat?",
+      "Text": "Hast du gewusst, dass die Tomate eigentlich gar kein Gem\u00FCse ist? Botaniker, also Pflanzenwissenschaftler, sortieren Fr\u00FCchte danach, wie sie wachsen. Alles, was aus der Bl\u00FCte einer Pflanze entsteht und Samen in sich tr\u00E4gt, ist im biologischen Sinne Obst. Dazu geh\u00F6ren nicht nur Tomaten, sondern \u00FCberraschenderweise auch Gurken, K\u00FCrbisse und sogar Avocados! Echtes Gem\u00FCse hingegen w\u00E4chst aus anderen Teilen der Pflanze. Karotten sind Wurzeln, Sellerie ist ein St\u00E4ngel und Spinat besteht aus Bl\u00E4ttern. Trotz dieser wissenschaftlichen Einteilung sortieren wir im Supermarkt alles anders ein. Hier gilt: Was s\u00FC\u00DF ist und roh gegessen wird, landet beim Obst. Was man eher kocht und salzt, gilt als Gem\u00FCse. Diese kulinarische Einteilung hilft uns im Alltag, beim Kochen nicht durcheinanderzukommen. Stell dir nur mal vor, du m\u00FCsstest eine Gurke in deinen Obstsalat schneiden \u2013 das w\u00FCrde den meisten Menschen wohl eher nicht schmecken, obwohl es botanisch gesehen absolut korrekt w\u00E4re!",
+      "Difficulty": "Mittel",
+      "Topic": "Obst und Gem\u00FCse",
+      "WordCount": 145,
+      "Questions": [
+        {
+          "QuestionText": "Was bestimmt aus biologischer Sicht, ob ein Pflanzenteil als Obst gilt?",
+          "Options": [
+            "Es muss besonders s\u00FC\u00DF schmecken und darf nicht gekocht werden.",
+            "Es muss aus einer Bl\u00FCte entstehen und Samen in sich tragen.",
+            "Es muss unter der Erde wachsen und eine Wurzel sein.",
+            "Es muss eine gr\u00FCne Farbe haben und roh essbar sein."
+          ],
+          "CorrectAnswer": "Es muss aus einer Bl\u00FCte entstehen und Samen in sich tragen.",
+          "Explanation": "Im Text steht: \u0027Alles, was aus der Bl\u00FCte einer Pflanze entsteht und Samen in sich tr\u00E4gt, ist im biologischen Sinne Obst.\u0027"
+        },
+        {
+          "QuestionText": "Welches der folgenden Lebensmittel ist botanisch gesehen eigentlich Obst?",
+          "Options": [
+            "Die Karotte",
+            "Der Sellerie",
+            "Die Gurke",
+            "Der Spinat"
+          ],
+          "CorrectAnswer": "Die Gurke",
+          "Explanation": "Laut Text geh\u00F6ren biologisch gesehen auch Gurken, K\u00FCrbisse und Avocados zum Obst, weil sie aus Bl\u00FCten entstehen."
+        },
+        {
+          "QuestionText": "Nach welchen Regeln sortieren wir Obst und Gem\u00FCse im Alltag (zum Beispiel im Supermarkt)?",
+          "Options": [
+            "Streng nach den biologischen Regeln der Botaniker.",
+            "Nach der Gr\u00F6\u00DFe und dem Gewicht der Fr\u00FCchte.",
+            "Danach, ob sie im Inland wachsen oder importiert werden m\u00FCssen.",
+            "Danach, ob sie s\u00FC\u00DF und roh gegessen werden oder eher gekocht und gesalzen werden."
+          ],
+          "CorrectAnswer": "Danach, ob sie s\u00FC\u00DF und roh gegessen werden oder eher gekocht und gesalzen werden.",
+          "Explanation": "Der Text erkl\u00E4rt: \u0027Was s\u00FC\u00DF ist und roh gegessen wird, landet beim Obst. Was man eher kocht und salzt, gilt als Gem\u00FCse.\u0027"
+        },
+        {
+          "QuestionText": "Was ist Sellerie aus biologischer Sicht?",
+          "Options": [
+            "Eine Wurzel",
+            "Ein St\u00E4ngel",
+            "Ein Blatt",
+            "Eine Frucht"
+          ],
+          "CorrectAnswer": "Ein St\u00E4ngel",
+          "Explanation": "Im Text wird erkl\u00E4rt: \u0027Karotten sind Wurzeln, Sellerie ist ein St\u00E4ngel und Spinat besteht aus Bl\u00E4ttern.\u0027"
+        }
+      ]
+    },
+    {
+      "Title": "Das Geheimnis der st\u00FCrmischen Bucht",
+      "Text": "Kapit\u00E4nin Alva blickte pr\u00FCfend auf die vergilbte Seekarte, deren Ecken bereits zerfleddert waren. Legenden besagten, dass in den zerkl\u00FCfteten Felsen der Totenkopf-Bucht ein Schatz verborgen lag, den kein gew\u00F6hnlicher Seer\u00E4uber jemals zu bergen wagte. Der Legende nach hatte der ber\u00FCchtigte Freibeuter \u201ASilberbart\u2018 sein gesamtes Verm\u00F6gen dort in einer verborgenen Grotte deponiert, gesch\u00FCtzt durch ein perfides R\u00E4tsel. W\u00E4hrend der Wind durch die Takelage pfiff und die Mannschaft nerv\u00F6s an ihren Entermessern nestelte, sp\u00FCrte Alva ein Prickeln. Sie wusste, dass dieser Schatz nicht nur aus Goldst\u00FCcken bestand. Alte Aufzeichnungen deuteten darauf hin, dass die Truhe ein mystisches Artefakt enthielt, welches das Schicksal der Meere beeinflussen konnte. Als sie die Bucht erreichte, versperrte ihr eine massive Felswand den Weg. Alva studierte die kryptischen Zeichen, die in den Stein eingemei\u00DFelt waren. Mit einem scharfen Blick erkannte sie das Muster: Es war kein Hindernis, sondern der Schl\u00FCssel. Mit ruhiger Hand dr\u00FCckte sie auf den zentralen Stein, woraufhin sich ein verborgener Durchgang lautlos \u00F6ffnete. Das Abenteuer hatte gerade erst begonnen.",
+      "Difficulty": "Schwer",
+      "Topic": "Piraten und ihre Sch\u00E4tze",
+      "WordCount": 164,
+      "Questions": [
+        {
+          "QuestionText": "Welches Ziel verfolgt Kapit\u00E4nin Alva?",
+          "Options": [
+            "Sie sucht einen neuen Weg zum Hafen.",
+            "Sie will den legend\u00E4ren Schatz von Silberbart finden.",
+            "Sie m\u00F6chte ihre Mannschaft vor dem Sturm retten.",
+            "Sie versucht, eine versunkene Stadt zu entdecken."
+          ],
+          "CorrectAnswer": "Sie will den legend\u00E4ren Schatz von Silberbart finden.",
+          "Explanation": "Im Text steht, dass sie nach dem Schatz in der Totenkopf-Bucht sucht."
+        },
+        {
+          "QuestionText": "Was ist das Besondere an dem Schatz von Silberbart?",
+          "Options": [
+            "Er besteht nur aus Silber.",
+            "Er ist in einem Schiffswrack versteckt.",
+            "Er enth\u00E4lt neben Gold auch ein mystisches Artefakt.",
+            "Er ist gar nicht wirklich vorhanden."
+          ],
+          "CorrectAnswer": "Er enth\u00E4lt neben Gold auch ein mystisches Artefakt.",
+          "Explanation": "Der Text erw\u00E4hnt ein mystisches Artefakt, das das Schicksal der Meere beeinflussen kann."
+        },
+        {
+          "QuestionText": "Wie \u00F6ffnete Alva den verborgenen Durchgang?",
+          "Options": [
+            "Sie benutzte Dynamit.",
+            "Sie l\u00F6ste das R\u00E4tsel der eingemei\u00DFelten Zeichen.",
+            "Sie musste gegen ein Seeungeheuer k\u00E4mpfen.",
+            "Sie wartete, bis die Flut den Weg frei gab."
+          ],
+          "CorrectAnswer": "Sie l\u00F6ste das R\u00E4tsel der eingemei\u00DFelten Zeichen.",
+          "Explanation": "Alva erkannte das Muster in den Felsen und dr\u00FCckte auf den richtigen Stein."
+        },
+        {
+          "QuestionText": "Wie l\u00E4sst sich die Stimmung der Mannschaft beschreiben?",
+          "Options": [
+            "Sie sind sehr entspannt und freuen sich.",
+            "Sie sind v\u00F6llig gleichg\u00FCltig.",
+            "Sie sind nerv\u00F6s und angespannt.",
+            "Sie sind m\u00FCde und wollen nach Hause."
+          ],
+          "CorrectAnswer": "Sie sind nerv\u00F6s und angespannt.",
+          "Explanation": "Der Text beschreibt, dass die Mannschaft \u0027nerv\u00F6s an ihren Entermessern nestelte\u0027."
+        }
+      ]
+    },
+    {
+      "Title": "Die K\u00F6nigin der Instrumente",
+      "Text": "Die Orgel wird v\u00F6llig zurecht als die \u201EK\u00F6nigin der Instrumente\u201C bezeichnet. Bereits vor \u00FCber zweitausend Jahren erfanden die Menschen dieses monumentale Musikinstrument, das physikalische Gesetze mit klanglicher Sch\u00F6nheit verbindet. Wer auf der Orgelbank Platz nimmt, blickt auf mehrere Klaviaturen, die man in der Fachsprache \u201EManuale\u201C nennt, sowie auf eine Pedaltastatur f\u00FCr die F\u00FC\u00DFe. Dr\u00FCckt der Organist eine Taste, str\u00F6mt Luft aus dem Windkanal in die ausgew\u00E4hlten Pfeifen. Diese fangen augenblicklich an zu schwingen und erzeugen so den charakteristischen Ton.\n\nEinzigartig ist die Vielfalt der Orgelregister: Durch das Ziehen bestimmter Kn\u00F6pfe kann der Spieler den Klangcharakter dramatisch ver\u00E4ndern. Pl\u00F6tzlich imitiert das Instrument den sanften Hauch einer Fl\u00F6te oder das schmetternde Dr\u00F6hnen einer Posaune. Diese klangliche Wandlungsf\u00E4higkeit fasziniert Musiker weltweit. Doch die Orgel ist nicht nur ein Meisterwerk der Akustik, sondern auch der Architektur. Oft f\u00FCllen die kunstvoll verzierten Prospekte \u2013 so nennt man die sichtbare Vorderseite der Orgel \u2013 die gesamte Wand einer riesigen Kathedrale aus.",
+      "Difficulty": "Schwer",
+      "Topic": "Musikinstrumente",
+      "WordCount": 155,
+      "Questions": [
+        {
+          "QuestionText": "Was sind \u201EManuale\u201C bei einer Orgel?",
+          "Options": [
+            "Die Pedale f\u00FCr die F\u00FC\u00DFe",
+            "Die Pfeifen der Orgel",
+            "Die Klaviaturen f\u00FCr die H\u00E4nde",
+            "Die Kn\u00F6pfe f\u00FCr die Register"
+          ],
+          "CorrectAnswer": "Die Klaviaturen f\u00FCr die H\u00E4nde",
+          "Explanation": "Im Text wird erkl\u00E4rt, dass man die Klaviaturen, auf die man blickt, in der Fachsprache \u201EManuale\u201C nennt. Davon abgegrenzt wird die Pedaltastatur f\u00FCr die F\u00FC\u00DFe genannt."
+        },
+        {
+          "QuestionText": "Wie erzeugt die Orgel ihre T\u00F6ne?",
+          "Options": [
+            "Durch das Zupfen von Metallsaiten im Geh\u00E4use",
+            "Durch Luft, die aus einem Windkanal in die Pfeifen str\u00F6mt",
+            "Durch das elektronische Abspielen gespeicherter T\u00F6ne",
+            "Durch das direkte Anschlagen von Holzplatten"
+          ],
+          "CorrectAnswer": "Durch Luft, die aus einem Windkanal in die Pfeifen str\u00F6mt",
+          "Explanation": "Laut Text str\u00F6mt Luft aus dem Windkanal in die ausgew\u00E4hlten Pfeifen, wenn eine Taste gedr\u00FCckt wird, wodurch diese anfangen zu schwingen."
+        },
+        {
+          "QuestionText": "Was passiert, wenn der Spieler an den Registerkn\u00F6pfen zieht?",
+          "Options": [
+            "Die Orgel wird lauter gestimmt",
+            "Der Klangcharakter des Instruments ver\u00E4ndert sich dramatisch",
+            "Die Pedale werden blockiert",
+            "Luft str\u00F6mt schneller aus den Pfeifen"
+          ],
+          "CorrectAnswer": "Der Klangcharakter des Instruments ver\u00E4ndert sich dramatisch",
+          "Explanation": "Der Text beschreibt, dass der Spieler durch das Ziehen bestimmter Kn\u00F6pfe den Klangcharakter dramatisch ver\u00E4ndern und so andere Instrumente wie Fl\u00F6ten oder Posaunen nachahmen kann."
+        },
+        {
+          "QuestionText": "Was versteht man unter dem \u201EProspekt\u201C einer Orgel?",
+          "Options": [
+            "Ein Werbeheft f\u00FCr das n\u00E4chste Konzert",
+            "Die Tastatur f\u00FCr die F\u00FC\u00DFe",
+            "Ein spezielles Register f\u00FCr Fl\u00F6tent\u00F6ne",
+            "Die sichtbare, oft kunstvoll verzierte Vorderseite der Orgel"
+          ],
+          "CorrectAnswer": "Die sichtbare, oft kunstvoll verzierte Vorderseite der Orgel",
+          "Explanation": "Im Text steht ausdr\u00FCcklich: \u201EProspekte \u2013 so nennt man die sichtbare Vorderseite der Orgel\u201C."
         }
       ]
     }
@@ -546,15 +1129,16 @@
         "getrennt"
       ],
       "Difficulty": "Leicht",
-      "Topic": "Freundschaft"
+      "Topic": "Freundschaft",
+      "Conjugations": null
     },
     {
-      "Word": "versöhnen",
+      "Word": "vers\u00F6hnen",
       "Article": "None",
       "Plural": null,
       "WordType": "Verb",
       "DefinitionGerman": "Sich nach einem Streit wieder gut vertragen.",
-      "ExampleSentence": "Nach dem Streit haben sie sich schnell wieder versöhnt.",
+      "ExampleSentence": "Nach dem Streit haben sie sich schnell wieder vers\u00F6hnt.",
       "Synonyms": [
         "vertragen"
       ],
@@ -564,12 +1148,12 @@
       "Difficulty": "Leicht",
       "Topic": "Freundschaft",
       "Conjugations": [
-        "versöhne",
-        "versöhnst",
-        "versöhnt",
-        "versöhnen",
-        "versöhnt",
-        "versöhnen"
+        "vers\u00F6hne",
+        "vers\u00F6hnst",
+        "vers\u00F6hnt",
+        "vers\u00F6hnen",
+        "vers\u00F6hnt",
+        "vers\u00F6hnen"
       ]
     },
     {
@@ -601,7 +1185,7 @@
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "So groß, dass es kein Ende gibt.",
+      "DefinitionGerman": "So gro\u00DF, dass es kein Ende gibt.",
       "ExampleSentence": "Das Weltall scheint unendlich zu sein, weil man kein Ende finden kann.",
       "Synonyms": [
         "grenzenlos"
@@ -610,7 +1194,8 @@
         "begrenzt"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Weltraum"
+      "Topic": "Weltraum",
+      "Conjugations": null
     },
     {
       "Word": "Schwerelosigkeit",
@@ -626,23 +1211,25 @@
         "Schwerkraft"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Weltraum"
+      "Topic": "Weltraum",
+      "Conjugations": null
     },
     {
       "Word": "lebensfeindlich",
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "Eine Umgebung, in der Lebewesen nicht überleben können.",
-      "ExampleSentence": "Auf der Oberfläche der Sonne ist es viel zu heiß und damit lebensfeindlich.",
+      "DefinitionGerman": "Eine Umgebung, in der Lebewesen nicht \u00FCberleben k\u00F6nnen.",
+      "ExampleSentence": "Auf der Oberfl\u00E4che der Sonne ist es viel zu hei\u00DF und damit lebensfeindlich.",
       "Synonyms": [
-        "gefährlich"
+        "gef\u00E4hrlich"
       ],
       "Antonyms": [
         "lebensfreundlich"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Weltraum"
+      "Topic": "Weltraum",
+      "Conjugations": null
     },
     {
       "Word": "Galaxie",
@@ -650,42 +1237,44 @@
       "Plural": "Galaxien",
       "WordType": "Nomen",
       "DefinitionGerman": "Eine riesige Ansammlung von Milliarden von Sternen im Weltraum.",
-      "ExampleSentence": "Unsere Erde gehört zu einer Galaxie, die Milchstraße heißt.",
+      "ExampleSentence": "Unsere Erde geh\u00F6rt zu einer Galaxie, die Milchstra\u00DFe hei\u00DFt.",
       "Synonyms": [
         "Sternsystem"
       ],
       "Antonyms": [],
       "Difficulty": "Mittel",
-      "Topic": "Weltraum"
+      "Topic": "Weltraum",
+      "Conjugations": null
     },
     {
       "Word": "Urvater",
       "Article": "Der",
-      "Plural": "Urväter",
+      "Plural": "Urv\u00E4ter",
       "WordType": "Nomen",
-      "DefinitionGerman": "Der allererste Vorläufer oder die Urform von etwas, das sich später weiterentwickelt hat.",
+      "DefinitionGerman": "Der allererste Vorl\u00E4ufer oder die Urform von etwas, das sich sp\u00E4ter weiterentwickelt hat.",
       "ExampleSentence": "Das alte Grammophon ist der Urvater unseres modernen Musik-Streamings.",
       "Synonyms": [
-        "Vorläufer",
+        "Vorl\u00E4ufer",
         "Ahne",
         "Ursprung"
       ],
       "Antonyms": [
         "Nachfolger",
-        "Spätform"
+        "Sp\u00E4tform"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Erfindungen"
+      "Topic": "Erfindungen",
+      "Conjugations": null
     },
     {
       "Word": "Alternative",
       "Article": "Die",
       "Plural": "Alternativen",
       "WordType": "Nomen",
-      "DefinitionGerman": "Eine andere, zweite Möglichkeit, zwischen der man wählen kann.",
+      "DefinitionGerman": "Eine andere, zweite M\u00F6glichkeit, zwischen der man w\u00E4hlen kann.",
       "ExampleSentence": "Wenn das Wetter schlecht ist, ist das Hallenbad eine gute Alternative zum See.",
       "Synonyms": [
-        "Ausweichmöglichkeit",
+        "Ausweichm\u00F6glichkeit",
         "Ersatz",
         "Option"
       ],
@@ -694,19 +1283,20 @@
         "Zwang"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Erfindungen"
+      "Topic": "Erfindungen",
+      "Conjugations": null
     },
     {
       "Word": "revolutionieren",
       "Article": "None",
       "Plural": null,
       "WordType": "Verb",
-      "DefinitionGerman": "Etwas so gründlich und neu gestalten, dass sich alles völlig verändert.",
+      "DefinitionGerman": "Etwas so gr\u00FCndlich und neu gestalten, dass sich alles v\u00F6llig ver\u00E4ndert.",
       "ExampleSentence": "Das Smartphone hat die Kommunikation der Menschen revolutioniert.",
       "Synonyms": [
         "umgestalten",
         "erneuern",
-        "umwälzen"
+        "umw\u00E4lzen"
       ],
       "Antonyms": [
         "beibehalten",
@@ -728,11 +1318,11 @@
       "Article": "Der",
       "Plural": null,
       "WordType": "Nomen",
-      "DefinitionGerman": "Gemeine Witze oder unfreundliches Auslachen über jemanden oder etwas.",
-      "ExampleSentence": "Wer hinfällt, muss leider manchmal mit dem Spott der Mitschüler rechnen.",
+      "DefinitionGerman": "Gemeine Witze oder unfreundliches Auslachen \u00FCber jemanden oder etwas.",
+      "ExampleSentence": "Wer hinf\u00E4llt, muss leider manchmal mit dem Spott der Mitsch\u00FCler rechnen.",
       "Synonyms": [
         "Hohn",
-        "Spöttelei",
+        "Sp\u00F6ttelei",
         "Auslachen"
       ],
       "Antonyms": [
@@ -741,28 +1331,30 @@
         "Respekt"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Erfindungen"
+      "Topic": "Erfindungen",
+      "Conjugations": null
     },
     {
       "Word": "kurios",
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "Sehr seltsam, merkwürdig oder auf eine lustige Art ungewöhnlich.",
+      "DefinitionGerman": "Sehr seltsam, merkw\u00FCrdig oder auf eine lustige Art ungew\u00F6hnlich.",
       "ExampleSentence": "Der Zauberer trug einen kuriosen Hut, aus dem Blumen wuchsen.",
       "Synonyms": [
         "seltsam",
         "sonderbar",
-        "merkwürdig",
+        "merkw\u00FCrdig",
         "skurril"
       ],
       "Antonyms": [
-        "gewöhnlich",
+        "gew\u00F6hnlich",
         "normal",
-        "alltäglich"
+        "allt\u00E4glich"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Erfindungen"
+      "Topic": "Erfindungen",
+      "Conjugations": null
     },
     {
       "Word": "auspowern",
@@ -794,13 +1386,14 @@
       "Plural": "Studien",
       "WordType": "Nomen",
       "DefinitionGerman": "eine wissenschaftliche Untersuchung, bei der ein Thema genau erforscht wird",
-      "ExampleSentence": "Die neue Studie zeigt, dass Äpfel sehr gesund sind.",
+      "ExampleSentence": "Die neue Studie zeigt, dass \u00C4pfel sehr gesund sind.",
       "Synonyms": [
         "Untersuchung"
       ],
       "Antonyms": [],
       "Difficulty": "Mittel",
-      "Topic": "Sport"
+      "Topic": "Sport",
+      "Conjugations": null
     },
     {
       "Word": "Niederlage",
@@ -816,15 +1409,16 @@
         "Sieg"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Sport"
+      "Topic": "Sport",
+      "Conjugations": null
     },
     {
       "Word": "ausgeglichen",
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "wenn man ruhig und zufrieden ist und nicht leicht wütend wird",
-      "ExampleSentence": "Nach dem Joggen fühle ich mich immer sehr ausgeglichen.",
+      "DefinitionGerman": "wenn man ruhig und zufrieden ist und nicht leicht w\u00FCtend wird",
+      "ExampleSentence": "Nach dem Joggen f\u00FChle ich mich immer sehr ausgeglichen.",
       "Synonyms": [
         "ruhig"
       ],
@@ -832,18 +1426,19 @@
         "gestresst"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Sport"
+      "Topic": "Sport",
+      "Conjugations": null
     },
     {
       "Word": "trutzig",
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "So beschreibt man ein Bauwerk, das sehr stabil, stark und wehrhaft aussieht, als würde es jedem Angriff trotzen.",
+      "DefinitionGerman": "So beschreibt man ein Bauwerk, das sehr stabil, stark und wehrhaft aussieht, als w\u00FCrde es jedem Angriff trotzen.",
       "ExampleSentence": "Die trutzige Burg hielt dem heftigen Angriff der Feinde problemlos stand.",
       "Synonyms": [
         "wehrhaft",
-        "widerstandsfähig",
+        "widerstandsf\u00E4hig",
         "fest",
         "trotzig"
       ],
@@ -853,7 +1448,8 @@
         "instabil"
       ],
       "Difficulty": "Schwer",
-      "Topic": "Ritter und Burgen"
+      "Topic": "Ritter und Burgen",
+      "Conjugations": null
     },
     {
       "Word": "Hierarchie",
@@ -861,7 +1457,7 @@
       "Plural": "Hierarchien",
       "WordType": "Nomen",
       "DefinitionGerman": "Eine feste Rangordnung von Menschen oder Dingen, bei der manche Personen mehr Macht und Bestimmungsrecht haben als andere.",
-      "ExampleSentence": "In einer Schule gibt es eine klare Hierarchie: Die Schulleiterin steht ganz oben, gefolgt von den Lehrern und den Schülern.",
+      "ExampleSentence": "In einer Schule gibt es eine klare Hierarchie: Die Schulleiterin steht ganz oben, gefolgt von den Lehrern und den Sch\u00FClern.",
       "Synonyms": [
         "Rangordnung",
         "Struktur",
@@ -872,18 +1468,19 @@
         "Anarchie"
       ],
       "Difficulty": "Schwer",
-      "Topic": "Ritter und Burgen"
+      "Topic": "Ritter und Burgen",
+      "Conjugations": null
     },
     {
       "Word": "Tugend",
       "Article": "Die",
       "Plural": "Tugenden",
       "WordType": "Nomen",
-      "DefinitionGerman": "Eine hervorragende moralische Eigenschaft oder ein vorbildliches Verhalten eines Menschen, wie zum Beispiel Tapferkeit, Ehrlichkeit oder Höflichkeit.",
-      "ExampleSentence": "Pünktlichkeit und Fleiß gelten auch heute noch als wichtige Tugenden im Berufsleben.",
+      "DefinitionGerman": "Eine hervorragende moralische Eigenschaft oder ein vorbildliches Verhalten eines Menschen, wie zum Beispiel Tapferkeit, Ehrlichkeit oder H\u00F6flichkeit.",
+      "ExampleSentence": "P\u00FCnktlichkeit und Flei\u00DF gelten auch heute noch als wichtige Tugenden im Berufsleben.",
       "Synonyms": [
         "gute Eigenschaft",
-        "Anständigkeit",
+        "Anst\u00E4ndigkeit",
         "Wertvorstellung"
       ],
       "Antonyms": [
@@ -891,36 +1488,38 @@
         "Untugend"
       ],
       "Difficulty": "Schwer",
-      "Topic": "Ritter und Burgen"
+      "Topic": "Ritter und Burgen",
+      "Conjugations": null
     },
     {
       "Word": "entbehrungsreich",
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "Voller Verzicht und Mühen, bei denen man auf viele wichtige, angenehme oder bequeme Dinge verzichten muss.",
+      "DefinitionGerman": "Voller Verzicht und M\u00FChen, bei denen man auf viele wichtige, angenehme oder bequeme Dinge verzichten muss.",
       "ExampleSentence": "Die Forscher erlebten eine entbehrungsreiche Reise durch das ewige Eis der Antarktis.",
       "Synonyms": [
-        "mühevoll",
+        "m\u00FChevoll",
         "hart",
         "karg",
         "entbehrungsvoll"
       ],
       "Antonyms": [
-        "luxuriös",
+        "luxuri\u00F6s",
         "bequem",
         "reichhaltig"
       ],
       "Difficulty": "Schwer",
-      "Topic": "Ritter und Burgen"
+      "Topic": "Ritter und Burgen",
+      "Conjugations": null
     },
     {
       "Word": "Bergfried",
       "Article": "Der",
       "Plural": "Bergfriede",
       "WordType": "Nomen",
-      "DefinitionGerman": "Der höchste, unbewohnte Hauptturm einer mittelalterlichen Burg, der besonders stark befestigt war und im Notfall als letzter Schutzort diente.",
-      "ExampleSentence": "Als das Burgtor nachgab, zogen sich die letzten Verteidiger in den Bergfried zurück.",
+      "DefinitionGerman": "Der h\u00F6chste, unbewohnte Hauptturm einer mittelalterlichen Burg, der besonders stark befestigt war und im Notfall als letzter Schutzort diente.",
+      "ExampleSentence": "Als das Burgtor nachgab, zogen sich die letzten Verteidiger in den Bergfried zur\u00FCck.",
       "Synonyms": [
         "Wehrturm",
         "Hauptturm",
@@ -928,7 +1527,8 @@
       ],
       "Antonyms": [],
       "Difficulty": "Schwer",
-      "Topic": "Ritter und Burgen"
+      "Topic": "Ritter und Burgen",
+      "Conjugations": null
     },
     {
       "Word": "verehren",
@@ -936,7 +1536,7 @@
       "Plural": null,
       "WordType": "Verb",
       "DefinitionGerman": "Jemanden sehr bewundern und achten, manchmal auch wie einen Gott behandeln.",
-      "ExampleSentence": "Die alten Ägypter mussten ihre Pharaonen verehren.",
+      "ExampleSentence": "Die alten \u00C4gypter mussten ihre Pharaonen verehren.",
       "Synonyms": [
         "anbeten",
         "bewundern",
@@ -947,7 +1547,7 @@
         "missachten"
       ],
       "Difficulty": "Schwer",
-      "Topic": "Das alte Ägypten",
+      "Topic": "Das alte \u00C4gypten",
       "Conjugations": [
         "verehre",
         "verehrst",
@@ -958,12 +1558,12 @@
       ]
     },
     {
-      "Word": "Herzstück",
+      "Word": "Herzst\u00FCck",
       "Article": "Das",
-      "Plural": "Herzstücke",
+      "Plural": "Herzst\u00FCcke",
       "WordType": "Nomen",
       "DefinitionGerman": "Der wichtigste oder zentrale Teil von etwas.",
-      "ExampleSentence": "Der Motor ist das Herzstück eines Autos.",
+      "ExampleSentence": "Der Motor ist das Herzst\u00FCck eines Autos.",
       "Synonyms": [
         "Kern",
         "Mittelpunkt",
@@ -971,62 +1571,66 @@
       ],
       "Antonyms": [],
       "Difficulty": "Schwer",
-      "Topic": "Das alte Ägypten"
+      "Topic": "Das alte \u00C4gypten",
+      "Conjugations": null
     },
     {
       "Word": "gigantisch",
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "Unglaublich groß oder riesig.",
+      "DefinitionGerman": "Unglaublich gro\u00DF oder riesig.",
       "ExampleSentence": "Der Elefant war ein gigantisches Tier.",
       "Synonyms": [
         "riesig",
         "enorm",
-        "riesengroß"
+        "riesengro\u00DF"
       ],
       "Antonyms": [
         "winzig",
         "klein"
       ],
       "Difficulty": "Schwer",
-      "Topic": "Das alte Ägypten"
+      "Topic": "Das alte \u00C4gypten",
+      "Conjugations": null
     },
     {
       "Word": "Mumifizierung",
       "Article": "Die",
       "Plural": null,
       "WordType": "Nomen",
-      "DefinitionGerman": "Eine alte Methode, um tote Körper durch spezielle Behandlungen vor dem Verrotten zu schützen, damit sie sehr lange erhalten bleiben.",
-      "ExampleSentence": "Die Mumifizierung war sehr wichtig für die Bestattung der Pharaonen.",
+      "DefinitionGerman": "Eine alte Methode, um tote K\u00F6rper durch spezielle Behandlungen vor dem Verrotten zu sch\u00FCtzen, damit sie sehr lange erhalten bleiben.",
+      "ExampleSentence": "Die Mumifizierung war sehr wichtig f\u00FCr die Bestattung der Pharaonen.",
       "Synonyms": [
         "Einbalsamierung"
       ],
       "Antonyms": [],
       "Difficulty": "Schwer",
-      "Topic": "Das alte Ägypten"
+      "Topic": "Das alte \u00C4gypten",
+      "Conjugations": null
     },
     {
       "Word": "Hieroglyphen",
       "Article": "Die",
       "Plural": "Hieroglyphen",
       "WordType": "Nomen",
-      "DefinitionGerman": "Eine sehr alte Schrift, die aus kleinen Bildern und Zeichen besteht. Man hat sie früher zum Beispiel in Ägypten benutzt.",
-      "ExampleSentence": "An den Wänden der Gräber entdeckten die Forscher alte Hieroglyphen.",
+      "DefinitionGerman": "Eine sehr alte Schrift, die aus kleinen Bildern und Zeichen besteht. Man hat sie fr\u00FCher zum Beispiel in \u00C4gypten benutzt.",
+      "ExampleSentence": "An den W\u00E4nden der Gr\u00E4ber entdeckten die Forscher alte Hieroglyphen.",
       "Synonyms": [
         "Bilderschrift"
       ],
       "Antonyms": [],
       "Difficulty": "Schwer",
-      "Topic": "Das alte Ägypten"
+      "Topic": "Das alte \u00C4gypten",
+      "Conjugations": null
     },
     {
-      "Word": "unermüdlich",
+      "Word": "unerm\u00FCdlich",
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "Wenn man lange und fleißig arbeitet, ohne aufzugeben.",
-      "ExampleSentence": "Die fleißige Ameise suchte unermüdlich nach Futter.",
+      "DefinitionGerman": "Wenn man lange und flei\u00DFig arbeitet, ohne aufzugeben.",
+      "ExampleSentence": "Die flei\u00DFige Ameise suchte unerm\u00FCdlich nach Futter.",
       "Synonyms": [
         "ausdauernd"
       ],
@@ -1034,21 +1638,23 @@
         "faul"
       ],
       "Difficulty": "Leicht",
-      "Topic": "Tiere"
+      "Topic": "Tiere",
+      "Conjugations": null
     },
     {
-      "Word": "Bestäubung",
+      "Word": "Best\u00E4ubung",
       "Article": "Die",
-      "Plural": "Bestäubungen",
+      "Plural": "Best\u00E4ubungen",
       "WordType": "Nomen",
-      "DefinitionGerman": "Wenn Blütenstaub von einer Blume auf eine andere übertragen wird, damit daraus Früchte wachsen.",
-      "ExampleSentence": "Die Bestäubung durch Bienen ist wichtig für die Ernte.",
+      "DefinitionGerman": "Wenn Bl\u00FCtenstaub von einer Blume auf eine andere \u00FCbertragen wird, damit daraus Fr\u00FCchte wachsen.",
+      "ExampleSentence": "Die Best\u00E4ubung durch Bienen ist wichtig f\u00FCr die Ernte.",
       "Synonyms": [
         "Befruchtung"
       ],
       "Antonyms": [],
       "Difficulty": "Leicht",
-      "Topic": "Tiere"
+      "Topic": "Tiere",
+      "Conjugations": null
     },
     {
       "Word": "Nachwuchs",
@@ -1056,30 +1662,32 @@
       "Plural": null,
       "WordType": "Nomen",
       "DefinitionGerman": "Die Kinder oder Babys von Tieren oder Menschen.",
-      "ExampleSentence": "Die Katzenmutter kümmert sich liebevoll um ihren Nachwuchs.",
+      "ExampleSentence": "Die Katzenmutter k\u00FCmmert sich liebevoll um ihren Nachwuchs.",
       "Synonyms": [
         "Kinder",
         "Babys"
       ],
       "Antonyms": [],
       "Difficulty": "Leicht",
-      "Topic": "Tiere"
+      "Topic": "Tiere",
+      "Conjugations": null
     },
     {
       "Word": "Verantwortung",
       "Article": "Die",
       "Plural": "Verantwortungen",
       "WordType": "Nomen",
-      "DefinitionGerman": "Die Pflicht, sich um etwas zu kümmern und dafür zu sorgen, dass alles gut geht.",
-      "ExampleSentence": "Ich übernehme die Verantwortung für meine Hausaufgaben.",
+      "DefinitionGerman": "Die Pflicht, sich um etwas zu k\u00FCmmern und daf\u00FCr zu sorgen, dass alles gut geht.",
+      "ExampleSentence": "Ich \u00FCbernehme die Verantwortung f\u00FCr meine Hausaufgaben.",
       "Synonyms": [
         "Pflicht"
       ],
       "Antonyms": [
-        "Gleichgültigkeit"
+        "Gleichg\u00FCltigkeit"
       ],
       "Difficulty": "Leicht",
-      "Topic": "Haustiere"
+      "Topic": "Haustiere",
+      "Conjugations": null
     },
     {
       "Word": "eigenwillig",
@@ -1087,16 +1695,17 @@
       "Plural": null,
       "WordType": "Adjektiv",
       "DefinitionGerman": "Wenn jemand oder etwas einen eigenen Kopf hat und nicht immer macht, was andere wollen.",
-      "ExampleSentence": "Meine Katze ist sehr eigenwillig und schläft nur, wo sie möchte.",
+      "ExampleSentence": "Meine Katze ist sehr eigenwillig und schl\u00E4ft nur, wo sie m\u00F6chte.",
       "Synonyms": [
         "stur",
-        "selbstständig"
+        "selbstst\u00E4ndig"
       ],
       "Antonyms": [
         "folgsam"
       ],
       "Difficulty": "Leicht",
-      "Topic": "Haustiere"
+      "Topic": "Haustiere",
+      "Conjugations": null
     },
     {
       "Word": "Begleiter",
@@ -1106,41 +1715,43 @@
       "DefinitionGerman": "Jemand oder ein Tier, der oder das immer bei einem ist.",
       "ExampleSentence": "Mein Hund ist mein treuer Begleiter auf dem Schulweg.",
       "Synonyms": [
-        "Gefährte"
+        "Gef\u00E4hrte"
       ],
       "Antonyms": [
-        "Einzelgänger"
+        "Einzelg\u00E4nger"
       ],
       "Difficulty": "Leicht",
-      "Topic": "Haustiere"
+      "Topic": "Haustiere",
+      "Conjugations": null
     },
     {
-      "Word": "Ökosystem",
+      "Word": "\u00D6kosystem",
       "Article": "Das",
-      "Plural": "Ökosysteme",
+      "Plural": "\u00D6kosysteme",
       "WordType": "Nomen",
       "DefinitionGerman": "Ein Lebensbereich, in dem Tiere, Pflanzen und die Umwelt zusammenarbeiten.",
-      "ExampleSentence": "Der Wald ist ein wichtiges Ökosystem für viele Tiere.",
+      "ExampleSentence": "Der Wald ist ein wichtiges \u00D6kosystem f\u00FCr viele Tiere.",
       "Synonyms": [
         "Lebensgemeinschaft"
       ],
       "Antonyms": [],
       "Difficulty": "Mittel",
-      "Topic": "Natur und Umwelt"
+      "Topic": "Natur und Umwelt",
+      "Conjugations": null
     },
     {
       "Word": "bewahren",
       "Article": "None",
       "Plural": null,
       "WordType": "Verb",
-      "DefinitionGerman": "Etwas schützen, damit es nicht kaputtgeht oder verloren geht.",
-      "ExampleSentence": "Wir müssen die Natur für die Zukunft bewahren.",
+      "DefinitionGerman": "Etwas sch\u00FCtzen, damit es nicht kaputtgeht oder verloren geht.",
+      "ExampleSentence": "Wir m\u00FCssen die Natur f\u00FCr die Zukunft bewahren.",
       "Synonyms": [
-        "beschützen",
+        "besch\u00FCtzen",
         "erhalten"
       ],
       "Antonyms": [
-        "zerstören",
+        "zerst\u00F6ren",
         "verlieren"
       ],
       "Difficulty": "Mittel",
@@ -1159,14 +1770,15 @@
       "Article": "Die",
       "Plural": "Generationen",
       "WordType": "Nomen",
-      "DefinitionGerman": "Alle Menschen, die ungefähr zur gleichen Zeit geboren wurden.",
-      "ExampleSentence": "Auch die nächste Generation soll im Wald spielen können.",
+      "DefinitionGerman": "Alle Menschen, die ungef\u00E4hr zur gleichen Zeit geboren wurden.",
+      "ExampleSentence": "Auch die n\u00E4chste Generation soll im Wald spielen k\u00F6nnen.",
       "Synonyms": [
         "Altersgruppe"
       ],
       "Antonyms": [],
       "Difficulty": "Mittel",
-      "Topic": "Natur und Umwelt"
+      "Topic": "Natur und Umwelt",
+      "Conjugations": null
     },
     {
       "Word": "achtlos",
@@ -1174,38 +1786,39 @@
       "Plural": null,
       "WordType": "Adjektiv",
       "DefinitionGerman": "Wenn man nicht aufpasst oder anderen keine Beachtung schenkt.",
-      "ExampleSentence": "Das achtlose Wegwerfen von Müll ist sehr schädlich.",
+      "ExampleSentence": "Das achtlose Wegwerfen von M\u00FCll ist sehr sch\u00E4dlich.",
       "Synonyms": [
         "unvorsichtig",
-        "nachlässig"
+        "nachl\u00E4ssig"
       ],
       "Antonyms": [
         "aufmerksam",
-        "sorgfältig"
+        "sorgf\u00E4ltig"
       ],
       "Difficulty": "Mittel",
-      "Topic": "Natur und Umwelt"
+      "Topic": "Natur und Umwelt",
+      "Conjugations": null
     },
     {
-      "Word": "verfärben",
+      "Word": "verf\u00E4rben",
       "Article": "None",
       "Plural": null,
       "WordType": "Verb",
       "DefinitionGerman": "Wenn etwas eine andere Farbe bekommt.",
-      "ExampleSentence": "Im Herbst verfärben sich die grünen Blätter braun.",
+      "ExampleSentence": "Im Herbst verf\u00E4rben sich die gr\u00FCnen Bl\u00E4tter braun.",
       "Synonyms": [
-        "umfärben"
+        "umf\u00E4rben"
       ],
       "Antonyms": [],
       "Difficulty": "Leicht",
       "Topic": "Jahreszeiten",
       "Conjugations": [
-        "verfärbe",
-        "verfärbst",
-        "verfärbt",
-        "verfärben",
-        "verfärbt",
-        "verfärben"
+        "verf\u00E4rbe",
+        "verf\u00E4rbst",
+        "verf\u00E4rbt",
+        "verf\u00E4rben",
+        "verf\u00E4rbt",
+        "verf\u00E4rben"
       ]
     },
     {
@@ -1213,7 +1826,7 @@
       "Article": "None",
       "Plural": null,
       "WordType": "Adjektiv",
-      "DefinitionGerman": "Wenn etwas so aussieht, als wäre es durch Magie entstanden oder sehr schön.",
+      "DefinitionGerman": "Wenn etwas so aussieht, als w\u00E4re es durch Magie entstanden oder sehr sch\u00F6n.",
       "ExampleSentence": "Der verschneite Wald wirkt wie verzaubert.",
       "Synonyms": [
         "magisch"
@@ -1222,21 +1835,807 @@
         "realistisch"
       ],
       "Difficulty": "Leicht",
-      "Topic": "Jahreszeiten"
+      "Topic": "Jahreszeiten",
+      "Conjugations": null
     },
     {
       "Word": "Winterschlaf",
       "Article": "Der",
       "Plural": "Winterschlafe",
       "WordType": "Nomen",
-      "DefinitionGerman": "Ein langer Schlaf, den manche Tiere oder Pflanzen über den Winter halten.",
-      "ExampleSentence": "Der Igel hält im Winter einen langen Winterschlaf.",
+      "DefinitionGerman": "Ein langer Schlaf, den manche Tiere oder Pflanzen \u00FCber den Winter halten.",
+      "ExampleSentence": "Der Igel h\u00E4lt im Winter einen langen Winterschlaf.",
       "Synonyms": [
         "Winterruhe"
       ],
       "Antonyms": [],
       "Difficulty": "Leicht",
-      "Topic": "Jahreszeiten"
+      "Topic": "Jahreszeiten",
+      "Conjugations": null
+    },
+    {
+      "Word": "Savanne",
+      "Article": "Die",
+      "Plural": "Savannen",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Ein gro\u00DFes, warmes Grasland in Afrika mit nur wenigen B\u00E4umen.",
+      "ExampleSentence": "In der Savanne leben viele wilde Tiere.",
+      "Synonyms": [
+        "Grasland"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Mittel",
+      "Topic": "Wilde Tiere Afrikas",
+      "Conjugations": []
+    },
+    {
+      "Word": "Lands\u00E4ugetier",
+      "Article": "Das",
+      "Plural": "Lands\u00E4ugetiere",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Ein Tier, das auf dem Land lebt, Junge lebend zur Welt bringt und diese mit Milch s\u00E4ugt.",
+      "ExampleSentence": "Der Elefant ist ein gro\u00DFes Lands\u00E4ugetier.",
+      "Synonyms": [
+        "Tier"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Mittel",
+      "Topic": "Wilde Tiere Afrikas",
+      "Conjugations": []
+    },
+    {
+      "Word": "beobachten",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Etwas oder jemanden genau und aufmerksam anschauen.",
+      "ExampleSentence": "Wir beobachten die Tiere mit einem Fernglas.",
+      "Synonyms": [
+        "anschauen",
+        "betrachten"
+      ],
+      "Antonyms": [
+        "\u00FCbersehen"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Wilde Tiere Afrikas",
+      "Conjugations": []
+    },
+    {
+      "Word": "kommunizieren",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Informationen, Gedanken oder Gef\u00FChle miteinander austauschen, zum Beispiel durch Sprechen, Zeichen, Gesten oder Laute.",
+      "ExampleSentence": "Delfine kommunizieren unter Wasser mithilfe von Klicklauten miteinander.",
+      "Synonyms": [
+        "sich verst\u00E4ndigen",
+        "austauschen",
+        "sprechen"
+      ],
+      "Antonyms": [
+        "schweigen",
+        "ignorieren"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Der Ozean und seine Tiere",
+      "Conjugations": []
+    },
+    {
+      "Word": "Finsternis",
+      "Article": "Die",
+      "Plural": "Finsternisse",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Eine sehr gro\u00DFe, fast vollst\u00E4ndige Dunkelheit, in der man \u00FCberhaupt nichts mehr sehen kann.",
+      "ExampleSentence": "In der Tiefsee herrscht ewige Finsternis, weil kein Sonnenlicht dorthin gelangt.",
+      "Synonyms": [
+        "Dunkelheit",
+        "D\u00FCsterkeit",
+        "Schatten"
+      ],
+      "Antonyms": [
+        "Helligkeit",
+        "Licht"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Der Ozean und seine Tiere",
+      "Conjugations": []
+    },
+    {
+      "Word": "paradoxerweise",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adverb",
+      "DefinitionGerman": "Auf eine Art und Weise, die widerspr\u00FCchlich ist oder ganz anders, als man es eigentlich erwarten w\u00FCrde.",
+      "ExampleSentence": "Obwohl er Angst vor Wasser hat, f\u00E4hrt er paradoxerweise gerne mit dem Boot.",
+      "Synonyms": [
+        "widerspr\u00FCchlicherweise",
+        "seltsamerweise",
+        "unerwartet"
+      ],
+      "Antonyms": [
+        "erwartungsgem\u00E4\u00DF",
+        "logischerweise"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Der Ozean und seine Tiere",
+      "Conjugations": []
+    },
+    {
+      "Word": "marin",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Alles, was das Meer, den Ozean oder die darin lebenden Tiere und Pflanzen betrifft.",
+      "ExampleSentence": "Die Erforschung mariner Lebensr\u00E4ume ist f\u00FCr Wissenschaftler sehr spannend.",
+      "Synonyms": [
+        "maritim",
+        "meerisch",
+        "ozeanisch"
+      ],
+      "Antonyms": [
+        "terrestrisch",
+        "festl\u00E4ndisch"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Der Ozean und seine Tiere",
+      "Conjugations": []
+    },
+    {
+      "Word": "Leidenschaft",
+      "Article": "Die",
+      "Plural": "Leidenschaften",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Ein sehr starkes Gef\u00FChl f\u00FCr etwas, das man besonders gerne macht oder liebt. Man ist mit dem ganzen Herzen dabei.",
+      "ExampleSentence": "Meine gr\u00F6\u00DFte Leidenschaft ist es, Fu\u00DFball zu spielen.",
+      "Synonyms": [
+        "Begeisterung",
+        "Hingabe"
+      ],
+      "Antonyms": [
+        "Gleichg\u00FCltigkeit",
+        "Abneigung"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Fu\u00DFball",
+      "Conjugations": []
+    },
+    {
+      "Word": "entscheidend",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Sehr wichtig, weil es den Ausgang oder das Ergebnis einer Sache stark beeinflusst. Es macht einen gro\u00DFen Unterschied.",
+      "ExampleSentence": "Der letzte Torschuss war entscheidend f\u00FCr den Sieg.",
+      "Synonyms": [
+        "wichtig",
+        "ausschlaggebend"
+      ],
+      "Antonyms": [
+        "unwichtig",
+        "bedeutungslos"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Fu\u00DFball",
+      "Conjugations": []
+    },
+    {
+      "Word": "Gegentor",
+      "Article": "Das",
+      "Plural": "Gegentore",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Ein Tor, das die gegnerische Mannschaft gegen das eigene Team schie\u00DFt.",
+      "ExampleSentence": "Der Torwart konnte das Gegentor leider nicht verhindern.",
+      "Synonyms": [],
+      "Antonyms": [
+        "Tor"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Fu\u00DFball",
+      "Conjugations": []
+    },
+    {
+      "Word": "zust\u00E4ndig",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Wenn man die Verantwortung oder die Aufgabe f\u00FCr etwas hat.",
+      "ExampleSentence": "Ich bin daf\u00FCr zust\u00E4ndig, die Blumen zu gie\u00DFen.",
+      "Synonyms": [
+        "verantwortlich"
+      ],
+      "Antonyms": [
+        "unzust\u00E4ndig"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Fu\u00DFball",
+      "Conjugations": []
+    },
+    {
+      "Word": "jubeln",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Laut und fr\u00F6hlich rufen oder sich freuen, um seine Begeisterung oder seinen Sieg zu zeigen.",
+      "ExampleSentence": "Als das Tor fiel, haben alle Fans gejubelt.",
+      "Synonyms": [
+        "sich freuen",
+        "anfeuern"
+      ],
+      "Antonyms": [
+        "trauern",
+        "weinen"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Fu\u00DFball",
+      "Conjugations": []
+    },
+    {
+      "Word": "mitfiebern",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Wenn man bei einem spannenden Ereignis, wie einem Spiel, sehr aufgeregt ist und sich w\u00FCnscht, dass das eigene Team oder der eigene Spieler gewinnt. Man f\u00FChlt mit.",
+      "ExampleSentence": "Ich fiebere immer mit, wenn meine Lieblingsmannschaft spielt.",
+      "Synonyms": [
+        "mitf\u00FChlen",
+        "gespannt sein"
+      ],
+      "Antonyms": [
+        "gleichg\u00FCltig bleiben"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Fu\u00DFball",
+      "Conjugations": []
+    },
+    {
+      "Word": "Metropole",
+      "Article": "Die",
+      "Plural": "Metropolen",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Eine sehr gro\u00DFe, wichtige Stadt, in der viel passiert.",
+      "ExampleSentence": "Berlin ist eine gro\u00DFe Metropole mit vielen Einwohnern.",
+      "Synonyms": [
+        "Gro\u00DFstadt"
+      ],
+      "Antonyms": [
+        "Dorf"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Deutschland",
+      "Conjugations": []
+    },
+    {
+      "Word": "pulsierend",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Wenn an einem Ort sehr viel los ist und man das Gef\u00FChl hat, das Leben flie\u00DFt dort schnell.",
+      "ExampleSentence": "In der Stadtmitte herrscht ein pulsierendes Leben.",
+      "Synonyms": [
+        "lebhaft"
+      ],
+      "Antonyms": [
+        "ruhig"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Deutschland",
+      "Conjugations": []
+    },
+    {
+      "Word": "erkunden",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Sich etwas genau anschauen, um es besser kennenzulernen.",
+      "ExampleSentence": "Wir wollen die alte Burg erkunden.",
+      "Synonyms": [
+        "erforschen"
+      ],
+      "Antonyms": [
+        "ignorieren"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Deutschland",
+      "Conjugations": []
+    },
+    {
+      "Word": "Facetten",
+      "Article": "Die",
+      "Plural": "Facetten",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Die verschiedenen Seiten oder Eigenschaften von etwas.",
+      "ExampleSentence": "Das Land zeigt viele verschiedene Facetten.",
+      "Synonyms": [
+        "Seiten"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Mittel",
+      "Topic": "Deutschland",
+      "Conjugations": []
+    },
+    {
+      "Word": "wimmeln",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Wenn es von etwas \u0027wimmelt\u0027, dann gibt es an diesem Ort eine sehr gro\u00DFe Menge davon, die sich wild durcheinanderbewegt.",
+      "ExampleSentence": "Auf dem bunten Jahrmarkt wimmelt es von fr\u00F6hlichen Menschen.",
+      "Synonyms": [
+        "krabbeln",
+        "wuseln",
+        "\u00FCberquellen"
+      ],
+      "Antonyms": [
+        "leer sein",
+        "fehlen"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Ber\u00FChmte M\u00E4rchen",
+      "Conjugations": []
+    },
+    {
+      "Word": "triumphieren",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Einen gro\u00DFen Sieg erringen, einen Erfolg feiern oder die Oberhand \u00FCber jemanden gewinnen.",
+      "ExampleSentence": "Nach einem anstrengenden Spiel triumphierte unsere Mannschaft im Finale.",
+      "Synonyms": [
+        "siegen",
+        "gewinnen",
+        "oberhandbehalten"
+      ],
+      "Antonyms": [
+        "verlieren",
+        "unterliegen"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Ber\u00FChmte M\u00E4rchen",
+      "Conjugations": []
+    },
+    {
+      "Word": "Leichtgl\u00E4ubigkeit",
+      "Article": "Die",
+      "Plural": null,
+      "WordType": "Nomen",
+      "DefinitionGerman": "Die Eigenschaft einer Person, anderen Menschen viel zu schnell und ohne Nachzudenken alles zu glauben, selbst wenn es geflunkert ist.",
+      "ExampleSentence": "Seine Leichtgl\u00E4ubigkeit f\u00FChrte dazu, dass er den Trick des Zauberers sofort glaubte.",
+      "Synonyms": [
+        "Naivit\u00E4t",
+        "Gutgl\u00E4ubigkeit",
+        "Vertrauensseligkeit"
+      ],
+      "Antonyms": [
+        "Misstrauen",
+        "Skepsis",
+        "Vorsicht"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Ber\u00FChmte M\u00E4rchen",
+      "Conjugations": []
+    },
+    {
+      "Word": "zeitlos",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Etwas, das immer modern, sch\u00F6n oder aktuell bleibt, v\u00F6llig unabh\u00E4ngig davon, wie viel Zeit vergeht.",
+      "ExampleSentence": "Die Musik von Ludwig van Beethoven ist einfach zeitlos und begeistert Jung und Alt.",
+      "Synonyms": [
+        "unverg\u00E4nglich",
+        "klassisch",
+        "ewig"
+      ],
+      "Antonyms": [
+        "altmodisch",
+        "verg\u00E4nglich",
+        "zeitgem\u00E4\u00DF"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Ber\u00FChmte M\u00E4rchen",
+      "Conjugations": []
+    },
+    {
+      "Word": "programmieren",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Einem Computer oder einer Maschine Schritt f\u00FCr Schritt beibringen, was sie tun soll.",
+      "ExampleSentence": "Ich m\u00F6chte lernen, wie man einen kleinen Computer programmiert.",
+      "Synonyms": [
+        "einstellen"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Leicht",
+      "Topic": "Roboter und Technik",
+      "Conjugations": []
+    },
+    {
+      "Word": "komplex",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Wenn etwas sehr schwierig ist und aus vielen verschiedenen Teilen besteht.",
+      "ExampleSentence": "Das Mathe-R\u00E4tsel ist sehr komplex, deshalb brauche ich Zeit.",
+      "Synonyms": [
+        "schwierig",
+        "kompliziert"
+      ],
+      "Antonyms": [
+        "einfach"
+      ],
+      "Difficulty": "Leicht",
+      "Topic": "Roboter und Technik",
+      "Conjugations": []
+    },
+    {
+      "Word": "Anweisung",
+      "Article": "Die",
+      "Plural": "Anweisungen",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Eine genaue Erkl\u00E4rung, wie man etwas machen soll.",
+      "ExampleSentence": "Ohne die Anweisung meines Lehrers wusste ich nicht, was ich tun sollte.",
+      "Synonyms": [
+        "Befehl",
+        "Vorgabe"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Leicht",
+      "Topic": "Roboter und Technik",
+      "Conjugations": []
+    },
+    {
+      "Word": "erforschen",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Etwas ganz genau untersuchen, um neue Dinge und Geheimnisse dar\u00FCber herauszufinden.",
+      "ExampleSentence": "Wissenschaftler erforschen die Tiefsee mit speziellen U-Booten.",
+      "Synonyms": [
+        "untersuchen",
+        "analysieren",
+        "auskundschaften"
+      ],
+      "Antonyms": [
+        "ignorieren",
+        "vernachl\u00E4ssigen"
+      ],
+      "Difficulty": "Leicht",
+      "Topic": "Die Planeten",
+      "Conjugations": []
+    },
+    {
+      "Word": "einzigartig",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "So besonders, dass es nichts Vergleichbares auf der Welt gibt; nur ein einziges Mal vorhanden.",
+      "ExampleSentence": "Jeder Schneekristall hat eine einzigartige Form.",
+      "Synonyms": [
+        "besonders",
+        "einmalig",
+        "unvergleichlich"
+      ],
+      "Antonyms": [
+        "gew\u00F6hnlich",
+        "allt\u00E4glich",
+        "normal"
+      ],
+      "Difficulty": "Leicht",
+      "Topic": "Die Planeten",
+      "Conjugations": []
+    },
+    {
+      "Word": "kosmisch",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Alles, was den Weltraum (den Kosmos) oder das Universum betrifft.",
+      "ExampleSentence": "Die Raumsonde sammelt kosmischen Staub im All.",
+      "Synonyms": [
+        "galaktisch",
+        "universell",
+        "weltraumartig"
+      ],
+      "Antonyms": [
+        "irdisch"
+      ],
+      "Difficulty": "Leicht",
+      "Topic": "Die Planeten",
+      "Conjugations": []
+    },
+    {
+      "Word": "faszinierend",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Extrem spannend, fesselnd oder anziehend, sodass man gerne hinschaut oder mehr dar\u00FCber wissen m\u00F6chte.",
+      "ExampleSentence": "Das neue Buch \u00FCber Dinosaurier ist wirklich faszinierend.",
+      "Synonyms": [
+        "spannend",
+        "fesselnd",
+        "beeindruckend",
+        "interessant"
+      ],
+      "Antonyms": [
+        "langweilig",
+        "uninteressant",
+        "\u00F6de"
+      ],
+      "Difficulty": "Leicht",
+      "Topic": "Die Planeten",
+      "Conjugations": []
+    },
+    {
+      "Word": "Arch\u00E4ologe",
+      "Article": "Der",
+      "Plural": "Arch\u00E4ologen",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Ein Mensch, der alte Dinge aus der Erde ausgr\u00E4bt, um zu lernen, wie Menschen fr\u00FCher gelebt haben.",
+      "ExampleSentence": "Der Arch\u00E4ologe fand eine alte M\u00FCnze im Boden.",
+      "Synonyms": [
+        "Ausgr\u00E4ber"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Schwer",
+      "Topic": "Meine Familie",
+      "Conjugations": []
+    },
+    {
+      "Word": "exzentrisch",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Wenn jemand anders ist als die meisten Leute oder sich sehr ungew\u00F6hnlich verh\u00E4lt.",
+      "ExampleSentence": "Er tr\u00E4gt immer einen bunten Hut, das ist ziemlich exzentrisch.",
+      "Synonyms": [
+        "au\u00DFergew\u00F6hnlich",
+        "seltsam"
+      ],
+      "Antonyms": [
+        "normal",
+        "gew\u00F6hnlich"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Meine Familie",
+      "Conjugations": []
+    },
+    {
+      "Word": "lauschen",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Sehr aufmerksam und leise zuh\u00F6ren.",
+      "ExampleSentence": "Wir lauschen gespannt dem Regen auf dem Dach.",
+      "Synonyms": [
+        "zuh\u00F6ren"
+      ],
+      "Antonyms": [
+        "\u00FCberh\u00F6ren"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Meine Familie",
+      "Conjugations": []
+    },
+    {
+      "Word": "existentiell",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Etwas, das das Leben oder das Dasein an sich betrifft.",
+      "ExampleSentence": "Die Frage nach dem Sinn des Lebens ist ein existentielles Thema.",
+      "Synonyms": [
+        "lebenswichtig",
+        "grundlegend"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Schwer",
+      "Topic": "Meine Familie",
+      "Conjugations": []
+    },
+    {
+      "Word": "Botaniker",
+      "Article": "Der",
+      "Plural": "die Botaniker",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Ein Wissenschaftler, der sich intensiv mit Pflanzen, ihrem Wachstum und ihrer Struktur besch\u00E4ftigt.",
+      "ExampleSentence": "Der Botaniker entdeckte im Urwald eine neue Orchideenart.",
+      "Synonyms": [
+        "Pflanzenkundler",
+        "Pflanzenwissenschaftler"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Mittel",
+      "Topic": "Obst und Gem\u00FCse",
+      "Conjugations": []
+    },
+    {
+      "Word": "entstehen",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Wenn etwas Neues beginnt, sich entwickelt oder erschaffen wird.",
+      "ExampleSentence": "Aus einer kleinen Raupe entsteht nach einiger Zeit ein wundersch\u00F6ner Schmetterling.",
+      "Synonyms": [
+        "sich bilden",
+        "erwachsen",
+        "hervorgehen"
+      ],
+      "Antonyms": [
+        "vergehen",
+        "verschwinden"
+      ],
+      "Difficulty": "Mittel",
+      "Topic": "Obst und Gem\u00FCse",
+      "Conjugations": []
+    },
+    {
+      "Word": "kulinarisch",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Alles, was mit der K\u00FCche, dem Kochen und dem guten Essen zu tun hat.",
+      "ExampleSentence": "Der Urlaub in Italien war f\u00FCr uns eine kulinarische Entdeckungsreise.",
+      "Synonyms": [
+        "geschmacklich",
+        "gastronomisch"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Mittel",
+      "Topic": "Obst und Gem\u00FCse",
+      "Conjugations": []
+    },
+    {
+      "Word": "zerkl\u00FCftet",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Etwas, das tiefe Risse oder Spalten hat, meistens \u00FCber Gestein oder Berge gesagt.",
+      "ExampleSentence": "Der Weg durch das zerkl\u00FCftete Gebirge ist sehr schwierig.",
+      "Synonyms": [
+        "felsig",
+        "zerrissen"
+      ],
+      "Antonyms": [
+        "eben",
+        "glatt"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Piraten und ihre Sch\u00E4tze",
+      "Conjugations": []
+    },
+    {
+      "Word": "deponieren",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Etwas an einem bestimmten Ort sicher ablegen oder aufbewahren.",
+      "ExampleSentence": "Du kannst dein Fahrrad sicher im Schuppen deponieren.",
+      "Synonyms": [
+        "abstellen",
+        "hinterlegen"
+      ],
+      "Antonyms": [
+        "entnehmen",
+        "mitnehmen"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Piraten und ihre Sch\u00E4tze",
+      "Conjugations": []
+    },
+    {
+      "Word": "perfide",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Besonders hinterlistig, gemein oder schwer zu durchschauen.",
+      "ExampleSentence": "Der R\u00E4uber hatte einen perfiden Plan, um alle zu t\u00E4uschen.",
+      "Synonyms": [
+        "hinterlistig",
+        "gemein"
+      ],
+      "Antonyms": [
+        "ehrlich",
+        "offen"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Piraten und ihre Sch\u00E4tze",
+      "Conjugations": []
+    },
+    {
+      "Word": "kryptisch",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Sehr geheimnisvoll und schwer zu verstehen.",
+      "ExampleSentence": "Er schrieb eine kryptische Nachricht, die niemand entschl\u00FCsseln konnte.",
+      "Synonyms": [
+        "r\u00E4tselhaft",
+        "geheimnisvoll"
+      ],
+      "Antonyms": [
+        "deutlich",
+        "klar"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Piraten und ihre Sch\u00E4tze",
+      "Conjugations": []
+    },
+    {
+      "Word": "monumental",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Adjektiv",
+      "DefinitionGerman": "Riesengro\u00DF, sehr eindrucksvoll oder gewaltig in seiner Wirkung.",
+      "ExampleSentence": "Die Pyramiden in \u00C4gypten sind monumentale Bauwerke aus alter Zeit.",
+      "Synonyms": [
+        "gewaltig",
+        "riesig",
+        "imposant"
+      ],
+      "Antonyms": [
+        "winzig",
+        "unbedeutend",
+        "klein"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Musikinstrumente",
+      "Conjugations": []
+    },
+    {
+      "Word": "imitieren",
+      "Article": "None",
+      "Plural": null,
+      "WordType": "Verb",
+      "DefinitionGerman": "Etwas oder jemanden nachmachen, nachahmen oder kopieren.",
+      "ExampleSentence": "Manche V\u00F6gel k\u00F6nnen die Stimmen von anderen Tieren t\u00E4uschend echt imitieren.",
+      "Synonyms": [
+        "nachahmen",
+        "kopieren",
+        "nachmachen"
+      ],
+      "Antonyms": [
+        "erfinden",
+        "kreieren"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Musikinstrumente",
+      "Conjugations": []
+    },
+    {
+      "Word": "Akustik",
+      "Article": "Die",
+      "Plural": "Akustiken",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Die Lehre vom Schall und wie gut T\u00F6ne und Ger\u00E4usche in einem bestimmten Raum klingen.",
+      "ExampleSentence": "In der alten Kirche ist die Akustik so gut, dass man jedes Fl\u00FCstern h\u00F6ren kann.",
+      "Synonyms": [
+        "Klangwirkung",
+        "Schallverh\u00E4ltnisse"
+      ],
+      "Antonyms": [],
+      "Difficulty": "Schwer",
+      "Topic": "Musikinstrumente",
+      "Conjugations": []
+    },
+    {
+      "Word": "Prospekt",
+      "Article": "Der",
+      "Plural": "Prospekte",
+      "WordType": "Nomen",
+      "DefinitionGerman": "Die \u00E4u\u00DFere, f\u00FCr den Betrachter sichtbare Vorderseite einer Orgel mit ihren kunstvoll angeordneten Pfeifen.",
+      "ExampleSentence": "Der pr\u00E4chtige Prospekt der Schlossorgel war mit echtem Gold verziert.",
+      "Synonyms": [
+        "Vorderseite",
+        "Schaufassade"
+      ],
+      "Antonyms": [
+        "R\u00FCckseite"
+      ],
+      "Difficulty": "Schwer",
+      "Topic": "Musikinstrumente",
+      "Conjugations": []
     }
   ]
 }
