@@ -14,7 +14,18 @@
     } @else if (!passages().length) {
       <p class="muted center empty">Noch keine Texte vorhanden. 🦊</p>
     } @else {
-      @for (group of groupedPassages(); track group.name) {
+      <div class="cat-chips">
+        <button class="cat-chip" [class.active]="selectedCategory() === null" (click)="selectCategory(null)">
+          Alle <span class="cat-num">{{ passages().length }}</span>
+        </button>
+        @for (c of categories(); track c.name) {
+          <button class="cat-chip" [class.active]="selectedCategory() === c.name" (click)="selectCategory(c.name)">
+            {{ c.icon }} {{ c.name }} <span class="cat-num">{{ c.count }}</span>
+          </button>
+        }
+      </div>
+
+      @for (group of displayedGroups(); track group.name) {
         <section class="topic-group">
           <h2 class="topic-heading">{{ group.icon }} {{ group.name }}
             <span class="topic-count">{{ group.items.length }}</span>

@@ -49,6 +49,9 @@ export class Leseverstaendnis implements OnInit {
 
   readCount = computed(() => this.passages().filter(p => this.readState.isRead(p.id)).length);
 
+  // Ausgewählte Kategorie (null = alle anzeigen).
+  selectedCategory = signal<string | null>(null);
+
   // Nach Kategorie gruppierte Kacheln
   groupedPassages = computed(() => {
     const groups = new Map<string, { icon: string; items: ReadingPassageSummary[] }>();
@@ -60,6 +63,20 @@ export class Leseverstaendnis implements OnInit {
     return Array.from(groups, ([name, g]) => ({ name, icon: g.icon, items: g.items }))
       .sort((a, b) => a.name.localeCompare(b.name));
   });
+
+  // Kategorie-Buttons (Name, Icon, Anzahl).
+  categories = computed(() =>
+    this.groupedPassages().map(g => ({ name: g.name, icon: g.icon, count: g.items.length })));
+
+  // Angezeigte Gruppen je nach ausgewählter Kategorie.
+  displayedGroups = computed(() => {
+    const sel = this.selectedCategory();
+    return sel ? this.groupedPassages().filter(g => g.name === sel) : this.groupedPassages();
+  });
+
+  selectCategory(name: string | null): void {
+    this.selectedCategory.set(name);
+  }
 
   // Text in Tokens zerlegt; schwierige Wörter sind markiert.
   textTokens = computed<TextToken[]>(() => {
