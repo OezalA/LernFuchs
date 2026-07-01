@@ -1,5 +1,10 @@
 # LernFuchs 🦊
 
+[![CI](https://github.com/OezalA/LernFuchs/actions/workflows/ci.yml/badge.svg)](https://github.com/OezalA/LernFuchs/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-22-DD0031?logo=angular&logoColor=white)
+
 A small web application to help a 5th-grade Gymnasium student improve her German
 **vocabulary (Wortschatz)** and **reading comprehension (Leseverständnis)**.
 
@@ -25,20 +30,44 @@ afterwards without repeated API calls.
 
 ---
 
+## Architecture
+
+```
+┌──────────────────────┐        HTTP/JSON        ┌───────────────────────────┐
+│   Angular 22 (SPA)    │  ───────────────────▶   │   ASP.NET Core Web API     │
+│  standalone + signals │   /api  (dev: proxy)    │   Controllers → Services   │
+│  Wortschatz · Lesen   │  ◀───────────────────   │   EF Core (SQLite)         │
+└──────────────────────┘                         └─────────────┬─────────────┘
+                                                               │ generate content
+                                                               ▼
+                                                   ┌───────────────────────────┐
+                                                   │   Google Gemini REST API   │
+                                                   │   (content generation)     │
+                                                   └───────────────────────────┘
+```
+
+Content is generated **once** by Gemini and then persisted in SQLite, so day-to-day
+use needs no further API calls. The content-generation layer sits behind the
+`IContentGenerationService` interface, so the AI provider can be swapped without
+touching controllers.
+
+---
+
 ## Project structure
 
 ```
 LernFuchs/
 ├── backend/
 │   ├── LernFuchs.slnx
-│   └── LernFuchs.Api/
-│       ├── Controllers/      # Vocabulary, Reading REST endpoints
-│       ├── Data/             # EF Core DbContext
-│       ├── Dtos/             # Request/response records
-│       ├── Migrations/       # EF Core schema migrations
-│       ├── Models/           # Domain entities + enums
-│       ├── Services/         # Gemini content-generation service
-│       └── Program.cs        # App startup (DB, CORS, Scalar, DI)
+│   ├── LernFuchs.Api/
+│   │   ├── Controllers/      # Vocabulary, Reading, Stats REST endpoints
+│   │   ├── Data/             # EF Core DbContext
+│   │   ├── Dtos/             # Request/response records
+│   │   ├── Migrations/       # EF Core schema migrations
+│   │   ├── Models/           # Domain entities + enums
+│   │   ├── Services/         # Gemini content-generation service
+│   │   └── Program.cs        # App startup (DB, CORS, Scalar, DI)
+│   └── LernFuchs.Tests/      # xUnit tests (controllers, in-memory SQLite)
 └── frontend/                 # Angular app
     ├── proxy.conf.json       # Dev proxy: /api -> backend :5219
     └── src/app/
@@ -167,6 +196,22 @@ curl -X POST https://localhost:<port>/api/vocabulary/generate \
 
 ---
 
+## Testing
+
+Backend tests use **xUnit** with an in-memory SQLite database and a fake content
+service (no real Gemini calls), covering the Leitner review logic, answer grading,
+difficult-word deduplication and that correct answers are never leaked by the API.
+
+```bash
+cd backend
+dotnet test
+```
+
+Every push and pull request to `main` / `develop` runs build + tests via GitHub
+Actions (see the CI badge above).
+
+---
+
 ## Development workflow
 
 - `main` — stable branch
@@ -179,4 +224,4 @@ when stable.
 
 ## License
 
-Private/personal educational project.
+Released under the [MIT License](LICENSE) © 2026 Özal Akdeniz.
