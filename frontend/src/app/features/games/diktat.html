@@ -1,0 +1,60 @@
+<div class="container">
+  <a class="ghost back" routerLink="/spiele">← Zurück zu den Spielen</a>
+  <h1>✍️ Diktat</h1>
+
+  @if (loading()) {
+    <p class="center"><span class="spinner"></span> Lädt…</p>
+  } @else if (!canSpeak) {
+    <div class="card empty-hint">
+      <div class="big-fox">🔇</div>
+      <p>Dein Browser kann leider nicht vorlesen. Probiere ein anderes Spiel!</p>
+      <a routerLink="/spiele"><button>Zu den Spielen</button></a>
+    </div>
+  } @else if (!deck().length) {
+    <div class="card empty-hint">
+      <div class="big-fox">🦊</div>
+      <p>Sammle zuerst ein paar Wörter im Wortschatz, dann kannst du sie hier schreiben üben!</p>
+      <a routerLink="/wortschatz"><button>Zum Wortschatz</button></a>
+    </div>
+  } @else if (finished()) {
+    <div class="card finished">
+      <div class="big-fox">{{ score() === deck().length ? '🏆' : '🦊' }}</div>
+      <h2>{{ score() }} von {{ deck().length }} richtig geschrieben!</h2>
+      <div class="row">
+        <button (click)="restart()">🔁 Nochmal</button>
+        <a routerLink="/spiele"><button class="ghost">Andere Spiele</button></a>
+      </div>
+    </div>
+  } @else {
+    @let w = current();
+    <div class="game-head">
+      <span class="progress-pill">{{ index() + 1 }} / {{ deck().length }}</span>
+      <span class="progress-pill score-pill">⭐ {{ score() }}</span>
+    </div>
+
+    <div class="card prompt-card">
+      <div class="prompt-label">Höre gut zu und schreibe das Wort:</div>
+      <button class="listen-btn" (click)="sayCurrent()" title="Nochmal hören">🔊 Nochmal hören</button>
+
+      <input class="diktat-input" type="text" placeholder="Wort hier schreiben…"
+             [(ngModel)]="inputModel" [disabled]="checked()"
+             (keyup.enter)="checked() ? next() : check()" autofocus />
+
+      @if (checked()) {
+        @if (wasCorrect()) {
+          <p class="fb ok">✅ Richtig geschrieben!</p>
+        } @else {
+          <p class="fb no">❌ Richtig ist: <strong>{{ w!.word }}</strong></p>
+        }
+      }
+    </div>
+
+    <div class="row">
+      @if (!checked()) {
+        <button (click)="check()" [disabled]="!input().trim()">Prüfen</button>
+      } @else {
+        <button (click)="next()">Weiter →</button>
+      }
+    </div>
+  }
+</div>

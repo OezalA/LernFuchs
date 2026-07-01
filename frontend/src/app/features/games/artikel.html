@@ -1,0 +1,46 @@
+<div class="container">
+  <a class="ghost back" routerLink="/spiele">← Zurück zu den Spielen</a>
+  <h1>🏷️ der / die / das</h1>
+
+  @if (loading()) {
+    <p class="center"><span class="spinner"></span> Lädt…</p>
+  } @else if (!deck().length) {
+    <div class="card empty-hint">
+      <div class="big-fox">🦊</div>
+      <p>Für dieses Spiel brauchst du ein paar <strong>Nomen</strong> (Wörter mit der/die/das).
+        Sammle zuerst welche im Wortschatz!</p>
+      <a routerLink="/wortschatz"><button>Zum Wortschatz</button></a>
+    </div>
+  } @else if (finished()) {
+    <div class="card finished">
+      <div class="big-fox">{{ score() === deck().length ? '🏆' : '🦊' }}</div>
+      <h2>{{ score() }} von {{ deck().length }} richtig!</h2>
+      <div class="row">
+        <button (click)="restart()">🔁 Nochmal</button>
+        <a routerLink="/spiele"><button class="ghost">Andere Spiele</button></a>
+      </div>
+    </div>
+  } @else {
+    @let w = current();
+    <div class="game-head">
+      <span class="progress-pill">{{ index() + 1 }} / {{ deck().length }}</span>
+      <span class="progress-pill score-pill">⭐ {{ score() }}</span>
+    </div>
+
+    @if (w) {
+      <div class="card prompt-card">
+        <div class="prompt-label">Welcher Artikel gehört zu diesem Wort?</div>
+        <div class="prompt-main">___ {{ w.word }}</div>
+      </div>
+
+      <div class="options-grid three">
+        @for (a of articles; track a) {
+          <button class="opt-btn artikel-btn" [class]="buttonState(a)"
+                  [disabled]="!!chosen()" (click)="choose(a)">
+            {{ a }}
+          </button>
+        }
+      </div>
+    }
+  }
+</div>

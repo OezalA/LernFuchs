@@ -1,0 +1,124 @@
+h1 { color: var(--fox-orange-dark); }
+
+/* Hub-Kacheln */
+.game-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.1rem;
+  margin-top: 1.2rem;
+}
+.game-tile {
+  text-align: center;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.game-tile:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(0,0,0,0.12); }
+.game-tile .game-icon { font-size: 2.8rem; }
+.game-tile h2 { margin: 0.3rem 0; }
+
+/* Gemeinsame Spiel-Elemente */
+.back { margin-bottom: 1rem; }
+.game-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.progress-pill {
+  font-weight: 700;
+  color: var(--muted);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  box-shadow: var(--shadow);
+}
+.score-pill { color: var(--leaf-green); }
+
+.prompt-card {
+  text-align: center;
+  padding: 1.6rem;
+  margin-bottom: 1.1rem;
+}
+.prompt-label { color: var(--muted); font-weight: 700; font-size: 0.9rem; }
+.prompt-main {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0.4rem 0;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.8rem;
+}
+.opt-btn {
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid #e7e2d8;
+  box-shadow: var(--shadow);
+  padding: 0.9rem 1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.opt-btn:hover:not(:disabled) { border-color: var(--fox-orange); background: #fff6ec; }
+.opt-btn.correct { border-color: var(--leaf-green); background: #eafaf0; color: #1f7a34; }
+.opt-btn.wrong { border-color: var(--berry-red); background: #fdf0f0; color: var(--berry-red); }
+
+.finished { text-align: center; padding: 1.5rem 0; }
+.big-fox { font-size: 3rem; }
+.row { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
+
+.empty-hint { text-align: center; padding: 2rem 1rem; }
+.empty-hint .big-fox { font-size: 2.5rem; }
+
+/* Artikel-Spiel */
+.options-grid.three { grid-template-columns: repeat(3, 1fr); max-width: 460px; margin: 0 auto; }
+.artikel-btn { font-family: 'Fredoka', sans-serif; font-size: 1.3rem; text-transform: lowercase; }
+
+/* Diktat */
+.listen-btn { margin: 0.4rem 0 1rem; }
+.diktat-input {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  font-size: 1.3rem;
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+}
+.fb { font-weight: 700; margin: 0.9rem 0 0; }
+.fb.ok { color: var(--leaf-green); }
+.fb.no { color: var(--berry-red); }
+
+/* Memory */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+@media (max-width: 560px) { .memory-grid { grid-template-columns: repeat(3, 1fr); } }
+.mem-card {
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  border: 2px solid var(--fox-orange);
+  background: linear-gradient(160deg, #fff 0%, #fff3e2 100%);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+.mem-card .mem-back { font-size: 1.8rem; }
+.mem-card.open { border-color: var(--sky-blue); background: #eaf6ff; cursor: default; }
+.mem-card.def { font-weight: 600; }
+.mem-card.done { opacity: 0.5; border-color: var(--leaf-green); background: #eafaf0; }
+.mem-text { line-height: 1.25; }

@@ -1,0 +1,44 @@
+<div class="container">
+  <a class="ghost back" routerLink="/spiele">← Zurück zu den Spielen</a>
+  <h1>🧠 Memory</h1>
+
+  @if (loading()) {
+    <p class="center"><span class="spinner"></span> Lädt…</p>
+  } @else if (cards().length < 4) {
+    <div class="card empty-hint">
+      <div class="big-fox">🦊</div>
+      <p>Du brauchst mindestens <strong>2 Wörter</strong>, um Memory zu spielen.
+        Sammle zuerst ein paar Wörter im Wortschatz!</p>
+      <a routerLink="/wortschatz"><button>Zum Wortschatz</button></a>
+    </div>
+  } @else {
+    <div class="game-head">
+      <span class="progress-pill">Züge: {{ moves() }}</span>
+      <span class="progress-pill score-pill">Paare: {{ matched().size / 2 }} / {{ cards().length / 2 }}</span>
+    </div>
+
+    @if (finished()) {
+      <div class="card finished">
+        <div class="big-fox">🏆</div>
+        <h2>Alle Paare gefunden – mit {{ moves() }} Zügen!</h2>
+        <div class="row">
+          <button (click)="restart()">🔁 Nochmal</button>
+          <a routerLink="/spiele"><button class="ghost">Andere Spiele</button></a>
+        </div>
+      </div>
+    }
+
+    <div class="memory-grid">
+      @for (card of cards(); track card.key) {
+        <button class="mem-card" [class.open]="isOpen(card)" [class.done]="matched().has(card.key)"
+                [class.def]="card.kind === 'def'" (click)="flip(card)">
+          @if (isOpen(card)) {
+            <span class="mem-text">{{ card.text }}</span>
+          } @else {
+            <span class="mem-back">🦊</span>
+          }
+        </button>
+      }
+    </div>
+  }
+</div>
