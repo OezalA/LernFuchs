@@ -35,9 +35,13 @@ public class GeminiContentGenerationService : IContentGenerationService
         string topic, Difficulty difficulty, int count, CancellationToken ct = default)
     {
         var prompt = $$"""
-            Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium (Muttersprache Türkisch).
+            Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
             Erzeuge genau {{count}} nützliche deutsche Vokabeln zum Thema "{{topic}}" mit Schwierigkeitsgrad "{{difficulty}}".
             Wähle altersgerechte, im Alltag und in der Schule häufige Wörter.
+
+            Alles ist auf DEUTSCH: das Wort, die Erklärung und der Beispielsatz.
+            Die Erklärung ("definitionGerman") muss so einfach sein, dass ein Kind der 5. Klasse
+            sie ohne Wörterbuch versteht: kurze Sätze, einfache Wörter, gern ein anschauliches Bild.
 
             Antworte ausschließlich als JSON in genau dieser Struktur:
             {
@@ -47,15 +51,15 @@ public class GeminiContentGenerationService : IContentGenerationService
                   "article": "der | die | das | none",
                   "plural": "Pluralform oder null",
                   "wordType": "Nomen | Verb | Adjektiv | Adverb | Praeposition | Pronomen | Konjunktion | Sonstiges",
-                  "meaningTurkish": "türkische Bedeutung",
-                  "definitionGerman": "einfache deutsche Erklärung für ein Kind",
-                  "exampleSentence": "ein einfacher Beispielsatz mit dem Wort",
-                  "synonyms": ["..."],
-                  "antonyms": ["..."]
+                  "definitionGerman": "einfache, kindgerechte deutsche Erklärung der Bedeutung",
+                  "exampleSentence": "ein einfacher deutscher Beispielsatz mit dem Wort",
+                  "synonyms": ["deutsches Synonym", "..."],
+                  "antonyms": ["deutsches Gegenteil", "..."]
                 }
               ]
             }
             Regeln: "article" ist nur bei Nomen der/die/das, sonst "none". Bei Nicht-Nomen ist "plural" null.
+            "definitionGerman" darf das Wort selbst nicht einfach wiederholen, sondern muss es erklären.
             Gib keine Erklärungen außerhalb des JSON aus.
             """;
 
@@ -69,8 +73,8 @@ public class GeminiContentGenerationService : IContentGenerationService
             Article = ParseEnum(w.Article, Article.None),
             Plural = string.IsNullOrWhiteSpace(w.Plural) ? null : w.Plural.Trim(),
             WordType = ParseEnum(w.WordType, WordType.Sonstiges),
-            MeaningTurkish = w.MeaningTurkish.Trim(),
-            DefinitionGerman = w.DefinitionGerman?.Trim(),
+            DefinitionGerman = w.DefinitionGerman?.Trim() ?? string.Empty,
+            MeaningTurkish = string.IsNullOrWhiteSpace(w.MeaningTurkish) ? null : w.MeaningTurkish.Trim(),
             ExampleSentence = w.ExampleSentence?.Trim(),
             Synonyms = w.Synonyms ?? new(),
             Antonyms = w.Antonyms ?? new(),

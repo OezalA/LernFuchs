@@ -20,13 +20,16 @@ public class VocabularyWord
 
     public WordType WordType { get; set; } = WordType.Sonstiges;
 
-    /// <summary>Türkische Bedeutung.</summary>
-    [Required, MaxLength(200)]
-    public string MeaningTurkish { get; set; } = string.Empty;
+    /// <summary>
+    /// Kindgerechte deutsche Erklärung der Bedeutung – so einfach formuliert,
+    /// dass ein Kind der 5. Klasse sie versteht. Dies ist die zentrale Bedeutung.
+    /// </summary>
+    [Required, MaxLength(500)]
+    public string DefinitionGerman { get; set; } = string.Empty;
 
-    /// <summary>Kindgerechte deutsche Definition/Erklärung.</summary>
-    [MaxLength(500)]
-    public string? DefinitionGerman { get; set; }
+    /// <summary>Optionale türkische Bedeutung als kleine Hilfe (kann leer bleiben).</summary>
+    [MaxLength(200)]
+    public string? MeaningTurkish { get; set; }
 
     /// <summary>Beispielsatz mit dem Wort.</summary>
     [MaxLength(300)]
