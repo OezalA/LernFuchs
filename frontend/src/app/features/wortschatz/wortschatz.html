@@ -1,34 +1,5 @@
 <div class="container">
   <h1>📚 Wortschatz</h1>
-
-  <!-- Neue Wörter erstellen -->
-  @if (config.userGenerationEnabled()) {
-  <section class="card gen">
-    <h2>Neue Wörter erstellen</h2>
-    <p class="muted">Gib ein Thema ein – der LernFuchs denkt sich passende Wörter aus.</p>
-    <div class="gen-form">
-      <input
-        type="text"
-        placeholder="Thema, z. B. Tiere, Natur, Sport…"
-        [(ngModel)]="topicModel"
-        (keyup.enter)="generate()" />
-      <select [(ngModel)]="difficultyModel">
-        <option value="Leicht">Leicht</option>
-        <option value="Mittel">Mittel</option>
-        <option value="Schwer">Schwer</option>
-      </select>
-      <select [(ngModel)]="countModel">
-        <option [ngValue]="5">5 Wörter</option>
-        <option [ngValue]="8">8 Wörter</option>
-        <option [ngValue]="12">12 Wörter</option>
-      </select>
-      <button (click)="generate()" [disabled]="generating()">
-        @if (generating()) { <span class="spinner"></span> Wird erstellt… }
-        @else { ✨ Erstellen }
-      </button>
-    </div>
-  </section>
-  }
   @if (error()) { <p class="error">{{ error() }}</p> }
 
   <!-- Übung (Karteikarten) -->
@@ -89,7 +60,7 @@
     </section>
   }
 
-  <!-- Wortliste nach Thema gruppiert -->
+  <!-- Wortliste nach Kategorie -->
   <section class="list-head">
     <h2>Wörter ({{ availableWords().length }})</h2>
     <div class="list-actions">
@@ -111,14 +82,22 @@
       <a routerLink="/lesen"><button>📖 Zum Leseverständnis</button></a>
     </div>
   } @else {
-    @for (group of groupedWords(); track group.topic) {
-      <section class="topic-group">
-        <button class="topic-heading" (click)="toggleGroup(group.topic)">
-          <span class="chevron">{{ isCollapsed(group.topic) ? '▶' : '▼' }}</span>
-          {{ group.icon }} {{ group.topic }}
-          <span class="topic-count">{{ group.words.length }}</span>
+    <div class="cat-chips">
+      <button class="cat-chip" [class.active]="selectedCategory() === null" (click)="selectCategory(null)">
+        Alle <span class="cat-num">{{ availableWords().length }}</span>
+      </button>
+      @for (c of categories(); track c.name) {
+        <button class="cat-chip" [class.active]="selectedCategory() === c.name" (click)="selectCategory(c.name)">
+          {{ c.icon }} {{ c.name }} <span class="cat-num">{{ c.count }}</span>
         </button>
-        @if (!isCollapsed(group.topic)) {
+      }
+    </div>
+
+    @for (group of displayedGroups(); track group.name) {
+      <section class="topic-group">
+        <h2 class="topic-heading">{{ group.icon }} {{ group.name }}
+          <span class="topic-count">{{ group.words.length }}</span>
+        </h2>
         <div class="wordgrid">
           @for (w of group.words; track w.id) {
             <div class="card word-card">
@@ -131,17 +110,15 @@
                 }
               </div>
               <p class="def muted">{{ w.definitionGerman }}</p>
-          <div class="word-foot">
-            <span class="badge" [class.leicht]="w.difficulty==='Leicht'"
-                  [class.mittel]="w.difficulty==='Mittel'"
-                  [class.schwer]="w.difficulty==='Schwer'">{{ w.difficulty }}</span>
-            @if (w.progress?.mastered) { <span class="mastered">⭐ gelernt</span> }
-            <button class="ghost tiny" (click)="deleteWord(w.id)" title="Löschen">🗑️</button>
-          </div>
+              <div class="word-foot">
+                <span class="badge" [class.leicht]="w.difficulty==='Leicht'"
+                      [class.mittel]="w.difficulty==='Mittel'"
+                      [class.schwer]="w.difficulty==='Schwer'">{{ w.difficulty }}</span>
+                @if (w.progress?.mastered) { <span class="mastered">⭐ gelernt</span> }
+              </div>
+            </div>
+          }
         </div>
-      }
-        </div>
-        }
       </section>
     }
   }

@@ -1,18 +1,16 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { VocabularyService } from '../../core/vocabulary.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
-import { ConfigService } from '../../core/config.service';
 import { ReadStateService } from '../../core/read-state.service';
 import { categoryFor } from '../../core/category';
-import { VocabularyWord, Difficulty } from '../../core/models';
+import { VocabularyWord } from '../../core/models';
 
 @Component({
   selector: 'app-wortschatz',
-  imports: [FormsModule, RouterLink],
+  imports: [RouterLink],
   templateUrl: './wortschatz.html',
   styleUrl: './wortschatz.css'
 })
@@ -21,23 +19,15 @@ export class Wortschatz implements OnInit {
   private speech = inject(SpeechService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
-  protected config = inject(ConfigService);
   private readState = inject(ReadStateService);
 
-  // Datenbestand
   words = signal<VocabularyWord[]>([]);
   loading = signal(false);
   error = signal<string | null>(null);
-
-  // Themenfilter
-  selectedTopic = signal<string>('');
   canSpeak = this.speech.supported;
 
-  // Formular zum Erzeugen
-  topic = signal('');
-  difficulty = signal<Difficulty>('Mittel');
-  count = signal(8);
-  generating = signal(false);
+  // Ausgewählte Kategorie (null = alle).
+  selectedCategory = signal<string | null>(null);
 
   // Übungsmodus (Karteikarten)
   deck = signal<VocabularyWord[]>([]);
@@ -50,28 +40,13 @@ export class Wortschatz implements OnInit {
   currentCard = computed(() => this.deck()[this.cardIndex()] ?? null);
   sessionFinished = computed(() => this.practicing() && this.cardIndex() >= this.deck().length);
 
-  // Nur Wörter aus gelesenen Texten (oder eigenständig erstellte Wörter ohne Quelltext).
+  // Nur Wörter aus gelesenen Texten (oder eigenständige Wörter ohne Quelltext).
   availableWords = computed(() => {
     const read = this.readState.ids();
     return this.words().filter(w => w.sourcePassageId == null || read.has(w.sourcePassageId));
   });
 
-  // Verfügbare Themen (aus den freigeschalteten Wörtern)
-  topics = computed(() => {
-    const set = new Set<string>();
-    for (const w of this.availableWords()) if (w.topic) set.add(w.topic);
-    return Array.from(set).sort();
-  });
-
-  // Gefilterte Wortliste nach ausgewähltem Thema
-  filteredWords = computed(() => {
-    const t = this.selectedTopic();
-    const words = this.availableWords();
-    return t ? words.filter(w => w.topic === t) : words;
-  });
-
-  // Nach Thema gruppiert (aufklappbar).
-  collapsedGroups = signal<Set<string>>(new Set());
+  // Nach Kategorie gruppiert
   groupedWords = computed(() => {
     const groups = new Map<string, { icon: string; words: VocabularyWord[] }>();
     for (const w of this.availableWords()) {
@@ -79,29 +54,29 @@ export class Wortschatz implements OnInit {
       const g = groups.get(cat.name);
       if (g) g.words.push(w); else groups.set(cat.name, { icon: cat.icon, words: [w] });
     }
-    return Array.from(groups, ([topic, g]) => ({ topic, icon: g.icon, words: g.words }))
-      .sort((a, b) => a.topic.localeCompare(b.topic));
+    return Array.from(groups, ([name, g]) => ({ name, icon: g.icon, words: g.words }))
+      .sort((a, b) => a.name.localeCompare(b.name));
   });
 
-  toggleGroup(topic: string): void {
-    const next = new Set(this.collapsedGroups());
-    if (next.has(topic)) next.delete(topic); else next.add(topic);
-    this.collapsedGroups.set(next);
-  }
-  isCollapsed(topic: string): boolean {
-    return this.collapsedGroups().has(topic);
-  }
+  categories = computed(() =>
+    this.groupedWords().map(g => ({ name: g.name, icon: g.icon, count: g.words.length })));
 
-  get topicModel2() { return this.selectedTopic(); }
-  set topicModel2(v: string) { this.selectedTopic.set(v); }
+  displayedGroups = computed(() => {
+    const sel = this.selectedCategory();
+    return sel ? this.groupedWords().filter(g => g.name === sel) : this.groupedWords();
+  });
 
-  // ngModel-Brücken zu den Signalen
-  get topicModel() { return this.topic(); }
-  set topicModel(v: string) { this.topic.set(v); }
-  get difficultyModel() { return this.difficulty(); }
-  set difficultyModel(v: Difficulty) { this.difficulty.set(v); }
-  get countModel() { return this.count(); }
-  set countModel(v: number) { this.count.set(v); }
+  // Wörter des aktuellen Filters (für die Übung).
+  shownWords = computed(() => {
+    const sel = this.selectedCategory();
+    return sel
+      ? this.availableWords().filter(w => categoryFor(w.topic).name === sel)
+      : this.availableWords();
+  });
+
+  selectCategory(name: string | null): void {
+    this.selectedCategory.set(name);
+  }
 
   ngOnInit(): void {
     this.load();
@@ -116,35 +91,11 @@ export class Wortschatz implements OnInit {
     });
   }
 
-  generate(): void {
-    const topic = this.topic().trim();
-    if (!topic) { this.error.set('Bitte gib ein Thema ein.'); return; }
-    this.generating.set(true);
-    this.error.set(null);
-    this.vocab.generate({ topic, difficulty: this.difficulty(), count: this.count() }).subscribe({
-      next: created => {
-        this.words.update(list => [...created, ...list]);
-        this.generating.set(false);
-        this.topic.set('');
-      },
-      error: () => {
-        this.error.set('Beim Erstellen ist etwas schiefgelaufen. Versuche es später noch einmal.');
-        this.generating.set(false);
-      }
-    });
-  }
-
-  deleteWord(id: number): void {
-    this.vocab.delete(id).subscribe({
-      next: () => this.words.update(list => list.filter(w => w.id !== id))
-    });
-  }
-
   // ----- Karteikarten -----
 
-  /** Übt alle (gefilterten) Wörter. */
+  /** Übt die aktuell angezeigten Wörter (alle oder die gewählte Kategorie). */
   startPractice(): void {
-    this.beginPractice([...this.filteredWords()]);
+    this.beginPractice([...this.shownWords()]);
   }
 
   /** Übt nur die heute fälligen Wörter (Leitner-System) aus gelesenen Texten. */
@@ -194,13 +145,12 @@ export class Wortschatz implements OnInit {
     }
     this.cardIndex.update(i => i + 1);
     this.flipped.set(false);
-    // Letzte Karte geschafft -> große Feier.
     if (this.cardIndex() >= this.deck().length) this.celebrate.confettiBig();
   }
 
   stopPractice(): void {
     this.practicing.set(false);
-    this.load(); // aktualisierte Fortschritte holen
+    this.load();
   }
 
   articleLabel(w: VocabularyWord): string {
