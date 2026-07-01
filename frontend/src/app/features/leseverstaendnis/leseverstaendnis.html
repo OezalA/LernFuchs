@@ -78,7 +78,11 @@
       </article>
 
       <div class="reader-cta">
-        <button class="big-cta" (click)="startQuiz()">Fertig gelesen → Fragen starten ✏️</button>
+        @if (quizActive()) {
+          <button class="big-cta" (click)="resumeQuiz()">← Zurück zu den Fragen</button>
+        } @else {
+          <button class="big-cta" (click)="startQuiz()">Fertig gelesen → Fragen starten ✏️</button>
+        }
       </div>
     }
   }
@@ -93,6 +97,7 @@
             <span class="dot" [class.done]="i < qIndex()" [class.active]="i === qIndex()"></span>
           }
         </div>
+        <button class="ghost show-text" (click)="backToText()">📖 Text ansehen</button>
       </div>
 
       @if (currentQuestion(); as q) {

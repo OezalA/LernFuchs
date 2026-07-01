@@ -39,6 +39,7 @@ export class Leseverstaendnis implements OnInit {
   activeWord = signal<PassageWord | null>(null); // angetipptes schwieriges Wort
 
   // Quiz
+  quizActive = signal(false); // läuft ein Quiz? (für "Zurück zu den Fragen")
   qIndex = signal(0);
   chosen = signal<string | null>(null);
   answers = signal<{ questionId: number; answer: string }[]>([]);
@@ -119,6 +120,20 @@ export class Leseverstaendnis implements OnInit {
     this.chosen.set(null);
     this.answers.set([]);
     this.checkResult.set(null);
+    this.quizActive.set(true);
+    this.view.set('quiz');
+  }
+
+  /** Während des Quiz kurz zum Text zurück (Fortschritt bleibt erhalten). */
+  backToText(): void {
+    this.speech.stop();
+    this.activeWord.set(null);
+    this.view.set('reading');
+  }
+
+  /** Vom Text zurück ins laufende Quiz. */
+  resumeQuiz(): void {
+    this.speech.stop();
     this.view.set('quiz');
   }
 
@@ -126,6 +141,7 @@ export class Leseverstaendnis implements OnInit {
     this.speech.stop();
     this.current.set(null);
     this.activeWord.set(null);
+    this.quizActive.set(false);
     this.view.set('list');
     this.load();
   }
@@ -186,6 +202,7 @@ export class Leseverstaendnis implements OnInit {
         this.checkResult.set(r);
         this.readState.markRead(p.id);
         this.game.handleActivity(r.game);
+        this.quizActive.set(false);
         this.view.set('result');
         if (r.score === r.total) this.celebrate.fanfare();
         else if (r.score > 0) this.celebrate.confettiSmall();
