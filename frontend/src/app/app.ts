@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { CelebrationService } from './core/celebration.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {}
+export class App {
+  private celebrate = inject(CelebrationService);
+  muted = signal(this.celebrate.isMuted);
+
+  toggleSound(): void {
+    this.muted.set(this.celebrate.toggleMute());
+  }
+}

@@ -2,6 +2,7 @@ import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReadingService } from '../../core/reading.service';
 import { SpeechService } from '../../core/speech.service';
+import { CelebrationService } from '../../core/celebration.service';
 import {
   ReadingPassage, ReadingPassageSummary, CheckResult, Difficulty
 } from '../../core/models';
@@ -15,6 +16,7 @@ import {
 export class Leseverstaendnis implements OnInit {
   private reading = inject(ReadingService);
   private speech = inject(SpeechService);
+  private celebrate = inject(CelebrationService);
 
   passages = signal<ReadingPassageSummary[]>([]);
   loading = signal(false);
@@ -118,7 +120,12 @@ export class Leseverstaendnis implements OnInit {
     }));
     this.checking.set(true);
     this.reading.check(passage.id, payload).subscribe({
-      next: r => { this.result.set(r); this.checking.set(false); },
+      next: r => {
+        this.result.set(r);
+        this.checking.set(false);
+        if (r.score === r.total) this.celebrate.fanfare();
+        else if (r.score > 0) this.celebrate.confettiSmall();
+      },
       error: () => { this.error.set('Die Antworten konnten nicht geprüft werden.'); this.checking.set(false); }
     });
   }

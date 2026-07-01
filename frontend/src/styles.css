@@ -20,7 +20,7 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  font-family: 'Segoe UI', 'Nunito', system-ui, sans-serif;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   color: var(--ink);
   background:
     radial-gradient(1200px 400px at 100% -50px, #fff2e0 0, transparent 60%),
@@ -28,7 +28,12 @@ html, body {
     var(--paper);
 }
 
-h1, h2, h3 { line-height: 1.2; }
+h1, h2, h3 {
+  line-height: 1.2;
+  font-family: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  letter-spacing: 0.2px;
+}
+.brand-name, .word, .stat-num { font-family: 'Fredoka', 'Nunito', sans-serif; }
 
 a { color: inherit; text-decoration: none; }
 
@@ -109,3 +114,17 @@ input:focus, select:focus, textarea:focus {
   vertical-align: middle;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* Maskot-Animationen */
+@keyframes pop-bounce {
+  0% { transform: scale(0) rotate(-12deg); }
+  60% { transform: scale(1.25) rotate(6deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.big-fox, .hero-fox { display: inline-block; animation: pop-bounce 0.55s ease both; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card { animation: fade-up 0.3s ease both; }

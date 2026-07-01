@@ -6,6 +6,10 @@
   <nav class="nav">
     <a routerLink="/wortschatz" routerLinkActive="active">📚 Wortschatz</a>
     <a routerLink="/lesen" routerLinkActive="active">📖 Leseverständnis</a>
+    <button class="sound-toggle" (click)="toggleSound()"
+            [title]="muted() ? 'Ton einschalten' : 'Ton ausschalten'">
+      {{ muted() ? '🔇' : '🔊' }}
+    </button>
   </nav>
 </header>
 

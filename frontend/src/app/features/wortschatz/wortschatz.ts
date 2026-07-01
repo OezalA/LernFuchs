@@ -2,6 +2,7 @@ import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VocabularyService } from '../../core/vocabulary.service';
 import { SpeechService } from '../../core/speech.service';
+import { CelebrationService } from '../../core/celebration.service';
 import { VocabularyWord, Difficulty } from '../../core/models';
 
 @Component({
@@ -13,6 +14,7 @@ import { VocabularyWord, Difficulty } from '../../core/models';
 export class Wortschatz implements OnInit {
   private vocab = inject(VocabularyService);
   private speech = inject(SpeechService);
+  private celebrate = inject(CelebrationService);
 
   // Datenbestand
   words = signal<VocabularyWord[]>([]);
@@ -145,9 +147,16 @@ export class Wortschatz implements OnInit {
     if (!card) return;
     this.vocab.review(card.id, correct).subscribe();
     this.reviewedCount.update(n => n + 1);
-    if (correct) this.correctCount.update(n => n + 1);
+    if (correct) {
+      this.correctCount.update(n => n + 1);
+      this.celebrate.correct();
+    } else {
+      this.celebrate.wrong();
+    }
     this.cardIndex.update(i => i + 1);
     this.flipped.set(false);
+    // Letzte Karte geschafft -> große Feier.
+    if (this.cardIndex() >= this.deck().length) this.celebrate.confettiBig();
   }
 
   stopPractice(): void {
