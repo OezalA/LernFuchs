@@ -20,7 +20,7 @@ afterwards without repeated API calls.
 | --------- | --------------------------------------------- |
 | Backend   | ASP.NET Core Web API (.NET 10, C#)            |
 | Database  | SQLite via Entity Framework Core              |
-| AI        | Google Gemini REST API (`gemini-2.0-flash`)   |
+| AI        | Google Gemini REST API (`gemini-2.5-flash`)   |
 | Frontend  | Angular (TypeScript) — *coming next*          |
 
 ---
