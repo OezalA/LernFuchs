@@ -146,7 +146,7 @@ npm start
 Then open **http://localhost:4200**. The dev server proxies all `/api` calls to the
 backend on port 5219 (see `proxy.conf.json`), so no CORS setup is needed.
 
-The UI (in German) has a start page with a **progress dashboard** and two modules:
+The UI (in German) has a start page with a **progress dashboard** and three areas:
 
 - **Wortschatz** — generate themed words, then practise them with flip-cards
   (marking "Gewusst" / "Nochmal" feeds the Leitner spaced-repetition progress).
@@ -157,8 +157,20 @@ The UI (in German) has a start page with a **progress dashboard** and two module
   per-question feedback and a score. When a text is generated, the **difficult
   words from it are automatically extracted and added to the Wortschatz** (skipping
   words that already exist), so reading feeds vocabulary practice.
+- **Spiele** — four practice games that reuse the vocabulary and award XP while
+  feeding spaced repetition: **Quiz** (pick the word for a definition),
+  **der/die/das** (choose the article), **Diktat** (listen and type), and
+  **Memory** (match word ↔ definition pairs).
 
-The start page shows live stats: words collected, mastered, due today, success
+### Gamification & progress
+
+- **XP, levels and a daily streak** (🔥) shown in the top bar; correct answers earn XP.
+- A **daily-goal ring** and **achievement badges** on the start page.
+- **Charts**: XP per day over the last week and the Leitner box distribution
+  (`GET /api/stats/progress`).
+- Confetti and Web-Audio **sound effects** with a global mute toggle.
+
+The start page also shows live stats: words collected, mastered, due today, success
 rate and number of reading texts (`GET /api/stats`).
 
 ---

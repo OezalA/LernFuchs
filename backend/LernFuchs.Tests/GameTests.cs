@@ -57,6 +57,22 @@ public class GameServiceTests
     }
 
     [Fact]
+    public async Task RegisterActivity_LogsDailyActivityForToday()
+    {
+        using var db = TestDb.Create();
+        var service = new GameService(db);
+
+        await service.RegisterActivityAsync(10, 1);
+        await service.RegisterActivityAsync(5, 1);
+
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+        var activity = await db.DailyActivities.SingleAsync();
+        Assert.Equal(today, activity.Date);
+        Assert.Equal(15, activity.XpEarned);
+        Assert.Equal(2, activity.Reviews);
+    }
+
+    [Fact]
     public async Task RegisterActivity_UnlocksFirstWordAchievement_WhenAWordExists()
     {
         using var db = TestDb.Create();

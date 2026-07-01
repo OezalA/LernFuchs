@@ -36,6 +36,16 @@ public class GameService
         profile.Xp += xpGained;
         profile.LongestStreakDays = Math.Max(profile.LongestStreakDays, profile.CurrentStreakDays);
 
+        // Tagesaktivität für die Wochenübersicht festhalten.
+        var activity = await _db.DailyActivities.FirstOrDefaultAsync(a => a.Date == today, ct);
+        if (activity is null)
+        {
+            activity = new DailyActivity { Date = today };
+            _db.DailyActivities.Add(activity);
+        }
+        activity.XpEarned += xpGained;
+        activity.Reviews += wordsReviewed;
+
         var newlyUnlocked = await CheckAchievementsAsync(profile, ct);
 
         await _db.SaveChangesAsync(ct);

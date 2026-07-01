@@ -2,7 +2,7 @@ import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StatsService } from '../../core/stats.service';
 import { GameService } from '../../core/game.service';
-import { LearningStats } from '../../core/models';
+import { LearningStats, ProgressData } from '../../core/models';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +15,18 @@ export class Home implements OnInit {
   protected game = inject(GameService);
 
   stats = signal<LearningStats | null>(null);
+  progress = signal<ProgressData | null>(null);
+
+  readonly boxLabels = ['Neu', 'Box 1', 'Box 2', 'Box 3', 'Box 4', 'Gelernt'];
+
+  /** Höchster Wert der Boxverteilung (für die Balkenhöhe). */
+  maxBox = computed(() => Math.max(1, ...(this.progress()?.boxes ?? [0])));
+  /** Höchste Tages-XP der Woche (für die Balkenhöhe). */
+  maxXp = computed(() => Math.max(1, ...(this.progress()?.last7Days.map(d => d.xp) ?? [0])));
+
+  barHeight(value: number, max: number): number {
+    return Math.round((value / max) * 100);
+  }
 
   /** Tagesziel-Fortschritt in Prozent (0–100). */
   goalPercent = computed(() => {
@@ -34,6 +46,10 @@ export class Home implements OnInit {
     this.statsService.get().subscribe({
       next: s => this.stats.set(s),
       error: () => this.stats.set(null)
+    });
+    this.statsService.getProgress().subscribe({
+      next: p => this.progress.set(p),
+      error: () => this.progress.set(null)
     });
     this.game.reload();
   }

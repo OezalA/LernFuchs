@@ -61,6 +61,40 @@
     </section>
   }
 
+  @if (progress(); as p) {
+    <section class="charts">
+      <div class="chart card">
+        <h2>Diese Woche 📅</h2>
+        <div class="bars">
+          @for (d of p.last7Days; track d.date) {
+            <div class="bar-col">
+              <div class="bar-value">{{ d.xp || '' }}</div>
+              <div class="bar" [style.height.%]="barHeight(d.xp, maxXp())"
+                   [class.today]="$last" [title]="d.xp + ' XP'"></div>
+              <div class="bar-label">{{ d.weekday }}</div>
+            </div>
+          }
+        </div>
+        <p class="chart-caption muted">XP pro Tag</p>
+      </div>
+
+      <div class="chart card">
+        <h2>Wörter-Fortschritt 📦</h2>
+        <div class="bars">
+          @for (count of p.boxes; track $index) {
+            <div class="bar-col">
+              <div class="bar-value">{{ count || '' }}</div>
+              <div class="bar box" [style.height.%]="barHeight(count, maxBox())"
+                   [class.mastered]="$index === 5" [title]="count + ' Wörter'"></div>
+              <div class="bar-label">{{ boxLabels[$index] }}</div>
+            </div>
+          }
+        </div>
+        <p class="chart-caption muted">Von „Neu" bis „Gelernt" (Leitner-System)</p>
+      </div>
+    </section>
+  }
+
   <div class="tiles">
     <a class="tile card" routerLink="/wortschatz">
       <div class="tile-icon">📚</div>

@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public DbSet<ComprehensionQuestion> ComprehensionQuestions => Set<ComprehensionQuestion>();
     public DbSet<PlayerProfile> PlayerProfiles => Set<PlayerProfile>();
     public DbSet<Achievement> Achievements => Set<Achievement>();
+    public DbSet<DailyActivity> DailyActivities => Set<DailyActivity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -51,6 +52,9 @@ public class AppDbContext : DbContext
 
         // Jeder Abzeichen-Code kommt höchstens einmal vor.
         modelBuilder.Entity<Achievement>(e => e.HasIndex(a => a.Code).IsUnique());
+
+        // Pro Tag ein Aktivitäts-Eintrag.
+        modelBuilder.Entity<DailyActivity>(e => e.HasIndex(a => a.Date).IsUnique());
 
         base.OnModelCreating(modelBuilder);
     }

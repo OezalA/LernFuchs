@@ -75,6 +75,18 @@ export interface CheckResult {
   game?: GameActivityResult;
 }
 
+export interface DayActivity {
+  date: string;
+  weekday: string;
+  xp: number;
+  reviews: number;
+}
+
+export interface ProgressData {
+  boxes: number[];
+  last7Days: DayActivity[];
+}
+
 export interface LearningStats {
   totalWords: number;
   masteredWords: number;
