@@ -4,6 +4,7 @@ import { ReadingService } from '../../core/reading.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
+import { ConfigService } from '../../core/config.service';
 import {
   ReadingPassage, ReadingPassageSummary, CheckResult, Difficulty
 } from '../../core/models';
@@ -19,6 +20,7 @@ export class Leseverstaendnis implements OnInit {
   private speech = inject(SpeechService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
+  protected config = inject(ConfigService);
 
   passages = signal<ReadingPassageSummary[]>([]);
   loading = signal(false);

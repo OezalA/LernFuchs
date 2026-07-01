@@ -6,13 +6,15 @@ using LernFuchs.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Options;
 
 namespace LernFuchs.Tests;
 
 public class VocabularyControllerTests
 {
     private static VocabularyController CreateController(AppDbContext db, FakeContentGenerationService? content = null)
-        => new(db, content ?? new FakeContentGenerationService(), new GameService(db), NullLogger<VocabularyController>.Instance);
+        => new(db, content ?? new FakeContentGenerationService(), new GameService(db),
+            Options.Create(new FeatureOptions()), NullLogger<VocabularyController>.Instance);
 
     [Fact]
     public async Task Review_CorrectAnswer_MovesWordToNextBoxAndSchedulesFutureReview()
@@ -80,6 +82,21 @@ public class VocabularyControllerTests
 
         Assert.IsType<OkObjectResult>(result);
         Assert.Equal(2, await db.VocabularyWords.CountAsync());
+    }
+
+    [Fact]
+    public async Task Generate_WhenUserGenerationDisabled_ReturnsForbidden()
+    {
+        using var db = TestDb.Create();
+        var controller = new VocabularyController(db, new FakeContentGenerationService(), new GameService(db),
+            Options.Create(new FeatureOptions { UserGenerationEnabled = false }),
+            NullLogger<VocabularyController>.Instance);
+
+        var result = await controller.Generate(new GenerateVocabularyRequest("Tiere"), CancellationToken.None);
+
+        var status = Assert.IsType<ObjectResult>(result);
+        Assert.Equal(403, status.StatusCode);
+        Assert.Equal(0, await db.VocabularyWords.CountAsync());
     }
 
     [Fact]

@@ -16,6 +16,9 @@ builder.Services.AddHttpClient<IContentGenerationService, GeminiContentGeneratio
 // --- Spiel-/Fortschrittslogik ---
 builder.Services.AddScoped<GameService>();
 
+// --- Feature-Flags ---
+builder.Services.Configure<FeatureOptions>(builder.Configuration.GetSection("Features"));
+
 // --- Web API ---
 builder.Services.AddControllers()
     .AddJsonOptions(o =>

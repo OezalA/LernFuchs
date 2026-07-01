@@ -4,6 +4,7 @@ using LernFuchs.Api.Models;
 using LernFuchs.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace LernFuchs.Api.Controllers;
 
@@ -14,16 +15,19 @@ public class VocabularyController : ControllerBase
     private readonly AppDbContext _db;
     private readonly IContentGenerationService _content;
     private readonly GameService _game;
+    private readonly FeatureOptions _features;
     private readonly ILogger<VocabularyController> _logger;
 
     /// <summary>Leitner-Intervalle in Tagen je Box (Index 0..5).</summary>
     private static readonly int[] BoxIntervalsDays = { 0, 1, 3, 7, 16, 35 };
 
-    public VocabularyController(AppDbContext db, IContentGenerationService content, GameService game, ILogger<VocabularyController> logger)
+    public VocabularyController(AppDbContext db, IContentGenerationService content, GameService game,
+        IOptions<FeatureOptions> features, ILogger<VocabularyController> logger)
     {
         _db = db;
         _content = content;
         _game = game;
+        _features = features.Value;
         _logger = logger;
     }
 
@@ -67,6 +71,8 @@ public class VocabularyController : ControllerBase
     [HttpPost("generate")]
     public async Task<IActionResult> Generate([FromBody] GenerateVocabularyRequest req, CancellationToken ct)
     {
+        if (!_features.UserGenerationEnabled)
+            return StatusCode(StatusCodes.Status403Forbidden, "Das Erstellen eigener Inhalte ist derzeit deaktiviert.");
         if (string.IsNullOrWhiteSpace(req.Topic))
             return BadRequest("Bitte ein Thema angeben.");
 

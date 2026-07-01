@@ -4,6 +4,7 @@ import { VocabularyService } from '../../core/vocabulary.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
+import { ConfigService } from '../../core/config.service';
 import { VocabularyWord, Difficulty } from '../../core/models';
 
 @Component({
@@ -17,6 +18,7 @@ export class Wortschatz implements OnInit {
   private speech = inject(SpeechService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
+  protected config = inject(ConfigService);
 
   // Datenbestand
   words = signal<VocabularyWord[]>([]);

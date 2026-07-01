@@ -2,6 +2,7 @@ import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CelebrationService } from './core/celebration.service';
 import { GameService } from './core/game.service';
+import { ConfigService } from './core/config.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { GameService } from './core/game.service';
 export class App implements OnInit {
   private celebrate = inject(CelebrationService);
   protected game = inject(GameService);
+  private config = inject(ConfigService);
 
   muted = signal(this.celebrate.isMuted);
 
@@ -24,6 +26,7 @@ export class App implements OnInit {
 
   ngOnInit(): void {
     this.game.reload();
+    this.config.load();
   }
 
   toggleSound(): void {

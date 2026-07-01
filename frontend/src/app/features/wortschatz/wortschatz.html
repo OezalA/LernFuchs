@@ -2,6 +2,7 @@
   <h1>📚 Wortschatz</h1>
 
   <!-- Neue Wörter erstellen -->
+  @if (config.userGenerationEnabled()) {
   <section class="card gen">
     <h2>Neue Wörter erstellen</h2>
     <p class="muted">Gib ein Thema ein – der LernFuchs denkt sich passende Wörter aus.</p>
@@ -26,8 +27,9 @@
         @else { ✨ Erstellen }
       </button>
     </div>
-    @if (error()) { <p class="error">{{ error() }}</p> }
   </section>
+  }
+  @if (error()) { <p class="error">{{ error() }}</p> }
 
   <!-- Übung (Karteikarten) -->
   @if (practicing()) {

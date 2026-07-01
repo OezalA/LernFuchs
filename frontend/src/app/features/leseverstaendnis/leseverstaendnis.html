@@ -3,6 +3,7 @@
 
   @if (!current()) {
     <!-- Übersicht + Erstellen -->
+    @if (config.userGenerationEnabled()) {
     <section class="card gen">
       <h2>Neuen Text erstellen</h2>
       <p class="muted">Wähle ein Thema – der LernFuchs schreibt dir eine kurze Geschichte mit Fragen.</p>
@@ -24,8 +25,9 @@
           @else { ✨ Erstellen }
         </button>
       </div>
-      @if (error()) { <p class="error">{{ error() }}</p> }
     </section>
+    }
+    @if (error()) { <p class="error">{{ error() }}</p> }
 
     <div class="list-head">
       <h2 class="section-title">Deine Texte ({{ filteredPassages().length }})</h2>
