@@ -95,17 +95,38 @@ export class Leseverstaendnis implements OnInit {
   }
 
   // Text in Tokens zerlegt; schwierige Wörter sind markiert.
+  // Vergleich über den längsten gemeinsamen Wortanfang, damit auch gebeugte
+  // Formen erkannt werden (z. B. "stürmischen" -> "stürmisch").
   textTokens = computed<TextToken[]>(() => {
     const p = this.current();
     if (!p) return [];
-    const map = new Map<string, PassageWord>();
-    for (const w of p.words) map.set(w.word.toLowerCase(), w);
+    const words = p.words;
     return p.text.split(/(\s+)/).map(tok => {
       const core = tok.replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, '');
-      const word = core ? map.get(core.toLowerCase()) : undefined;
+      const word = core ? this.matchWord(core.toLowerCase(), words) : undefined;
       return { text: tok, word };
     });
   });
+
+  /** Findet das schwierige Wort, dessen Wortstamm am besten zum Token passt. */
+  private matchWord(token: string, words: PassageWord[]): PassageWord | undefined {
+    let best: PassageWord | undefined;
+    let bestLcp = 0;
+    for (const w of words) {
+      const base = w.word.toLowerCase();
+      const lcp = this.commonPrefix(token, base);
+      const threshold = Math.max(4, base.length - 3); // gebeugte Endungen erlauben
+      if (lcp >= threshold && lcp > bestLcp) { best = w; bestLcp = lcp; }
+    }
+    return best;
+  }
+
+  private commonPrefix(a: string, b: string): number {
+    const n = Math.min(a.length, b.length);
+    let i = 0;
+    while (i < n && a[i] === b[i]) i++;
+    return i;
+  }
 
   ngOnInit(): void {
     this.load();
