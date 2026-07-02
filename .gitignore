@@ -28,3 +28,7 @@ Thumbs.db
 
 # Published Angular assets served by the API
 backend/LernFuchs.Api/wwwroot/
+
+# Local deployment artifacts (publish output + zip)
+backend/LernFuchs.Api/publish/
+backend/LernFuchs.Api/*.zip
