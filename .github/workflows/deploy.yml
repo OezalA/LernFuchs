@@ -1,13 +1,18 @@
 name: Deploy to Azure
 
 # Deploys the app to Azure App Service on every push to main.
-# Requires the repository secret AZURE_WEBAPP_PUBLISH_PROFILE
-# (download it from the Web App in the Azure Portal → "Get publish profile").
+# Authenticates via OpenID Connect (OIDC) — no stored passwords/publish profile.
+# Requires these repository secrets (identifiers, set up once):
+#   AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
 
 on:
   push:
     branches: [main]
   workflow_dispatch: # allows manual runs from the Actions tab
+
+permissions:
+  id-token: write # required to request the OIDC token
+  contents: read
 
 env:
   AZURE_WEBAPP_NAME: lernfuchs-oezal-2026
@@ -38,9 +43,15 @@ jobs:
       - name: Publish
         run: dotnet publish backend/LernFuchs.Api/LernFuchs.Api.csproj --configuration Release -o publish
 
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: publish
