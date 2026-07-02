@@ -1,0 +1,46 @@
+name: Deploy to Azure
+
+# Deploys the app to Azure App Service on every push to main.
+# Requires the repository secret AZURE_WEBAPP_PUBLISH_PROFILE
+# (download it from the Web App in the Azure Portal → "Get publish profile").
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # allows manual runs from the Actions tab
+
+env:
+  AZURE_WEBAPP_NAME: lernfuchs-oezal-2026
+  DOTNET_VERSION: '10.0.x'
+  NODE_VERSION: '22'
+
+jobs:
+  deploy:
+    name: Build & deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # Publishing the API also builds the Angular frontend and copies it into
+      # wwwroot (see the PublishAngular target in LernFuchs.Api.csproj).
+      - name: Publish
+        run: dotnet publish backend/LernFuchs.Api/LernFuchs.Api.csproj --configuration Release -o publish
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: publish

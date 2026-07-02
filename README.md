@@ -1,9 +1,13 @@
 # LernFuchs 🦊
 
 [![CI](https://github.com/OezalA/LernFuchs/actions/workflows/ci.yml/badge.svg)](https://github.com/OezalA/LernFuchs/actions/workflows/ci.yml)
+[![Deploy](https://github.com/OezalA/LernFuchs/actions/workflows/deploy.yml/badge.svg)](https://github.com/OezalA/LernFuchs/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-22-DD0031?logo=angular&logoColor=white)
+
+**🌐 Live demo:** **[lernfuchs-oezal-2026…azurewebsites.net](https://lernfuchs-oezal-2026-a6e8b7ekfscqaghh.francecentral-01.azurewebsites.net)**
+&nbsp;·&nbsp; _hosted on Azure App Service (free tier — the first request after a while may take a few seconds to wake the app)._
 
 A small web application to help a 5th-grade Gymnasium student improve her German
 **vocabulary (Wortschatz)** and **reading comprehension (Leseverständnis)**.
@@ -231,6 +235,24 @@ Actions (see the CI badge above).
 
 Work happens on `develop` (or feature branches off it) and is merged into `main`
 when stable.
+
+---
+
+## Deployment
+
+The app is deployed as a **single package** to **Azure App Service** (Linux, free F1
+tier). During `dotnet publish` the Angular frontend is built and copied into the API's
+`wwwroot`, so one ASP.NET Core process serves both the static SPA and the `/api`
+endpoints (with an SPA fallback route). SQLite lives on a persistent path
+(`/home/data`) so generated content survives restarts.
+
+Deployment is **automated with GitHub Actions** ([`deploy.yml`](.github/workflows/deploy.yml)):
+every push to `main` builds the publish bundle and ships it to Azure via a publish
+profile stored in the `AZURE_WEBAPP_PUBLISH_PROFILE` repository secret.
+
+In production, on-demand content generation is disabled and a background service
+(`DailyContentService`) generates a few fresh reading texts per day automatically —
+so there is nothing to run locally and no computer needs to stay on.
 
 ---
 
