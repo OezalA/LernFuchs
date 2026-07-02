@@ -1,0 +1,35 @@
+name: Daily content wake-up
+
+# The app runs a background service (DailyContentService) that generates a few
+# fresh reading texts once per day — but on the free Azure tier the app sleeps
+# when idle, so the timer can't fire. This scheduled job simply wakes the app
+# once a day; the service then runs ~20s after the cold start and generates the
+# day's content. No Azure resources, no backend changes.
+#
+# Note: scheduled workflows only run from the default branch (main) and may be
+# delayed a few minutes under GitHub load — fine for once-a-day content.
+
+on:
+  schedule:
+    - cron: '0 5 * * *' # 05:00 UTC daily (~07:00 Berlin in summer)
+  workflow_dispatch: # allow manual "generate now" from the Actions tab
+
+jobs:
+  wake:
+    name: Wake the app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the site (cold start triggers daily generation)
+        run: |
+          URL="https://lernfuchs-oezal-2026-a6e8b7ekfscqaghh.francecentral-01.azurewebsites.net/"
+          for attempt in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 120 "$URL" || echo 000)
+            echo "Attempt $attempt: HTTP $code"
+            if [ "$code" = "200" ]; then
+              echo "App is awake — DailyContentService will run shortly."
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::App did not respond with 200 after several attempts."
+          exit 1
