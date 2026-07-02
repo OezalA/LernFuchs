@@ -1,5 +1,6 @@
 using LernFuchs.Api.Data;
 using LernFuchs.Api.Services;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -32,7 +33,7 @@ builder.Services.AddControllers()
     });
 builder.Services.AddOpenApi();
 
-// --- CORS für das Angular-Frontend ---
+// --- CORS (nur für lokale Entwicklung nötig; in Produktion wird alles von hier ausgeliefert) ---
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
     ?? new[] { "http://localhost:4200" };
 builder.Services.AddCors(options =>
@@ -40,6 +41,12 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod()));
 
 var app = builder.Build();
+
+// Verzeichnis der SQLite-Datei sicherstellen (falls ein persistenter Pfad gesetzt ist).
+var dbPath = new SqliteConnectionStringBuilder(
+    builder.Configuration.GetConnectionString("Default")).DataSource;
+var dbDir = Path.GetDirectoryName(dbPath);
+if (!string.IsNullOrEmpty(dbDir)) Directory.CreateDirectory(dbDir);
 
 // Datenbank bei Start automatisch anlegen/migrieren und ggf. mit Startinhalten füllen.
 using (var scope = app.Services.CreateScope())
@@ -57,9 +64,15 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference(); // UI unter /scalar/v1
 }
 
-app.UseHttpsRedirection();
+// Angular-Frontend (statische Dateien aus wwwroot) ausliefern.
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseCors("frontend");
 app.UseAuthorization();
 app.MapControllers();
+
+// SPA-Fallback: unbekannte Pfade (z. B. /wortschatz) liefern die Angular-Startseite.
+app.MapFallbackToFile("index.html");
 
 app.Run();

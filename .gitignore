@@ -25,3 +25,6 @@ npm-debug.log*
 *.swp
 .DS_Store
 Thumbs.db
+
+# Published Angular assets served by the API
+backend/LernFuchs.Api/wwwroot/

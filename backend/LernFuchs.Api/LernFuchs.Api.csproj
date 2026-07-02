@@ -23,4 +23,19 @@
     <Content Update="Data\seed-data.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <!-- Beim 'dotnet publish' das Angular-Frontend bauen und nach wwwroot der Veröffentlichung legen. -->
+  <Target Name="PublishAngular" AfterTargets="ComputeFilesToPublish">
+    <Message Importance="high" Text="Baue Angular-Frontend für die Veröffentlichung…" />
+    <Exec Command="npm ci" WorkingDirectory="$(MSBuildProjectDirectory)/../../frontend"
+          Condition="!Exists('$(MSBuildProjectDirectory)/../../frontend/node_modules')" />
+    <Exec Command="npm run build" WorkingDirectory="$(MSBuildProjectDirectory)/../../frontend" />
+    <ItemGroup>
+      <_AngularDist Include="$(MSBuildProjectDirectory)/../../frontend/dist/lernfuchs-web/browser/**/*" />
+      <ResolvedFileToPublish Include="@(_AngularDist)">
+        <RelativePath>wwwroot/%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
 </Project>
