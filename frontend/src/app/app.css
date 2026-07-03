@@ -49,6 +49,7 @@
 .learn-switch {
   display: inline-flex; align-items: center; gap: 0.25rem;
   background: #fff3e2; border-radius: 999px; padding: 3px; padding-left: 0.7rem;
+  margin-left: 1.75rem;
 }
 .ls-label { font-weight: 800; font-size: 0.85rem; color: var(--fox-orange-dark); margin-right: 0.15rem; }
 .ls-btn {
