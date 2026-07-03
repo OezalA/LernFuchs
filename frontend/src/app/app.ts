@@ -21,9 +21,6 @@ export class App implements OnInit {
   muted = signal(this.celebrate.isMuted);
   language = this.langService.language;
 
-  // Kleines Sprachmenü im Kopfbereich.
-  langMenuOpen = signal(false);
-
   /** Füllstand des XP-Balkens im aktuellen Level (0–100 %). */
   levelProgress = computed(() => {
     const s = this.game.state();
@@ -42,12 +39,6 @@ export class App implements OnInit {
 
   /** Sprachwechsel (lädt neu, damit alle Bereiche umschalten). */
   switchLanguage(lang: Language): void {
-    this.langMenuOpen.set(false);
     this.langService.set(lang, true);
-  }
-
-  /** Kindgerechtes Label der Sprache (ohne Länderkürzel/Flaggen). */
-  langLabel(lang: Language): string {
-    return lang === 'Englisch' ? 'Englisch' : 'Deutsch';
   }
 }

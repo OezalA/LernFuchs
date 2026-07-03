@@ -4,6 +4,14 @@
     <span class="brand-name">LernFuchs</span>
   </a>
 
+  <div class="learn-switch" title="Was möchtest du üben?">
+    <span class="ls-label">Üben:</span>
+    <button class="ls-btn" [class.active]="language() === 'Deutsch'"
+            (click)="switchLanguage('Deutsch')">Deutsch</button>
+    <button class="ls-btn" [class.active]="language() === 'Englisch'"
+            (click)="switchLanguage('Englisch')">Englisch</button>
+  </div>
+
   @if (game.state(); as s) {
     <div class="hud">
       <div class="hud-level" title="Level {{ s.level }}">
@@ -20,28 +28,6 @@
     <a routerLink="/wortschatz" routerLinkActive="active">📚 Wortschatz</a>
     <a routerLink="/lesen" routerLinkActive="active">📖 Leseverständnis</a>
     <a routerLink="/spiele" routerLinkActive="active">🎮 Spiele</a>
-
-    <div class="lang-menu">
-      <button class="lang-current" (click)="langMenuOpen.set(!langMenuOpen())" title="Sprache wechseln">
-        <span class="lang-emoji">🌍</span>
-        <span class="lang-label">{{ langLabel(language()) }}</span>
-        <span class="caret">▾</span>
-      </button>
-      @if (langMenuOpen()) {
-        <div class="lang-backdrop" (click)="langMenuOpen.set(false)"></div>
-        <div class="lang-dropdown">
-          <button [class.active]="language() === 'Deutsch'" (click)="switchLanguage('Deutsch')">
-            Deutsch
-            @if (language() === 'Deutsch') { <span class="tick">✓</span> }
-          </button>
-          <button [class.active]="language() === 'Englisch'" (click)="switchLanguage('Englisch')">
-            Englisch
-            @if (language() === 'Englisch') { <span class="tick">✓</span> }
-          </button>
-        </div>
-      }
-    </div>
-
     <button class="sound-toggle" (click)="toggleSound()"
             [title]="muted() ? 'Ton einschalten' : 'Ton ausschalten'">
       {{ muted() ? '🔇' : '🔊' }}
