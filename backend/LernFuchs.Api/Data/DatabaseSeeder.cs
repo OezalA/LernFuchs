@@ -43,6 +43,7 @@ public static class DatabaseSeeder
                 Title = p.Title,
                 Text = p.Text,
                 Difficulty = ParseEnum(p.Difficulty, Difficulty.Mittel),
+                Language = ParseEnum(p.Language, Language.Deutsch),
                 Topic = p.Topic,
                 WordCount = p.WordCount,
                 Questions = p.Questions.Select(q => new ComprehensionQuestion
@@ -79,6 +80,7 @@ public static class DatabaseSeeder
                 Antonyms = w.Antonyms,
                 Conjugations = w.Conjugations ?? new(),
                 Difficulty = ParseEnum(w.Difficulty, Difficulty.Mittel),
+                Language = ParseEnum(w.Language, Language.Deutsch),
                 Topic = w.Topic,
                 SourcePassageId = sourceId
             });
@@ -105,7 +107,8 @@ public static class DatabaseSeeder
                 g.Passage.Topic ?? "",
                 g.Passage.WordCount,
                 g.Passage.Questions.Select(q => new SeedQuestion(
-                    q.QuestionText, q.Options, q.CorrectAnswer, q.Explanation)).ToList()));
+                    q.QuestionText, q.Options, q.CorrectAnswer, q.Explanation)).ToList(),
+                g.Passage.Language.ToString()));
 
             foreach (var w in g.DifficultWords)
             {
@@ -113,7 +116,7 @@ public static class DatabaseSeeder
                 words.Add(new SeedWord(
                     w.Word, w.Article.ToString(), w.Plural, w.WordType.ToString(),
                     w.DefinitionGerman, w.ExampleSentence, w.Synonyms, w.Antonyms,
-                    w.Difficulty.ToString(), w.Topic ?? "", w.Conjugations));
+                    w.Difficulty.ToString(), w.Topic ?? "", w.Conjugations, w.Language.ToString()));
             }
         }
 

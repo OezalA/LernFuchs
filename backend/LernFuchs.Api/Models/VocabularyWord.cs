@@ -45,6 +45,9 @@ public class VocabularyWord
 
     public Difficulty Difficulty { get; set; } = Difficulty.Mittel;
 
+    /// <summary>Lernsprache des Wortes (Deutsch oder Englisch als Fremdsprache).</summary>
+    public Language Language { get; set; } = Language.Deutsch;
+
     /// <summary>Themengebiet, z. B. "Schule", "Natur", "Familie".</summary>
     [MaxLength(60)]
     public string? Topic { get; set; }

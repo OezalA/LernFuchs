@@ -1,3 +1,4 @@
+using System.Text.Json;
 using LernFuchs.Api.Data;
 using LernFuchs.Api.Dtos;
 using LernFuchs.Api.Models;
@@ -28,19 +29,22 @@ public class ReadingController : ControllerBase
 
     /// <summary>Alle Lesetexte (ohne Fragen, als Übersicht).</summary>
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] string? topic, [FromQuery] Difficulty? difficulty)
+    public async Task<IActionResult> GetAll(
+        [FromQuery] string? topic, [FromQuery] Difficulty? difficulty, [FromQuery] Language? language = null)
     {
         var query = _db.ReadingPassages.AsQueryable();
         if (!string.IsNullOrWhiteSpace(topic))
             query = query.Where(p => p.Topic == topic);
         if (difficulty is not null)
             query = query.Where(p => p.Difficulty == difficulty);
+        if (language is not null)
+            query = query.Where(p => p.Language == language);
 
         var passages = await query
             .OrderByDescending(p => p.CreatedAt)
             .Select(p => new
             {
-                p.Id, p.Title, p.Difficulty, p.Topic, p.WordCount, p.CreatedAt,
+                p.Id, p.Title, p.Difficulty, p.Language, p.Topic, p.WordCount, p.CreatedAt,
                 QuestionCount = p.Questions.Count
             })
             .ToListAsync();
@@ -55,21 +59,36 @@ public class ReadingController : ControllerBase
             .FirstOrDefaultAsync(p => p.Id == id);
         if (passage is null) return NotFound();
 
-        // Wörter, die aus diesem Text stammen (zum Hervorheben im Text und für die Ergebnisseite).
+        // "words": die schwierigen Wörter aus dem Text – zum Unterstreichen und für
+        // die Ergebnisseite (gleiche Logik wie im Wortschatz/Spielen, entdoppelt).
         var words = await _db.VocabularyWords
             .Where(w => w.SourcePassageId == id)
             .Select(w => new { w.Id, w.Word, w.Article, w.Plural, w.WordType, w.DefinitionGerman, w.ExampleSentence })
             .ToListAsync();
 
+        // "glossary": vollständiges Wörterverzeichnis (Fremdsprache) – nur für die
+        // Wörter-Lernphase, damit fast jedes Wort des Textes abgefragt wird.
+        object glossary = new List<object>();
+        if (!string.IsNullOrWhiteSpace(passage.GlossaryJson))
+        {
+            var entries = JsonSerializer.Deserialize<List<GlossaryEntry>>(passage.GlossaryJson) ?? new();
+            glossary = entries.Select((g, i) => new
+            {
+                Id = i + 1, g.Word, Article = "None", Plural = (string?)null,
+                WordType = "Sonstiges", DefinitionGerman = g.Meaning, ExampleSentence = (string?)null
+            }).ToList();
+        }
+
         return Ok(new
         {
-            passage.Id, passage.Title, passage.Text, passage.Difficulty,
+            passage.Id, passage.Title, passage.Text, passage.Difficulty, passage.Language,
             passage.Topic, passage.WordCount, passage.CreatedAt,
             Questions = passage.Questions.Select(q => new
             {
                 q.Id, q.QuestionText, q.QuestionType, q.Options, q.CorrectAnswer, q.Explanation
             }),
-            Words = words
+            Words = words,
+            Glossary = glossary
         });
     }
 
@@ -83,14 +102,17 @@ public class ReadingController : ControllerBase
             return BadRequest("Bitte ein Thema angeben.");
 
         var questionCount = Math.Clamp(req.QuestionCount, 1, 10);
-        var generated = await _content.GenerateReadingPassageAsync(req.Topic, req.Difficulty, questionCount, ct);
+        var generated = await _content.GenerateReadingPassageAsync(
+            req.Topic, req.Difficulty, questionCount, req.Language, ct);
 
         _db.ReadingPassages.Add(generated.Passage);
         await _db.SaveChangesAsync(ct); // Passage-Id festlegen, um die Wörter zu verknüpfen
 
-        // Schwierige Wörter aus dem Text zum Wortschatz hinzufügen –
-        // aber keine Dubletten (Wörter, die es schon gibt).
-        var existing = (await _db.VocabularyWords.Select(w => w.Word).ToListAsync(ct))
+        // Schwierige Wörter aus dem Text zum Wortschatz hinzufügen – aber keine Dubletten
+        // (je Sprache, damit ein gleich geschriebenes DE-Wort ein EN-Wort nicht verdrängt).
+        var lang = generated.Passage.Language;
+        var existing = (await _db.VocabularyWords.Where(w => w.Language == lang)
+                .Select(w => w.Word).ToListAsync(ct))
             .Select(w => w.ToLowerInvariant())
             .ToHashSet();
 

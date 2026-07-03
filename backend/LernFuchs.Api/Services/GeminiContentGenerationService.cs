@@ -32,16 +32,34 @@ public class GeminiContentGenerationService : IContentGenerationService
     }
 
     public async Task<IReadOnlyList<VocabularyWord>> GenerateVocabularyAsync(
-        string topic, Difficulty difficulty, int count, CancellationToken ct = default)
+        string topic, Difficulty difficulty, int count,
+        Language language = Language.Deutsch, CancellationToken ct = default)
     {
-        var prompt = $$"""
-            Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
-            Erzeuge genau {{count}} nützliche deutsche Vokabeln zum Thema "{{topic}}" mit Schwierigkeitsgrad "{{difficulty}}".
-            Wähle altersgerechte, im Alltag und in der Schule häufige Wörter.
+        var task = language == Language.Englisch
+            ? $$"""
+                Du bist ein Englischlehrer für eine deutschsprachige Schülerin der 5. Klasse,
+                die Englisch als FREMDSPRACHE lernt (Anfängerniveau, ca. A1-A2).
+                Erzeuge genau {{count}} nützliche ENGLISCHE Vokabeln zum Thema "{{topic}}".
+                Wähle sehr einfache, häufige Alltagswörter (leichter als im Deutschen!).
+                Das Wort ("word") ist ENGLISCH. Die Erklärung ("definitionGerman") ist die deutsche
+                Bedeutung/Übersetzung, kindgerecht und kurz. Der Beispielsatz ("exampleSentence")
+                ist ein sehr einfacher ENGLISCHER Satz mit dem Wort.
+                "article" ist immer "none" (Englisch hat keine der/die/das-Artikel),
+                "plural" ist die englische Pluralform bei Nomen (sonst null),
+                "conjugations" bleibt immer ein leeres Array [].
+                """
+            : $$"""
+                Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
+                Erzeuge genau {{count}} nützliche deutsche Vokabeln zum Thema "{{topic}}" mit Schwierigkeitsgrad "{{difficulty}}".
+                Wähle altersgerechte, im Alltag und in der Schule häufige Wörter.
 
-            Alles ist auf DEUTSCH: das Wort, die Erklärung und der Beispielsatz.
-            Die Erklärung ("definitionGerman") muss so einfach sein, dass ein Kind der 5. Klasse
-            sie ohne Wörterbuch versteht: kurze Sätze, einfache Wörter, gern ein anschauliches Bild.
+                Alles ist auf DEUTSCH: das Wort, die Erklärung und der Beispielsatz.
+                Die Erklärung ("definitionGerman") muss so einfach sein, dass ein Kind der 5. Klasse
+                sie ohne Wörterbuch versteht: kurze Sätze, einfache Wörter, gern ein anschauliches Bild.
+                """;
+
+        var prompt = $$"""
+            {{task}}
 
             Antworte ausschließlich als JSON in genau dieser Struktur:
             {
@@ -79,22 +97,49 @@ public class GeminiContentGenerationService : IContentGenerationService
             Antonyms = w.Antonyms ?? new(),
             Conjugations = w.Conjugations ?? new(),
             Difficulty = difficulty,
+            Language = language,
             Topic = topic
         }).ToList();
     }
 
     public async Task<GeneratedReading> GenerateReadingPassageAsync(
         string topic, Difficulty difficulty, int questionCount,
+        Language language = Language.Deutsch,
         CancellationToken ct = default, string? modelOverride = null)
     {
-        var prompt = $$"""
-            Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
-            Schreibe einen altersgerechten deutschen Lesetext zum Thema "{{topic}}" mit Schwierigkeitsgrad "{{difficulty}}".
-            Der Text soll etwa 120-200 Wörter haben und interessant sein.
-            Formuliere danach genau {{questionCount}} Verständnisfragen zum Text.
+        var task = language == Language.Englisch
+            ? $$"""
+                Du bist ein Englischlehrer für eine deutschsprachige Schülerin der 5. Klasse,
+                die Englisch als FREMDSPRACHE lernt (Anfängerniveau, ca. A1-A2).
+                Schreibe einen SEHR EINFACHEN, kurzen ENGLISCHEN Lesetext zum Thema "{{topic}}":
+                nur etwa 60-110 Wörter, kurze Sätze, häufige Alltagswörter, meistens Präsens.
+                Er soll deutlich leichter sein als ein deutscher Text für dieses Alter.
+                Formuliere danach genau {{questionCount}} einfache Verständnisfragen AUF ENGLISCH zum Text.
 
-            Suche außerdem die 3-6 schwierigsten Wörter aus DEINEM Text heraus (Wörter, die ein Kind
-            der 5. Klasse vielleicht noch nicht kennt) und erkläre sie einfach – alles auf Deutsch.
+                Da Englisch eine Fremdsprache ist, kennt die Anfängerin viele Wörter noch NICHT –
+                auch einfache Alltagswörter (z. B. sky, run, happy, blue). Nimm deshalb etwa
+                10-16 nützliche englische Wörter aus DEINEM Text als "difficultWords" auf
+                (Nomen, Verben, Adjektive), die eine deutsche Anfängerin lernen sollte.
+                Erkläre jedes: "definitionGerman" ist die DEUTSCHE Übersetzung/Bedeutung
+                (kindgerecht), "exampleSentence" ist ein einfacher ENGLISCHER Beispielsatz.
+                "word" steht in der Grundform (z. B. "run" statt "running", "sky" statt "skies").
+                "article" ist immer "none", "conjugations" bleibt ein leeres Array [].
+
+                Titel, Text, Fragen und Antwortmöglichkeiten sind auf ENGLISCH;
+                nur "definitionGerman" der schwierigen Wörter ist auf Deutsch.
+                """
+            : $$"""
+                Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
+                Schreibe einen altersgerechten deutschen Lesetext zum Thema "{{topic}}" mit Schwierigkeitsgrad "{{difficulty}}".
+                Der Text soll etwa 120-200 Wörter haben und interessant sein.
+                Formuliere danach genau {{questionCount}} Verständnisfragen zum Text.
+
+                Suche außerdem die 3-6 schwierigsten Wörter aus DEINEM Text heraus (Wörter, die ein Kind
+                der 5. Klasse vielleicht noch nicht kennt) und erkläre sie einfach – alles auf Deutsch.
+                """;
+
+        var prompt = $$"""
+            {{task}}
 
             Alle Fragen sind Multiple-Choice mit genau 4 Antwortmöglichkeiten.
 
@@ -143,6 +188,7 @@ public class GeminiContentGenerationService : IContentGenerationService
             Title = dto.Title.Trim(),
             Text = text,
             Difficulty = difficulty,
+            Language = language,
             Topic = topic,
             WordCount = text.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length,
             Questions = dto.Questions.Select(q => new ComprehensionQuestion
@@ -168,6 +214,7 @@ public class GeminiContentGenerationService : IContentGenerationService
                 Synonyms = w.Synonyms ?? new(),
                 Antonyms = w.Antonyms ?? new(),
                 Difficulty = difficulty,
+                Language = language,
                 Topic = topic
             })
             .ToList();

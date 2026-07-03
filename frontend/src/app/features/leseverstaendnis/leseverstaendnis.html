@@ -62,12 +62,60 @@
     }
   }
 
+  <!-- ============ 1b) WÖRTER LERNEN (Karteikarten, Fremdsprache) ============ -->
+  @if (view() === 'vocab') {
+    <div class="quiz-head">
+      <button class="ghost back" (click)="backToList()">← Bibliothek</button>
+      <div class="progress-dots">
+        @for (w of vocabWords(); track $index; let i = $index) {
+          <span class="dot" [class.done]="i < vIndex()" [class.active]="i === vIndex()"></span>
+        }
+      </div>
+      <button class="ghost show-text" (click)="backToText()">📖 Zum Text</button>
+    </div>
+
+    @if (currentCard(); as w) {
+      <div class="q-count center">📚 Wörter lernen · {{ vIndex() + 1 }} / {{ vocabWords().length }}</div>
+
+      <div class="vflash" [class.is-flipped]="vFlipped()" (click)="flipCard()">
+        <div class="vface vfront">
+          <span class="vw">{{ w.word }}</span>
+          @if (canSpeak) {
+            <button class="icon-btn big" (click)="speakCard(); $event.stopPropagation()"
+                    title="Aussprache hören">🔊</button>
+          }
+          <span class="vhint muted">(Zum Umdrehen tippen)</span>
+        </div>
+        <div class="vface vback">
+          <span class="vmeaning">{{ w.definitionGerman }}</span>
+          <span class="vhint muted">{{ w.word }}</span>
+        </div>
+      </div>
+
+      <div class="reader-cta vocab-cta">
+        <button class="success" (click)="markCardLearned()">✓ Gewusst</button>
+        <button class="big-cta" (click)="nextCard()">
+          {{ vIndex() + 1 < vocabWords().length ? 'Weiter →' : 'Jetzt den Text lesen 📖' }}
+        </button>
+      </div>
+    }
+  }
+
   <!-- ============ 2) LESEN ============ -->
   @if (view() === 'reading') {
     <button class="ghost back" (click)="backToList()">← Zurück zur Bibliothek</button>
     @if (loadingText()) {
       <p class="center"><span class="spinner"></span> Lädt…</p>
     } @else if (current(); as p) {
+      @if (isEnglish && vocabWords().length && !vocabDone()) {
+        <div class="learn-hint">
+          <span class="learn-hint-text">💡 In diesem Text gibt es <strong>{{ vocabWords().length }}</strong>
+            englische Wörter. Möchtest du sie zuerst lernen?</span>
+          <button class="secondary" (click)="learnWords()">📚 Wörter lernen</button>
+        </div>
+      } @else if (isEnglish && vocabWords().length) {
+        <button class="ghost learn-again" (click)="learnWords()">🔁 Wörter nochmal lernen</button>
+      }
       <article class="card reader">
         <div class="reader-head">
           <h1 class="reader-title">{{ p.title }}</h1>

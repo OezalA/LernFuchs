@@ -4,6 +4,14 @@
     <span class="brand-name">LernFuchs</span>
   </a>
 
+  <div class="learn-switch" title="Was möchtest du üben?">
+    <span class="ls-label">Üben:</span>
+    <button class="ls-btn" [class.active]="language() === 'Deutsch'"
+            (click)="switchLanguage('Deutsch')">Deutsch</button>
+    <button class="ls-btn" [class.active]="language() === 'Englisch'"
+            (click)="switchLanguage('Englisch')">Englisch</button>
+  </div>
+
   @if (game.state(); as s) {
     <div class="hud">
       <div class="hud-level" title="Level {{ s.level }}">

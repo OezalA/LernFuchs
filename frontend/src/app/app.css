@@ -45,6 +45,20 @@
 }
 .sound-toggle:hover { background: #f5efe4; }
 
+/* Lern-Umschalter (links): Was möchte das Kind üben? – klar als Lerninhalt, nicht als Seitensprache */
+.learn-switch {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  background: #fff3e2; border-radius: 999px; padding: 3px; padding-left: 0.7rem;
+  margin-left: 1.75rem;
+}
+.ls-label { font-weight: 800; font-size: 0.85rem; color: var(--fox-orange-dark); margin-right: 0.15rem; }
+.ls-btn {
+  background: transparent; box-shadow: none; color: var(--muted);
+  border-radius: 999px; padding: 0.35rem 0.85rem; font-weight: 800; font-size: 0.9rem;
+}
+.ls-btn:hover { color: var(--ink); }
+.ls-btn.active { background: var(--fox-orange); color: #fff; box-shadow: var(--shadow); }
+
 /* Spielstand-Anzeige (HUD) */
 .hud {
   display: flex;

@@ -1,17 +1,21 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { LowerCasePipe } from '@angular/common';
 import { ReadingService } from '../../core/reading.service';
+import { VocabularyService } from '../../core/vocabulary.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
 import { ReadStateService } from '../../core/read-state.service';
+import { LanguageService } from '../../core/language.service';
 import { categoryFor } from '../../core/category';
 import {
   ReadingPassage, ReadingPassageSummary, PassageWord, ComprehensionQuestion, CheckResult
 } from '../../core/models';
 
-type View = 'list' | 'reading' | 'quiz' | 'result';
+// In der Fremdsprache (Englisch) lernt das Kind vor dem Lesen erst die Wörter ('vocab').
+type View = 'list' | 'vocab' | 'reading' | 'quiz' | 'result';
 interface TextToken { text: string; word?: PassageWord; }
+interface VocabItem { word: PassageWord; options: string[]; answer: string; }
 
 @Component({
   selector: 'app-leseverstaendnis',
@@ -21,12 +25,30 @@ interface TextToken { text: string; word?: PassageWord; }
 })
 export class Leseverstaendnis implements OnInit {
   private reading = inject(ReadingService);
+  private vocab = inject(VocabularyService);
   private speech = inject(SpeechService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
   private readState = inject(ReadStateService);
+  private lang = inject(LanguageService);
 
   canSpeak = this.speech.supported;
+  isEnglish = this.lang.current() === 'Englisch';
+
+  // Wörter-Lernphase vor dem Lesen (nur Englisch): Karteikarten der schwierigen Wörter.
+  vIndex = signal(0);
+  vFlipped = signal(false);
+  vocabDone = signal(false); // wurde die (optionale) Wörter-Lernphase abgeschlossen?
+  currentCard = computed<PassageWord | null>(() => this.vocabWords()[this.vIndex()] ?? null);
+
+  // --- Multiple-Choice-Abfrage: aktuell ungenutzt, wird in einer späteren Aufgabe wiederverwendet ---
+  vocabDeck = signal<VocabItem[]>([]);
+  vChosen = signal<string | null>(null);
+  currentVocabItem = computed<VocabItem | null>(() => this.vocabDeck()[this.vIndex()] ?? null);
+  vocabCorrect = computed(() => {
+    const item = this.currentVocabItem();
+    return !!item && this.vChosen() === item.answer;
+  });
 
   view = signal<View>('list');
   passages = signal<ReadingPassageSummary[]>([]);
@@ -110,12 +132,16 @@ export class Leseverstaendnis implements OnInit {
 
   /** Findet das schwierige Wort, dessen Wortstamm am besten zum Token passt. */
   private matchWord(token: string, words: PassageWord[]): PassageWord | undefined {
+    // Exakte Treffer zuerst – so werden auch kurze Wörter wie "sky" oder "run" erkannt.
+    for (const w of words) if (token === w.word.toLowerCase()) return w;
+
     let best: PassageWord | undefined;
     let bestLcp = 0;
     for (const w of words) {
       const base = w.word.toLowerCase();
       const lcp = this.commonPrefix(token, base);
-      const threshold = Math.max(4, base.length - 3); // gebeugte Endungen erlauben
+      // Gebeugte Formen zulassen; auch kürzere Wörter (mind. 3 gemeinsame Zeichen).
+      const threshold = Math.max(3, base.length - 3);
       if (lcp >= threshold && lcp > bestLcp) { best = w; bestLcp = lcp; }
     }
     return best;
@@ -145,9 +171,117 @@ export class Leseverstaendnis implements OnInit {
     this.loadingText.set(true);
     this.activeWord.set(null);
     this.reading.getById(id).subscribe({
-      next: p => { this.current.set(p); this.loadingText.set(false); this.view.set('reading'); },
+      next: p => {
+        this.current.set(p);
+        this.loadingText.set(false);
+        this.vocabDone.set(false);
+        // Direkt zum Text; in der Fremdsprache wird das Wörterlernen dort optional angeboten.
+        this.view.set('reading');
+      },
       error: () => { this.error.set('Der Text konnte nicht geöffnet werden.'); this.loadingText.set(false); }
     });
+  }
+
+  // ---- Wörter-Lernphase (optional, nur Englisch) ----
+  // Für die Lernkarten die schwierigen (unterstrichenen) Wörter des Textes nutzen.
+  vocabWords = computed<PassageWord[]>(() => this.current()?.words ?? []);
+
+  /** Startet die optionale Wörter-Lernphase (Karteikarten) vom Hinweis im Lesetext aus. */
+  learnWords(): void {
+    if (!this.vocabWords().length) return;
+    this.vIndex.set(0);
+    this.vFlipped.set(false);
+    this.view.set('vocab');
+    this.speakCard();
+  }
+
+  /** Dreht die Karteikarte um (Wort <-> Bedeutung). */
+  flipCard(): void {
+    this.vFlipped.update(f => !f);
+  }
+
+  /** Liest das aktuelle Wort auf Englisch vor. */
+  speakCard(): void {
+    const w = this.currentCard();
+    if (w) this.speech.speak(w.word);
+  }
+
+  /** "Gewusst": Wort direkt als gelernt markieren und zur nächsten Karte. */
+  markCardLearned(): void {
+    const w = this.currentCard();
+    if (w) this.vocab.markLearned(w.id).subscribe(res => this.game.handleActivity(res.game));
+    this.celebrate.correct();
+    this.nextCard();
+  }
+
+  /** Nächste Karte; nach der letzten geht es zum Text. */
+  nextCard(): void {
+    if (this.vIndex() + 1 < this.vocabWords().length) {
+      this.vIndex.update(i => i + 1);
+      this.vFlipped.set(false);
+      this.speakCard();
+    } else {
+      this.speech.stop();
+      this.vocabDone.set(true);
+      this.view.set('reading');
+    }
+  }
+
+  // --- Multiple-Choice-Abfrage: aktuell ungenutzt, für eine spätere Aufgabe aufbewahrt ---
+
+  /** Baut je Wort eine Multiple-Choice-Frage (deutsche Bedeutung + 3 Ablenker). */
+  private buildVocabDeck(words: PassageWord[]): VocabItem[] {
+    const allDefs = [...new Set(words.map(w => w.definitionGerman).filter(d => !!d))];
+    return words.map(w => {
+      const answer = w.definitionGerman;
+      const distractors = this.sample(allDefs.filter(d => d !== answer), 3);
+      const options = this.shuffle([answer, ...distractors]);
+      return { word: w, options, answer };
+    });
+  }
+
+  speakCurrentVocab(): void {
+    const item = this.currentVocabItem();
+    if (item) this.speech.speak(item.word.word);
+  }
+
+  chooseVocab(option: string): void {
+    if (this.vChosen()) return;
+    this.vChosen.set(option);
+    if (option === this.currentVocabItem()?.answer) this.celebrate.correct();
+    else this.celebrate.wrong();
+  }
+
+  vocabOptionState(option: string): 'correct' | 'wrong' | '' {
+    if (!this.vChosen()) return '';
+    const item = this.currentVocabItem();
+    if (option === item?.answer) return 'correct';
+    if (option === this.vChosen()) return 'wrong';
+    return '';
+  }
+
+  nextVocab(): void {
+    if (this.vIndex() + 1 < this.vocabDeck().length) {
+      this.vIndex.update(i => i + 1);
+      this.vChosen.set(null);
+      this.speakCurrentVocab();
+    } else {
+      // Wörter gelernt – zurück zum Text.
+      this.speech.stop();
+      this.vocabDone.set(true);
+      this.view.set('reading');
+    }
+  }
+
+  private sample<T>(arr: T[], n: number): T[] {
+    return this.shuffle([...arr]).slice(0, n);
+  }
+  private shuffle<T>(arr: T[]): T[] {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 
   startQuiz(): void {

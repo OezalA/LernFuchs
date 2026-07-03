@@ -60,13 +60,66 @@
     </section>
   }
 
+  <!-- Test (Multiple Choice; 4x hintereinander richtig = gelernt) -->
+  @if (testing()) {
+    <section class="card test">
+      @if (testFinished()) {
+        <div class="finished center">
+          <div class="big-fox">🏆</div>
+          <h2>Test geschafft!</h2>
+          <p>Du hast <strong>{{ testLearned() }}</strong> Wörter gelernt. 🎉</p>
+          <div class="row center">
+            <button class="ghost" (click)="stopTest()">Fertig</button>
+          </div>
+        </div>
+      } @else if (testCurrent(); as w) {
+        <div class="practice-head">
+          <span class="muted">Noch {{ testPool().length }} · gelernt: {{ testLearned() }}</span>
+          <button class="ghost small" (click)="stopTest()">Beenden</button>
+        </div>
+
+        <div class="test-word">
+          @if (articleLabel(w)) { <span class="article">{{ articleLabel(w) }}</span> }
+          <span class="word">{{ w.word }}</span>
+          @if (canSpeak) {
+            <button class="icon-btn big" (click)="speak(w, $event)" title="Vorlesen">🔊</button>
+          }
+        </div>
+
+        <div class="streak-dots" [title]="testProgress() + ' von ' + testTarget + ' richtig in Folge'">
+          @for (i of dots4; track i) {
+            <span class="sdot" [class.on]="i < testProgress()"></span>
+          }
+        </div>
+        <p class="muted center q-ask">Was bedeutet dieses Wort?</p>
+
+        <div class="q-options">
+          @for (opt of testOptions(); track opt) {
+            <button class="q-opt" [class]="testOptionState(opt)"
+                    [disabled]="!!testChosen()" (click)="chooseTest(opt)">{{ opt }}</button>
+          }
+        </div>
+
+        @if (testChosen()) {
+          <div class="q-feedback" [class.ok]="testCorrect()" [class.no]="!testCorrect()">
+            @if (testJustLearned()) { <span>🎉 Gelernt! Dieses Wort kannst du jetzt.</span> }
+            @else if (testCorrect()) { <span>✅ Richtig!</span> }
+            @else { <span>❌ Richtig ist: <strong>{{ w.definitionGerman }}</strong></span> }
+          </div>
+          <button class="big-cta" (click)="nextTest()">Weiter →</button>
+        }
+      }
+    </section>
+  }
+
   <!-- Wortliste nach Kategorie -->
   <section class="list-head">
     <h2>Wörter ({{ availableWords().length }})</h2>
     <div class="list-actions">
-      @if (availableWords().length && !practicing()) {
+      @if (availableWords().length && !practicing() && !testing()) {
         <button class="secondary" (click)="startDuePractice()">⏰ Heute üben</button>
-        <button (click)="startPractice()">🎴 Üben</button>
+        <button class="secondary" (click)="startPractice()">🎴 Üben</button>
+        <button (click)="startTest()">✅ Test</button>
       }
     </div>
   </section>

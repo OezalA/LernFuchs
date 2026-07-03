@@ -143,6 +143,40 @@ h1 { color: var(--fox-orange-dark); }
 
 .quiz-card { text-align: center; }
 .q-count { color: var(--muted); font-weight: 700; font-size: 0.9rem; }
+
+/* Optionaler Hinweis über dem Lesetext (Fremdsprache): erst Wörter lernen? */
+.learn-hint {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.7rem;
+  background: #fff8ee; border: 2px solid var(--sun-yellow); border-radius: 14px;
+  padding: 0.8rem 1rem; margin-bottom: 0.9rem;
+}
+.learn-hint-text { font-weight: 600; }
+.learn-hint button { white-space: nowrap; }
+.learn-again { margin-bottom: 0.8rem; font-size: 0.9rem; padding: 0.35rem 0.7rem; }
+
+/* Wörter-Lernphase: Karteikarten (Fremdsprache) */
+.vflash {
+  position: relative; margin: 0.5rem auto 0; max-width: 480px; min-height: 170px;
+  cursor: pointer; perspective: 1200px;
+}
+.vface {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: var(--radius); padding: 1.4rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 0.5rem; transition: transform 0.5s; box-shadow: var(--shadow);
+}
+.vfront { background: linear-gradient(160deg, #fff 0%, #fff3e2 100%); border: 3px solid var(--fox-orange); }
+.vback {
+  background: linear-gradient(160deg, #fff 0%, #eaf6ff 100%); border: 3px solid var(--sky-blue);
+  transform: rotateY(180deg);
+}
+.vflash.is-flipped .vfront { transform: rotateY(180deg); }
+.vflash.is-flipped .vback { transform: rotateY(360deg); }
+.vflash::after { content: ''; display: block; padding-bottom: 40%; }
+.vw { font-size: 2rem; font-weight: 900; color: var(--fox-orange-dark); }
+.vmeaning { font-size: 1.25rem; font-weight: 700; }
+.vhint { font-size: 0.85rem; }
+.vocab-cta { display: flex; gap: 0.6rem; justify-content: center; align-items: center; flex-wrap: wrap; }
 .q-text { margin: 0.5rem 0 1.2rem; font-size: 1.35rem; }
 .q-options { display: flex; flex-direction: column; gap: 0.7rem; }
 .q-opt {

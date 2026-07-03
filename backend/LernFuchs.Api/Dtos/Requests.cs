@@ -3,10 +3,14 @@ using LernFuchs.Api.Models;
 namespace LernFuchs.Api.Dtos;
 
 /// <summary>Anfrage zum Erzeugen neuer Vokabeln.</summary>
-public record GenerateVocabularyRequest(string Topic, Difficulty Difficulty = Difficulty.Mittel, int Count = 10);
+public record GenerateVocabularyRequest(
+    string Topic, Difficulty Difficulty = Difficulty.Mittel, int Count = 10,
+    Language Language = Language.Deutsch);
 
 /// <summary>Anfrage zum Erzeugen eines Lesetextes mit Fragen.</summary>
-public record GenerateReadingRequest(string Topic, Difficulty Difficulty = Difficulty.Mittel, int QuestionCount = 4);
+public record GenerateReadingRequest(
+    string Topic, Difficulty Difficulty = Difficulty.Mittel, int QuestionCount = 4,
+    Language Language = Language.Deutsch);
 
 /// <summary>Ergebnis einer Vokabel-Wiederholung (richtig/falsch beantwortet).</summary>
 public record ReviewResult(bool Correct);
