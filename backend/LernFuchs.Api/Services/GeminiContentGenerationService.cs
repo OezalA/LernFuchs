@@ -116,15 +116,14 @@ public class GeminiContentGenerationService : IContentGenerationService
                 Er soll deutlich leichter sein als ein deutscher Text für dieses Alter.
                 Formuliere danach genau {{questionCount}} einfache Verständnisfragen AUF ENGLISCH zum Text.
 
-                Da Englisch eine Fremdsprache ist, kennt die Anfängerin fast KEIN Wort sicher.
-                Nimm deshalb als "difficultWords" FAST JEDES inhaltstragende Wort deines Textes auf –
-                jedes Nomen, Verb, Adjektiv und Adverb sowie jedes wichtigere Wort. Ziel: möglichst
-                jedes Wort, das im Text vorkommt, ist dabei. Überspringe nur die einfachsten
-                Funktionswörter (a, an, the, and, or, but, is, are, am, I, you, he, she, it, we,
-                they, of, to, in, on, at). Erkläre jedes: "definitionGerman" ist die DEUTSCHE
-                Übersetzung/Bedeutung (kindgerecht), "exampleSentence" ist ein einfacher ENGLISCHER
-                Beispielsatz. "word" steht in der Grundform (z. B. "run" statt "running").
-                Jedes Wort nur EINMAL. "article" ist immer "none", "conjugations" bleibt [].
+                Da Englisch eine Fremdsprache ist, kennt die Anfängerin viele Wörter noch NICHT –
+                auch einfache Alltagswörter (z. B. sky, run, happy, blue). Nimm deshalb etwa
+                10-16 nützliche englische Wörter aus DEINEM Text als "difficultWords" auf
+                (Nomen, Verben, Adjektive), die eine deutsche Anfängerin lernen sollte.
+                Erkläre jedes: "definitionGerman" ist die DEUTSCHE Übersetzung/Bedeutung
+                (kindgerecht), "exampleSentence" ist ein einfacher ENGLISCHER Beispielsatz.
+                "word" steht in der Grundform (z. B. "run" statt "running", "sky" statt "skies").
+                "article" ist immer "none", "conjugations" bleibt ein leeres Array [].
 
                 Titel, Text, Fragen und Antwortmöglichkeiten sind auf ENGLISCH;
                 nur "definitionGerman" der schwierigen Wörter ist auf Deutsch.
@@ -219,16 +218,6 @@ public class GeminiContentGenerationService : IContentGenerationService
                 Topic = topic
             })
             .ToList();
-
-        // In der Fremdsprache das vollständige Wörterverzeichnis am Text speichern
-        // (für die Wörter-Lernphase, die fast jedes Wort abfragt).
-        if (language == Language.Englisch && difficultWords.Count > 0)
-        {
-            var glossary = difficultWords
-                .Select(w => new GlossaryEntry(w.Word, w.DefinitionGerman))
-                .ToList();
-            passage.GlossaryJson = JsonSerializer.Serialize(glossary);
-        }
 
         return new GeneratedReading(passage, difficultWords);
     }

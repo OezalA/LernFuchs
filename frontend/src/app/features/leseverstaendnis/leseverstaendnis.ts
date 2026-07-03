@@ -33,11 +33,15 @@ export class Leseverstaendnis implements OnInit {
   canSpeak = this.speech.supported;
   isEnglish = this.lang.current() === 'Englisch';
 
-  // Wörter-Lernphase vor dem Lesen (nur Englisch).
-  vocabDeck = signal<VocabItem[]>([]);
+  // Wörter-Lernphase vor dem Lesen (nur Englisch): Karteikarten der schwierigen Wörter.
   vIndex = signal(0);
-  vChosen = signal<string | null>(null);
+  vFlipped = signal(false);
   vocabDone = signal(false); // wurde die (optionale) Wörter-Lernphase abgeschlossen?
+  currentCard = computed<PassageWord | null>(() => this.vocabWords()[this.vIndex()] ?? null);
+
+  // --- Multiple-Choice-Abfrage: aktuell ungenutzt, wird in einer späteren Aufgabe wiederverwendet ---
+  vocabDeck = signal<VocabItem[]>([]);
+  vChosen = signal<string | null>(null);
   currentVocabItem = computed<VocabItem | null>(() => this.vocabDeck()[this.vIndex()] ?? null);
   vocabCorrect = computed(() => {
     const item = this.currentVocabItem();
@@ -177,27 +181,43 @@ export class Leseverstaendnis implements OnInit {
   }
 
   // ---- Wörter-Lernphase (optional, nur Englisch) ----
-  // Für die Lernphase das vollständige Wörterverzeichnis (glossary) nutzen,
-  // fürs Unterstreichen im Text aber nur die schwierigen Wörter (words).
-  vocabWords = computed<PassageWord[]>(() => {
-    const p = this.current();
-    if (!p) return [];
-    return p.glossary?.length ? p.glossary : p.words;
-  });
+  // Für die Lernkarten die schwierigen (unterstrichenen) Wörter des Textes nutzen.
+  vocabWords = computed<PassageWord[]>(() => this.current()?.words ?? []);
 
-  /** Startet die optionale Wörter-Lernphase (vom Hinweis im Lesetext aus). */
+  /** Startet die optionale Wörter-Lernphase (Karteikarten) vom Hinweis im Lesetext aus. */
   learnWords(): void {
-    const src = this.vocabWords();
-    if (src.length) this.startVocab(src);
+    if (!this.vocabWords().length) return;
+    this.vIndex.set(0);
+    this.vFlipped.set(false);
+    this.view.set('vocab');
+    this.speakCard();
   }
 
-  private startVocab(words: PassageWord[]): void {
-    this.vocabDeck.set(this.buildVocabDeck(words));
-    this.vIndex.set(0);
-    this.vChosen.set(null);
-    this.view.set('vocab');
-    this.speakCurrentVocab();
+  /** Dreht die Karteikarte um (Wort <-> Bedeutung). */
+  flipCard(): void {
+    this.vFlipped.update(f => !f);
   }
+
+  /** Liest das aktuelle Wort auf Englisch vor. */
+  speakCard(): void {
+    const w = this.currentCard();
+    if (w) this.speech.speak(w.word);
+  }
+
+  /** Nächste Karte; nach der letzten geht es zum Text. */
+  nextCard(): void {
+    if (this.vIndex() + 1 < this.vocabWords().length) {
+      this.vIndex.update(i => i + 1);
+      this.vFlipped.set(false);
+      this.speakCard();
+    } else {
+      this.speech.stop();
+      this.vocabDone.set(true);
+      this.view.set('reading');
+    }
+  }
+
+  // --- Multiple-Choice-Abfrage: aktuell ungenutzt, für eine spätere Aufgabe aufbewahrt ---
 
   /** Baut je Wort eine Multiple-Choice-Frage (deutsche Bedeutung + 3 Ablenker). */
   private buildVocabDeck(words: PassageWord[]): VocabItem[] {

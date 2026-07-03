@@ -62,47 +62,40 @@
     }
   }
 
-  <!-- ============ 1b) WÖRTER LERNEN (Fremdsprache) ============ -->
+  <!-- ============ 1b) WÖRTER LERNEN (Karteikarten, Fremdsprache) ============ -->
   @if (view() === 'vocab') {
     <div class="quiz-head">
       <button class="ghost back" (click)="backToList()">← Bibliothek</button>
       <div class="progress-dots">
-        @for (v of vocabDeck(); track $index; let i = $index) {
+        @for (w of vocabWords(); track $index; let i = $index) {
           <span class="dot" [class.done]="i < vIndex()" [class.active]="i === vIndex()"></span>
         }
       </div>
       <button class="ghost show-text" (click)="backToText()">📖 Zum Text</button>
     </div>
 
-    @if (currentVocabItem(); as item) {
-      <div class="card quiz-card">
-        <div class="q-count">📚 Wörter lernen · {{ vIndex() + 1 }} / {{ vocabDeck().length }}</div>
-        <div class="vocab-word">
-          <span class="vw">{{ item.word.word }}</span>
+    @if (currentCard(); as w) {
+      <div class="q-count center">📚 Wörter lernen · {{ vIndex() + 1 }} / {{ vocabWords().length }}</div>
+
+      <div class="vflash" [class.is-flipped]="vFlipped()" (click)="flipCard()">
+        <div class="vface vfront">
+          <span class="vw">{{ w.word }}</span>
           @if (canSpeak) {
-            <button class="icon-btn big" (click)="speakCurrentVocab()" title="Aussprache hören">🔊</button>
+            <button class="icon-btn big" (click)="speakCard(); $event.stopPropagation()"
+                    title="Aussprache hören">🔊</button>
           }
+          <span class="vhint muted">(Zum Umdrehen tippen)</span>
         </div>
-        <p class="vocab-ask muted">Was bedeutet dieses Wort?</p>
-
-        <div class="q-options">
-          @for (opt of item.options; track opt) {
-            <button class="q-opt" [class]="vocabOptionState(opt)"
-                    [disabled]="!!vChosen()" (click)="chooseVocab(opt)">
-              {{ opt }}
-            </button>
-          }
+        <div class="vface vback">
+          <span class="vmeaning">{{ w.definitionGerman }}</span>
+          <span class="vhint muted">{{ w.word }}</span>
         </div>
+      </div>
 
-        @if (vChosen()) {
-          <div class="q-feedback" [class.ok]="vocabCorrect()" [class.no]="!vocabCorrect()">
-            @if (vocabCorrect()) { <span>✅ Richtig!</span> }
-            @else { <span>❌ <strong>{{ item.word.word }}</strong> bedeutet: {{ item.answer }}</span> }
-          </div>
-          <button class="big-cta" (click)="nextVocab()">
-            {{ vIndex() + 1 < vocabDeck().length ? 'Weiter →' : 'Jetzt den Text lesen 📖' }}
-          </button>
-        }
+      <div class="reader-cta">
+        <button class="big-cta" (click)="nextCard()">
+          {{ vIndex() + 1 < vocabWords().length ? 'Weiter →' : 'Jetzt den Text lesen 📖' }}
+        </button>
       </div>
     }
   }
