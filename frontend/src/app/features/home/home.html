@@ -2,10 +2,24 @@
   <section class="hero card">
     <div class="hero-fox">🦊</div>
     <h1>Willkommen bei LernFuchs!</h1>
-    <p class="muted">
-      Hier lernst du neue deutsche Wörter und übst das Lesen.
-      Wähle aus, was du heute üben möchtest:
-    </p>
+    <p class="muted">Was möchtest du heute üben?</p>
+
+    <div class="lang-choice">
+      <button class="lang-card" [class.active]="language() === 'Deutsch'"
+              (click)="chooseLanguage('Deutsch')">
+        <span class="lang-flag">🇩🇪</span>
+        <span class="lang-name">Deutsch</span>
+        <span class="lang-sub">Wörter &amp; Lesen üben</span>
+        @if (language() === 'Deutsch') { <span class="lang-check">✓</span> }
+      </button>
+      <button class="lang-card" [class.active]="language() === 'Englisch'"
+              (click)="chooseLanguage('Englisch')">
+        <span class="lang-flag">🇬🇧</span>
+        <span class="lang-name">English</span>
+        <span class="lang-sub">Als Fremdsprache lernen</span>
+        @if (language() === 'Englisch') { <span class="lang-check">✓</span> }
+      </button>
+    </div>
   </section>
 
   @if (game.state(); as g) {

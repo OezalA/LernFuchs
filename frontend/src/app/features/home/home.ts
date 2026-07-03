@@ -2,7 +2,8 @@ import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StatsService } from '../../core/stats.service';
 import { GameService } from '../../core/game.service';
-import { LearningStats, ProgressData } from '../../core/models';
+import { LanguageService } from '../../core/language.service';
+import { LearningStats, ProgressData, Language } from '../../core/models';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,13 @@ import { LearningStats, ProgressData } from '../../core/models';
 export class Home implements OnInit {
   private statsService = inject(StatsService);
   protected game = inject(GameService);
+  private langService = inject(LanguageService);
+
+  language = this.langService.language;
+
+  chooseLanguage(lang: Language): void {
+    this.langService.set(lang);
+  }
 
   stats = signal<LearningStats | null>(null);
   progress = signal<ProgressData | null>(null);
