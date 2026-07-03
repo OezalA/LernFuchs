@@ -92,9 +92,11 @@ public class ReadingController : ControllerBase
         _db.ReadingPassages.Add(generated.Passage);
         await _db.SaveChangesAsync(ct); // Passage-Id festlegen, um die Wörter zu verknüpfen
 
-        // Schwierige Wörter aus dem Text zum Wortschatz hinzufügen –
-        // aber keine Dubletten (Wörter, die es schon gibt).
-        var existing = (await _db.VocabularyWords.Select(w => w.Word).ToListAsync(ct))
+        // Schwierige Wörter aus dem Text zum Wortschatz hinzufügen – aber keine Dubletten
+        // (je Sprache, damit ein gleich geschriebenes DE-Wort ein EN-Wort nicht verdrängt).
+        var lang = generated.Passage.Language;
+        var existing = (await _db.VocabularyWords.Where(w => w.Language == lang)
+                .Select(w => w.Word).ToListAsync(ct))
             .Select(w => w.ToLowerInvariant())
             .ToHashSet();
 

@@ -116,10 +116,14 @@ public class GeminiContentGenerationService : IContentGenerationService
                 Er soll deutlich leichter sein als ein deutscher Text für dieses Alter.
                 Formuliere danach genau {{questionCount}} einfache Verständnisfragen AUF ENGLISCH zum Text.
 
-                Suche außerdem die 3-6 schwierigsten ENGLISCHEN Wörter aus DEINEM Text heraus und
-                erkläre sie: "definitionGerman" ist die DEUTSCHE Übersetzung/Bedeutung (kindgerecht),
-                "exampleSentence" ist ein einfacher ENGLISCHER Beispielsatz. "article" ist immer "none",
-                "conjugations" bleibt ein leeres Array [].
+                Da Englisch eine Fremdsprache ist, kennt die Anfängerin viele Wörter noch NICHT –
+                auch einfache Alltagswörter (z. B. sky, run, happy, animal, blue). Nimm deshalb
+                MÖGLICHST VIELE nützliche englische Wörter aus DEINEM Text als "difficultWords" auf:
+                etwa 10-16 Wörter (Nomen, Verben, Adjektive), die eine deutsche Anfängerin lernen
+                sollte. Erkläre jedes: "definitionGerman" ist die DEUTSCHE Übersetzung/Bedeutung
+                (kindgerecht), "exampleSentence" ist ein einfacher ENGLISCHER Beispielsatz.
+                "word" steht in der Grundform (z. B. "run" statt "running", "sky" statt "skies").
+                "article" ist immer "none", "conjugations" bleibt ein leeres Array [].
 
                 Titel, Text, Fragen und Antwortmöglichkeiten sind auf ENGLISCH;
                 nur "definitionGerman" der schwierigen Wörter ist auf Deutsch.

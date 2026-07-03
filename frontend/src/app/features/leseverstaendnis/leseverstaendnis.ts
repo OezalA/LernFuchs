@@ -110,12 +110,16 @@ export class Leseverstaendnis implements OnInit {
 
   /** Findet das schwierige Wort, dessen Wortstamm am besten zum Token passt. */
   private matchWord(token: string, words: PassageWord[]): PassageWord | undefined {
+    // Exakte Treffer zuerst – so werden auch kurze Wörter wie "sky" oder "run" erkannt.
+    for (const w of words) if (token === w.word.toLowerCase()) return w;
+
     let best: PassageWord | undefined;
     let bestLcp = 0;
     for (const w of words) {
       const base = w.word.toLowerCase();
       const lcp = this.commonPrefix(token, base);
-      const threshold = Math.max(4, base.length - 3); // gebeugte Endungen erlauben
+      // Gebeugte Formen zulassen; auch kürzere Wörter (mind. 3 gemeinsame Zeichen).
+      const threshold = Math.max(3, base.length - 3);
       if (lcp >= threshold && lcp > bestLcp) { best = w; bestLcp = lcp; }
     }
     return best;
