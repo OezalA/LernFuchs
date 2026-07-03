@@ -33,6 +33,15 @@ public class DailyContentService : BackgroundService
         "Gesund bleiben", "Eine spannende Schatzsuche", "Der Ozean und seine Tiere",
     };
 
+    // Einfache Alltagsthemen für die Fremdsprache Englisch (Anfängerniveau).
+    private static readonly string[] EnglishTopicPool =
+    {
+        "Animals", "My Family", "Food and Drinks", "Colours", "My School",
+        "The Body", "Clothes", "The Weather", "Hobbies", "Pets",
+        "Fruits and Vegetables", "The House", "Sports", "Toys", "Feelings",
+        "Jobs", "Nature", "Holidays", "Days and Months", "My Town",
+    };
+
     private static readonly string[] Models =
     {
         "gemini-2.5-flash", "gemini-flash-lite-latest", "gemini-flash-latest",
@@ -88,22 +97,44 @@ public class DailyContentService : BackgroundService
         }
         if (state.LastDailyContentDate == today) return; // heute bereits erledigt
 
-        var count = Math.Clamp(_features.DailyTextCount, 1, 10);
-        var start = (today.DayNumber * count) % TopicPool.Length;
+        var germanCount = Math.Clamp(_features.DailyTextCount, 0, 10);
+        var englishCount = Math.Clamp(_features.DailyEnglishTextCount, 0, 10);
 
-        var existingWords = (await db.VocabularyWords.Select(w => w.Word).ToListAsync(ct))
+        // Deutsche (Muttersprache) und englische (Fremdsprache) Inhalte erzeugen.
+        var madeDe = await GenerateBatchAsync(db, content, Language.Deutsch, TopicPool, germanCount, today, ct);
+        var madeEn = await GenerateBatchAsync(db, content, Language.Englisch, EnglishTopicPool, englishCount, today, ct);
+
+        // Nur als erledigt markieren, wenn wenigstens ein Text erzeugt wurde (sonst später erneut versuchen).
+        if (madeDe + madeEn > 0) state.LastDailyContentDate = today;
+        await db.SaveChangesAsync(ct);
+        _logger.LogInformation("Täglicher Inhalt abgeschlossen: {De} DE + {En} EN Texte.", madeDe, madeEn);
+    }
+
+    /// <summary>Erzeugt einen Tagesstapel Texte einer Sprache und verknüpft die schwierigen Wörter.</summary>
+    private async Task<int> GenerateBatchAsync(
+        AppDbContext db, IContentGenerationService content, Language language,
+        string[] pool, int count, DateOnly today, CancellationToken ct)
+    {
+        if (count <= 0) return 0;
+        var start = (today.DayNumber * count) % pool.Length;
+
+        // Dubletten je Sprache vermeiden (gleiches Wort in DE und EN ist erlaubt).
+        var existingWords = (await db.VocabularyWords
+                .Where(w => w.Language == language)
+                .Select(w => w.Word).ToListAsync(ct))
             .Select(w => w.ToLowerInvariant())
             .ToHashSet();
 
         var made = 0;
         for (var i = 0; i < count; i++)
         {
-            var topic = TopicPool[(start + i) % TopicPool.Length];
-            var difficulty = TopicDifficulty.For(topic); // Schwierigkeit passend zum Thema
+            var topic = pool[(start + i) % pool.Length];
+            // Fremdsprache bewusst leicht halten; Muttersprache je nach Thema.
+            var difficulty = language == Language.Englisch ? Difficulty.Leicht : TopicDifficulty.For(topic);
             var model = Models[i % Models.Length];
             try
             {
-                var generated = await content.GenerateReadingPassageAsync(topic, difficulty, 4, ct, model);
+                var generated = await content.GenerateReadingPassageAsync(topic, difficulty, 4, language, ct, model);
                 db.ReadingPassages.Add(generated.Passage);
                 await db.SaveChangesAsync(ct); // Passage-Id für die Verknüpfung
 
@@ -114,19 +145,15 @@ public class DailyContentService : BackgroundService
                         db.VocabularyWords.Add(w);
                     }
                 made++;
-                _logger.LogInformation("Tagesinhalt erzeugt: {Topic} ({Difficulty})", topic, difficulty);
+                _logger.LogInformation("Tagesinhalt erzeugt: {Topic} ({Lang}, {Difficulty})", topic, language, difficulty);
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Tagesinhalt fehlgeschlagen: {Topic}", topic);
+                _logger.LogWarning(ex, "Tagesinhalt fehlgeschlagen: {Topic} ({Lang})", topic, language);
             }
             await DelaySafe(TimeSpan.FromSeconds(4), ct);
         }
-
-        // Nur als erledigt markieren, wenn wenigstens ein Text erzeugt wurde (sonst später erneut versuchen).
-        if (made > 0) state.LastDailyContentDate = today;
-        await db.SaveChangesAsync(ct);
-        _logger.LogInformation("Täglicher Inhalt abgeschlossen: {Made}/{Count} Texte.", made, count);
+        return made;
     }
 
     private static async Task<bool> DelaySafe(TimeSpan delay, CancellationToken ct)

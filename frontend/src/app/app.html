@@ -20,6 +20,12 @@
     <a routerLink="/wortschatz" routerLinkActive="active">📚 Wortschatz</a>
     <a routerLink="/lesen" routerLinkActive="active">📖 Leseverständnis</a>
     <a routerLink="/spiele" routerLinkActive="active">🎮 Spiele</a>
+    <div class="lang-switch" title="Sprache wechseln">
+      <button class="lang-btn" [class.active]="language() === 'Deutsch'"
+              (click)="setLanguage('Deutsch')">🇩🇪 DE</button>
+      <button class="lang-btn" [class.active]="language() === 'Englisch'"
+              (click)="setLanguage('Englisch')">🇬🇧 EN</button>
+    </div>
     <button class="sound-toggle" (click)="toggleSound()"
             [title]="muted() ? 'Ton einschalten' : 'Ton ausschalten'">
       {{ muted() ? '🔇' : '🔊' }}

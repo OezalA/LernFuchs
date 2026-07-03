@@ -32,11 +32,13 @@ public sealed class FakeContentGenerationService : IContentGenerationService
     public GeneratedReading? ReadingToReturn { get; set; }
 
     public Task<IReadOnlyList<VocabularyWord>> GenerateVocabularyAsync(
-        string topic, Difficulty difficulty, int count, CancellationToken ct = default)
+        string topic, Difficulty difficulty, int count,
+        Language language = Language.Deutsch, CancellationToken ct = default)
         => Task.FromResult(VocabToReturn);
 
     public Task<GeneratedReading> GenerateReadingPassageAsync(
         string topic, Difficulty difficulty, int questionCount,
+        Language language = Language.Deutsch,
         CancellationToken ct = default, string? modelOverride = null)
         => Task.FromResult(ReadingToReturn
             ?? throw new InvalidOperationException("ReadingToReturn wurde im Test nicht gesetzt."));

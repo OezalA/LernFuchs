@@ -6,6 +6,7 @@ export type WordType =
   | 'Nomen' | 'Verb' | 'Adjektiv' | 'Adverb'
   | 'Praeposition' | 'Pronomen' | 'Konjunktion' | 'Sonstiges';
 export type QuestionType = 'MultipleChoice' | 'OpenEnded';
+export type Language = 'Deutsch' | 'Englisch';
 
 export interface VocabularyProgress {
   id: number;
@@ -29,6 +30,7 @@ export interface VocabularyWord {
   antonyms: string[];
   conjugations: string[];
   difficulty: Difficulty;
+  language: Language;
   topic: string | null;
   sourcePassageId: number | null;
   createdAt: string;
@@ -60,6 +62,7 @@ export interface ReadingPassage {
   title: string;
   text: string;
   difficulty: Difficulty;
+  language: Language;
   topic: string | null;
   wordCount: number;
   createdAt: string;
@@ -71,6 +74,7 @@ export interface ReadingPassageSummary {
   id: number;
   title: string;
   difficulty: Difficulty;
+  language: Language;
   topic: string | null;
   wordCount: number;
   createdAt: string;
@@ -146,10 +150,12 @@ export interface GenerateVocabularyRequest {
   topic: string;
   difficulty: Difficulty;
   count: number;
+  language?: Language;
 }
 
 export interface GenerateReadingRequest {
   topic: string;
   difficulty: Difficulty;
   questionCount: number;
+  language?: Language;
 }

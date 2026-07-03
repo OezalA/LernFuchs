@@ -28,19 +28,22 @@ public class ReadingController : ControllerBase
 
     /// <summary>Alle Lesetexte (ohne Fragen, als Übersicht).</summary>
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] string? topic, [FromQuery] Difficulty? difficulty)
+    public async Task<IActionResult> GetAll(
+        [FromQuery] string? topic, [FromQuery] Difficulty? difficulty, [FromQuery] Language? language = null)
     {
         var query = _db.ReadingPassages.AsQueryable();
         if (!string.IsNullOrWhiteSpace(topic))
             query = query.Where(p => p.Topic == topic);
         if (difficulty is not null)
             query = query.Where(p => p.Difficulty == difficulty);
+        if (language is not null)
+            query = query.Where(p => p.Language == language);
 
         var passages = await query
             .OrderByDescending(p => p.CreatedAt)
             .Select(p => new
             {
-                p.Id, p.Title, p.Difficulty, p.Topic, p.WordCount, p.CreatedAt,
+                p.Id, p.Title, p.Difficulty, p.Language, p.Topic, p.WordCount, p.CreatedAt,
                 QuestionCount = p.Questions.Count
             })
             .ToListAsync();
@@ -63,7 +66,7 @@ public class ReadingController : ControllerBase
 
         return Ok(new
         {
-            passage.Id, passage.Title, passage.Text, passage.Difficulty,
+            passage.Id, passage.Title, passage.Text, passage.Difficulty, passage.Language,
             passage.Topic, passage.WordCount, passage.CreatedAt,
             Questions = passage.Questions.Select(q => new
             {
@@ -83,7 +86,8 @@ public class ReadingController : ControllerBase
             return BadRequest("Bitte ein Thema angeben.");
 
         var questionCount = Math.Clamp(req.QuestionCount, 1, 10);
-        var generated = await _content.GenerateReadingPassageAsync(req.Topic, req.Difficulty, questionCount, ct);
+        var generated = await _content.GenerateReadingPassageAsync(
+            req.Topic, req.Difficulty, questionCount, req.Language, ct);
 
         _db.ReadingPassages.Add(generated.Passage);
         await _db.SaveChangesAsync(ct); // Passage-Id festlegen, um die Wörter zu verknüpfen

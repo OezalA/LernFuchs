@@ -5,14 +5,16 @@ import {
   ReadingPassage, ReadingPassageSummary, CheckResult,
   GenerateReadingRequest, Difficulty
 } from './models';
+import { LanguageService } from './language.service';
 
 @Injectable({ providedIn: 'root' })
 export class ReadingService {
   private http = inject(HttpClient);
+  private lang = inject(LanguageService);
   private base = '/api/reading';
 
   getAll(topic?: string, difficulty?: Difficulty): Observable<ReadingPassageSummary[]> {
-    const params: Record<string, string> = {};
+    const params: Record<string, string> = { language: this.lang.current() };
     if (topic) params['topic'] = topic;
     if (difficulty) params['difficulty'] = difficulty;
     return this.http.get<ReadingPassageSummary[]>(this.base, { params });

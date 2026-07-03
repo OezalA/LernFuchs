@@ -3,7 +3,7 @@
   <p class="muted">Übe deine Wörter mit einem Spiel – dabei sammelst du XP und Abzeichen!</p>
 
   <div class="game-tiles">
-    @for (g of games; track g.path) {
+    @for (g of games(); track g.path) {
       <a class="game-tile card" [routerLink]="g.path">
         <div class="game-icon">{{ g.icon }}</div>
         <h2>{{ g.title }}</h2>

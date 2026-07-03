@@ -9,7 +9,8 @@ public record SeedPassage(
     string Difficulty,
     string Topic,
     int WordCount,
-    List<SeedQuestion> Questions);
+    List<SeedQuestion> Questions,
+    string? Language = null); // fehlt in Altdaten -> Deutsch
 
 public record SeedQuestion(
     string QuestionText,
@@ -28,4 +29,5 @@ public record SeedWord(
     List<string> Antonyms,
     string Difficulty,
     string Topic,
-    List<string>? Conjugations = null);
+    List<string>? Conjugations = null,
+    string? Language = null); // fehlt in Altdaten -> Deutsch

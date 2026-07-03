@@ -33,13 +33,16 @@ public class VocabularyController : ControllerBase
 
     /// <summary>Alle Vokabeln, optional gefiltert nach Thema/Schwierigkeit.</summary>
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] string? topic, [FromQuery] Difficulty? difficulty)
+    public async Task<IActionResult> GetAll(
+        [FromQuery] string? topic, [FromQuery] Difficulty? difficulty, [FromQuery] Language? language = null)
     {
         var query = _db.VocabularyWords.Include(w => w.Progress).AsQueryable();
         if (!string.IsNullOrWhiteSpace(topic))
             query = query.Where(w => w.Topic == topic);
         if (difficulty is not null)
             query = query.Where(w => w.Difficulty == difficulty);
+        if (language is not null)
+            query = query.Where(w => w.Language == language);
 
         var words = await query.OrderBy(w => w.Word).ToListAsync();
         return Ok(words);
@@ -55,11 +58,14 @@ public class VocabularyController : ControllerBase
 
     /// <summary>Vokabeln, die heute zur Wiederholung fällig sind (Leitner-System).</summary>
     [HttpGet("due")]
-    public async Task<IActionResult> GetDue([FromQuery] int limit = 20)
+    public async Task<IActionResult> GetDue([FromQuery] int limit = 20, [FromQuery] Language? language = null)
     {
         var now = DateTime.UtcNow;
+        var query = _db.VocabularyWords.Include(w => w.Progress).AsQueryable();
+        if (language is not null)
+            query = query.Where(w => w.Language == language);
         // Neue Wörter (ohne Fortschritt) zuerst, dann die am längsten fälligen.
-        var due = await _db.VocabularyWords.Include(w => w.Progress)
+        var due = await query
             .Where(w => w.Progress == null || w.Progress.NextReviewAt <= now)
             .OrderBy(w => w.Progress == null ? DateTime.MinValue : w.Progress.NextReviewAt)
             .Take(limit)
@@ -77,7 +83,7 @@ public class VocabularyController : ControllerBase
             return BadRequest("Bitte ein Thema angeben.");
 
         var count = Math.Clamp(req.Count, 1, 30);
-        var words = await _content.GenerateVocabularyAsync(req.Topic, req.Difficulty, count, ct);
+        var words = await _content.GenerateVocabularyAsync(req.Topic, req.Difficulty, count, req.Language, ct);
 
         _db.VocabularyWords.AddRange(words);
         await _db.SaveChangesAsync(ct);

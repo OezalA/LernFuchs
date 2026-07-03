@@ -36,3 +36,10 @@ public enum QuestionType
     MultipleChoice,
     OpenEnded
 }
+
+/// <summary>Lernsprache eines Inhalts: Deutsch (Muttersprache) oder Englisch (Fremdsprache).</summary>
+public enum Language
+{
+    Deutsch,
+    Englisch
+}

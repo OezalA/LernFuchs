@@ -16,6 +16,9 @@ public class ReadingPassage
 
     public Difficulty Difficulty { get; set; } = Difficulty.Mittel;
 
+    /// <summary>Lernsprache des Textes (Deutsch oder Englisch als Fremdsprache).</summary>
+    public Language Language { get; set; } = Language.Deutsch;
+
     /// <summary>Themengebiet, z. B. "Tiere", "Abenteuer".</summary>
     [MaxLength(60)]
     public string? Topic { get; set; }
