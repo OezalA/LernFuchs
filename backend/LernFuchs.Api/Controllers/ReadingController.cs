@@ -1,3 +1,4 @@
+using System.Text.Json;
 using LernFuchs.Api.Data;
 using LernFuchs.Api.Dtos;
 using LernFuchs.Api.Models;
@@ -58,11 +59,30 @@ public class ReadingController : ControllerBase
             .FirstOrDefaultAsync(p => p.Id == id);
         if (passage is null) return NotFound();
 
-        // Wörter, die aus diesem Text stammen (zum Hervorheben im Text und für die Ergebnisseite).
-        var words = await _db.VocabularyWords
-            .Where(w => w.SourcePassageId == id)
-            .Select(w => new { w.Id, w.Word, w.Article, w.Plural, w.WordType, w.DefinitionGerman, w.ExampleSentence })
-            .ToListAsync();
+        // Wörter zum Hervorheben im Text und für die Wörter-Lernphase.
+        // Fremdsprache: vollständiges Wörterverzeichnis des Textes (GlossaryJson),
+        // sonst die aus dem Text verknüpften Wörter (Muttersprache/Altdaten).
+        object words;
+        if (!string.IsNullOrWhiteSpace(passage.GlossaryJson))
+        {
+            var glossary = JsonSerializer.Deserialize<List<GlossaryEntry>>(passage.GlossaryJson) ?? new();
+            words = glossary.Select((g, i) => new
+            {
+                Id = i + 1, g.Word, Article = "None", Plural = (string?)null,
+                WordType = "Sonstiges", DefinitionGerman = g.Meaning, ExampleSentence = (string?)null
+            }).ToList();
+        }
+        else
+        {
+            words = await _db.VocabularyWords
+                .Where(w => w.SourcePassageId == id)
+                .Select(w => new
+                {
+                    w.Id, w.Word, Article = w.Article.ToString(), w.Plural,
+                    WordType = w.WordType.ToString(), w.DefinitionGerman, w.ExampleSentence
+                })
+                .ToListAsync();
+        }
 
         return Ok(new
         {

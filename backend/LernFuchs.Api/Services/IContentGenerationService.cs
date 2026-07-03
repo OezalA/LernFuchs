@@ -27,3 +27,6 @@ public interface IContentGenerationService
 
 /// <summary>Ergebnis der Lesetext-Erzeugung: Text plus die schwierigen Wörter daraus.</summary>
 public record GeneratedReading(ReadingPassage Passage, IReadOnlyList<VocabularyWord> DifficultWords);
+
+/// <summary>Ein Eintrag im Wörterverzeichnis eines Textes: englisches Wort + deutsche Bedeutung.</summary>
+public record GlossaryEntry(string Word, string Meaning);
