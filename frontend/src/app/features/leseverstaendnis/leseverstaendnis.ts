@@ -5,13 +5,16 @@ import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
 import { ReadStateService } from '../../core/read-state.service';
+import { LanguageService } from '../../core/language.service';
 import { categoryFor } from '../../core/category';
 import {
   ReadingPassage, ReadingPassageSummary, PassageWord, ComprehensionQuestion, CheckResult
 } from '../../core/models';
 
-type View = 'list' | 'reading' | 'quiz' | 'result';
+// In der Fremdsprache (Englisch) lernt das Kind vor dem Lesen erst die Wörter ('vocab').
+type View = 'list' | 'vocab' | 'reading' | 'quiz' | 'result';
 interface TextToken { text: string; word?: PassageWord; }
+interface VocabItem { word: PassageWord; options: string[]; answer: string; }
 
 @Component({
   selector: 'app-leseverstaendnis',
@@ -25,8 +28,20 @@ export class Leseverstaendnis implements OnInit {
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
   private readState = inject(ReadStateService);
+  private lang = inject(LanguageService);
 
   canSpeak = this.speech.supported;
+  isEnglish = this.lang.current() === 'Englisch';
+
+  // Wörter-Lernphase vor dem Lesen (nur Englisch).
+  vocabDeck = signal<VocabItem[]>([]);
+  vIndex = signal(0);
+  vChosen = signal<string | null>(null);
+  currentVocabItem = computed<VocabItem | null>(() => this.vocabDeck()[this.vIndex()] ?? null);
+  vocabCorrect = computed(() => {
+    const item = this.currentVocabItem();
+    return !!item && this.vChosen() === item.answer;
+  });
 
   view = signal<View>('list');
   passages = signal<ReadingPassageSummary[]>([]);
@@ -149,9 +164,78 @@ export class Leseverstaendnis implements OnInit {
     this.loadingText.set(true);
     this.activeWord.set(null);
     this.reading.getById(id).subscribe({
-      next: p => { this.current.set(p); this.loadingText.set(false); this.view.set('reading'); },
+      next: p => {
+        this.current.set(p);
+        this.loadingText.set(false);
+        // Fremdsprache: erst die Wörter lernen, dann lesen. Muttersprache: direkt lesen.
+        if (this.isEnglish && p.words.length) this.startVocab(p);
+        else this.view.set('reading');
+      },
       error: () => { this.error.set('Der Text konnte nicht geöffnet werden.'); this.loadingText.set(false); }
     });
+  }
+
+  // ---- Wörter-Lernphase (nur Englisch) ----
+  private startVocab(p: ReadingPassage): void {
+    this.vocabDeck.set(this.buildVocabDeck(p.words));
+    this.vIndex.set(0);
+    this.vChosen.set(null);
+    this.view.set('vocab');
+    this.speakCurrentVocab();
+  }
+
+  /** Baut je Wort eine Multiple-Choice-Frage (deutsche Bedeutung + 3 Ablenker). */
+  private buildVocabDeck(words: PassageWord[]): VocabItem[] {
+    const allDefs = [...new Set(words.map(w => w.definitionGerman).filter(d => !!d))];
+    return words.map(w => {
+      const answer = w.definitionGerman;
+      const distractors = this.sample(allDefs.filter(d => d !== answer), 3);
+      const options = this.shuffle([answer, ...distractors]);
+      return { word: w, options, answer };
+    });
+  }
+
+  speakCurrentVocab(): void {
+    const item = this.currentVocabItem();
+    if (item) this.speech.speak(item.word.word);
+  }
+
+  chooseVocab(option: string): void {
+    if (this.vChosen()) return;
+    this.vChosen.set(option);
+    if (option === this.currentVocabItem()?.answer) this.celebrate.correct();
+    else this.celebrate.wrong();
+  }
+
+  vocabOptionState(option: string): 'correct' | 'wrong' | '' {
+    if (!this.vChosen()) return '';
+    const item = this.currentVocabItem();
+    if (option === item?.answer) return 'correct';
+    if (option === this.vChosen()) return 'wrong';
+    return '';
+  }
+
+  nextVocab(): void {
+    if (this.vIndex() + 1 < this.vocabDeck().length) {
+      this.vIndex.update(i => i + 1);
+      this.vChosen.set(null);
+      this.speakCurrentVocab();
+    } else {
+      // Wörter gelernt – jetzt den Text lesen.
+      this.speech.stop();
+      this.view.set('reading');
+    }
+  }
+
+  private sample<T>(arr: T[], n: number): T[] {
+    return this.shuffle([...arr]).slice(0, n);
+  }
+  private shuffle<T>(arr: T[]): T[] {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 
   startQuiz(): void {

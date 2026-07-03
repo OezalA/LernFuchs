@@ -62,6 +62,51 @@
     }
   }
 
+  <!-- ============ 1b) WÖRTER LERNEN (Fremdsprache) ============ -->
+  @if (view() === 'vocab') {
+    <div class="quiz-head">
+      <button class="ghost back" (click)="backToList()">← Zurück zur Bibliothek</button>
+      <div class="progress-dots">
+        @for (v of vocabDeck(); track $index; let i = $index) {
+          <span class="dot" [class.done]="i < vIndex()" [class.active]="i === vIndex()"></span>
+        }
+      </div>
+      <span class="vocab-tag">📚 Wörter lernen</span>
+    </div>
+
+    @if (currentVocabItem(); as item) {
+      <div class="card quiz-card">
+        <div class="q-count">Wort {{ vIndex() + 1 }} von {{ vocabDeck().length }}</div>
+        <div class="vocab-word">
+          <span class="vw">{{ item.word.word }}</span>
+          @if (canSpeak) {
+            <button class="icon-btn big" (click)="speakCurrentVocab()" title="Aussprache hören">🔊</button>
+          }
+        </div>
+        <p class="vocab-ask muted">Was bedeutet dieses Wort?</p>
+
+        <div class="q-options">
+          @for (opt of item.options; track opt) {
+            <button class="q-opt" [class]="vocabOptionState(opt)"
+                    [disabled]="!!vChosen()" (click)="chooseVocab(opt)">
+              {{ opt }}
+            </button>
+          }
+        </div>
+
+        @if (vChosen()) {
+          <div class="q-feedback" [class.ok]="vocabCorrect()" [class.no]="!vocabCorrect()">
+            @if (vocabCorrect()) { <span>✅ Richtig!</span> }
+            @else { <span>❌ <strong>{{ item.word.word }}</strong> bedeutet: {{ item.answer }}</span> }
+          </div>
+          <button class="big-cta" (click)="nextVocab()">
+            {{ vIndex() + 1 < vocabDeck().length ? 'Weiter →' : 'Jetzt den Text lesen 📖' }}
+          </button>
+        }
+      </div>
+    }
+  }
+
   <!-- ============ 2) LESEN ============ -->
   @if (view() === 'reading') {
     <button class="ghost back" (click)="backToList()">← Zurück zur Bibliothek</button>

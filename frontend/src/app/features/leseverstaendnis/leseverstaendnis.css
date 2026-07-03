@@ -143,6 +143,18 @@ h1 { color: var(--fox-orange-dark); }
 
 .quiz-card { text-align: center; }
 .q-count { color: var(--muted); font-weight: 700; font-size: 0.9rem; }
+
+/* Wörter-Lernphase (Fremdsprache) */
+.vocab-tag {
+  font-size: 0.85rem; font-weight: 800; color: var(--fox-orange-dark);
+  background: #fff3e2; border-radius: 999px; padding: 0.3rem 0.7rem; white-space: nowrap;
+}
+.vocab-word {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  margin: 0.6rem 0 0.2rem;
+}
+.vocab-word .vw { font-size: 2.2rem; font-weight: 900; color: var(--fox-orange-dark); }
+.vocab-ask { margin: 0 0 1rem; font-size: 1rem; }
 .q-text { margin: 0.5rem 0 1.2rem; font-size: 1.35rem; }
 .q-options { display: flex; flex-direction: column; gap: 0.7rem; }
 .q-opt {
