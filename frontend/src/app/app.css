@@ -45,25 +45,61 @@
 }
 .sound-toggle:hover { background: #f5efe4; }
 
-/* Sprachumschalter (DE / EN) */
-.lang-switch {
-  display: inline-flex;
-  gap: 2px;
-  background: #f0e6d6;
-  border-radius: 999px;
-  padding: 2px;
+/* Sprachmenü im Kopfbereich (aktuelle Sprache + kleines Dropdown) */
+.lang-menu { position: relative; }
+.lang-current {
+  background: #fff; color: var(--ink);
+  box-shadow: none; border: 2px solid #eee4d4;
+  border-radius: 999px; padding: 0.35rem 0.7rem;
+  font-size: 0.85rem; font-weight: 800;
+  display: inline-flex; align-items: center; gap: 0.25rem;
 }
-.lang-btn {
-  background: transparent;
-  box-shadow: none;
-  border-radius: 999px;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--muted);
+.lang-current:hover { border-color: var(--fox-orange); background: #fff8ee; }
+.lang-current .caret { font-size: 0.7rem; color: var(--muted); }
+.lang-backdrop { position: fixed; inset: 0; z-index: 20; }
+.lang-dropdown {
+  position: absolute; top: calc(100% + 6px); right: 0; z-index: 21;
+  background: #fff; border: 2px solid #eee4d4; border-radius: 12px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.16);
+  padding: 4px; display: flex; flex-direction: column; gap: 2px; min-width: 150px;
 }
-.lang-btn:hover { color: var(--ink); }
-.lang-btn.active { background: var(--fox-orange); color: #fff; }
+.lang-dropdown button {
+  background: transparent; box-shadow: none; color: var(--ink);
+  border-radius: 8px; padding: 0.5rem 0.7rem; font-weight: 700; font-size: 0.9rem;
+  text-align: left;
+}
+.lang-dropdown button:hover { background: #fff8ee; }
+.lang-dropdown button.active { background: var(--fox-orange); color: #fff; }
+
+/* Erstauswahl der Lernsprache (Onboarding) */
+.onboarding {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, #fff8ee 0%, #ffe9d2 100%);
+}
+.onboarding-card { text-align: center; max-width: 520px; padding: 2.2rem 1.6rem; }
+.ob-fox { font-size: 3.8rem; }
+.onboarding-card h1 { margin: 0.4rem 0 0.4rem; color: var(--fox-orange-dark); }
+.ob-cards {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 1.4rem 0 0.6rem;
+}
+.ob-hint { font-size: 0.85rem; }
+
+/* Große Sprachkarten (Onboarding) */
+.lang-card {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  min-width: 175px;
+  background: #fff; color: var(--ink);
+  border: 2px solid #eee4d4; border-radius: 18px;
+  padding: 1.1rem 1.4rem; box-shadow: var(--shadow);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+.lang-card:hover { transform: translateY(-3px); border-color: var(--fox-orange); box-shadow: 0 12px 26px rgba(0,0,0,0.14); }
+.lang-flag { font-size: 2.6rem; line-height: 1; }
+.lang-name { font-size: 1.2rem; font-weight: 900; }
+.lang-sub { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
 
 /* Spielstand-Anzeige (HUD) */
 .hud {

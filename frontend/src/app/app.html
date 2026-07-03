@@ -1,48 +1,81 @@
-<header class="topbar">
-  <a class="brand" routerLink="/">
-    <span class="fox">🦊</span>
-    <span class="brand-name">LernFuchs</span>
-  </a>
-
-  @if (game.state(); as s) {
-    <div class="hud">
-      <div class="hud-level" title="Level {{ s.level }}">
-        <span class="lvl-badge">Lvl {{ s.level }}</span>
-        <div class="xp-bar"><div class="xp-fill" [style.width.%]="levelProgress()"></div></div>
+@if (needsChoice()) {
+  <!-- Erstauswahl der Lernsprache (nur beim allerersten Start) -->
+  <div class="onboarding">
+    <div class="onboarding-card card">
+      <div class="ob-fox">🦊</div>
+      <h1>Hallo, ich bin der LernFuchs!</h1>
+      <p class="muted">Was möchtest du lernen?</p>
+      <div class="ob-cards">
+        <button class="lang-card" (click)="choose('Deutsch')">
+          <span class="lang-flag">🇩🇪</span>
+          <span class="lang-name">Deutsch</span>
+          <span class="lang-sub">Muttersprache</span>
+        </button>
+        <button class="lang-card" (click)="choose('Englisch')">
+          <span class="lang-flag">🇬🇧</span>
+          <span class="lang-name">English</span>
+          <span class="lang-sub">Fremdsprache</span>
+        </button>
       </div>
-      <div class="hud-streak" title="{{ s.currentStreakDays }} Tage in Folge">
-        🔥 <strong>{{ s.currentStreakDays }}</strong>
+      <p class="ob-hint muted">Du kannst später oben jederzeit wechseln.</p>
+    </div>
+  </div>
+} @else {
+  <header class="topbar">
+    <a class="brand" routerLink="/">
+      <span class="fox">🦊</span>
+      <span class="brand-name">LernFuchs</span>
+    </a>
+
+    @if (game.state(); as s) {
+      <div class="hud">
+        <div class="hud-level" title="Level {{ s.level }}">
+          <span class="lvl-badge">Lvl {{ s.level }}</span>
+          <div class="xp-bar"><div class="xp-fill" [style.width.%]="levelProgress()"></div></div>
+        </div>
+        <div class="hud-streak" title="{{ s.currentStreakDays }} Tage in Folge">
+          🔥 <strong>{{ s.currentStreakDays }}</strong>
+        </div>
+      </div>
+    }
+
+    <nav class="nav">
+      <a routerLink="/wortschatz" routerLinkActive="active">📚 Wortschatz</a>
+      <a routerLink="/lesen" routerLinkActive="active">📖 Leseverständnis</a>
+      <a routerLink="/spiele" routerLinkActive="active">🎮 Spiele</a>
+
+      <div class="lang-menu">
+        <button class="lang-current" (click)="langMenuOpen.set(!langMenuOpen())" title="Sprache wechseln">
+          {{ language() === 'Englisch' ? '🇬🇧 English' : '🇩🇪 Deutsch' }}
+          <span class="caret">▾</span>
+        </button>
+        @if (langMenuOpen()) {
+          <div class="lang-backdrop" (click)="langMenuOpen.set(false)"></div>
+          <div class="lang-dropdown">
+            <button [class.active]="language() === 'Deutsch'" (click)="switchLanguage('Deutsch')">🇩🇪 Deutsch</button>
+            <button [class.active]="language() === 'Englisch'" (click)="switchLanguage('Englisch')">🇬🇧 English</button>
+          </div>
+        }
+      </div>
+
+      <button class="sound-toggle" (click)="toggleSound()"
+              [title]="muted() ? 'Ton einschalten' : 'Ton ausschalten'">
+        {{ muted() ? '🔇' : '🔊' }}
+      </button>
+    </nav>
+  </header>
+
+  @if (game.latestAchievement(); as badge) {
+    <div class="achievement-toast">
+      <span class="at-icon">{{ badge.icon }}</span>
+      <div>
+        <div class="at-title">Neues Abzeichen!</div>
+        <div class="at-name">{{ badge.title }} – {{ badge.description }}</div>
       </div>
     </div>
   }
 
-  <nav class="nav">
-    <a routerLink="/wortschatz" routerLinkActive="active">📚 Wortschatz</a>
-    <a routerLink="/lesen" routerLinkActive="active">📖 Leseverständnis</a>
-    <a routerLink="/spiele" routerLinkActive="active">🎮 Spiele</a>
-    <div class="lang-switch" title="Sprache wechseln">
-      <button class="lang-btn" [class.active]="language() === 'Deutsch'"
-              (click)="setLanguage('Deutsch')">🇩🇪 DE</button>
-      <button class="lang-btn" [class.active]="language() === 'Englisch'"
-              (click)="setLanguage('Englisch')">🇬🇧 EN</button>
-    </div>
-    <button class="sound-toggle" (click)="toggleSound()"
-            [title]="muted() ? 'Ton einschalten' : 'Ton ausschalten'">
-      {{ muted() ? '🔇' : '🔊' }}
-    </button>
-  </nav>
-</header>
-
-@if (game.latestAchievement(); as badge) {
-  <div class="achievement-toast">
-    <span class="at-icon">{{ badge.icon }}</span>
-    <div>
-      <div class="at-title">Neues Abzeichen!</div>
-      <div class="at-name">{{ badge.title }} – {{ badge.description }}</div>
-    </div>
-  </div>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 }
-
-<main>
-  <router-outlet></router-outlet>
-</main>

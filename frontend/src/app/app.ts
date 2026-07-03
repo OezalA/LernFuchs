@@ -21,6 +21,11 @@ export class App implements OnInit {
   muted = signal(this.celebrate.isMuted);
   language = this.langService.language;
 
+  // Erstauswahl der Lernsprache (Onboarding), solange noch nichts gewählt wurde.
+  needsChoice = signal(!this.langService.hasChosen());
+  // Kleines Sprachmenü im Kopfbereich.
+  langMenuOpen = signal(false);
+
   /** Füllstand des XP-Balkens im aktuellen Level (0–100 %). */
   levelProgress = computed(() => {
     const s = this.game.state();
@@ -37,7 +42,15 @@ export class App implements OnInit {
     this.muted.set(this.celebrate.toggleMute());
   }
 
-  setLanguage(lang: Language): void {
-    this.langService.set(lang);
+  /** Erstauswahl im Onboarding (kein Neuladen nötig, App startet dann normal). */
+  choose(lang: Language): void {
+    this.langService.set(lang, false);
+    this.needsChoice.set(false);
+  }
+
+  /** Sprachwechsel während der Nutzung (lädt neu, damit alle Bereiche umschalten). */
+  switchLanguage(lang: Language): void {
+    this.langMenuOpen.set(false);
+    this.langService.set(lang, true);
   }
 }

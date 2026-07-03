@@ -20,16 +20,29 @@ export class LanguageService {
     return this._language();
   }
 
-  /** Wechselt die Sprache und lädt die App neu. */
-  set(lang: Language): void {
-    if (lang === this._language()) return;
+  /** Ob der Nutzer die Lernsprache schon einmal bewusst gewählt hat. */
+  hasChosen(): boolean {
+    try {
+      const v = localStorage.getItem(this.key);
+      return v === 'Deutsch' || v === 'Englisch';
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Setzt die Lernsprache. Beim Wechsel während der Nutzung wird die App neu
+   * geladen (<paramref name="reload"/>=true), bei der Erstauswahl nicht nötig.
+   */
+  set(lang: Language, reload = true): void {
+    const changed = lang !== this._language();
     try {
       localStorage.setItem(this.key, lang);
     } catch {
       // localStorage nicht verfügbar – ignorieren.
     }
     this._language.set(lang);
-    location.reload();
+    if (reload && changed) location.reload();
   }
 
   private load(): Language {
