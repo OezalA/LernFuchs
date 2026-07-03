@@ -92,7 +92,8 @@
         </div>
       </div>
 
-      <div class="reader-cta">
+      <div class="reader-cta vocab-cta">
+        <button class="success" (click)="markCardLearned()">✓ Gewusst</button>
         <button class="big-cta" (click)="nextCard()">
           {{ vIndex() + 1 < vocabWords().length ? 'Weiter →' : 'Jetzt den Text lesen 📖' }}
         </button>

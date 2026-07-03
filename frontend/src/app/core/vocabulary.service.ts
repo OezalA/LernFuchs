@@ -33,6 +33,12 @@ export class VocabularyService {
       `${this.base}/${id}/review`, { correct });
   }
 
+  /** Markiert ein Wort direkt als gelernt (für "Gewusst" und den 4er-Test). */
+  markLearned(id: number): Observable<{ progress: VocabularyProgress; game: GameActivityResult }> {
+    return this.http.post<{ progress: VocabularyProgress; game: GameActivityResult }>(
+      `${this.base}/${id}/learned`, {});
+  }
+
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.base}/${id}`);
   }

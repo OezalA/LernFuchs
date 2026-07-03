@@ -176,6 +176,7 @@ h1 { color: var(--fox-orange-dark); }
 .vw { font-size: 2rem; font-weight: 900; color: var(--fox-orange-dark); }
 .vmeaning { font-size: 1.25rem; font-weight: 700; }
 .vhint { font-size: 0.85rem; }
+.vocab-cta { display: flex; gap: 0.6rem; justify-content: center; align-items: center; flex-wrap: wrap; }
 .q-text { margin: 0.5rem 0 1.2rem; font-size: 1.35rem; }
 .q-options { display: flex; flex-direction: column; gap: 0.7rem; }
 .q-opt {

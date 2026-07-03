@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { LowerCasePipe } from '@angular/common';
 import { ReadingService } from '../../core/reading.service';
+import { VocabularyService } from '../../core/vocabulary.service';
 import { SpeechService } from '../../core/speech.service';
 import { CelebrationService } from '../../core/celebration.service';
 import { GameService } from '../../core/game.service';
@@ -24,6 +25,7 @@ interface VocabItem { word: PassageWord; options: string[]; answer: string; }
 })
 export class Leseverstaendnis implements OnInit {
   private reading = inject(ReadingService);
+  private vocab = inject(VocabularyService);
   private speech = inject(SpeechService);
   private celebrate = inject(CelebrationService);
   private game = inject(GameService);
@@ -202,6 +204,14 @@ export class Leseverstaendnis implements OnInit {
   speakCard(): void {
     const w = this.currentCard();
     if (w) this.speech.speak(w.word);
+  }
+
+  /** "Gewusst": Wort direkt als gelernt markieren und zur nächsten Karte. */
+  markCardLearned(): void {
+    const w = this.currentCard();
+    if (w) this.vocab.markLearned(w.id).subscribe(res => this.game.handleActivity(res.game));
+    this.celebrate.correct();
+    this.nextCard();
   }
 
   /** Nächste Karte; nach der letzten geht es zum Text. */

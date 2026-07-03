@@ -121,6 +121,29 @@ public class VocabularyController : ControllerBase
         return Ok(new { progress = p, game });
     }
 
+    /// <summary>Markiert ein Wort direkt als "gelernt" (höchste Box). Für "Gewusst" und den 4er-Test.</summary>
+    [HttpPost("{id:int}/learned")]
+    public async Task<IActionResult> MarkLearned(int id)
+    {
+        var word = await _db.VocabularyWords.Include(w => w.Progress)
+            .FirstOrDefaultAsync(w => w.Id == id);
+        if (word is null) return NotFound();
+
+        var p = word.Progress ??= new VocabularyProgress { VocabularyWordId = id };
+        var wasLearned = p.Box >= 5;
+
+        p.TimesCorrect++;
+        p.Box = 5; // höchste Leitner-Box = gelernt
+        p.LastReviewedAt = DateTime.UtcNow;
+        p.NextReviewAt = DateTime.UtcNow.AddDays(BoxIntervalsDays[5]);
+
+        await _db.SaveChangesAsync();
+
+        // XP nur beim erstmaligen Lernen vergeben.
+        var game = await _game.RegisterActivityAsync(wasLearned ? 0 : 15, wordsReviewed: 1);
+        return Ok(new { progress = p, game });
+    }
+
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
