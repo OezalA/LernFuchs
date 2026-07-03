@@ -65,18 +65,18 @@
   <!-- ============ 1b) WÖRTER LERNEN (Fremdsprache) ============ -->
   @if (view() === 'vocab') {
     <div class="quiz-head">
-      <button class="ghost back" (click)="backToList()">← Zurück zur Bibliothek</button>
+      <button class="ghost back" (click)="backToList()">← Bibliothek</button>
       <div class="progress-dots">
         @for (v of vocabDeck(); track $index; let i = $index) {
           <span class="dot" [class.done]="i < vIndex()" [class.active]="i === vIndex()"></span>
         }
       </div>
-      <span class="vocab-tag">📚 Wörter lernen</span>
+      <button class="ghost show-text" (click)="backToText()">📖 Zum Text</button>
     </div>
 
     @if (currentVocabItem(); as item) {
       <div class="card quiz-card">
-        <div class="q-count">Wort {{ vIndex() + 1 }} von {{ vocabDeck().length }}</div>
+        <div class="q-count">📚 Wörter lernen · {{ vIndex() + 1 }} / {{ vocabDeck().length }}</div>
         <div class="vocab-word">
           <span class="vw">{{ item.word.word }}</span>
           @if (canSpeak) {
