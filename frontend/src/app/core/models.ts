@@ -68,6 +68,7 @@ export interface ReadingPassage {
   createdAt: string;
   questions: ComprehensionQuestion[];
   words: PassageWord[];
+  glossary: PassageWord[]; // vollständiges Wörterverzeichnis (Fremdsprache) für die Lernphase
 }
 
 export interface ReadingPassageSummary {

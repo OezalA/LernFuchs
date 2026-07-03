@@ -113,13 +113,13 @@
     @if (loadingText()) {
       <p class="center"><span class="spinner"></span> Lädt…</p>
     } @else if (current(); as p) {
-      @if (isEnglish && p.words.length && !vocabDone()) {
+      @if (isEnglish && vocabWords().length && !vocabDone()) {
         <div class="learn-hint">
-          <span class="learn-hint-text">💡 In diesem Text gibt es <strong>{{ p.words.length }}</strong>
-            neue englische Wörter. Möchtest du sie zuerst lernen?</span>
+          <span class="learn-hint-text">💡 In diesem Text gibt es <strong>{{ vocabWords().length }}</strong>
+            englische Wörter. Möchtest du sie zuerst lernen?</span>
           <button class="secondary" (click)="learnWords()">📚 Wörter lernen</button>
         </div>
-      } @else if (isEnglish && p.words.length) {
+      } @else if (isEnglish && vocabWords().length) {
         <button class="ghost learn-again" (click)="learnWords()">🔁 Wörter nochmal lernen</button>
       }
       <article class="card reader">

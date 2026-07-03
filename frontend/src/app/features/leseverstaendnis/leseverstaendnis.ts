@@ -177,14 +177,22 @@ export class Leseverstaendnis implements OnInit {
   }
 
   // ---- Wörter-Lernphase (optional, nur Englisch) ----
+  // Für die Lernphase das vollständige Wörterverzeichnis (glossary) nutzen,
+  // fürs Unterstreichen im Text aber nur die schwierigen Wörter (words).
+  vocabWords = computed<PassageWord[]>(() => {
+    const p = this.current();
+    if (!p) return [];
+    return p.glossary?.length ? p.glossary : p.words;
+  });
+
   /** Startet die optionale Wörter-Lernphase (vom Hinweis im Lesetext aus). */
   learnWords(): void {
-    const p = this.current();
-    if (p && p.words.length) this.startVocab(p);
+    const src = this.vocabWords();
+    if (src.length) this.startVocab(src);
   }
 
-  private startVocab(p: ReadingPassage): void {
-    this.vocabDeck.set(this.buildVocabDeck(p.words));
+  private startVocab(words: PassageWord[]): void {
+    this.vocabDeck.set(this.buildVocabDeck(words));
     this.vIndex.set(0);
     this.vChosen.set(null);
     this.view.set('vocab');

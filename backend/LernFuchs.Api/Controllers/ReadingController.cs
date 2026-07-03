@@ -59,29 +59,24 @@ public class ReadingController : ControllerBase
             .FirstOrDefaultAsync(p => p.Id == id);
         if (passage is null) return NotFound();
 
-        // Wörter zum Hervorheben im Text und für die Wörter-Lernphase.
-        // Fremdsprache: vollständiges Wörterverzeichnis des Textes (GlossaryJson),
-        // sonst die aus dem Text verknüpften Wörter (Muttersprache/Altdaten).
-        object words;
+        // "words": die schwierigen Wörter aus dem Text – zum Unterstreichen und für
+        // die Ergebnisseite (gleiche Logik wie im Wortschatz/Spielen, entdoppelt).
+        var words = await _db.VocabularyWords
+            .Where(w => w.SourcePassageId == id)
+            .Select(w => new { w.Id, w.Word, w.Article, w.Plural, w.WordType, w.DefinitionGerman, w.ExampleSentence })
+            .ToListAsync();
+
+        // "glossary": vollständiges Wörterverzeichnis (Fremdsprache) – nur für die
+        // Wörter-Lernphase, damit fast jedes Wort des Textes abgefragt wird.
+        object glossary = new List<object>();
         if (!string.IsNullOrWhiteSpace(passage.GlossaryJson))
         {
-            var glossary = JsonSerializer.Deserialize<List<GlossaryEntry>>(passage.GlossaryJson) ?? new();
-            words = glossary.Select((g, i) => new
+            var entries = JsonSerializer.Deserialize<List<GlossaryEntry>>(passage.GlossaryJson) ?? new();
+            glossary = entries.Select((g, i) => new
             {
                 Id = i + 1, g.Word, Article = "None", Plural = (string?)null,
                 WordType = "Sonstiges", DefinitionGerman = g.Meaning, ExampleSentence = (string?)null
             }).ToList();
-        }
-        else
-        {
-            words = await _db.VocabularyWords
-                .Where(w => w.SourcePassageId == id)
-                .Select(w => new
-                {
-                    w.Id, w.Word, Article = w.Article.ToString(), w.Plural,
-                    WordType = w.WordType.ToString(), w.DefinitionGerman, w.ExampleSentence
-                })
-                .ToListAsync();
         }
 
         return Ok(new
@@ -92,7 +87,8 @@ public class ReadingController : ControllerBase
             {
                 q.Id, q.QuestionText, q.QuestionType, q.Options, q.CorrectAnswer, q.Explanation
             }),
-            Words = words
+            Words = words,
+            Glossary = glossary
         });
     }
 
