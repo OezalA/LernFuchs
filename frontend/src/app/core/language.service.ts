@@ -3,9 +3,8 @@ import { Language } from './models';
 
 /**
  * Merkt sich – ohne Login, nur im Browser (localStorage) – die aktuell gewählte
- * Lernsprache (Deutsch oder Englisch als Fremdsprache). Beim Umschalten wird die
- * Seite neu geladen, damit alle Bereiche (Lesen, Wortschatz, Spiele) in der neuen
- * Sprache frisch laden.
+ * Lernsprache. Beim Wechsel wird die App an der Startseite neu geladen, damit alle
+ * Bereiche (Lesen, Wortschatz, Spiele, Dashboard) frisch in der neuen Sprache starten.
  */
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
@@ -20,29 +19,17 @@ export class LanguageService {
     return this._language();
   }
 
-  /** Ob der Nutzer die Lernsprache schon einmal bewusst gewählt hat. */
-  hasChosen(): boolean {
-    try {
-      const v = localStorage.getItem(this.key);
-      return v === 'Deutsch' || v === 'Englisch';
-    } catch {
-      return false;
-    }
-  }
-
-  /**
-   * Setzt die Lernsprache. Beim Wechsel während der Nutzung wird die App neu
-   * geladen (<paramref name="reload"/>=true), bei der Erstauswahl nicht nötig.
-   */
-  set(lang: Language, reload = true): void {
-    const changed = lang !== this._language();
+  /** Wechselt die Lernsprache und startet auf der Startseite neu. */
+  set(lang: Language): void {
+    if (lang === this._language()) return;
     try {
       localStorage.setItem(this.key, lang);
     } catch {
       // localStorage nicht verfügbar – ignorieren.
     }
     this._language.set(lang);
-    if (reload && changed) location.reload();
+    // Zur Startseite wechseln und neu laden (nicht an Ort und Stelle umschalten).
+    window.location.assign('/');
   }
 
   private load(): Language {

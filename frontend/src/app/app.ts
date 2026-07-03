@@ -21,6 +21,18 @@ export class App implements OnInit {
   muted = signal(this.celebrate.isMuted);
   language = this.langService.language;
 
+  // Verfügbare Lernsprachen (später einfach erweiterbar, z. B. 'Spanisch').
+  readonly languages: Language[] = ['Deutsch', 'Englisch'];
+  langMenuOpen = signal(false);
+
+  /** Andere Sprachen als die aktuelle (für "Wechseln zu …"). */
+  otherLanguages = computed(() => this.languages.filter(l => l !== this.language()));
+
+  /** Anzeigename einer Sprache. */
+  langLabel(lang: Language): string {
+    return lang; // Deutsch / Englisch (später ggf. eigene Labels)
+  }
+
   /** Füllstand des XP-Balkens im aktuellen Level (0–100 %). */
   levelProgress = computed(() => {
     const s = this.game.state();
@@ -37,8 +49,9 @@ export class App implements OnInit {
     this.muted.set(this.celebrate.toggleMute());
   }
 
-  /** Sprachwechsel (lädt neu, damit alle Bereiche umschalten). */
+  /** Wechselt die Lernsprache (App startet an der Startseite neu). */
   switchLanguage(lang: Language): void {
-    this.langService.set(lang, true);
+    this.langMenuOpen.set(false);
+    this.langService.set(lang);
   }
 }

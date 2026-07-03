@@ -45,19 +45,32 @@
 }
 .sound-toggle:hover { background: #f5efe4; }
 
-/* Lern-Umschalter (links): Was möchte das Kind üben? – klar als Lerninhalt, nicht als Seitensprache */
-.learn-switch {
-  display: inline-flex; align-items: center; gap: 0.25rem;
-  background: #fff3e2; border-radius: 999px; padding: 3px; padding-left: 0.7rem;
-  margin-left: 1.75rem;
+/* Lern-Sprache (links): "Du übst: X" + Menü "Wechseln zu …" – klar als Lerninhalt */
+.lang-menu { position: relative; margin-left: 1.75rem; }
+.lang-current {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  background: linear-gradient(160deg, #ffd98a 0%, var(--fox-orange) 100%);
+  color: #fff; border: none; box-shadow: var(--shadow);
+  border-radius: 999px; padding: 0.4rem 0.9rem;
+  font-size: 0.95rem; font-weight: 800;
+  transition: transform 0.12s ease, filter 0.12s ease;
 }
-.ls-label { font-weight: 800; font-size: 0.85rem; color: var(--fox-orange-dark); margin-right: 0.15rem; }
-.ls-btn {
-  background: transparent; box-shadow: none; color: var(--muted);
-  border-radius: 999px; padding: 0.35rem 0.85rem; font-weight: 800; font-size: 0.9rem;
+.lang-current:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.lang-current .lc-label { font-weight: 700; opacity: 0.95; }
+.lang-current .caret { font-size: 0.75rem; opacity: 0.9; }
+.lang-backdrop { position: fixed; inset: 0; z-index: 20; }
+.lang-dropdown {
+  position: absolute; top: calc(100% + 8px); left: 0; z-index: 21;
+  background: #fff; border: 2px solid #eee4d4; border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  padding: 6px; display: flex; flex-direction: column; gap: 3px; min-width: 170px;
 }
-.ls-btn:hover { color: var(--ink); }
-.ls-btn.active { background: var(--fox-orange); color: #fff; box-shadow: var(--shadow); }
+.ld-head { font-size: 0.78rem; font-weight: 800; color: var(--muted); padding: 0.2rem 0.6rem 0.1rem; }
+.lang-dropdown button {
+  background: transparent; box-shadow: none; color: var(--ink); text-align: left;
+  border-radius: 10px; padding: 0.55rem 0.8rem; font-weight: 800; font-size: 1rem;
+}
+.lang-dropdown button:hover { background: #fff3e2; color: var(--fox-orange-dark); }
 
 /* Spielstand-Anzeige (HUD) */
 .hud {

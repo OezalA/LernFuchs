@@ -4,12 +4,21 @@
     <span class="brand-name">LernFuchs</span>
   </a>
 
-  <div class="learn-switch" title="Was möchtest du üben?">
-    <span class="ls-label">Üben:</span>
-    <button class="ls-btn" [class.active]="language() === 'Deutsch'"
-            (click)="switchLanguage('Deutsch')">Deutsch</button>
-    <button class="ls-btn" [class.active]="language() === 'Englisch'"
-            (click)="switchLanguage('Englisch')">Englisch</button>
+  <div class="lang-menu">
+    <button class="lang-current" (click)="langMenuOpen.set(!langMenuOpen())" title="Sprache wechseln">
+      <span class="lc-label">Du übst:</span>
+      <strong>{{ langLabel(language()) }}</strong>
+      <span class="caret">▾</span>
+    </button>
+    @if (langMenuOpen()) {
+      <div class="lang-backdrop" (click)="langMenuOpen.set(false)"></div>
+      <div class="lang-dropdown">
+        <div class="ld-head">Wechseln zu:</div>
+        @for (l of otherLanguages(); track l) {
+          <button (click)="switchLanguage(l)">{{ langLabel(l) }}</button>
+        }
+      </div>
+    }
   </div>
 
   @if (game.state(); as s) {
