@@ -144,6 +144,16 @@ h1 { color: var(--fox-orange-dark); }
 .quiz-card { text-align: center; }
 .q-count { color: var(--muted); font-weight: 700; font-size: 0.9rem; }
 
+/* Optionaler Hinweis über dem Lesetext (Fremdsprache): erst Wörter lernen? */
+.learn-hint {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.7rem;
+  background: #fff8ee; border: 2px solid var(--sun-yellow); border-radius: 14px;
+  padding: 0.8rem 1rem; margin-bottom: 0.9rem;
+}
+.learn-hint-text { font-weight: 600; }
+.learn-hint button { white-space: nowrap; }
+.learn-again { margin-bottom: 0.8rem; font-size: 0.9rem; padding: 0.35rem 0.7rem; }
+
 /* Wörter-Lernphase (Fremdsprache) */
 .vocab-tag {
   font-size: 0.85rem; font-weight: 800; color: var(--fox-orange-dark);

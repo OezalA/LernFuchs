@@ -37,6 +37,7 @@ export class Leseverstaendnis implements OnInit {
   vocabDeck = signal<VocabItem[]>([]);
   vIndex = signal(0);
   vChosen = signal<string | null>(null);
+  vocabDone = signal(false); // wurde die (optionale) Wörter-Lernphase abgeschlossen?
   currentVocabItem = computed<VocabItem | null>(() => this.vocabDeck()[this.vIndex()] ?? null);
   vocabCorrect = computed(() => {
     const item = this.currentVocabItem();
@@ -167,15 +168,21 @@ export class Leseverstaendnis implements OnInit {
       next: p => {
         this.current.set(p);
         this.loadingText.set(false);
-        // Fremdsprache: erst die Wörter lernen, dann lesen. Muttersprache: direkt lesen.
-        if (this.isEnglish && p.words.length) this.startVocab(p);
-        else this.view.set('reading');
+        this.vocabDone.set(false);
+        // Direkt zum Text; in der Fremdsprache wird das Wörterlernen dort optional angeboten.
+        this.view.set('reading');
       },
       error: () => { this.error.set('Der Text konnte nicht geöffnet werden.'); this.loadingText.set(false); }
     });
   }
 
-  // ---- Wörter-Lernphase (nur Englisch) ----
+  // ---- Wörter-Lernphase (optional, nur Englisch) ----
+  /** Startet die optionale Wörter-Lernphase (vom Hinweis im Lesetext aus). */
+  learnWords(): void {
+    const p = this.current();
+    if (p && p.words.length) this.startVocab(p);
+  }
+
   private startVocab(p: ReadingPassage): void {
     this.vocabDeck.set(this.buildVocabDeck(p.words));
     this.vIndex.set(0);
@@ -221,8 +228,9 @@ export class Leseverstaendnis implements OnInit {
       this.vChosen.set(null);
       this.speakCurrentVocab();
     } else {
-      // Wörter gelernt – jetzt den Text lesen.
+      // Wörter gelernt – zurück zum Text.
       this.speech.stop();
+      this.vocabDone.set(true);
       this.view.set('reading');
     }
   }

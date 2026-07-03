@@ -113,6 +113,15 @@
     @if (loadingText()) {
       <p class="center"><span class="spinner"></span> Lädt…</p>
     } @else if (current(); as p) {
+      @if (isEnglish && p.words.length && !vocabDone()) {
+        <div class="learn-hint">
+          <span class="learn-hint-text">💡 In diesem Text gibt es <strong>{{ p.words.length }}</strong>
+            neue englische Wörter. Möchtest du sie zuerst lernen?</span>
+          <button class="secondary" (click)="learnWords()">📚 Wörter lernen</button>
+        </div>
+      } @else if (isEnglish && p.words.length) {
+        <button class="ghost learn-again" (click)="learnWords()">🔁 Wörter nochmal lernen</button>
+      }
       <article class="card reader">
         <div class="reader-head">
           <h1 class="reader-title">{{ p.title }}</h1>
