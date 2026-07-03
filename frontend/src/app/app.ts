@@ -22,7 +22,7 @@ export class App implements OnInit {
   language = this.langService.language;
 
   // Verfügbare Lernsprachen (später einfach erweiterbar, z. B. 'Spanisch').
-  readonly languages: Language[] = ['Deutsch', 'Englisch'];
+  readonly languages: Language[] = ['Deutsch', 'Englisch', 'Spanisch'];
   langMenuOpen = signal(false);
 
   /** Andere Sprachen als die aktuelle (für "Wechseln zu …"). */

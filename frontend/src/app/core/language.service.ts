@@ -35,7 +35,7 @@ export class LanguageService {
   private load(): Language {
     try {
       const raw = localStorage.getItem(this.key);
-      return raw === 'Englisch' ? 'Englisch' : 'Deutsch';
+      return raw === 'Englisch'|| raw === 'Spanisch' ? raw: 'Deutsch';
     } catch {
       return 'Deutsch';
     }

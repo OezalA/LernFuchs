@@ -12,7 +12,7 @@ import {
   ReadingPassage, ReadingPassageSummary, PassageWord, ComprehensionQuestion, CheckResult
 } from '../../core/models';
 
-// In der Fremdsprache (Englisch) lernt das Kind vor dem Lesen erst die Wörter ('vocab').
+// In der Fremdsprache lernt das Kind vor dem Lesen erst die Wörter ('vocab').
 type View = 'list' | 'vocab' | 'reading' | 'quiz' | 'result';
 interface TextToken { text: string; word?: PassageWord; }
 interface VocabItem { word: PassageWord; options: string[]; answer: string; }
@@ -33,9 +33,9 @@ export class Leseverstaendnis implements OnInit {
   private lang = inject(LanguageService);
 
   canSpeak = this.speech.supported;
-  isEnglish = this.lang.current() === 'Englisch';
+  isForeign = this.lang.current() !== 'Deutsch';
 
-  // Wörter-Lernphase vor dem Lesen (nur Englisch): Karteikarten der schwierigen Wörter.
+  // Wörter-Lernphase vor dem Lesen (Fremdsprachen): Karteikarten der schwierigen Wörter.
   vIndex = signal(0);
   vFlipped = signal(false);
   vocabDone = signal(false); // wurde die (optionale) Wörter-Lernphase abgeschlossen?
@@ -182,7 +182,6 @@ export class Leseverstaendnis implements OnInit {
     });
   }
 
-  // ---- Wörter-Lernphase (optional, nur Englisch) ----
   // Für die Lernkarten die schwierigen (unterstrichenen) Wörter des Textes nutzen.
   vocabWords = computed<PassageWord[]>(() => this.current()?.words ?? []);
 
@@ -200,7 +199,7 @@ export class Leseverstaendnis implements OnInit {
     this.vFlipped.update(f => !f);
   }
 
-  /** Liest das aktuelle Wort auf Englisch vor. */
+  /** Liest das aktuelle Wort auf der Fremdsprache vor. */
   speakCard(): void {
     const w = this.currentCard();
     if (w) this.speech.speak(w.word);

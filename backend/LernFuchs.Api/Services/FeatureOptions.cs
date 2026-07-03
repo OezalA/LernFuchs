@@ -20,4 +20,5 @@ public class FeatureOptions
 
     /// <summary>Anzahl der täglich automatisch erzeugten englischen Texte (Fremdsprache).</summary>
     public int DailyEnglishTextCount { get; set; } = 3;
+    public int DailySpanishTextCount { get; set; } = 3;
 }

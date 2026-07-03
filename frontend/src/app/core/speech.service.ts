@@ -3,7 +3,7 @@ import { LanguageService } from './language.service';
 
 /**
  * Liest Text laut vor – über die kostenlose Web Speech API des Browsers.
- * Die Sprache (deutsch/englisch) richtet sich nach der gewählten Lernsprache,
+ * Die Sprache (deutsch/englisch/spanisch) richtet sich nach der gewählten Lernsprache,
  * damit englische Inhalte auch englisch ausgesprochen werden.
  * Keine Internetverbindung oder API-Schlüssel nötig.
  */
@@ -27,16 +27,20 @@ export class SpeechService {
     const synth = this.synth;
     if (!synth || !text) return;
 
-    const isEnglish = this.lang.current() === 'Englisch';
-    const langCode = isEnglish ? 'en' : 'de';
+    const current = this.lang.current();
+    const { code, tag } =
+    current === 'Englisch' ? { code: 'en', tag: 'en-US' } :
+    current === 'Spanisch' ? { code: 'es', tag: 'es-ES' } :
+                             { code: 'de', tag: 'de-DE' };
 
     synth.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = isEnglish ? 'en-US' : 'de-DE';
+    utterance.lang = tag;
     utterance.rate = 0.9; // etwas langsamer, kindgerecht
 
-    const voice = synth.getVoices().find(v => v.lang.startsWith(langCode));
+    const voice = synth.getVoices().find(v => v.lang.startsWith(code));
     if (voice) utterance.voice = voice;
+
 
     synth.speak(utterance);
   }

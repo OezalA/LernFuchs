@@ -22,7 +22,7 @@ export class GamesHub {
 
   // Im Englischen die deutsch-spezifischen Spiele ausblenden.
   games = computed(() =>
-    this.lang.language() === 'Englisch'
+    this.lang.language() !== 'Deutsch'
       ? this.allGames.filter(g => !g.germanOnly)
       : this.allGames);
 }

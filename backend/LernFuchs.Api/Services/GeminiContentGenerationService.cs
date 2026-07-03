@@ -35,8 +35,9 @@ public class GeminiContentGenerationService : IContentGenerationService
         string topic, Difficulty difficulty, int count,
         Language language = Language.Deutsch, CancellationToken ct = default)
     {
-        var task = language == Language.Englisch
-            ? $$"""
+                var task = language switch
+        {
+            Language.Englisch => $$"""
                 Du bist ein Englischlehrer für eine deutschsprachige Schülerin der 5. Klasse,
                 die Englisch als FREMDSPRACHE lernt (Anfängerniveau, ca. A1-A2).
                 Erzeuge genau {{count}} nützliche ENGLISCHE Vokabeln zum Thema "{{topic}}".
@@ -47,8 +48,21 @@ public class GeminiContentGenerationService : IContentGenerationService
                 "article" ist immer "none" (Englisch hat keine der/die/das-Artikel),
                 "plural" ist die englische Pluralform bei Nomen (sonst null),
                 "conjugations" bleibt immer ein leeres Array [].
-                """
-            : $$"""
+                """,
+            Language.Spanisch => $$"""
+                Du bist ein Spanischlehrer für eine deutschsprachige Schülerin der 5. Klasse,
+                die zum ALLERERSTEN MAL Spanisch lernt (absolute Anfängerin, ganz von vorne, vor-A1).
+                Sie hat noch KEINE Vorkenntnisse in Spanisch.
+                Erzeuge genau {{count}} sehr einfache, grundlegende SPANISCHE Vokabeln zum Thema "{{topic}}".
+                Wähle die allereinfachsten, häufigsten Grundwörter (noch leichter als im Englischen!).
+                Das Wort ("word") ist SPANISCH. Die Erklärung ("definitionGerman") ist die deutsche
+                Bedeutung/Übersetzung, kindgerecht und kurz. Der Beispielsatz ("exampleSentence")
+                ist ein sehr einfacher SPANISCHER Satz mit dem Wort.
+                "article" ist immer "none" (die spanischen Artikel el/la behandeln wir hier noch nicht),
+                "plural" ist die spanische Pluralform bei Nomen (sonst null),
+                "conjugations" bleibt immer ein leeres Array [].
+                """,
+            _ => $$"""
                 Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
                 Erzeuge genau {{count}} nützliche deutsche Vokabeln zum Thema "{{topic}}" mit Schwierigkeitsgrad "{{difficulty}}".
                 Wähle altersgerechte, im Alltag und in der Schule häufige Wörter.
@@ -56,7 +70,9 @@ public class GeminiContentGenerationService : IContentGenerationService
                 Alles ist auf DEUTSCH: das Wort, die Erklärung und der Beispielsatz.
                 Die Erklärung ("definitionGerman") muss so einfach sein, dass ein Kind der 5. Klasse
                 sie ohne Wörterbuch versteht: kurze Sätze, einfache Wörter, gern ein anschauliches Bild.
-                """;
+                """
+        };
+
 
         var prompt = $$"""
             {{task}}
@@ -88,7 +104,7 @@ public class GeminiContentGenerationService : IContentGenerationService
         return dto.Words.Select(w => new VocabularyWord
         {
             Word = w.Word.Trim(),
-            Article = ParseEnum(w.Article, Article.None),
+            Article = language == Language.Deutsch ? ParseEnum(w.Article, Article.None) : Article.None,
             Plural = string.IsNullOrWhiteSpace(w.Plural) ? null : w.Plural.Trim(),
             WordType = ParseEnum(w.WordType, WordType.Sonstiges),
             DefinitionGerman = w.DefinitionGerman?.Trim() ?? string.Empty,
@@ -107,8 +123,9 @@ public class GeminiContentGenerationService : IContentGenerationService
         Language language = Language.Deutsch,
         CancellationToken ct = default, string? modelOverride = null)
     {
-        var task = language == Language.Englisch
-            ? $$"""
+                var task = language switch
+        {
+            Language.Englisch => $$"""
                 Du bist ein Englischlehrer für eine deutschsprachige Schülerin der 5. Klasse,
                 die Englisch als FREMDSPRACHE lernt (Anfängerniveau, ca. A1-A2).
                 Schreibe einen SEHR EINFACHEN, kurzen ENGLISCHEN Lesetext zum Thema "{{topic}}":
@@ -127,8 +144,29 @@ public class GeminiContentGenerationService : IContentGenerationService
 
                 Titel, Text, Fragen und Antwortmöglichkeiten sind auf ENGLISCH;
                 nur "definitionGerman" der schwierigen Wörter ist auf Deutsch.
-                """
-            : $$"""
+                """,
+            Language.Spanisch => $$"""
+                Du bist ein Spanischlehrer für eine deutschsprachige Schülerin der 5. Klasse,
+                die zum ALLERERSTEN MAL Spanisch lernt (absolute Anfängerin, vor-A1, keine Vorkenntnisse).
+                Schreibe einen EXTREM EINFACHEN, sehr kurzen SPANISCHEN Lesetext zum Thema "{{topic}}":
+                nur etwa 40-80 Wörter, sehr kurze Sätze, nur die häufigsten Grundwörter, nur Präsens.
+                Er soll noch deutlich leichter sein als ein englischer Anfängertext.
+                Formuliere danach genau {{questionCount}} sehr einfache Verständnisfragen AUF DEUTSCH zum Text
+                (die Anfängerin kann noch kein Spanisch lesen).
+
+                Da Spanisch völlig neu ist, kennt die Anfängerin so gut wie KEIN Wort.
+                Nimm deshalb etwa 10-16 nützliche spanische Wörter aus DEINEM Text als "difficultWords" auf
+                (Nomen, Verben, Adjektive), die eine deutsche Anfängerin lernen sollte.
+                Erkläre jedes: "definitionGerman" ist die DEUTSCHE Übersetzung/Bedeutung
+                (kindgerecht), "exampleSentence" ist ein einfacher SPANISCHER Beispielsatz.
+                "word" steht in der Grundform.
+                "article" ist immer "none", "conjugations" bleibt ein leeres Array [].
+
+                Titel und Text sind auf SPANISCH (das ist der Lesetext).
+                Die Verständnisfragen und ihre Antwortmöglichkeiten sind auf DEUTSCH,
+                ebenso "definitionGerman" der schwierigen Wörter.
+                """,
+            _ => $$"""
                 Du bist ein Deutschlehrer für eine Schülerin der 5. Klasse Gymnasium.
                 Schreibe einen altersgerechten deutschen Lesetext zum Thema "{{topic}}" mit Schwierigkeitsgrad "{{difficulty}}".
                 Der Text soll etwa 120-200 Wörter haben und interessant sein.
@@ -136,7 +174,9 @@ public class GeminiContentGenerationService : IContentGenerationService
 
                 Suche außerdem die 3-6 schwierigsten Wörter aus DEINEM Text heraus (Wörter, die ein Kind
                 der 5. Klasse vielleicht noch nicht kennt) und erkläre sie einfach – alles auf Deutsch.
-                """;
+                """
+        };
+
 
         var prompt = $$"""
             {{task}}
@@ -206,7 +246,7 @@ public class GeminiContentGenerationService : IContentGenerationService
             .Select(w => new VocabularyWord
             {
                 Word = w.Word.Trim(),
-                Article = ParseEnum(w.Article, Article.None),
+                Article = language == Language.Deutsch ? ParseEnum(w.Article, Article.None) : Article.None,
                 Plural = string.IsNullOrWhiteSpace(w.Plural) ? null : w.Plural.Trim(),
                 WordType = ParseEnum(w.WordType, WordType.Sonstiges),
                 DefinitionGerman = w.DefinitionGerman?.Trim() ?? string.Empty,

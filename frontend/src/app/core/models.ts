@@ -6,7 +6,7 @@ export type WordType =
   | 'Nomen' | 'Verb' | 'Adjektiv' | 'Adverb'
   | 'Praeposition' | 'Pronomen' | 'Konjunktion' | 'Sonstiges';
 export type QuestionType = 'MultipleChoice' | 'OpenEnded';
-export type Language = 'Deutsch' | 'Englisch';
+export type Language = 'Deutsch' | 'Englisch' | 'Spanisch';
 
 export interface VocabularyProgress {
   id: number;

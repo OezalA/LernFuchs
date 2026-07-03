@@ -42,6 +42,15 @@ public class DailyContentService : BackgroundService
         "Jobs", "Nature", "Holidays", "Days and Months", "My Town",
     };
 
+        // Ganz einfache Alltagsthemen für die Fremdsprache Spanisch (absolute Anfänger).
+    private static readonly string[] SpanishTopicPool =
+    {
+        "Los animales", "Mi familia", "La comida", "Los colores", "La escuela",
+        "El cuerpo", "La ropa", "El tiempo", "Los pasatiempos", "Las mascotas",
+        "Las frutas", "La casa", "Los deportes", "Los juguetes", "Los sentimientos",
+        "Los números", "La naturaleza", "Los días de la semana", "Mi ciudad", "Saludos",
+    };
+
     private static readonly string[] Models =
     {
         "gemini-2.5-flash", "gemini-flash-lite-latest", "gemini-flash-latest",
@@ -99,15 +108,17 @@ public class DailyContentService : BackgroundService
 
         var germanCount = Math.Clamp(_features.DailyTextCount, 0, 10);
         var englishCount = Math.Clamp(_features.DailyEnglishTextCount, 0, 10);
-
+        var spanishCount = Math.Clamp(_features.DailySpanishTextCount, 0, 10);
         // Deutsche (Muttersprache) und englische (Fremdsprache) Inhalte erzeugen.
         var madeDe = await GenerateBatchAsync(db, content, Language.Deutsch, TopicPool, germanCount, today, ct);
         var madeEn = await GenerateBatchAsync(db, content, Language.Englisch, EnglishTopicPool, englishCount, today, ct);
+        var madeEs = await GenerateBatchAsync(db, content, Language.Spanisch, SpanishTopicPool, spanishCount, today, ct);
 
         // Nur als erledigt markieren, wenn wenigstens ein Text erzeugt wurde (sonst später erneut versuchen).
-        if (madeDe + madeEn > 0) state.LastDailyContentDate = today;
+        if (madeDe + madeEn + madeEs > 0) state.LastDailyContentDate = today;
         await db.SaveChangesAsync(ct);
-        _logger.LogInformation("Täglicher Inhalt abgeschlossen: {De} DE + {En} EN Texte.", madeDe, madeEn);
+        _logger.LogInformation("Täglicher Inhalt abgeschlossen: {De} DE + {En} EN + {Es} ES Texte.", madeDe, madeEn, madeEs);
+
     }
 
     /// <summary>Erzeugt einen Tagesstapel Texte einer Sprache und verknüpft die schwierigen Wörter.</summary>
@@ -130,7 +141,7 @@ public class DailyContentService : BackgroundService
         {
             var topic = pool[(start + i) % pool.Length];
             // Fremdsprache bewusst leicht halten; Muttersprache je nach Thema.
-            var difficulty = language == Language.Englisch ? Difficulty.Leicht : TopicDifficulty.For(topic);
+            var difficulty = language != Language.Deutsch ? Difficulty.Leicht : TopicDifficulty.For(topic);
             var model = Models[i % Models.Length];
             try
             {
