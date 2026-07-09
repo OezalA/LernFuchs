@@ -41,6 +41,7 @@ public enum QuestionType
 public enum Language
 {
     Deutsch,
-    Englisch, 
-    Spanisch
+    Englisch,
+    Spanisch,
+    Franzoesisch
 }

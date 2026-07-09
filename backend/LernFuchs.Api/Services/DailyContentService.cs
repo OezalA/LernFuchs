@@ -51,6 +51,15 @@ public class DailyContentService : BackgroundService
         "Los números", "La naturaleza", "Los días de la semana", "Mi ciudad", "Saludos",
     };
 
+    // Ganz einfache Alltagsthemen für die Fremdsprache Französisch (absolute Anfänger).
+    private static readonly string[] FrenchTopicPool =
+    {
+        "Les animaux", "Ma famille", "La nourriture", "Les couleurs", "L'école",
+        "Le corps", "Les vêtements", "Le temps", "Les loisirs", "Les animaux domestiques",
+        "Les fruits", "La maison", "Les sports", "Les jouets", "Les sentiments",
+        "Les nombres", "La nature", "Les jours de la semaine", "Ma ville", "Les salutations",
+    };
+
     private static readonly string[] Models =
     {
         "gemini-2.5-flash", "gemini-flash-lite-latest", "gemini-flash-latest",
@@ -109,15 +118,17 @@ public class DailyContentService : BackgroundService
         var germanCount = Math.Clamp(_features.DailyTextCount, 0, 10);
         var englishCount = Math.Clamp(_features.DailyEnglishTextCount, 0, 10);
         var spanishCount = Math.Clamp(_features.DailySpanishTextCount, 0, 10);
-        // Deutsche (Muttersprache) und englische (Fremdsprache) Inhalte erzeugen.
+        var frenchCount = Math.Clamp(_features.DailyFrenchTextCount, 0, 10);
+        // Deutsche (Muttersprache) und Fremdsprachen (Englisch, Spanisch, Französisch) erzeugen.
         var madeDe = await GenerateBatchAsync(db, content, Language.Deutsch, TopicPool, germanCount, today, ct);
         var madeEn = await GenerateBatchAsync(db, content, Language.Englisch, EnglishTopicPool, englishCount, today, ct);
         var madeEs = await GenerateBatchAsync(db, content, Language.Spanisch, SpanishTopicPool, spanishCount, today, ct);
+        var madeFr = await GenerateBatchAsync(db, content, Language.Franzoesisch, FrenchTopicPool, frenchCount, today, ct);
 
         // Nur als erledigt markieren, wenn wenigstens ein Text erzeugt wurde (sonst später erneut versuchen).
-        if (madeDe + madeEn + madeEs > 0) state.LastDailyContentDate = today;
+        if (madeDe + madeEn + madeEs + madeFr > 0) state.LastDailyContentDate = today;
         await db.SaveChangesAsync(ct);
-        _logger.LogInformation("Täglicher Inhalt abgeschlossen: {De} DE + {En} EN + {Es} ES Texte.", madeDe, madeEn, madeEs);
+        _logger.LogInformation("Täglicher Inhalt abgeschlossen: {De} DE + {En} EN + {Es} ES + {Fr} FR Texte.", madeDe, madeEn, madeEs, madeFr);
 
     }
 

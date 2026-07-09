@@ -29,9 +29,10 @@ export class SpeechService {
 
     const current = this.lang.current();
     const { code, tag } =
-    current === 'Englisch' ? { code: 'en', tag: 'en-US' } :
-    current === 'Spanisch' ? { code: 'es', tag: 'es-ES' } :
-                             { code: 'de', tag: 'de-DE' };
+    current === 'Englisch'     ? { code: 'en', tag: 'en-US' } :
+    current === 'Spanisch'     ? { code: 'es', tag: 'es-ES' } :
+    current === 'Franzoesisch' ? { code: 'fr', tag: 'fr-FR' } :
+                                 { code: 'de', tag: 'de-DE' };
 
     synth.cancel();
     const utterance = new SpeechSynthesisUtterance(text);

@@ -22,15 +22,15 @@ export class App implements OnInit {
   language = this.langService.language;
 
   // Verfügbare Lernsprachen (später einfach erweiterbar, z. B. 'Spanisch').
-  readonly languages: Language[] = ['Deutsch', 'Englisch', 'Spanisch'];
+  readonly languages: Language[] = ['Deutsch', 'Englisch', 'Spanisch', 'Franzoesisch'];
   langMenuOpen = signal(false);
 
   /** Andere Sprachen als die aktuelle (für "Wechseln zu …"). */
   otherLanguages = computed(() => this.languages.filter(l => l !== this.language()));
 
-  /** Anzeigename einer Sprache. */
+  /** Anzeigename einer Sprache (schöne Schreibweise fürs Kind). */
   langLabel(lang: Language): string {
-    return lang; // Deutsch / Englisch (später ggf. eigene Labels)
+    return lang === 'Franzoesisch' ? 'Französisch' : lang;
   }
 
   /** Füllstand des XP-Balkens im aktuellen Level (0–100 %). */
