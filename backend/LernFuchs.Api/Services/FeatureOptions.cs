@@ -16,12 +16,12 @@ public class FeatureOptions
     public bool DailyAutoGenerationEnabled { get; set; }
 
     /// <summary>Anzahl der täglich automatisch erzeugten deutschen Texte.</summary>
-    public int DailyTextCount { get; set; } = 5;
+    public int DailyTextCount { get; set; } = 1;
 
     /// <summary>Anzahl der täglich automatisch erzeugten englischen Texte (Fremdsprache).</summary>
-    public int DailyEnglishTextCount { get; set; } = 3;
-    public int DailySpanishTextCount { get; set; } = 3;
+    public int DailyEnglishTextCount { get; set; } = 1;
+    public int DailySpanishTextCount { get; set; } = 1;
 
     /// <summary>Anzahl der täglich automatisch erzeugten französischen Texte (Fremdsprache, Anfänger).</summary>
-    public int DailyFrenchTextCount { get; set; } = 3;
+    public int DailyFrenchTextCount { get; set; } = 1;
 }
