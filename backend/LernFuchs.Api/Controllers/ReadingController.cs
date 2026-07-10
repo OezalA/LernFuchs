@@ -70,7 +70,7 @@ public class ReadingController : ControllerBase
         // "words": die schwierigen Wörter aus dem Text – zum Unterstreichen und für
         // die Ergebnisseite (gleiche Logik wie im Wortschatz/Spielen, entdoppelt).
         var words = await _db.VocabularyWords
-            .Where(w => w.SourcePassageId == id)
+            .Where(w => w.SourcePassageId == id && w.WordType != WordType.Satz)
             .Select(w => new { w.Id, w.Word, w.Article, w.Plural, w.WordType, w.DefinitionGerman, w.ExampleSentence })
             .ToListAsync();
 

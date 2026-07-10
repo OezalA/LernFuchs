@@ -4,7 +4,7 @@ export type Difficulty = 'Leicht' | 'Mittel' | 'Schwer';
 export type Article = 'None' | 'Der' | 'Die' | 'Das';
 export type WordType =
   | 'Nomen' | 'Verb' | 'Adjektiv' | 'Adverb'
-  | 'Praeposition' | 'Pronomen' | 'Konjunktion' | 'Sonstiges';
+  | 'Praeposition' | 'Pronomen' | 'Konjunktion' | 'Sonstiges' | 'Satz';
 export type QuestionType = 'MultipleChoice' | 'OpenEnded';
 export type Language = 'Deutsch' | 'Englisch' | 'Spanisch' | 'Franzoesisch';
 

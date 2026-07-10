@@ -35,7 +35,6 @@ export class Wortschatz implements OnInit {
   flipped = signal(false);
   practicing = signal(false);
   reviewedCount = signal(0);
-  correctCount = signal(0);
 
   currentCard = computed(() => this.deck()[this.cardIndex()] ?? null);
   sessionFinished = computed(() => this.practicing() && this.cardIndex() >= this.deck().length);
@@ -111,17 +110,20 @@ export class Wortschatz implements OnInit {
 
   // ----- Karteikarten -----
 
-  /** Übt die aktuell angezeigten Wörter (alle oder die gewählte Kategorie). */
+  /** Übt die aktuell angezeigten, noch nicht gelernten Wörter. */
   startPractice(): void {
-    this.beginPractice([...this.shownWords()]);
+    const cards = this.shownWords().filter(w => !w.progress?.mastered);
+    if (!cards.length) { this.error.set('Alle Wörter sind schon gelernt – super! 🎉'); return; }
+    this.beginPractice(cards);
   }
 
-  /** Übt nur die heute fälligen Wörter (Leitner-System) aus gelesenen Texten. */
+  /** Übt nur die heute fälligen, noch nicht gelernten Wörter (Leitner) aus gelesenen Texten. */
   startDuePractice(): void {
     this.vocab.getDue(50).subscribe({
       next: due => {
         const read = this.readState.ids();
-        const scoped = due.filter(w => w.sourcePassageId == null || read.has(w.sourcePassageId));
+        const scoped = due.filter(w =>
+          (w.sourcePassageId == null || read.has(w.sourcePassageId)) && !w.progress?.mastered);
         if (!scoped.length) { this.error.set('Heute ist nichts fällig – super, du bist auf dem neuesten Stand! 🎉'); return; }
         this.beginPractice(scoped);
       }
@@ -134,7 +136,6 @@ export class Wortschatz implements OnInit {
     this.cardIndex.set(0);
     this.flipped.set(false);
     this.reviewedCount.set(0);
-    this.correctCount.set(0);
     this.practicing.set(true);
     this.error.set(null);
   }
@@ -150,19 +151,12 @@ export class Wortschatz implements OnInit {
     this.flipped.update(f => !f);
   }
 
-  answer(correct: boolean): void {
-    const card = this.currentCard();
-    if (!card) return;
-    // "Gewusst" markiert das Wort direkt als gelernt; "Nochmal" bleibt zum Üben.
-    const req = correct ? this.vocab.markLearned(card.id) : this.vocab.review(card.id, false);
-    req.subscribe(res => this.game.handleActivity(res.game));
+  /**
+   * Nächste Karteikarte. Reines Lernen – hier wird NICHTS als "gelernt" markiert;
+   * das geschieht nur im Test (4x hintereinander richtig).
+   */
+  nextCard(): void {
     this.reviewedCount.update(n => n + 1);
-    if (correct) {
-      this.correctCount.update(n => n + 1);
-      this.celebrate.correct();
-    } else {
-      this.celebrate.wrong();
-    }
     this.cardIndex.update(i => i + 1);
     this.flipped.set(false);
     if (this.cardIndex() >= this.deck().length) this.celebrate.confettiBig();
@@ -200,9 +194,15 @@ export class Wortschatz implements OnInit {
       word = pool[Math.floor(Math.random() * pool.length)];
     }
 
-    // Optionen: richtige Bedeutung + 3 Ablenker aus allen sichtbaren Wörtern.
-    const allDefs = [...new Set(this.shownWords().map(w => w.definitionGerman).filter(d => !!d))];
-    const distractors = this.sample(allDefs.filter(d => d !== word.definitionGerman), 3);
+    // Optionen: richtige Bedeutung + 3 Ablenker GLEICHER Art (zu einem Satz andere
+    // Satz-Übersetzungen, zu einem Wort andere Wort-Bedeutungen). Falls zu wenige, mit allen auffüllen.
+    const isSentence = word.wordType === 'Satz';
+    const sameKind = this.shownWords().filter(w => (w.wordType === 'Satz') === isSentence);
+    let defs = [...new Set(sameKind.map(w => w.definitionGerman).filter(d => !!d && d !== word.definitionGerman))];
+    if (defs.length < 3) {
+      defs = [...new Set(this.shownWords().map(w => w.definitionGerman).filter(d => !!d && d !== word.definitionGerman))];
+    }
+    const distractors = this.sample(defs, 3);
     this.testOptions.set(this.shuffle([word.definitionGerman, ...distractors]));
     this.testCurrent.set(word);
     this.speak(word);

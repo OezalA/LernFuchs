@@ -329,6 +329,25 @@ public class GeminiContentGenerationService : IContentGenerationService
                 passage.GlossaryJson = JsonSerializer.Serialize(glossary);
         }
 
+        // Sätze als eigene Wiederhol-Einheiten (Fremdsprachen): erscheinen im Wortschatz
+        // (Üben/Test) und im Quiz, aber nicht in Diktat/Memory oder der Wörter-Lernphase.
+        if (language != Language.Deutsch && dto.Sentences is { Count: > 0 })
+        {
+            var sentenceItems = dto.Sentences
+                .Where(s => !string.IsNullOrWhiteSpace(s.Text) && !string.IsNullOrWhiteSpace(s.German))
+                .Select(s => new VocabularyWord
+                {
+                    Word = s.Text.Trim(),
+                    DefinitionGerman = s.German.Trim(),
+                    WordType = WordType.Satz,
+                    Article = Article.None,
+                    Difficulty = effectiveDifficulty,
+                    Language = language,
+                    Topic = topic
+                });
+            difficultWords = difficultWords.Concat(sentenceItems).ToList();
+        }
+
         return new GeneratedReading(passage, difficultWords);
     }
 

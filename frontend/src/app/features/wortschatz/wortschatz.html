@@ -9,8 +9,7 @@
         <div class="finished center">
           <div class="big-fox">🎉</div>
           <h2>Super gemacht!</h2>
-          <p>Du hast <strong>{{ correctCount() }}</strong> von
-            <strong>{{ reviewedCount() }}</strong> Wörtern gewusst.</p>
+          <p>Du hast <strong>{{ reviewedCount() }}</strong> Karten angeschaut. 👏</p>
           <div class="row center">
             <button (click)="startPractice()">🔁 Nochmal üben</button>
             <button class="ghost" (click)="stopPractice()">Fertig</button>
@@ -47,13 +46,13 @@
             </div>
           </div>
 
-          @if (flipped()) {
-            <div class="row center answer-row">
-              <button class="danger" (click)="answer(false)">🔁 Nochmal</button>
-              <button class="success" (click)="answer(true)">👍 Gewusst</button>
-            </div>
-          } @else {
-            <p class="center muted">Überlege erst, dann tippe auf die Karte.</p>
+          <div class="row center answer-row">
+            <button class="big-cta" (click)="nextCard()">
+              {{ cardIndex() + 1 < deck().length ? 'Weiter →' : 'Fertig ✓' }}
+            </button>
+          </div>
+          @if (!flipped()) {
+            <p class="center muted">Tippe auf die Karte, um die Bedeutung zu sehen.</p>
           }
         }
       }

@@ -94,7 +94,6 @@
       </div>
 
       <div class="reader-cta vocab-cta">
-        <button class="success" (click)="markCardLearned()">✓ Gewusst</button>
         <button class="big-cta" (click)="nextCard()">
           {{ vIndex() + 1 < vocabWords().length ? 'Weiter →' : 'Jetzt den Text lesen 📖' }}
         </button>
@@ -127,7 +126,7 @@
             </div>
           }
         </div>
-        @if (isForeign && sentenceRows().length) {
+        @if (hasGlossary() && sentenceRows().length) {
           <p class="reader-text">@for (row of sentenceRows(); track $index; let si = $index) {<span class="sentence-inline" [class.active]="activeSentence() === si" (click)="tapSentence(si)">@for (t of row.tokens; track $index) {@if (t.word) {<button class="hard-word" (click)="tapWord(t.word); $event.stopPropagation()">{{ t.text }}</button>} @else {{{ t.text }}}}</span>{{ ' ' }}@if (activeSentence() === si) {<span class="sentence-de-inline">💬 {{ row.german }}</span>}}</p>
         } @else {
           <p class="reader-text">@for (t of textTokens(); track $index) {@if (t.word) {<button class="hard-word" (click)="tapWord(t.word)">{{ t.text }}</button>} @else {{{ t.text }}}}</p>
@@ -140,12 +139,27 @@
           </div>
         } @else if (hasGlossary()) {
           <p class="reader-hint muted">💡 Tippe einen ganzen <strong>Satz</strong> an, um ihn zu hören und auf Deutsch zu verstehen.</p>
-        } @else if (isForeign) {
-          <p class="reader-hint muted">💡 Tippe ein <span class="hard-word-demo">Wort</span> für seine Bedeutung – oder einen ganzen Satz, um ihn zu hören und auf Deutsch zu verstehen.</p>
         } @else {
           <p class="reader-hint muted">💡 Tippe auf ein <span class="hard-word-demo">unterstrichenes</span> Wort, um es zu hören und seine Bedeutung zu sehen.</p>
         }
       </article>
+
+      @if (isForeign && !hasGlossary() && sentences().length) {
+        <article class="card sentences-card">
+          <h2 class="sentences-head">🗣️ Satz für Satz</h2>
+          <p class="reader-hint muted">Tippe einen Satz an, um ihn zu hören und seine deutsche Bedeutung zu sehen.</p>
+          <ul class="sentence-list">
+            @for (s of sentences(); track $index; let si = $index) {
+              <li class="sentence-item">
+                <button class="sentence" [class.active]="activeSentence() === si" (click)="tapSentence(si)">{{ s.text }}</button>
+                @if (activeSentence() === si) {
+                  <div class="sentence-de">💬 {{ s.german }}</div>
+                }
+              </li>
+            }
+          </ul>
+        </article>
+      }
 
       <div class="reader-cta">
         @if (quizActive()) {

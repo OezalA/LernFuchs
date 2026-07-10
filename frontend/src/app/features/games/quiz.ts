@@ -45,7 +45,12 @@ export class QuizGame implements OnInit {
     if (words.length < 4) { this.questions.set([]); return; }
     const picked = shuffle([...words]).slice(0, 10);
     const questions = picked.map(word => {
-      const distractors = shuffle(words.filter(w => w.id !== word.id)).slice(0, 3);
+      // Ablenker gleicher Art: zu einem Satz andere Sätze, zu einem Wort andere Wörter
+      // (sonst verrät die Länge die Antwort). Falls zu wenige, mit allen auffüllen.
+      const isSentence = word.wordType === 'Satz';
+      const sameKind = words.filter(w => w.id !== word.id && (w.wordType === 'Satz') === isSentence);
+      const pool = sameKind.length >= 3 ? sameKind : words.filter(w => w.id !== word.id);
+      const distractors = shuffle(pool).slice(0, 3);
       return { word, options: shuffle([word, ...distractors]) };
     });
     this.questions.set(questions);

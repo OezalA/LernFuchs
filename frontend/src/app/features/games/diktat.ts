@@ -40,7 +40,9 @@ export class DiktatGame implements OnInit {
   ngOnInit(): void {
     this.vocab.getAll().subscribe({
       next: words => {
-        this.deck.set(shuffle(readableWords(words, this.readState.ids())).slice(0, 10));
+        // Sätze (WordType 'Satz') gehören nicht ins Diktat – man tippt keine ganzen Sätze.
+        const only = readableWords(words, this.readState.ids()).filter(w => w.wordType !== 'Satz');
+        this.deck.set(shuffle(only).slice(0, 10));
         this.loading.set(false);
         setTimeout(() => this.sayCurrent(), 400);
       },

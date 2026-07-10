@@ -19,7 +19,8 @@ public enum WordType
     Praeposition,
     Pronomen,
     Konjunktion,
-    Sonstiges
+    Sonstiges,
+    Satz
 }
 
 /// <summary>Schwierigkeitsgrad – ausgerichtet auf Gymnasium Klasse 5.</summary>

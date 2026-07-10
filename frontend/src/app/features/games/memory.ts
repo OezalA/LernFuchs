@@ -44,7 +44,9 @@ export class MemoryGame implements OnInit {
   }
 
   private build(words: VocabularyWord[]): void {
-    const picked = shuffle(readableWords(words, this.readState.ids())).slice(0, 6);
+    // Sätze (WordType 'Satz') eignen sich nicht fürs Memory (zu lange Karten).
+    const only = readableWords(words, this.readState.ids()).filter(w => w.wordType !== 'Satz');
+    const picked = shuffle(only).slice(0, 6);
     let key = 0;
     const cards: MemoryCard[] = [];
     for (const w of picked) {
