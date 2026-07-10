@@ -9,7 +9,7 @@ import { ReadStateService } from '../../core/read-state.service';
 import { LanguageService } from '../../core/language.service';
 import { categoryFor } from '../../core/category';
 import {
-  ReadingPassage, ReadingPassageSummary, PassageWord, ComprehensionQuestion, CheckResult
+  ReadingPassage, ReadingPassageSummary, PassageWord, PassageSentence, ComprehensionQuestion, CheckResult
 } from '../../core/models';
 
 // In der Fremdsprache lernt das Kind vor dem Lesen erst die Wörter ('vocab').
@@ -59,6 +59,10 @@ export class Leseverstaendnis implements OnInit {
   current = signal<ReadingPassage | null>(null);
   loadingText = signal(false);
   activeWord = signal<PassageWord | null>(null); // angetipptes schwieriges Wort
+
+  // "Satz für Satz" (Fremdsprache): jeder Satz mit deutscher Übersetzung.
+  sentences = computed<PassageSentence[]>(() => this.current()?.sentences ?? []);
+  activeSentence = signal<number | null>(null); // angetippter Satz (Index)
 
   // Quiz
   quizActive = signal(false); // läuft ein Quiz? (für "Zurück zu den Fragen")
@@ -116,19 +120,31 @@ export class Leseverstaendnis implements OnInit {
     this.selectedCategory.set(name);
   }
 
-  // Text in Tokens zerlegt; schwierige Wörter sind markiert.
-  // Vergleich über den längsten gemeinsamen Wortanfang, damit auch gebeugte
-  // Formen erkannt werden (z. B. "stürmischen" -> "stürmisch").
+  // Text in Tokens zerlegt; schwierige Wörter sind markiert (Muttersprache).
   textTokens = computed<TextToken[]>(() => {
     const p = this.current();
+    return p ? this.tokenize(p.text, p.words) : [];
+  });
+
+  // Fremdsprache: Text satzweise – jeder Satz ist unterstrichen und antippbar
+  // (hören + deutsche Übersetzung); die schwierigen Wörter darin bleiben einzeln antippbar.
+  sentenceRows = computed<{ german: string; tokens: TextToken[] }[]>(() => {
+    const p = this.current();
     if (!p) return [];
-    const words = p.words;
-    return p.text.split(/(\s+)/).map(tok => {
+    // Anfänger-Sprachen (Glossar vorhanden): keine Wörter unterstreichen, nur die Sätze.
+    const words = p.glossary.length ? [] : p.words;
+    return this.sentences().map(s => ({ german: s.german, tokens: this.tokenize(s.text, words) }));
+  });
+
+  // Zerlegt einen Text in Tokens; Vergleich über den längsten gemeinsamen Wortanfang,
+  // damit auch gebeugte Formen erkannt werden (z. B. "stürmischen" -> "stürmisch").
+  private tokenize(text: string, words: PassageWord[]): TextToken[] {
+    return text.split(/(\s+)/).map(tok => {
       const core = tok.replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, '');
       const word = core ? this.matchWord(core.toLowerCase(), words) : undefined;
       return { text: tok, word };
     });
-  });
+  }
 
   /** Findet das schwierige Wort, dessen Wortstamm am besten zum Token passt. */
   private matchWord(token: string, words: PassageWord[]): PassageWord | undefined {
@@ -170,6 +186,7 @@ export class Leseverstaendnis implements OnInit {
   open(id: number): void {
     this.loadingText.set(true);
     this.activeWord.set(null);
+    this.activeSentence.set(null);
     this.reading.getById(id).subscribe({
       next: p => {
         this.current.set(p);
@@ -182,8 +199,16 @@ export class Leseverstaendnis implements OnInit {
     });
   }
 
-  // Für die Lernkarten die schwierigen (unterstrichenen) Wörter des Textes nutzen.
-  vocabWords = computed<PassageWord[]>(() => this.current()?.words ?? []);
+  // Anfänger-Fremdsprachen (Spanisch/Französisch) liefern ein vollständiges Glossar (ALLE Wörter);
+  // dann werden keine Wörter im Text unterstrichen, nur ganze Sätze.
+  hasGlossary = computed(() => (this.current()?.glossary.length ?? 0) > 0);
+
+  // Lernkarten: bei Anfänger-Sprachen ALLE Wörter (Glossar), sonst die schwierigen Wörter.
+  vocabWords = computed<PassageWord[]>(() => {
+    const p = this.current();
+    if (!p) return [];
+    return p.glossary.length ? p.glossary : p.words;
+  });
 
   /** Startet die optionale Wörter-Lernphase (Karteikarten) vom Hinweis im Lesetext aus. */
   learnWords(): void {
@@ -327,6 +352,15 @@ export class Leseverstaendnis implements OnInit {
     if (p) this.speech.speak(p.text);
   }
   stopSpeaking(): void { this.speech.stop(); }
+
+  // ---- Satz für Satz (Fremdsprache) ----
+  /** Liest den Satz vor und zeigt/versteckt seine deutsche Übersetzung. */
+  tapSentence(index: number): void {
+    const s = this.sentences()[index];
+    if (!s) return;
+    this.activeSentence.update(cur => (cur === index ? null : index));
+    this.speech.speak(s.text);
+  }
 
   // ---- Quiz ----
   choose(option: string): void {

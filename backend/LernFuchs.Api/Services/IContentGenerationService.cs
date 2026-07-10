@@ -30,3 +30,6 @@ public record GeneratedReading(ReadingPassage Passage, IReadOnlyList<VocabularyW
 
 /// <summary>Ein Eintrag im Wörterverzeichnis eines Textes: englisches Wort + deutsche Bedeutung.</summary>
 public record GlossaryEntry(string Word, string Meaning);
+
+/// <summary>Ein Satz eines Fremdsprachentextes samt seiner deutschen Übersetzung.</summary>
+public record PassageSentence(string Text, string German);

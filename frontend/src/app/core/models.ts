@@ -57,6 +57,12 @@ export interface PassageWord {
   exampleSentence: string | null;
 }
 
+/** Ein Satz eines Fremdsprachentextes samt deutscher Übersetzung ("Satz für Satz"). */
+export interface PassageSentence {
+  text: string;
+  german: string;
+}
+
 export interface ReadingPassage {
   id: number;
   title: string;
@@ -69,6 +75,7 @@ export interface ReadingPassage {
   questions: ComprehensionQuestion[];
   words: PassageWord[];
   glossary: PassageWord[]; // vollständiges Wörterverzeichnis (Fremdsprache) für die Lernphase
+  sentences: PassageSentence[]; // Satz-für-Satz-Übersetzung (nur Fremdsprache)
 }
 
 export interface ReadingPassageSummary {
@@ -80,6 +87,7 @@ export interface ReadingPassageSummary {
   wordCount: number;
   createdAt: string;
   questionCount: number;
+  isNew: boolean; // gehört zum zuletzt erzeugten Tagesstapel
 }
 
 export interface AnswerFeedback {

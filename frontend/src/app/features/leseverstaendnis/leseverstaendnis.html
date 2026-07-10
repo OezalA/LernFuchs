@@ -45,6 +45,7 @@
           <div class="book-grid">
             @for (p of group.items; track p.id) {
               <button class="book" [class.read]="isRead(p.id)" (click)="open(p.id)">
+                @if (p.isNew) { <span class="book-new">neu</span> }
                 <div class="book-cover">
                   <span class="cover-emoji">{{ group.icon }}</span>
                   @if (isRead(p.id)) { <span class="cover-check">✓</span> }
@@ -110,7 +111,7 @@
       @if (isForeign && vocabWords().length && !vocabDone()) {
         <div class="learn-hint">
           <span class="learn-hint-text">💡 In diesem Text gibt es <strong>{{ vocabWords().length }}</strong>
-            englische Wörter. Möchtest du sie zuerst lernen?</span>
+            Wörter. Möchtest du sie zuerst lernen?</span>
           <button class="secondary" (click)="learnWords()">📚 Wörter lernen</button>
         </div>
       } @else if (isForeign && vocabWords().length) {
@@ -126,13 +127,21 @@
             </div>
           }
         </div>
-        <p class="reader-text">@for (t of textTokens(); track $index) {@if (t.word) {<button class="hard-word" (click)="tapWord(t.word)">{{ t.text }}</button>} @else {{{ t.text }}}}</p>
+        @if (isForeign && sentenceRows().length) {
+          <p class="reader-text">@for (row of sentenceRows(); track $index; let si = $index) {<span class="sentence-inline" [class.active]="activeSentence() === si" (click)="tapSentence(si)">@for (t of row.tokens; track $index) {@if (t.word) {<button class="hard-word" (click)="tapWord(t.word); $event.stopPropagation()">{{ t.text }}</button>} @else {{{ t.text }}}}</span>{{ ' ' }}@if (activeSentence() === si) {<span class="sentence-de-inline">💬 {{ row.german }}</span>}}</p>
+        } @else {
+          <p class="reader-text">@for (t of textTokens(); track $index) {@if (t.word) {<button class="hard-word" (click)="tapWord(t.word)">{{ t.text }}</button>} @else {{{ t.text }}}}</p>
+        }
 
         @if (activeWord(); as w) {
           <div class="word-popover">
             <strong>{{ w.article !== 'None' ? (w.article | lowercase) + ' ' : '' }}{{ w.word }}</strong>
             <span class="muted"> – {{ w.definitionGerman }}</span>
           </div>
+        } @else if (hasGlossary()) {
+          <p class="reader-hint muted">💡 Tippe einen ganzen <strong>Satz</strong> an, um ihn zu hören und auf Deutsch zu verstehen.</p>
+        } @else if (isForeign) {
+          <p class="reader-hint muted">💡 Tippe ein <span class="hard-word-demo">Wort</span> für seine Bedeutung – oder einen ganzen Satz, um ihn zu hören und auf Deutsch zu verstehen.</p>
         } @else {
           <p class="reader-hint muted">💡 Tippe auf ein <span class="hard-word-demo">unterstrichenes</span> Wort, um es zu hören und seine Bedeutung zu sehen.</p>
         }

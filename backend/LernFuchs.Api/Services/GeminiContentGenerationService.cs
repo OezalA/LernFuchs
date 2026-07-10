@@ -161,16 +161,16 @@ public class GeminiContentGenerationService : IContentGenerationService
             Language.Spanisch => $$"""
                 Du bist ein Spanischlehrer für eine deutschsprachige Schülerin der 5. Klasse,
                 die zum ALLERERSTEN MAL Spanisch lernt (absolute Anfängerin, vor-A1, keine Vorkenntnisse).
-                Schreibe einen EXTREM EINFACHEN, sehr kurzen SPANISCHEN Lesetext zum Thema "{{topic}}":
-                nur etwa 40-80 Wörter, sehr kurze Sätze, nur die häufigsten Grundwörter, nur Präsens.
+                Schreibe einen EXTREM EINFACHEN, GANZ KURZEN SPANISCHEN Lesetext zum Thema "{{topic}}":
+                nur etwa 25-45 Wörter, sehr kurze Sätze, nur die häufigsten Grundwörter, nur Präsens.
                 Er soll noch deutlich leichter sein als ein englischer Anfängertext.
                 Formuliere danach genau {{questionCount}} sehr einfache Verständnisfragen AUF DEUTSCH zum Text
                 (die Anfängerin kann noch kein Spanisch lesen).
 
-                Da Spanisch völlig neu ist, kennt die Anfängerin so gut wie KEIN Wort.
-                Nimm deshalb etwa 10-16 nützliche spanische Wörter aus DEINEM Text als "difficultWords" auf
-                (Nomen, Verben, Adjektive), die eine deutsche Anfängerin lernen sollte.
-                Erkläre jedes: "definitionGerman" ist die DEUTSCHE Übersetzung/Bedeutung
+                Da Spanisch völlig neu ist, kennt die Anfängerin KEIN einziges Wort.
+                Nimm deshalb JEDES eigenständige Wort des Textes (ohne Wiederholungen, in Grundform)
+                als "difficultWords" auf – AUCH ganz einfache Wörter wie Artikel, Pronomen und "und/ist".
+                Erkläre jedes: "definitionGerman" ist die DEUTSCHE Bedeutung
                 (kindgerecht), "exampleSentence" ist ein einfacher SPANISCHER Beispielsatz.
                 "word" steht in der Grundform.
                 "article" ist immer "none", "conjugations" bleibt ein leeres Array [].
@@ -182,16 +182,16 @@ public class GeminiContentGenerationService : IContentGenerationService
             Language.Franzoesisch => $$"""
                 Du bist ein Französischlehrer für eine deutschsprachige Schülerin der 5. Klasse,
                 die zum ALLERERSTEN MAL Französisch lernt (absolute Anfängerin, vor-A1, keine Vorkenntnisse).
-                Schreibe einen EXTREM EINFACHEN, sehr kurzen FRANZÖSISCHEN Lesetext zum Thema "{{topic}}":
-                nur etwa 40-80 Wörter, sehr kurze Sätze, nur die häufigsten Grundwörter, nur Präsens.
+                Schreibe einen EXTREM EINFACHEN, GANZ KURZEN FRANZÖSISCHEN Lesetext zum Thema "{{topic}}":
+                nur etwa 25-45 Wörter, sehr kurze Sätze, nur die häufigsten Grundwörter, nur Präsens.
                 Er soll noch deutlich leichter sein als ein englischer Anfängertext.
                 Formuliere danach genau {{questionCount}} sehr einfache Verständnisfragen AUF DEUTSCH zum Text
                 (die Anfängerin kann noch kein Französisch lesen).
 
-                Da Französisch völlig neu ist, kennt die Anfängerin so gut wie KEIN Wort.
-                Nimm deshalb etwa 10-16 nützliche französische Wörter aus DEINEM Text als "difficultWords" auf
-                (Nomen, Verben, Adjektive), die eine deutsche Anfängerin lernen sollte.
-                Erkläre jedes: "definitionGerman" ist die DEUTSCHE Übersetzung/Bedeutung
+                Da Französisch völlig neu ist, kennt die Anfängerin KEIN einziges Wort.
+                Nimm deshalb JEDES eigenständige Wort des Textes (ohne Wiederholungen, in Grundform)
+                als "difficultWords" auf – AUCH ganz einfache Wörter wie Artikel, Pronomen und "und/ist".
+                Erkläre jedes: "definitionGerman" ist die DEUTSCHE Bedeutung
                 (kindgerecht), "exampleSentence" ist ein einfacher FRANZÖSISCHER Beispielsatz.
                 "word" steht in der Grundform.
                 "article" ist immer "none", "conjugations" bleibt ein leeres Array [].
@@ -242,6 +242,12 @@ public class GeminiContentGenerationService : IContentGenerationService
                   "antonyms": ["deutsches Gegenteil"],
                   "conjugations": ["ich-Form", "du-Form", "er/sie/es-Form", "wir-Form", "ihr-Form", "sie/Sie-Form"]
                 }
+              ],
+              "sentences": [
+                {
+                  "text": "ein vollständiger Satz aus dem Text (Originalsprache)",
+                  "german": "die deutsche Übersetzung genau dieses Satzes"
+                }
               ]
             }
             Regeln: Jede Frage hat genau 4 Optionen, und "correctAnswer" muss exakt einer der Optionen entsprechen.
@@ -249,6 +255,10 @@ public class GeminiContentGenerationService : IContentGenerationService
             Die Wörter in "difficultWords" müssen wirklich im Text vorkommen.
             "conjugations" NUR bei Verben ausfüllen (Präsens: ich, du, er/sie/es, wir, ihr, sie/Sie),
             bei allen anderen Wortarten ein leeres Array [].
+            "sentences": Bei einer FREMDSPRACHE (nicht Deutsch) enthält es JEDEN Satz des Textes
+            in genau der Reihenfolge des Textes, jeweils mit seiner deutschen Übersetzung. "text" ist der
+            Satz in der Originalsprache, "german" seine kindgerechte deutsche Übersetzung. Bei einem
+            DEUTSCHEN Text bleibt "sentences" ein leeres Array [].
             Gib keine Erklärungen außerhalb des JSON aus.
             """;
 
@@ -257,11 +267,14 @@ public class GeminiContentGenerationService : IContentGenerationService
                   ?? throw new InvalidOperationException("Gemini-Antwort konnte nicht gelesen werden.");
 
         var text = dto.Text.Trim();
+        // Fremdsprachen (Englisch/Spanisch/Französisch) sind immer leicht (pre-A1),
+        // egal welche Schwierigkeit angefragt wurde – nur Deutsch nutzt die Vorgabe.
+        var effectiveDifficulty = language == Language.Deutsch ? difficulty : Difficulty.Leicht;
         var passage = new ReadingPassage
         {
             Title = dto.Title.Trim(),
             Text = text,
-            Difficulty = difficulty,
+            Difficulty = effectiveDifficulty,
             Language = language,
             Topic = topic,
             WordCount = text.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length,
@@ -275,6 +288,17 @@ public class GeminiContentGenerationService : IContentGenerationService
             }).ToList()
         };
 
+        // Fremdsprachen: jeden Satz mit deutscher Übersetzung speichern (für "Satz für Satz").
+        if (language != Language.Deutsch && dto.Sentences is { Count: > 0 })
+        {
+            var sentences = dto.Sentences
+                .Where(s => !string.IsNullOrWhiteSpace(s.Text) && !string.IsNullOrWhiteSpace(s.German))
+                .Select(s => new PassageSentence(s.Text.Trim(), s.German.Trim()))
+                .ToList();
+            if (sentences.Count > 0)
+                passage.SentencesJson = JsonSerializer.Serialize(sentences);
+        }
+
         var difficultWords = (dto.DifficultWords ?? new())
             .Where(w => !string.IsNullOrWhiteSpace(w.Word))
             .Select(w => new VocabularyWord
@@ -287,11 +311,23 @@ public class GeminiContentGenerationService : IContentGenerationService
                 ExampleSentence = w.ExampleSentence?.Trim(),
                 Synonyms = w.Synonyms ?? new(),
                 Antonyms = w.Antonyms ?? new(),
-                Difficulty = difficulty,
+                Difficulty = effectiveDifficulty,
                 Language = language,
                 Topic = topic
             })
             .ToList();
+
+        // Anfänger-Fremdsprachen (Spanisch/Französisch): ALLE Wörter des Textes als vollständiges
+        // Glossar speichern, damit die Wörter-Lernphase jedes Wort zeigt – unabhängig von der
+        // (je Sprache entdoppelten) Wortschatz-Tabelle. Englisch/Deutsch nutzen weiter die Wort-Untermenge.
+        if (language is Language.Spanisch or Language.Franzoesisch)
+        {
+            var glossary = difficultWords
+                .Select(w => new GlossaryEntry(w.Word, w.DefinitionGerman))
+                .ToList();
+            if (glossary.Count > 0)
+                passage.GlossaryJson = JsonSerializer.Serialize(glossary);
+        }
 
         return new GeneratedReading(passage, difficultWords);
     }
@@ -393,6 +429,13 @@ public class GeminiContentGenerationService : IContentGenerationService
         public string Text { get; init; } = "";
         public List<QuestionDto> Questions { get; init; } = new();
         public List<VocabularyDto>? DifficultWords { get; init; }
+        public List<SentenceDto>? Sentences { get; init; }
+    }
+
+    private sealed record SentenceDto
+    {
+        public string Text { get; init; } = "";
+        public string German { get; init; } = "";
     }
 
     private sealed record QuestionDto

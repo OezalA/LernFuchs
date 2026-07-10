@@ -207,3 +207,24 @@ h1 { color: var(--fox-orange-dark); }
   background: #fff; border: 2px solid var(--fox-orange);
   border-radius: 999px; padding: 0.25rem 0.7rem; font-weight: 700; font-size: 0.9rem;
 }
+
+/* "neu"-Abzeichen + Satz für Satz (Fremdsprache) */
+.book { position: relative; }
+.book-new {
+  position: absolute; top: -7px; left: -7px; z-index: 1;
+  background: var(--berry-red); color: #fff; font-weight: 900;
+  font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 0.12rem 0.45rem; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+/* Satz für Satz inline: ganzer Satz mit durchgehender blauer Linie + antippbar
+   (blau, damit es sich klar von den orange gestrichelten schwierigen Wörtern abhebt) */
+.sentence-inline {
+  text-decoration: underline solid #3f8fbf; text-decoration-thickness: 2px;
+  text-underline-offset: 4px; cursor: pointer; border-radius: 4px;
+}
+.sentence-inline:hover { background: #eaf4fb; }
+.sentence-inline.active { background: #e1eefb; text-decoration-color: #266a94; }
+.sentence-de-inline {
+  display: block; margin: 0.2rem 0 0.7rem;
+  color: #266a94; font-weight: 600; font-size: 1.05rem;
+}

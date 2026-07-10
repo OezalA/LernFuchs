@@ -20,8 +20,33 @@ env:
   NODE_VERSION: '22'
 
 jobs:
+  # Gate: build and run the backend tests first. Deploy only runs if this passes.
+  test:
+    name: Build & test (gate)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test --no-build --configuration Release --verbosity normal
+
   deploy:
     name: Build & deploy
+    needs: test # nur deployen, wenn die Tests grün sind
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

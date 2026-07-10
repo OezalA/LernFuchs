@@ -33,6 +33,13 @@ public class ReadingPassage
     /// </summary>
     public string? GlossaryJson { get; set; }
 
+    /// <summary>
+    /// Satzweise deutsche Übersetzung des Textes als JSON [{ "text", "german" }, …].
+    /// Nur für Fremdsprachen (Englisch/Spanisch/Französisch) gefüllt, damit das Kind
+    /// jeden Satz anhören und seine deutsche Bedeutung sehen kann. Null bei Deutsch/Altdaten.
+    /// </summary>
+    public string? SentencesJson { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public List<ComprehensionQuestion> Questions { get; set; } = new();

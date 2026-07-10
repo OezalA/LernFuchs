@@ -48,7 +48,15 @@ public class ReadingController : ControllerBase
                 QuestionCount = p.Questions.Count
             })
             .ToListAsync();
-        return Ok(passages);
+
+        // "isNew": Texte des zuletzt erzeugten Tages (rotiert automatisch, wenn neue dazukommen).
+        var latestDay = passages.Count > 0 ? passages.Max(p => p.CreatedAt).Date : (DateTime?)null;
+        var result = passages.Select(p => new
+        {
+            p.Id, p.Title, p.Difficulty, p.Language, p.Topic, p.WordCount, p.CreatedAt, p.QuestionCount,
+            IsNew = latestDay != null && p.CreatedAt.Date == latestDay
+        });
+        return Ok(result);
     }
 
     /// <summary>Ein Lesetext samt Fragen und den zugehörigen Wörtern (für das Frontend-Spielerlebnis).</summary>
@@ -71,12 +79,42 @@ public class ReadingController : ControllerBase
         object glossary = new List<object>();
         if (!string.IsNullOrWhiteSpace(passage.GlossaryJson))
         {
-            var entries = JsonSerializer.Deserialize<List<GlossaryEntry>>(passage.GlossaryJson) ?? new();
-            glossary = entries.Select((g, i) => new
+            var entries = JsonSerializer.Deserialize<List<GlossaryEntry>>(
+                passage.GlossaryJson,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+
+            // Echte Vokabeln dieser Sprache nachschlagen, damit die Wörter-Lernphase die
+            // richtige Id (und den Fortschritt) trifft – so funktioniert auch "Gewusst".
+            var vocab = await _db.VocabularyWords
+                .Where(w => w.Language == passage.Language)
+                .ToListAsync();
+            var byWord = vocab
+                .GroupBy(w => w.Word.ToLowerInvariant())
+                .ToDictionary(gr => gr.Key, gr => gr.First());
+
+            glossary = entries.Select((g, i) =>
             {
-                Id = i + 1, g.Word, Article = "None", Plural = (string?)null,
-                WordType = "Sonstiges", DefinitionGerman = g.Meaning, ExampleSentence = (string?)null
+                byWord.TryGetValue(g.Word.ToLowerInvariant(), out var v);
+                return new
+                {
+                    Id = v?.Id ?? -(i + 1),
+                    g.Word,
+                    Article = (v?.Article ?? Article.None).ToString(),
+                    Plural = v?.Plural,
+                    WordType = (v?.WordType ?? WordType.Sonstiges).ToString(),
+                    DefinitionGerman = v?.DefinitionGerman ?? g.Meaning,
+                    ExampleSentence = v?.ExampleSentence
+                };
             }).ToList();
+        }
+
+        // "sentences": jeder Satz des Fremdsprachentextes mit deutscher Übersetzung ("Satz für Satz").
+        object sentences = new List<object>();
+        if (!string.IsNullOrWhiteSpace(passage.SentencesJson))
+        {
+            sentences = JsonSerializer.Deserialize<List<PassageSentence>>(
+                passage.SentencesJson,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
         }
 
         return Ok(new
@@ -88,7 +126,8 @@ public class ReadingController : ControllerBase
                 q.Id, q.QuestionText, q.QuestionType, q.Options, q.CorrectAnswer, q.Explanation
             }),
             Words = words,
-            Glossary = glossary
+            Glossary = glossary,
+            Sentences = sentences
         });
     }
 
