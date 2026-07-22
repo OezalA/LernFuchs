@@ -1,10 +1,30 @@
 using LernFuchs.Api.Data;
 using LernFuchs.Api.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Web;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// --- Authentifizierung (Microsoft Entra ID) für den geschützten Admin-Bereich ---
+// Das Kinder-Frontend bleibt offen; nur /api/admin/* verlangt die App-Rolle "Admin".
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(
+        jwt =>
+        {
+            builder.Configuration.Bind("AzureAd", jwt);
+            jwt.TokenValidationParameters.RoleClaimType = "roles"; // App-Rollen stehen im "roles"-Claim
+        },
+        identity => builder.Configuration.Bind("AzureAd", identity));
+
+builder.Services.AddAuthorization(options =>
+    options.AddPolicy("Admin", policy =>
+        policy.RequireAssertion(ctx =>
+            ctx.User.Claims.Any(c =>
+                (c.Type == "roles" || c.Type == System.Security.Claims.ClaimTypes.Role)
+                && c.Value == "Admin"))));
 
 // --- Datenbank (SQLite via EF Core) ---
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -69,6 +89,7 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseCors("frontend");
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

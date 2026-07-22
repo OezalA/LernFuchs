@@ -46,5 +46,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/games/verb').then(m => m.VerbGame),
     title: 'LernFuchs – Verben'
   },
+  {
+    path: 'admin',
+    loadComponent: () => import('./features/admin/admin').then(m => m.Admin),
+    title: 'LernFuchs – Admin'
+  },
   { path: '**', redirectTo: '' }
 ];

@@ -1,0 +1,77 @@
+<div class="container admin">
+  <header class="admin-head">
+    <h1>🔐 Admin</h1>
+    @if (account()) {
+      <div class="who">
+        <span class="muted">{{ userName }}</span>
+        <button class="ghost" (click)="logout()">Abmelden</button>
+      </div>
+    }
+  </header>
+
+  @if (message()) { <p class="admin-msg">{{ message() }}</p> }
+
+  @if (!account()) {
+    <div class="card center login-card">
+      <p>Bitte mit deinem Microsoft-Konto anmelden.</p>
+      <button (click)="login()">🔑 Mit Microsoft anmelden</button>
+    </div>
+  } @else if (!isAdmin) {
+    <div class="card center">
+      <p><strong>{{ userName }}</strong> hat keine Admin-Berechtigung.</p>
+      <p class="muted">Rollen im Token: <code>{{ tokenRoles }}</code></p>
+      <p class="muted">Angemeldet als: <code>{{ account()?.username }}</code></p>
+      <p class="muted">Diese Seite ist nur für Administratoren (App-Rolle „Admin").</p>
+      <button class="ghost" (click)="logout()">Abmelden &amp; neu anmelden</button>
+    </div>
+  } @else {
+    <div class="lang-row">
+      @for (l of languages; track l) {
+        <button class="lang-btn" [class.active]="language() === l" (click)="selectLanguage(l)">{{ langLabel(l) }}</button>
+      }
+    </div>
+
+    <section class="card gen">
+      <h2>Neuen Text erzeugen · {{ langLabel(language()) }}</h2>
+      <div class="gen-row">
+        <input [ngModel]="topic()" (ngModelChange)="topic.set($event)"
+               placeholder="Thema, z. B. Animals / Los colores" (keyup.enter)="generate()" />
+        <button (click)="generate()" [disabled]="busy()">✨ Erzeugen</button>
+      </div>
+    </section>
+
+    @if (loading()) { <p class="center"><span class="spinner"></span> Lädt…</p> }
+
+    <section class="card">
+      <div class="sec-head">
+        <h2>Texte ({{ passages().length }})</h2>
+        <button class="danger small" (click)="deleteAll()" [disabled]="busy()">🗑 Alle {{ langLabel(language()) }}-Inhalte</button>
+      </div>
+      @if (!passages().length) { <p class="muted">Keine Texte.</p> }
+      @for (p of passages(); track p.id) {
+        <div class="row-item">
+          <div>
+            <strong>{{ p.title }}</strong>
+            <span class="muted"> · {{ p.difficulty }} · {{ p.wordCount }} W · {{ p.questionCount }} Fragen</span>
+          </div>
+          <button class="danger small" (click)="deletePassage(p)">Löschen</button>
+        </div>
+      }
+    </section>
+
+    <section class="card">
+      <h2>Wörter ({{ words().length }})</h2>
+      @if (!words().length) { <p class="muted">Keine Wörter.</p> }
+      @for (w of words(); track w.id) {
+        <div class="row-item">
+          <div class="word-cell">
+            <strong>{{ w.word }}</strong>
+            <span class="muted"> — {{ w.definitionGerman }}</span>
+            <span class="tag" [class.satz]="w.wordType === 'Satz'">{{ w.wordType }}</span>
+          </div>
+          <button class="danger small" (click)="deleteWord(w)">Löschen</button>
+        </div>
+      }
+    </section>
+  }
+</div>
