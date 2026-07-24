@@ -50,7 +50,7 @@ public class AdminController : ControllerBase
             .OrderByDescending(p => p.CreatedAt)
             .Select(p => new
             {
-                p.Id, p.Title, p.Language, p.Difficulty, p.Topic, p.WordCount, p.CreatedAt,
+                p.Id, p.Title, p.Text, p.Language, p.Difficulty, p.Topic, p.WordCount, p.CreatedAt,
                 QuestionCount = p.Questions.Count
             })
             .ToListAsync();
@@ -67,7 +67,7 @@ public class AdminController : ControllerBase
             .OrderByDescending(w => w.CreatedAt)
             .Select(w => new
             {
-                w.Id, w.Word, w.DefinitionGerman, w.WordType, w.Language, w.Difficulty,
+                w.Id, w.Word, w.DefinitionGerman, w.ExampleSentence, w.WordType, w.Language, w.Difficulty,
                 w.Topic, w.SourcePassageId
             })
             .ToListAsync();
@@ -140,6 +140,39 @@ public class AdminController : ControllerBase
 
         return Ok(new { generated.Passage.Id, generated.Passage.Title, addedWords = newWords.Count });
     }
+
+    /// <summary>Bearbeitet einen Text (Titel/Text/Schwierigkeit).</summary>
+    [HttpPut("passages/{id:int}")]
+    public async Task<IActionResult> UpdatePassage(int id, [FromBody] UpdatePassageRequest req)
+    {
+        var p = await _db.ReadingPassages.FindAsync(id);
+        if (p is null) return NotFound();
+        if (!string.IsNullOrWhiteSpace(req.Title)) p.Title = req.Title.Trim();
+        if (!string.IsNullOrWhiteSpace(req.Text))
+        {
+            p.Text = req.Text.Trim();
+            p.WordCount = p.Text.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
+        }
+        if (req.Difficulty is not null) p.Difficulty = req.Difficulty.Value;
+        await _db.SaveChangesAsync();
+        return Ok(new { p.Id, p.Title, p.WordCount, p.Difficulty });
+    }
+
+    /// <summary>Bearbeitet ein Wort (Wort/deutsche Bedeutung/Beispielsatz).</summary>
+    [HttpPut("words/{id:int}")]
+    public async Task<IActionResult> UpdateWord(int id, [FromBody] UpdateWordRequest req)
+    {
+        var w = await _db.VocabularyWords.FindAsync(id);
+        if (w is null) return NotFound();
+        if (!string.IsNullOrWhiteSpace(req.Word)) w.Word = req.Word.Trim();
+        if (req.DefinitionGerman is not null) w.DefinitionGerman = req.DefinitionGerman.Trim();
+        if (req.ExampleSentence is not null)
+            w.ExampleSentence = string.IsNullOrWhiteSpace(req.ExampleSentence) ? null : req.ExampleSentence.Trim();
+        await _db.SaveChangesAsync();
+        return Ok(new { w.Id, w.Word, w.DefinitionGerman, w.ExampleSentence });
+    }
 }
 
 public record AdminGenerateRequest(string Topic, Language Language, Difficulty? Difficulty, int? QuestionCount);
+public record UpdatePassageRequest(string? Title, string? Text, Difficulty? Difficulty);
+public record UpdateWordRequest(string? Word, string? DefinitionGerman, string? ExampleSentence);

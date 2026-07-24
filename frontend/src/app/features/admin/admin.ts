@@ -99,4 +99,57 @@ export class Admin {
       error: () => { this.message.set('Erzeugen fehlgeschlagen (evtl. Gemini-Limit).'); this.busy.set(false); }
     });
   }
+
+  // ---- Bearbeiten: Text ----
+  readonly difficulties = ['Leicht', 'Mittel', 'Schwer'];
+  editPassageId = signal<number | null>(null);
+  pTitle = signal('');
+  pText = signal('');
+  pDifficulty = signal('Leicht');
+
+  startEditPassage(p: AdminPassage): void {
+    this.editWordId.set(null);
+    this.editPassageId.set(p.id);
+    this.pTitle.set(p.title);
+    this.pText.set(p.text);
+    this.pDifficulty.set(p.difficulty);
+  }
+  cancelPassageEdit(): void { this.editPassageId.set(null); }
+  savePassage(p: AdminPassage): void {
+    this.api.updatePassage(p.id, { title: this.pTitle(), text: this.pText(), difficulty: this.pDifficulty() }).subscribe({
+      next: r => {
+        this.passages.update(list => list.map(x => x.id === p.id
+          ? { ...x, title: r.title, text: this.pText(), wordCount: r.wordCount, difficulty: r.difficulty } : x));
+        this.editPassageId.set(null);
+        this.message.set('Text gespeichert.');
+      },
+      error: () => this.message.set('Speichern fehlgeschlagen.')
+    });
+  }
+
+  // ---- Bearbeiten: Wort ----
+  editWordId = signal<number | null>(null);
+  wWord = signal('');
+  wDef = signal('');
+  wExample = signal('');
+
+  startEditWord(w: AdminWord): void {
+    this.editPassageId.set(null);
+    this.editWordId.set(w.id);
+    this.wWord.set(w.word);
+    this.wDef.set(w.definitionGerman);
+    this.wExample.set(w.exampleSentence ?? '');
+  }
+  cancelWordEdit(): void { this.editWordId.set(null); }
+  saveWord(w: AdminWord): void {
+    this.api.updateWord(w.id, { word: this.wWord(), definitionGerman: this.wDef(), exampleSentence: this.wExample() }).subscribe({
+      next: r => {
+        this.words.update(list => list.map(x => x.id === w.id
+          ? { ...x, word: r.word, definitionGerman: r.definitionGerman, exampleSentence: r.exampleSentence } : x));
+        this.editWordId.set(null);
+        this.message.set('Wort gespeichert.');
+      },
+      error: () => this.message.set('Speichern fehlgeschlagen.')
+    });
+  }
 }

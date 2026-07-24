@@ -32,5 +32,17 @@
 }
 .tag.satz { background: #d7ecf7; color: #266a94; }
 .danger { background: var(--berry-red); color: #fff; }
+.success { background: var(--leaf-green); color: #fff; }
 .small { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
 .center { text-align: center; }
+.row-actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
+.edit-form {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  padding: 0.7rem; margin: 0.4rem 0; background: #fff8ee;
+  border: 2px solid var(--fox-orange); border-radius: 12px;
+}
+.edit-form input, .edit-form textarea, .edit-form select {
+  padding: 0.5rem 0.7rem; border: 2px solid #eee4d4; border-radius: 10px; font: inherit; width: 100%;
+}
+.edit-form textarea { resize: vertical; }
+.edit-actions { display: flex; gap: 0.5rem; }

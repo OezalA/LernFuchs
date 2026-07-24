@@ -2,12 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 export interface AdminPassage {
-  id: number; title: string; language: string; difficulty: string;
+  id: number; title: string; text: string; language: string; difficulty: string;
   topic: string | null; wordCount: number; createdAt: string; questionCount: number;
 }
 export interface AdminWord {
-  id: number; word: string; definitionGerman: string; wordType: string;
-  language: string; difficulty: string; topic: string | null; sourcePassageId: number | null;
+  id: number; word: string; definitionGerman: string; exampleSentence: string | null;
+  wordType: string; language: string; difficulty: string; topic: string | null; sourcePassageId: number | null;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -28,5 +28,11 @@ export class AdminService {
   }
   generate(body: { topic: string; language: string; difficulty?: string; questionCount?: number }) {
     return this.http.post<{ id: number; title: string; addedWords: number }>(`${this.base}/generate`, body);
+  }
+  updatePassage(id: number, body: { title?: string; text?: string; difficulty?: string }) {
+    return this.http.put<{ id: number; title: string; wordCount: number; difficulty: string }>(`${this.base}/passages/${id}`, body);
+  }
+  updateWord(id: number, body: { word?: string; definitionGerman?: string; exampleSentence?: string }) {
+    return this.http.put<{ id: number; word: string; definitionGerman: string; exampleSentence: string | null }>(`${this.base}/words/${id}`, body);
   }
 }

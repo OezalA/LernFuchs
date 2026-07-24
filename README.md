@@ -47,6 +47,7 @@ afterwards without repeated API calls.
 | Database  | SQLite via Entity Framework Core              |
 | AI        | Google Gemini REST API (`gemini-2.5-flash`)   |
 | Frontend  | Angular 22 (TypeScript, standalone + signals) |
+| Auth      | Microsoft Entra ID (MSAL) — admin area only   |
 
 ---
 
@@ -174,10 +175,14 @@ language switch** (Deutsch / Englisch / Spanisch / Französisch, with a *"Wechse
 menu) in the header, and three areas:
 
 - **Wortschatz** — the words the child has met, grouped by topic, with **read-aloud**
-  (🔊). Two practice modes:
-  - **🎴 Üben** — flip-cards; marking **"Gewusst"** moves a word to *learned*.
-  - **✅ Test** — multiple choice in random order; getting a word right **4 times in
-    a row** marks it *learned*.
+  (🔊). Two modes:
+  - **🎴 Üben / Heute üben** — study flash-cards (flip, listen, next); nothing is
+    self-marked here, so the child can't "click away" the test.
+  - **✅ Test** — multiple choice in random order; a word counts as *learned* only after
+    **4 correct in a row**, and learned words then drop out of Test and Üben.
+
+  In the foreign languages, each **sentence** of a read text also becomes a review item
+  (flash-cards and Test/Quiz, sentence-vs-sentence), so whole sentences are practised too.
 - **Leseverständnis** — read a short text (with optional **read-aloud**), filter by
   topic, answer the questions and get instant per-question feedback and a score.
   The **difficult words are extracted into the Wortschatz**, and the newest texts are
@@ -206,6 +211,24 @@ rate and number of reading texts (`GET /api/stats`).
 
 ---
 
+## Admin area
+
+A separate, protected **`/admin`** page lets the maintainer manage content —
+**list, edit, delete and generate** texts and words per language. It is **not** part of
+the child-facing app (which stays completely login-free).
+
+- **Sign-in with Microsoft Entra ID** (MSAL redirect flow). Only accounts assigned the
+  **`Admin`** app role are allowed in; everyone else is refused.
+- The backend protects every `/api/admin/*` endpoint with `[Authorize(Policy = "Admin")]`
+  (tokens validated via `Microsoft.Identity.Web`).
+- The admin **generate** endpoint bypasses the public `UserGenerationEnabled` flag, so new
+  content can be created in production without opening generation to everyone.
+
+Configuration lives under `AzureAd` in `appsettings.json` (tenant/client IDs are public
+identifiers, not secrets; no client secret is needed for token validation).
+
+---
+
 ## API endpoints
 
 ### Vocabulary — `/api/vocabulary`
@@ -229,6 +252,20 @@ rate and number of reading texts (`GET /api/stats`).
 | POST   | `/api/reading/generate`   | Generate & save a new passage + questions via Gemini |
 | POST   | `/api/reading/{id}/check` | Submit answers and get per-question feedback         |
 | DELETE | `/api/reading/{id}`       | Delete a passage                                      |
+
+### Admin — `/api/admin` (requires the `Admin` app role)
+
+| Method | Route                        | Description                                       |
+| ------ | ---------------------------- | ------------------------------------------------- |
+| GET    | `/api/admin/summary`         | Counts of texts and words per language            |
+| GET    | `/api/admin/passages`        | List texts (filter by `language`)                 |
+| GET    | `/api/admin/words`           | List words (filter by `language`)                 |
+| POST   | `/api/admin/generate`        | Generate a text (ignores `UserGenerationEnabled`) |
+| PUT    | `/api/admin/passages/{id}`   | Edit a text (title / text / difficulty)           |
+| PUT    | `/api/admin/words/{id}`      | Edit a word (word / meaning / example)            |
+| DELETE | `/api/admin/passages/{id}`   | Delete a text                                     |
+| DELETE | `/api/admin/words/{id}`      | Delete a word                                     |
+| DELETE | `/api/admin/language/{lang}` | Delete all texts + words of a language            |
 
 ### Example: generate vocabulary
 

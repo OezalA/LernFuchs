@@ -49,13 +49,30 @@
       </div>
       @if (!passages().length) { <p class="muted">Keine Texte.</p> }
       @for (p of passages(); track p.id) {
-        <div class="row-item">
-          <div>
-            <strong>{{ p.title }}</strong>
-            <span class="muted"> · {{ p.difficulty }} · {{ p.wordCount }} W · {{ p.questionCount }} Fragen</span>
+        @if (editPassageId() === p.id) {
+          <div class="edit-form">
+            <input [ngModel]="pTitle()" (ngModelChange)="pTitle.set($event)" placeholder="Titel" />
+            <textarea [ngModel]="pText()" (ngModelChange)="pText.set($event)" rows="6" placeholder="Text"></textarea>
+            <select [ngModel]="pDifficulty()" (ngModelChange)="pDifficulty.set($event)">
+              @for (d of difficulties; track d) { <option [value]="d">{{ d }}</option> }
+            </select>
+            <div class="edit-actions">
+              <button class="success small" (click)="savePassage(p)">Speichern</button>
+              <button class="ghost small" (click)="cancelPassageEdit()">Abbrechen</button>
+            </div>
           </div>
-          <button class="danger small" (click)="deletePassage(p)">Löschen</button>
-        </div>
+        } @else {
+          <div class="row-item">
+            <div>
+              <strong>{{ p.title }}</strong>
+              <span class="muted"> · {{ p.difficulty }} · {{ p.wordCount }} W · {{ p.questionCount }} Fragen</span>
+            </div>
+            <div class="row-actions">
+              <button class="ghost small" (click)="startEditPassage(p)">Bearbeiten</button>
+              <button class="danger small" (click)="deletePassage(p)">Löschen</button>
+            </div>
+          </div>
+        }
       }
     </section>
 
@@ -63,14 +80,29 @@
       <h2>Wörter ({{ words().length }})</h2>
       @if (!words().length) { <p class="muted">Keine Wörter.</p> }
       @for (w of words(); track w.id) {
-        <div class="row-item">
-          <div class="word-cell">
-            <strong>{{ w.word }}</strong>
-            <span class="muted"> — {{ w.definitionGerman }}</span>
-            <span class="tag" [class.satz]="w.wordType === 'Satz'">{{ w.wordType }}</span>
+        @if (editWordId() === w.id) {
+          <div class="edit-form">
+            <input [ngModel]="wWord()" (ngModelChange)="wWord.set($event)" placeholder="Wort" />
+            <input [ngModel]="wDef()" (ngModelChange)="wDef.set($event)" placeholder="Deutsche Bedeutung" />
+            <input [ngModel]="wExample()" (ngModelChange)="wExample.set($event)" placeholder="Beispielsatz (optional)" />
+            <div class="edit-actions">
+              <button class="success small" (click)="saveWord(w)">Speichern</button>
+              <button class="ghost small" (click)="cancelWordEdit()">Abbrechen</button>
+            </div>
           </div>
-          <button class="danger small" (click)="deleteWord(w)">Löschen</button>
-        </div>
+        } @else {
+          <div class="row-item">
+            <div class="word-cell">
+              <strong>{{ w.word }}</strong>
+              <span class="muted"> — {{ w.definitionGerman }}</span>
+              <span class="tag" [class.satz]="w.wordType === 'Satz'">{{ w.wordType }}</span>
+            </div>
+            <div class="row-actions">
+              <button class="ghost small" (click)="startEditWord(w)">Bearbeiten</button>
+              <button class="danger small" (click)="deleteWord(w)">Löschen</button>
+            </div>
+          </div>
+        }
       }
     </section>
   }
