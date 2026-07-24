@@ -19,8 +19,6 @@
   } @else if (!isAdmin) {
     <div class="card center">
       <p><strong>{{ userName }}</strong> hat keine Admin-Berechtigung.</p>
-      <p class="muted">Rollen im Token: <code>{{ tokenRoles }}</code></p>
-      <p class="muted">Angemeldet als: <code>{{ account()?.username }}</code></p>
       <p class="muted">Diese Seite ist nur für Administratoren (App-Rolle „Admin").</p>
       <button class="ghost" (click)="logout()">Abmelden &amp; neu anmelden</button>
     </div>

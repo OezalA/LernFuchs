@@ -40,13 +40,6 @@ export class Admin {
 
   langLabel(l: string): string { return l === 'Franzoesisch' ? 'Französisch' : l; }
 
-  /** Diagnose: welche Rollen stehen im Token? */
-  get tokenRoles(): string {
-    const claims = this.account()?.idTokenClaims as Record<string, unknown> | undefined;
-    const roles = claims?.['roles'];
-    return roles ? JSON.stringify(roles) : '— (keine roles im Token)';
-  }
-
   async login(): Promise<void> {
     try { await this.auth.login(); this.load(); }
     catch { this.message.set('Anmeldung fehlgeschlagen.'); }
